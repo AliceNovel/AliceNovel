@@ -6,102 +6,101 @@
              SizeChanged="Main_ui_SizeChanged">
 
     <Grid>
-        <Grid>
-            <!-- # # 縦分割 # # -->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
-            </Grid.RowDefinitions>
-            <!-- # # 横分割 # # -->
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+        <!-- # # 縦分割 # # -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <!-- # # 横分割 # # -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-            <!-- # # メインUI # # -->
-            <StackLayout Grid.Row="0"
-                         Grid.RowSpan="1"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="1"
-                         VerticalOptions="Center"
-                         HorizontalOptions="Start">
+        <!-- # # メインUI # # -->
+        <StackLayout x:Name="image_desigin"
+                        Grid.Row="0"
+                        Grid.RowSpan="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start">
 
-                <Image x:Name="image"
-                       Source="dotnet_bot.png"
-                       MaximumHeightRequest="500"
-                       Margin="20"/>
+            <Image x:Name="image"
+                   Source="dotnet_bot.png"
+                   HeightRequest="500"
+                   Margin="20"/>
 
-            </StackLayout>
+        </StackLayout>
 
-            <!-- # # 横向きUI # # -->
-            <StackLayout x:Name="vertical_desigin"
-                         Grid.Row="0"
-                         Grid.RowSpan="1"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="1"
-                         VerticalOptions="Center"
-                         HorizontalOptions="End"
-                         Margin="0,10,15,10">
+        <!-- # # 横向きUI # # -->
+        <StackLayout x:Name="vertical_desigin"
+                        Grid.Row="0"
+                        Grid.RowSpan="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="1"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Margin="0,10,15,10">
                 
-                <Button x:Name="button1"
+            <Button x:Name="button1"
+                    Text="Button1 / Next Button"
+                    Margin="0,0,0,0"
+                    WidthRequest="250"/>
+            <Button x:Name="button2"
+                    Text="Button2"
+                    Margin="0,20,0,0"/>
+            <Button x:Name="button3"
+                    Text="Button3"
+                    Margin="0,20,0,0"/>
+            <Button x:Name="button4"
+                    Text="Button4"
+                    Margin="0,20,0,0"/>
+            <Button x:Name="button5"
+                    Text="Button5"
+                    Margin="0,20,0,0"/>
+            <Button x:Name="button6"
+                    Text="Button6 / System Button"
+                    Margin="0,20,0,0"/>
+
+        </StackLayout>
+
+        <!-- # # 縦向きUI # # -->
+        <StackLayout x:Name="horizontal_desigin"
+                        Grid.Row="0"
+                        Grid.RowSpan="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="1"
+                        VerticalOptions="End"
+                        HorizontalOptions="Center"
+                        Margin="0,10,0,10"
+                        Orientation="Horizontal">
+
+            <StackLayout>
+                <Button x:Name="button1x"
                         Text="Button1 / Next Button"
-                        Margin="0,0,0,0"
+                        Margin="0,0,10,0"
                         WidthRequest="250"/>
-                <Button x:Name="button2"
+                <Button x:Name="button2x"
                         Text="Button2"
-                        Margin="0,20,0,0"/>
-                <Button x:Name="button3"
+                        Margin="0,20,10,0"/>
+                <Button x:Name="button3x"
                         Text="Button3"
-                        Margin="0,20,0,0"/>
-                <Button x:Name="button4"
+                        Margin="0,20,10,0"/>
+            </StackLayout>
+
+            <StackLayout>
+                <Button x:Name="button4x"
                         Text="Button4"
-                        Margin="0,20,0,0"/>
-                <Button x:Name="button5"
+                        Margin="10,0,0,0"
+                        WidthRequest="250"/>
+                <Button x:Name="button5x"
                         Text="Button5"
-                        Margin="0,20,0,0"/>
-                <Button x:Name="button6"
+                        Margin="10,20,0,0"/>
+                <Button x:Name="button6x"
                         Text="Button6 / System Button"
-                        Margin="0,20,0,0"/>
-
+                        Margin="10,20,0,0"/>
             </StackLayout>
+        </StackLayout>
 
-            <!-- # # 縦向きUI # # -->
-            <StackLayout x:Name="horizontal_desigin"
-                         Grid.Row="0"
-                         Grid.RowSpan="1"
-                         Grid.Column="0"
-                         Grid.ColumnSpan="1"
-                         VerticalOptions="End"
-                         HorizontalOptions="Center"
-                         Margin="0,10,15,10"
-                         Orientation="Horizontal">
-
-                <StackLayout>
-                    <Button x:Name="button1x"
-                            Text="Button1 / Next Button"
-                            Margin="0,0,10,0"
-                            WidthRequest="250"/>
-                    <Button x:Name="button2x"
-                            Text="Button2"
-                            Margin="0,20,10,0"/>
-                    <Button x:Name="button3x"
-                            Text="Button3"
-                            Margin="0,20,10,0"/>
-                </StackLayout>
-
-                <StackLayout>
-                    <Button x:Name="button4x"
-                            Text="Button4"
-                            Margin="10,0,0,0"
-                            WidthRequest="250"/>
-                    <Button x:Name="button5x"
-                            Text="Button5"
-                            Margin="10,20,0,0"/>
-                    <Button x:Name="button6x"
-                            Text="Button6 / System Button"
-                            Margin="10,20,0,0"/>
-                </StackLayout>
-            </StackLayout>
-
-        </Grid>
     </Grid>
 
 
