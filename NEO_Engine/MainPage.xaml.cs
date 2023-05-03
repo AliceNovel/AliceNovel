@@ -54,5 +54,51 @@ public partial class MainPage : ContentPage
             image.HeightRequest = height - 40;
             image.WidthRequest = height - 40;
         }
+
+        //携帯向け設定
+        if (width > 600)
+        {
+            button1x.WidthRequest = 250;
+            button4x.WidthRequest = 250;
+        }
+        else
+        {
+            button1x.WidthRequest = 180;
+            button4x.WidthRequest = 180;
+        }
+
+        //携帯向け設定
+        if (height > 400)
+        {
+            button1.HeightRequest = 46;
+            button2.HeightRequest = 46;
+            button3.HeightRequest = 46;
+            button4.HeightRequest = 46;
+            button5.HeightRequest = 46;
+            button6.HeightRequest = 46;
+
+            //button1のMarginは0,0,0,0なので変更しない
+            button2.Margin = new Thickness(0,20,0,0);
+            button3.Margin = new Thickness(0,20,0,0);
+            button4.Margin = new Thickness(0,20,0,0);
+            button5.Margin = new Thickness(0,20,0,0);
+            button6.Margin = new Thickness(0,20,0,0);
+        }
+        else
+        {
+            button1.HeightRequest = 42;
+            button2.HeightRequest = 42;
+            button3.HeightRequest = 42;
+            button4.HeightRequest = 42;
+            button5.HeightRequest = 42;
+            button6.HeightRequest = 42;
+
+            //button1のMarginは0,0,0,0なので変更しない
+            button2.Margin = new Thickness(0, 8, 0, 0);
+            button3.Margin = new Thickness(0, 8, 0, 0);
+            button4.Margin = new Thickness(0, 8, 0, 0);
+            button5.Margin = new Thickness(0, 8, 0, 0);
+            button6.Margin = new Thickness(0, 8, 0, 0);
+        }
     }
 }
