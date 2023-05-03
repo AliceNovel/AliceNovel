@@ -17,12 +17,12 @@
 
         <!-- # # メインUI # # -->
         <StackLayout x:Name="image_desigin"
-                        Grid.Row="0"
-                        Grid.RowSpan="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="1"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start">
+                     Grid.Row="0"
+                     Grid.RowSpan="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="1"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Start">
 
             <Image x:Name="image"
                    Source="dotnet_bot.png"
@@ -31,73 +31,91 @@
 
         </StackLayout>
 
-        <!-- # # 横向きUI # # -->
+        <!-- # # ボタン配置(横/パソコン向け) # # -->
         <StackLayout x:Name="vertical_desigin"
-                        Grid.Row="0"
-                        Grid.RowSpan="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="1"
-                        VerticalOptions="Center"
-                        HorizontalOptions="End"
-                        Margin="0,10,15,10">
-                
+                     Grid.Row="0"
+                     Grid.RowSpan="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="1"
+                     VerticalOptions="Center"
+                     HorizontalOptions="End"
+                     Margin="0,10,15,10">
+
             <Button x:Name="button1"
                     Text="Button1 / Next Button"
                     Margin="0,0,0,0"
-                    WidthRequest="250"/>
+                    WidthRequest="250"
+                    HeightRequest="38"
+                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button2"
                     Text="Button2"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    HeightRequest="38"
+                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button3"
                     Text="Button3"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    HeightRequest="38"
+                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button4"
                     Text="Button4"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    HeightRequest="38"
+                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button5"
                     Text="Button5"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    HeightRequest="38"
+                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button6"
                     Text="Button6 / System Button"
-                    Margin="0,20,0,0"/>
+                    Margin="0,20,0,0"
+                    HeightRequest="38"
+                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
 
         </StackLayout>
 
-        <!-- # # 縦向きUI # # -->
+        <!-- # # ボタン配置(縦/携帯向け) # # -->
         <StackLayout x:Name="horizontal_desigin"
-                        Grid.Row="0"
-                        Grid.RowSpan="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="1"
-                        VerticalOptions="End"
-                        HorizontalOptions="Center"
-                        Margin="0,10,0,10"
-                        Orientation="Horizontal">
+                     Grid.Row="0"
+                     Grid.RowSpan="1"
+                     Grid.Column="0"
+                     Grid.ColumnSpan="1"
+                     VerticalOptions="End"
+                     HorizontalOptions="Center"
+                     Margin="0,10,0,10"
+                     Orientation="Horizontal">
 
             <StackLayout>
                 <Button x:Name="button1x"
                         Text="Button1 / Next Button"
                         Margin="0,0,10,0"
-                        WidthRequest="250"/>
+                        WidthRequest="180"
+                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button2x"
                         Text="Button2"
-                        Margin="0,20,10,0"/>
+                        Margin="0,20,10,0"
+                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button3x"
                         Text="Button3"
-                        Margin="0,20,10,0"/>
+                        Margin="0,20,10,0"
+                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             </StackLayout>
 
             <StackLayout>
                 <Button x:Name="button4x"
                         Text="Button4"
                         Margin="10,0,0,0"
-                        WidthRequest="250"/>
+                        WidthRequest="180"
+                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button5x"
                         Text="Button5"
-                        Margin="10,20,0,0"/>
+                        Margin="10,20,0,0"
+                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button6x"
                         Text="Button6 / System Button"
-                        Margin="10,20,0,0"/>
+                        Margin="10,20,0,0"
+                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             </StackLayout>
         </StackLayout>
 
