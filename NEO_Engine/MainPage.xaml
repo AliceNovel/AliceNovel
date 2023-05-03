@@ -42,32 +42,38 @@
                      Margin="0,10,15,10">
 
             <Button x:Name="button1"
+                    Clicked="button1_Clicked"
                     Text="Button1 / Next Button"
                     Margin="0,0,0,0"
                     WidthRequest="250"
                     HeightRequest="38"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button2"
+                    Clicked="button2_Clicked"
                     Text="Button2"
                     Margin="0,20,0,0"
                     HeightRequest="38"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button3"
+                    Clicked="button3_Clicked"
                     Text="Button3"
                     Margin="0,20,0,0"
                     HeightRequest="38"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button4"
+                    Clicked="button4_Clicked"
                     Text="Button4"
                     Margin="0,20,0,0"
                     HeightRequest="38"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button5"
+                    Clicked="button5_Clicked"
                     Text="Button5"
                     Margin="0,20,0,0"
                     HeightRequest="38"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button6"
+                    Clicked="button6_Clicked"
                     Text="Button6 / System Button"
                     Margin="0,20,0,0"
                     HeightRequest="38"
@@ -88,15 +94,18 @@
 
             <StackLayout>
                 <Button x:Name="button1x"
+                        Clicked="button1_Clicked"
                         Text="Button1 / Next Button"
                         Margin="0,0,10,0"
                         WidthRequest="180"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button2x"
+                        Clicked="button2_Clicked"
                         Text="Button2"
                         Margin="0,20,10,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button3x"
+                        Clicked="button3_Clicked"
                         Text="Button3"
                         Margin="0,20,10,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
@@ -104,59 +113,23 @@
 
             <StackLayout>
                 <Button x:Name="button4x"
+                        Clicked="button4_Clicked"
                         Text="Button4"
                         Margin="10,0,0,0"
                         WidthRequest="180"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button5x"
+                        Clicked="button5_Clicked"
                         Text="Button5"
                         Margin="10,20,0,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button6x"
+                        Clicked="button6_Clicked"
                         Text="Button6 / System Button"
                         Margin="10,20,0,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             </StackLayout>
         </StackLayout>
-
+        
     </Grid>
-
-
-    <!--
-    <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
-
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-        </VerticalStackLayout>
-    </ScrollView>
-    -->
-    
 </ContentPage>
