@@ -2,27 +2,13 @@
 
 public partial class MainPage : ContentPage
 {
-	//int count = 0;
-
 	public MainPage()
 	{
+        //ページの読み込み
 		InitializeComponent();
     }
 
-	/*
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
-	*/
-
+    //サイズ変更
     private void Main_ui_SizeChanged(object sender, EventArgs e)
     {
         double height = main_ui.Height;
@@ -100,5 +86,35 @@ public partial class MainPage : ContentPage
             button5.Margin = new Thickness(0, 8, 0, 0);
             button6.Margin = new Thickness(0, 8, 0, 0);
         }
+    }
+
+    private void button1_Clicked(object sender, EventArgs e)
+    {
+        //button1またはbutton1xをクリックしたときの処理
+    }
+
+    private void button2_Clicked(object sender, EventArgs e)
+    {
+        //button2またはbutton2xをクリックしたときの処理
+    }
+
+    private void button3_Clicked(object sender, EventArgs e)
+    {
+        //button3またはbutton3xをクリックしたときの処理
+    }
+
+    private void button4_Clicked(object sender, EventArgs e)
+    {
+        //button4またはbutton4xをクリックしたときの処理
+    }
+
+    private void button5_Clicked(object sender, EventArgs e)
+    {
+        //button5またはbutton5xをクリックしたときの処理
+    }
+
+    private void button6_Clicked(object sender, EventArgs e)
+    {
+        //button6またはbutton6xをクリックしたときの処理
     }
 }
