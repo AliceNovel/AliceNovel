@@ -8,7 +8,7 @@ public partial class GamePage : ContentPage
 	}
 
     //画面の比率によって画像の中心位置変更
-    private void game_ui_SizeChanged(object sender, EventArgs e)
+    private void Game_ui_SizeChanged(object sender, EventArgs e)
     {
         /*
         double height = main_ui.Height;
@@ -27,33 +27,34 @@ public partial class GamePage : ContentPage
         */
     }
 
-    private void button1_Clicked(object sender, EventArgs e)
+    private void Button1_Clicked(object sender, EventArgs e)
     {
-        //button1またはbutton1xをクリックしたときの処理
+        //button1をクリックしたときの処理
     }
 
-    private void button2_Clicked(object sender, EventArgs e)
+    private async void Button2_Clicked(object sender, EventArgs e)
     {
-        //button2またはbutton2xをクリックしたときの処理
+        //button2をクリックしたときの処理
+        await Shell.Current.GoToAsync("//MainPage");
     }
 
-    private void button3_Clicked(object sender, EventArgs e)
+    private void Button3_Clicked(object sender, EventArgs e)
     {
-        //button3またはbutton3xをクリックしたときの処理
+        //button3をクリックしたときの処理
     }
 
-    private void button4_Clicked(object sender, EventArgs e)
+    private void Button4_Clicked(object sender, EventArgs e)
     {
-        //button4またはbutton4xをクリックしたときの処理
+        //button4をクリックしたときの処理
     }
 
-    private void button5_Clicked(object sender, EventArgs e)
+    private void Button5_Clicked(object sender, EventArgs e)
     {
-        //button5またはbutton5xをクリックしたときの処理
+        //button5をクリックしたときの処理
     }
 
-    private void button6_Clicked(object sender, EventArgs e)
+    private void Button6_Clicked(object sender, EventArgs e)
     {
-        //button6またはbutton6xをクリックしたときの処理
+        //button6をクリックしたときの処理
     }
 }
