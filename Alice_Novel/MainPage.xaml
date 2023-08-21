@@ -1,89 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Alice_Novel.MainPage"
-             x:Name="main_ui"
-             SizeChanged="Main_ui_SizeChanged">
+             x:Class="Alice_Novel.MainPage">
 
-    <Grid>
-        <!-- # # 縦分割 # # -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-        </Grid.RowDefinitions>
-        <!-- # # 横分割 # # -->
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-
-        <!-- # # メインUI # # -->
-        <Image x:Name="image"
-               Grid.Row="0"
-               Grid.RowSpan="1"
-               Grid.Column="0"
-               Grid.ColumnSpan="1"
-               Source="dotnet_bot.png"
-               Margin="18"
-               Aspect="AspectFit"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-
-        <HorizontalStackLayout x:Name="top_buttons"
-                               Grid.Row="0"
-                               Grid.RowSpan="1"
-                               Grid.Column="0"
-                               Grid.ColumnSpan="1"
-                               VerticalOptions="Start"
-                               HorizontalOptions="End"
-                               Margin="0,12,22,0">
-
-            <Button x:Name="button1x"
-                    Clicked="button1_Clicked"
-                    Text="Button1"
-                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
-            <Button x:Name="button2x"
-                    Clicked="button2_Clicked"
-                    Text="Button2"
-                    Margin="12,0,0,0"
-                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
-
-        </HorizontalStackLayout>
-
-        <VerticalStackLayout x:Name="bottom_buttons"
-                             Grid.Row="0"
-                             Grid.RowSpan="1"
-                             Grid.Column="0"
-                             Grid.ColumnSpan="1"
-                             Margin="18,12,18,12"
-                             VerticalOptions="End"
-                             HorizontalOptions="Center">
-
-            <HorizontalStackLayout Margin="0,0,0,6">
-                <Button x:Name="button3x"
-                        Clicked="button3_Clicked"
-                        Text="Button3"
-                        Margin="0,0,0,0"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
-                <Button x:Name="button4x"
-                        Clicked="button4_Clicked"
-                        Text="Button4"
-                        Margin="12,0,0,0"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
-            </HorizontalStackLayout>
-
-            <HorizontalStackLayout>
-                <Button x:Name="button5x"
-                        Clicked="button5_Clicked"
-                        Text="Button5"
-                        Margin="0,0,0,0"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
-                <Button x:Name="button6x"
-                        Clicked="button6_Clicked"
-                        Text="Button6"
-                        Margin="12,0,0,0"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
-            </HorizontalStackLayout>
-
-        </VerticalStackLayout>
-        
-    </Grid>
+    <StackLayout>
+        <Button Text="Play Game!"
+                HorizontalOptions="Center"
+                Clicked="Button_Clicked"/>
+        <Button Text="Play Game!"/>
+        <Button Text="Play Game!"/>
+    </StackLayout>
 </ContentPage>
