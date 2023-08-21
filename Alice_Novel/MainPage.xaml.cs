@@ -3,12 +3,20 @@ public partial class MainPage : ContentPage
 {
     public MainPage()
     {
-        //ページの読み込み
-        InitializeComponent();
+        InitializeComponent();//ページの読み込み
     }
 
-    private async void Button_Clicked(object sender, EventArgs e)
+    private async void Game_Clicked(object sender, EventArgs e)
     {
-        await Shell.Current.GoToAsync("//GamePage");
+        await Shell.Current.GoToAsync("//GamePage");//画面遷移
+    }
+
+    private async void Develop_Clicked(object sender, EventArgs e)
+    {
+    }
+
+    private async void Setting_Clicked(object sender, EventArgs e)
+    {
+        await Shell.Current.GoToAsync("//SettingPage");//画面遷移
     }
 }
