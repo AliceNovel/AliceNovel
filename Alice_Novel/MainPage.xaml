@@ -3,11 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Alice_Novel.MainPage">
 
-    <StackLayout>
+    <StackLayout HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        
         <Button Text="Play Game!"
                 HorizontalOptions="Center"
-                Clicked="Button_Clicked"/>
-        <Button Text="Play Game!"/>
-        <Button Text="Play Game!"/>
+                Clicked="Game_Clicked"/>
+        <Button Text="Develop Game!"
+                HorizontalOptions="Center"
+                Clicked="Develop_Clicked"/>
+        <Button Text="Setting this application"
+                HorizontalOptions="Center"
+                Clicked="Setting_Clicked"/>
+
     </StackLayout>
 </ContentPage>
