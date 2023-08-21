@@ -7,7 +7,7 @@
     Shell.FlyoutBehavior="Disabled">
 
     <ShellContent
-        Title="Home"
+        Title="Alice Novel"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
 
@@ -16,4 +16,9 @@
         ContentTemplate="{DataTemplate local:GamePage}"
         Route="GamePage" />
 
+    <ShellContent
+        Title="Setting"
+        ContentTemplate="{DataTemplate local:SettingPage}"
+        Route="SettingPage" />
+    
 </Shell>
