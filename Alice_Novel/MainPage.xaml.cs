@@ -1,4 +1,9 @@
-﻿namespace Alice_Novel;
+﻿using System.Text;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Storage;
+
+namespace Alice_Novel;
 public partial class MainPage : ContentPage
 {
     public MainPage()
