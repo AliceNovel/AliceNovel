@@ -8,6 +8,7 @@
     <Grid>
         <!-- # # 縦分割 # # -->
         <Grid.RowDefinitions>
+            <RowDefinition Height="4*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <!-- # # 横分割 # # -->
@@ -15,34 +16,45 @@
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
 
+        <!-- UI再表示用 -->
+        <Button x:Name="re"
+                Clicked="ReShow_Clicked"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="1"
+                BackgroundColor="Transparent"
+                IsEnabled="False"/>
+
         <!-- # # メインUI # # -->
         <Image x:Name="image"
                Grid.Row="0"
-               Grid.RowSpan="1"
+               Grid.RowSpan="2"
                Grid.Column="0"
                Grid.ColumnSpan="1"
                Source="dotnet_bot.png"
-               Margin="18"
+               Margin="16"
                Aspect="AspectFit"
+               InputTransparent="True"
                HorizontalOptions="Center"
                VerticalOptions="Center"/>
 
         <HorizontalStackLayout x:Name="top_buttons"
                                Grid.Row="0"
-                               Grid.RowSpan="1"
+                               Grid.RowSpan="2"
                                Grid.Column="0"
                                Grid.ColumnSpan="1"
                                VerticalOptions="Start"
                                HorizontalOptions="End"
                                Margin="0,12,22,0">
 
-            <Button x:Name="button"
+            <Button x:Name="button1"
                     Clicked="Button1_Clicked"
-                    Text="Button1"
+                    Text="セーブ"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button2"
                     Clicked="Button2_Clicked"
-                    Text="Return"
+                    Text="UI非表示"
                     Margin="12,0,0,0"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
 
@@ -57,7 +69,9 @@
                              VerticalOptions="End"
                              HorizontalOptions="Center">
 
-            <HorizontalStackLayout Margin="0,0,0,6">
+            <!-- 規定では非表示 -->
+            <HorizontalStackLayout Margin="0,0,0,6"
+                                   IsVisible="false">
                 <Button x:Name="button3"
                         Clicked="Button3_Clicked"
                         Text="Button3"
@@ -71,19 +85,37 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
+                <!-- 規定では非表示 -->
                 <Button x:Name="button5"
                         Clicked="Button5_Clicked"
-                        Text="Button5"
+                        Text="ロード"
                         Margin="0,0,0,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
                 <Button x:Name="button6"
                         Clicked="Button6_Clicked"
                         Text="Button6"
+                        IsVisible="false"
                         Margin="12,0,0,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             </HorizontalStackLayout>
 
         </VerticalStackLayout>
+        
+        <ScrollView Grid.Row="2"
+                    Grid.RowSpan="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="1"
+                    Margin="12,4"
+                    x:Name="textbox_out"
+                    BackgroundColor="{AppThemeBinding Light=#F0FFFFFF, Dark=#AA000000}">
+
+            <Label x:Name="textbox"
+                   Margin="28,2"
+                   Padding="0,4"
+                   FontSize="22"
+                   Text="AliceNovelゲームを読み込んでください。"/>
+
+        </ScrollView>
 
     </Grid>
 </ContentPage>
