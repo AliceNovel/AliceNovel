@@ -3,18 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Alice_Novel.MainPage">
 
-    <StackLayout HorizontalOptions="Center"
-                 VerticalOptions="Center">
+    <Grid>
+        <!-- # # 縦分割 # # -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+        <!-- # # 横分割 # # -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
         
-        <Button Text="Play Game!"
-                HorizontalOptions="Center"
+        <Button Text="ゲームをプレイする!"
+                Grid.Row="1"
+                Grid.Column="1"
+                VerticalOptions="Center"
                 Clicked="Game_Clicked"/>
-        <Button Text="Develop Game!"
-                HorizontalOptions="Center"
+        <Button Text="ゲームを開発する!"
+                Grid.Row="3"
+                Grid.Column="1"
+                VerticalOptions="Center"
                 Clicked="Develop_Clicked"/>
-        <Button Text="Setting this application"
-                HorizontalOptions="Center"
+        <Button Text="設定"
+                Grid.Row="5"
+                Grid.Column="1"
+                VerticalOptions="Center"
                 Clicked="Setting_Clicked"/>
 
-    </StackLayout>
+    </Grid>
+    
 </ContentPage>
