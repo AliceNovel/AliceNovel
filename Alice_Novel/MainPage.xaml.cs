@@ -18,6 +18,8 @@ public partial class MainPage : ContentPage
 
     private async void Develop_Clicked(object sender, EventArgs e)
     {
+        await Shell.Current.GoToAsync("//DevPage");//画面遷移
+
         //(DevelopPageへ移動処理)
         await PickFolder(CancellationToken.None);
         //await SaveFile(CancellationToken.None);
@@ -29,7 +31,6 @@ public partial class MainPage : ContentPage
             {
                 //await Toast.Make($"フォルダーを確認しました。名称:{result.Folder.Name}, 場所:{result.Folder.Path}", ToastDuration.Long).Show(cancellationToken);
                 string location = result.Folder.Path;
-                //ここでDevelopPageへ移動処理
             }
             /*
             else
