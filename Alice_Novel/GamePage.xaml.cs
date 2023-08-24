@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Alice_Novel;
 
 public partial class GamePage : ContentPage
@@ -81,19 +83,84 @@ public partial class GamePage : ContentPage
         //button4をクリックしたときの処理
     }
 
-    private void Button5_Clicked(object sender, EventArgs e)
+    private async void Button5_Clicked(object sender, EventArgs e)
     {
         //button5をクリックしたときの処理
+
+        //anovファイルを規定
+        FilePickerFileType anovFileType = new(
+            new Dictionary<DevicePlatform, IEnumerable<string>>
+            {
+                { DevicePlatform.WinUI, new[] { ".anov" } },// 拡張子
+                { DevicePlatform.macOS, new[] { "plainText" } },// UTType
+                { DevicePlatform.Android, new[] { "textbox/plain" } },// MIME Type
+                { DevicePlatform.iOS, new[] { "public.plain-text" } },// UTType
+                { DevicePlatform.Tizen, new[] { "*/*" } },
+            });
+
+        //anovファイルを読み込み
+        var result = await FilePicker.Default.PickAsync(new PickOptions { 
+            PickerTitle = "Alice Novelファイル(.anov)を選択してください。", 
+            FileTypes = anovFileType,
+        });
+        if (result != null)
+        {
+            string readFilePath = result.FullPath.ToString();
+            FileRead(readFilePath);
+
+            void FileRead(string readFilePath)
+            {
+                using (StreamReader sr = new(readFilePath))
+                {
+                    string temp = sr.ReadLine();
+                    string pattern_map = @"> (.*)";// "> "から始まる"場所"を読み込み
+                    string pattern_chara = @"- (.*)";// "- "から始まる"人物"を読み込み
+                    string pattern_chara2 = @"- (.*?)/";// "- "から始まって"/ "(感情)が続く場合の"人物"を読み込み
+                    string pattern_emotion = @"/ (.*)";// "/ "から始まる"感情"を読み込み
+                    string pattern_talk = @"\[(.*?)\]";// "["と"]"で囲む"会話"を読み込み
+
+                    Match match = Regex.Match(temp, pattern_map);
+                    if (match.Success)
+                    {
+                        //背景変更
+                    }
+
+                    match = Regex.Match(temp, pattern_chara);
+                    if (match.Success)
+                    {
+                        talkname.Text = match.Groups[1].Value;
+                    }
+
+                    match = Regex.Match(temp, pattern_chara2);
+                    if (match.Success)
+                    {
+                        talkname.Text = match.Groups[1].Value;
+                    }
+
+                    match = Regex.Match(temp, pattern_emotion);
+                    if (match.Success)
+                    {
+                        //感情変更
+                    }
+
+                    match = Regex.Match(temp, pattern_talk);
+                    if (match.Success)
+                    {
+                        textbox.Text = match.Groups[1].Value;
+                    }
+                }
+            }
+        }
+        /*
         //ファイル読み込み処理
-        talkname.Text = ".NET";
-        textbox.Text = "ようこそ!";
         button5.IsVisible = false;
-        //button6.IsVisible = true;
         game_ui.Title = "Game Title";
+        */
     }
 
     private void Button6_Clicked(object sender, EventArgs e)
     {
         //button6をクリックしたときの処理
     }
+
 }
