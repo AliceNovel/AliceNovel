@@ -19,13 +19,15 @@ public partial class GamePage : ContentPage
         //画面をクリックしたときの処理
         if (ui_visible == true)
         {
+            FileRead();
+            /*
             //テキストを進める処理
             talkname.Text = ".NET";
             if (textbox.Text == "Next...")
                 textbox.Text = "Text";
             else
                 textbox.Text = "Next...";
-
+            */
         }
         else
         {
@@ -83,79 +85,89 @@ public partial class GamePage : ContentPage
         //button4をクリックしたときの処理
     }
 
-    private async void Button5_Clicked(object sender, EventArgs e)
-    {
-        //button5をクリックしたときの処理
-
-        //anovファイルを規定
-        FilePickerFileType anovFileType = new(
-            new Dictionary<DevicePlatform, IEnumerable<string>>
-            {
+    //anovファイルを規定
+    readonly FilePickerFileType anovFileType = new(
+        new Dictionary<DevicePlatform, IEnumerable<string>>
+        {
                 { DevicePlatform.WinUI, new[] { ".anov" } },// 拡張子
                 { DevicePlatform.macOS, new[] { "plainText" } },// UTType
                 { DevicePlatform.Android, new[] { "textbox/plain" } },// MIME Type
                 { DevicePlatform.iOS, new[] { "public.plain-text" } },// UTType
                 { DevicePlatform.Tizen, new[] { "*/*" } },
+        });
+
+    FileResult result;//.anovファイル選択用
+    string FilePath;
+    StreamReader sr;
+    string sr_read;
+
+    private async void Button5_Clicked(object sender, EventArgs e)
+    {
+        //button5をクリックしたときの処理
+
+        //anovファイルを読み込み(もしnullならファイル読み込みを行う)
+        result ??= await FilePicker.Default.PickAsync(new PickOptions { 
+                PickerTitle = "Alice Novelファイル(.anov)を選択してください。", 
+                FileTypes = anovFileType,
             });
 
-        //anovファイルを読み込み
-        var result = await FilePicker.Default.PickAsync(new PickOptions { 
-            PickerTitle = "Alice Novelファイル(.anov)を選択してください。", 
-            FileTypes = anovFileType,
-        });
         if (result != null)
         {
-            string readFilePath = result.FullPath.ToString();
-            FileRead(readFilePath);
+            FilePath ??= result.FullPath.ToString();
 
-            void FileRead(string readFilePath)
-            {
-                using (StreamReader sr = new(readFilePath))
-                {
-                    string temp = sr.ReadLine();
-                    string pattern_map = @"> (.*)";// "> "から始まる"場所"を読み込み
-                    string pattern_chara = @"- (.*)";// "- "から始まる"人物"を読み込み
-                    string pattern_chara2 = @"- (.*?)/";// "- "から始まって"/ "(感情)が続く場合の"人物"を読み込み
-                    string pattern_emotion = @"/ (.*)";// "/ "から始まる"感情"を読み込み
-                    string pattern_talk = @"\[(.*?)\]";// "["と"]"で囲む"会話"を読み込み
-
-                    Match match = Regex.Match(temp, pattern_map);
-                    if (match.Success)
-                    {
-                        //背景変更
-                    }
-
-                    match = Regex.Match(temp, pattern_chara);
-                    if (match.Success)
-                    {
-                        talkname.Text = match.Groups[1].Value;
-                    }
-
-                    match = Regex.Match(temp, pattern_chara2);
-                    if (match.Success)
-                    {
-                        talkname.Text = match.Groups[1].Value;
-                    }
-
-                    match = Regex.Match(temp, pattern_emotion);
-                    if (match.Success)
-                    {
-                        //感情変更
-                    }
-
-                    match = Regex.Match(temp, pattern_talk);
-                    if (match.Success)
-                    {
-                        textbox.Text = match.Groups[1].Value;
-                    }
-                }
-            }
+            sr ??= new(FilePath);
+            //ファイル読み込み処理
+            FileRead();
+            game_ui.Title = "Game Title";
+            textbox.Text = "";
+            talkname.Text = "";
+            button5.IsVisible = false;
         }
-        /*
-        //ファイル読み込み処理
-        button5.IsVisible = false;
-        game_ui.Title = "Game Title";
-        */
+    }
+
+    void FileRead()
+    {
+        if (sr != null)
+            sr_read = sr.ReadLine();
+        if (sr_read != null)
+        {
+            string pattern_map = @"> (.*)";// "> "から始まる"場所"を読み込み
+            string pattern_chara = @"- (.*)";// "- "から始まる"人物"を読み込み
+            string pattern_chara2 = @"- (.*?)/";// "- "から始まって"/ "(感情)が続く場合の"人物"を読み込み
+            string pattern_emotion = @"/ (.*)";// "/ "から始まる"感情"を読み込み
+            string pattern_talk = @"\[(.*?)\]";// "["と"]"で囲む"会話"を読み込み
+
+            Match match = Regex.Match(sr_read, pattern_map);
+            //if (match.Success)
+            //背景変更
+
+            match = Regex.Match(sr_read, pattern_chara);
+            if (match.Success)
+                talkname.Text = match.Groups[1].Value;
+
+            match = Regex.Match(sr_read, pattern_chara2);
+            if (match.Success)
+                talkname.Text = match.Groups[1].Value;
+
+            match = Regex.Match(sr_read, pattern_emotion);
+            //if (match.Success)
+            //感情変更
+
+            match = Regex.Match(sr_read, pattern_talk);
+            if (match.Success)
+                textbox.Text = match.Groups[1].Value;
+        }
+        else
+        {
+            result = null;
+            sr?.Close();
+            sr = null;
+            talkname.Text = "";
+            textbox.Text = "Alice Novelゲーム(.anov)を読み込んでください。";
+            button5.IsVisible = true;
+            button5.Text = "ロード";
+            game_ui.Title = "ゲームをプレイする!";
+        }
     }
 
     private void Button6_Clicked(object sender, EventArgs e)
