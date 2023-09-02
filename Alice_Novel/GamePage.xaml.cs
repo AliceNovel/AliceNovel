@@ -131,31 +131,38 @@ public partial class GamePage : ContentPage
             sr_read = sr.ReadLine();
         if (sr_read != null)
         {
-            string pattern_map = @"> (.*)";// "> "から始まる"場所"を読み込み
-            string pattern_chara = @"- (.*)";// "- "から始まる"人物"を読み込み
-            string pattern_chara2 = @"- (.*?)/";// "- "から始まって"/ "(感情)が続く場合の"人物"を読み込み
-            string pattern_emotion = @"/ (.*)";// "/ "から始まる"感情"を読み込み
-            string pattern_talk = @"\[(.*?)\]";// "["と"]"で囲む"会話"を読み込み
+            while (sr_read != "" && sr_read != null)
+            {
+                string pattern_map = @"> (.*)";// "> "から始まる"場所"を読み込み
+                string pattern_chara = @"- (.*)";// "- "から始まる"人物"を読み込み
+                string pattern_chara2 = @"- (.*?)/";// "- "から始まって"/ "(感情)が続く場合の"人物"を読み込み
+                string pattern_emotion = @"/ (.*)";// "/ "から始まる"感情"を読み込み
+                string pattern_talk = @"\[(.*?)\]";// "["と"]"で囲む"会話"を読み込み
 
-            Match match = Regex.Match(sr_read, pattern_map);
-            //if (match.Success)
-            //背景変更
+                Match match = Regex.Match(sr_read, pattern_map);
+                //if (match.Success)
+                    // 背景変更
 
-            match = Regex.Match(sr_read, pattern_chara);
-            if (match.Success)
-                talkname.Text = match.Groups[1].Value;
+                match = Regex.Match(sr_read, pattern_chara);
+                if (match.Success)
+                    talkname.Text = match.Groups[1].Value;
 
-            match = Regex.Match(sr_read, pattern_chara2);
-            if (match.Success)
-                talkname.Text = match.Groups[1].Value;
+                match = Regex.Match(sr_read, pattern_chara2);
+                if (match.Success)
+                    talkname.Text = match.Groups[1].Value;
+                    // 感情変更
 
-            match = Regex.Match(sr_read, pattern_emotion);
-            //if (match.Success)
-            //感情変更
+                match = Regex.Match(sr_read, pattern_emotion);
+                //if (match.Success)
+                    // 感情変更
 
-            match = Regex.Match(sr_read, pattern_talk);
-            if (match.Success)
-                textbox.Text = match.Groups[1].Value;
+                match = Regex.Match(sr_read, pattern_talk);
+                if (match.Success)
+                    textbox.Text = match.Groups[1].Value;
+
+                //次の行を読み込む
+                sr_read = sr.ReadLine();
+            }
         }
         else
         {
