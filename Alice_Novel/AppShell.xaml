@@ -17,11 +17,6 @@
         Route="GamePage" />
 
     <ShellContent
-        Title="ゲームを開発する!"
-        ContentTemplate="{DataTemplate local:DevPage}"
-        Route="DevPage" />
-    
-    <ShellContent
         Title="設定"
         ContentTemplate="{DataTemplate local:SettingPage}"
         Route="SettingPage" />

@@ -11,11 +11,6 @@ public partial class MainPage : ContentPage
         await Shell.Current.GoToAsync("//GamePage");//画面遷移
     }
 
-    private async void Develop_Clicked(object sender, EventArgs e)
-    {
-        await Shell.Current.GoToAsync("//DevPage");//画面遷移
-    }
-
     private async void Setting_Clicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//SettingPage");//画面遷移
