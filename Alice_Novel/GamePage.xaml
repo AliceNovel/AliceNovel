@@ -27,12 +27,12 @@
                 BorderColor="Transparent"/>
 
         <!-- # # メインUI # # -->
+        <!-- 画像表示領域(Source=""で指定) -->
         <Image x:Name="image"
                Grid.Row="0"
                Grid.RowSpan="2"
                Grid.Column="0"
                Grid.ColumnSpan="2"
-               Source="dotnet_bot.png"
                Margin="0"
                Aspect="AspectFit"
                InputTransparent="True"
@@ -48,10 +48,12 @@
                                HorizontalOptions="End"
                                Margin="0,12,22,0">
 
+            <!-- 現時点では未実装のため非表示 -->
             <Button x:Name="button1"
                     Clicked="Button1_Clicked"
                     Text="セーブ"
                     Margin="0,0,12,0"
+                    IsVisible="false"
                     BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
             <Button x:Name="button2"
                     Clicked="Button2_Clicked"
@@ -69,14 +71,15 @@
                              VerticalOptions="End"
                              HorizontalOptions="End">
 
-            <!-- 規定では非表示 -->
             <HorizontalStackLayout Margin="0,0,0,6"
                                    IsVisible="false">
+                <!-- 規定では非表示 -->
                 <Button x:Name="button3"
                         Clicked="Button3_Clicked"
                         Text="Button3"
                         Margin="0,0,0,0"
                         BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#F0FFFFFF}"/>
+                <!-- 規定では非表示 -->
                 <Button x:Name="button4"
                         Clicked="Button4_Clicked"
                         Text="Button4"
@@ -85,6 +88,7 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
+                <!-- 規定では(ファイルのロード後は)非表示 -->
                 <Button x:Name="button5"
                         Clicked="Button5_Clicked"
                         Text="ロード"
