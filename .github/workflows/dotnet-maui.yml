@@ -32,7 +32,8 @@ jobs:
         run: dotnet restore Alice_Novel/Alice_Novel.csproj
 
       - name: Build MAUI App
-        run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore
+        run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false
+        # -p:PublishReadyToRun=false はWindowsの謎エラーの対策として追加。
 
       - name: Publish Artifacts
         uses: actions/upload-artifact@v2
