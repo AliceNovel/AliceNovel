@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-12') || 'windows-latest' }}
     strategy:
       matrix:
-        os: [windows-latest]
         tfm: [net7.0-android, net7.0-ios, net7.0-maccatalyst, net7.0-windows10.0.19041.0]
       fail-fast: false
-    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build Artifacts
-          path: Alice_Novel/bin/Release/${{ matrix.tfm }}/publish/
+          path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/*
