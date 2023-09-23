@@ -34,8 +34,27 @@ jobs:
         run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false
         # -p:PublishReadyToRun=false はWindowsの謎エラーの対策として追加。
 
-      - name: Publish Artifacts
-        uses: actions/upload-artifact@v2
+      # Upload Artifact
+      - name: Android Artifact
+        uses: actions/upload-artifact@v2.3.1
         with:
-          name: Build Artifacts
-          path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/*
+          name: android-ci-build
+          path: Alice_Novel/bin/Release/net7.0-android/*Signed.a*
+
+      - name: iOS Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: ios-ci-build
+          path: Alice_Novel/bin/Release/net7.0-ios/**/*.app/
+
+      - name: MacCatalyst Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: macos-ci-build
+          path: Alice_Novel/bin/Release/net7.0-maccatalyst/**/*.app/
+
+      - name: Windows Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: windows-ci-build
+          path: Alice_Novel/bin/Release/net7.0-windows*/**/Alice_Novel*.msix
