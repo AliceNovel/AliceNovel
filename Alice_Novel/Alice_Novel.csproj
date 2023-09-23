@@ -37,7 +37,7 @@
 	</PropertyGroup>
 
 	<!-- GitHub Actionsのビルドエラー対策として追加 -->
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net6.0-maccatalyst'">
+	<PropertyGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
 		<RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
 	</PropertyGroup>
 
