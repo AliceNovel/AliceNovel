@@ -57,7 +57,7 @@ jobs:
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ci-build
-          path: Alice_Novel/bin/Release/net7.0-windows*/**/Alice_Novel*.msix
+          path: Alice_Novel/bin/Release/net7.0-windows*/**/
 
       - name: Full Artifacts
         uses: actions/upload-artifact@v2.3.1
