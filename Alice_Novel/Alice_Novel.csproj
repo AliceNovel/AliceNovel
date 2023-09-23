@@ -40,6 +40,9 @@
 	<PropertyGroup Condition="'$(TargetFramework)' == 'net7.0-maccatalyst'">
 		<RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
 	</PropertyGroup>
+	<PropertyGroup Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows' and '$(Configuration)' == 'Release'">
+	    <AppxPackageSigningEnabled>true</AppxPackageSigningEnabled>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
