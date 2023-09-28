@@ -9,25 +9,25 @@ public partial class GamePage : ContentPage
 		InitializeComponent();
 	}
 
-	// ‰Šúó‘Ô‚Ìƒ{ƒ^ƒ“—LŒø/–³Œø‚ÌŠm”F—p(nullƒGƒ‰[‘Îô‚Ì‚½‚ß‚É‰Šú’l‚Ífalse‚Éİ’è)
+	// åˆæœŸçŠ¶æ…‹ã®ãƒœã‚¿ãƒ³æœ‰åŠ¹/ç„¡åŠ¹ã®ç¢ºèªç”¨(nullã‚¨ãƒ©ãƒ¼å¯¾ç­–ã®ãŸã‚ã«åˆæœŸå€¤ã¯falseã«è¨­å®š)
 	bool button1_start, button2_start, button3_start, button4_start, button5_start, button6_start = false;
-	// UI•\¦/”ñ•\¦
+	// UIè¡¨ç¤º/éè¡¨ç¤º
 	bool ui_visible = true;
 
 	private void ReShow_Clicked(object sender, EventArgs e)
 	{
-		// ‰æ–Ê‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// ç”»é¢ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 		if (ui_visible == true)
 		{
 			FileRead();
 		}
 		else
 		{
-			// UIÄ•\¦ˆ—
+			// UIå†è¡¨ç¤ºå‡¦ç†
 			talkname.IsVisible = true;
 			textbox.IsVisible = true;
 			textbox_out.IsVisible = true;
-			// ‰Šú’l‚Éİ’è(‰Šú‚Å•\¦‚³‚ê‚Ä‚¢‚½‚ç•\¦A‚»‚¤‚Å‚È‚©‚Á‚½‚ç”ñ•\¦)
+			// åˆæœŸå€¤ã«è¨­å®š(åˆæœŸã§è¡¨ç¤ºã•ã‚Œã¦ã„ãŸã‚‰è¡¨ç¤ºã€ãã†ã§ãªã‹ã£ãŸã‚‰éè¡¨ç¤º)
 			button1.IsVisible = button1_start;
 			button2.IsVisible = button2_start;
 			button3.IsVisible = button3_start;
@@ -40,21 +40,21 @@ public partial class GamePage : ContentPage
 
 	private void Button1_Clicked(object sender, EventArgs e)
 	{
-		// button1‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// button1ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 	}
 
 	private void Button2_Clicked(object sender, EventArgs e)
 	{
-		// button2‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// button2ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 
-		// ‰Šú‚Ìƒ{ƒ^ƒ“—LŒø/–³Œøó‘Ô‚ğŠm”F
+		// åˆæœŸã®ãƒœã‚¿ãƒ³æœ‰åŠ¹/ç„¡åŠ¹çŠ¶æ…‹ã‚’ç¢ºèª
 		button1_start = button1.IsVisible;
 		button2_start = button2.IsVisible;
 		button3_start = button3.IsVisible;
 		button4_start = button4.IsVisible;
 		button5_start = button5.IsVisible;
 		button6_start = button6.IsVisible;
-		// ‰æ‘œˆÈŠO‚·‚×‚Ä”ñ•\¦
+		// ç”»åƒä»¥å¤–ã™ã¹ã¦éè¡¨ç¤º
 		button1.IsVisible = false;
 		button2.IsVisible = false;
 		button3.IsVisible = false;
@@ -69,37 +69,37 @@ public partial class GamePage : ContentPage
 
 	private void Button3_Clicked(object sender, EventArgs e)
 	{
-		// button3‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// button3ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 	}
 
 	private void Button4_Clicked(object sender, EventArgs e)
 	{
-		// button4‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// button4ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 	}
 
-	// .anovƒtƒ@ƒCƒ‹‚ğ‹K’è
+	// .anovãƒ•ã‚¡ã‚¤ãƒ«ã‚’è¦å®š
 	readonly FilePickerFileType anovFileType = new(
 		new Dictionary<DevicePlatform, IEnumerable<string>>
 		{
-				{ DevicePlatform.WinUI, new[] { ".anov" } },// Šg’£q
+			{ DevicePlatform.WinUI, new[] { ".anov" } },// æ‹¡å¼µå­
 				{ DevicePlatform.macOS, new[] { "plainText" } },// UTType
 				{ DevicePlatform.Android, new[] { "textbox/plain" } },// MIME Type
 				{ DevicePlatform.iOS, new[] { "public.plain-text" } },// UTType
 				{ DevicePlatform.Tizen, new[] { "*/*" } },
 		});
 
-	FileResult result;// .anovƒtƒ@ƒCƒ‹‘I‘ğ—p
+	FileResult result;// .anovãƒ•ã‚¡ã‚¤ãƒ«é¸æŠç”¨
 	string FilePath;
 	StreamReader sr;
 	string sr_read;
 
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
-		// button5‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// button5ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 
-		// .anovƒtƒ@ƒCƒ‹‚ğ“Ç‚İ‚İ(‚à‚µnull‚È‚çƒtƒ@ƒCƒ‹“Ç‚İ‚İ‚ğs‚¤)
+		// .anovãƒ•ã‚¡ã‚¤ãƒ«ã‚’èª­ã¿è¾¼ã¿(ã‚‚ã—nullãªã‚‰ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ã‚’è¡Œã†)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
-				PickerTitle = "Alice Novelƒtƒ@ƒCƒ‹(.anov)‚ğ‘I‘ğ‚µ‚Ä‚­‚¾‚³‚¢B", 
+				PickerTitle = "Alice Novelãƒ•ã‚¡ã‚¤ãƒ«(.anov)ã‚’é¸æŠã—ã¦ãã ã•ã„ã€‚", 
 				FileTypes = anovFileType,
 			});
 
@@ -108,7 +108,7 @@ public partial class GamePage : ContentPage
 			FilePath ??= result.FullPath.ToString();
 
 			sr ??= new(FilePath);
-			// ƒtƒ@ƒCƒ‹“Ç‚İ‚İˆ—
+			// ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿å‡¦ç†
 			FileRead();
 			game_ui.Title = "Game Title";
 			textbox.Text = "";
@@ -125,15 +125,15 @@ public partial class GamePage : ContentPage
 		{
 			while (sr_read != "" && sr_read != null)
 			{
-				string pattern_map = @"> (.*)";// "> "‚©‚çn‚Ü‚é"êŠ"‚ğ“Ç‚İ‚İ
-				string pattern_chara = @"- (.*)";// "- "‚©‚çn‚Ü‚é"l•¨"‚ğ“Ç‚İ‚İ
-				string pattern_chara2 = @"- (.*?)/";// "- "‚©‚çn‚Ü‚Á‚Ä"/ "(Š´î)‚ª‘±‚­ê‡‚Ì"l•¨"‚ğ“Ç‚İ‚İ
-				string pattern_emotion = @"/ (.*)";// "/ "‚©‚çn‚Ü‚é"Š´î"‚ğ“Ç‚İ‚İ
-				string pattern_talk = @"\[(.*?)\]";// "["‚Æ"]"‚ÅˆÍ‚Ş"‰ï˜b"‚ğ“Ç‚İ‚İ
+				string pattern_map = @"> (.*)";// "> "ã‹ã‚‰å§‹ã¾ã‚‹"å ´æ‰€"ã‚’èª­ã¿è¾¼ã¿
+				string pattern_chara = @"- (.*)";// "- "ã‹ã‚‰å§‹ã¾ã‚‹"äººç‰©"ã‚’èª­ã¿è¾¼ã¿
+				string pattern_chara2 = @"- (.*?)/";// "- "ã‹ã‚‰å§‹ã¾ã£ã¦"/ "(æ„Ÿæƒ…)ãŒç¶šãå ´åˆã®"äººç‰©"ã‚’èª­ã¿è¾¼ã¿
+				string pattern_emotion = @"/ (.*)";// "/ "ã‹ã‚‰å§‹ã¾ã‚‹"æ„Ÿæƒ…"ã‚’èª­ã¿è¾¼ã¿
+				string pattern_talk = @"\[(.*?)\]";// "["ã¨"]"ã§å›²ã‚€"ä¼šè©±"ã‚’èª­ã¿è¾¼ã¿
 
 				Match match = Regex.Match(sr_read, pattern_map);
 				//if (match.Success)
-					// ”wŒi•ÏX
+					// èƒŒæ™¯å¤‰æ›´
 
 				match = Regex.Match(sr_read, pattern_chara);
 				if (match.Success)
@@ -142,17 +142,17 @@ public partial class GamePage : ContentPage
 				match = Regex.Match(sr_read, pattern_chara2);
 				if (match.Success)
 					talkname.Text = match.Groups[1].Value;
-					// Š´î•ÏX
+					// æ„Ÿæƒ…å¤‰æ›´
 
 				match = Regex.Match(sr_read, pattern_emotion);
 				//if (match.Success)
-					// Š´î•ÏX
+					// æ„Ÿæƒ…å¤‰æ›´
 
 				match = Regex.Match(sr_read, pattern_talk);
 				if (match.Success)
 					textbox.Text = match.Groups[1].Value;
 
-				// Ÿ‚Ìs‚ğ“Ç‚İ‚Ş
+				// æ¬¡ã®è¡Œã‚’èª­ã¿è¾¼ã‚€
 				sr_read = sr.ReadLine();
 			}
 		}
@@ -162,16 +162,16 @@ public partial class GamePage : ContentPage
 			sr?.Close();
 			sr = null;
 			talkname.Text = "";
-			textbox.Text = "Alice NovelƒQ[ƒ€(.anov)‚ğ“Ç‚İ‚ñ‚Å‚­‚¾‚³‚¢B";
+			textbox.Text = "Alice Novelã‚²ãƒ¼ãƒ (.anov)ã‚’èª­ã¿è¾¼ã‚“ã§ãã ã•ã„ã€‚";
 			button5.IsVisible = true;
-			button5.Text = "ƒ[ƒh";
-			game_ui.Title = "ƒQ[ƒ€‚ğƒvƒŒƒC‚·‚é!";
+			button5.Text = "ãƒ­ãƒ¼ãƒ‰";
+			game_ui.Title = "ã‚²ãƒ¼ãƒ ã‚’ãƒ—ãƒ¬ã‚¤ã™ã‚‹!";
 		}
 	}
 
 	private void Button6_Clicked(object sender, EventArgs e)
 	{
-		// button6‚ğƒNƒŠƒbƒN‚µ‚½‚Æ‚«‚Ìˆ—
+		// button6ã‚’ã‚¯ãƒªãƒƒã‚¯ã—ãŸã¨ãã®å‡¦ç†
 	}
 
 }
