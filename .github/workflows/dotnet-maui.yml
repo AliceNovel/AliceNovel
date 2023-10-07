@@ -15,10 +15,10 @@ jobs:
       fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.4.0
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3.0.3
         with:
           dotnet-version: 7.0.x
 
@@ -36,31 +36,31 @@ jobs:
 
       # Upload Artifact
       - name: Android Artifact
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: android-ci-build
           path: Alice_Novel/bin/Release/net7.0-android/*Signed.a*
 
       - name: iOS Artifact
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: ios-ci-build
           path: Alice_Novel/bin/Release/net7.0-ios/**/*.app/
 
       - name: MacCatalyst Artifact
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: macos-ci-build
           path: Alice_Novel/bin/Release/net7.0-maccatalyst/**/*.app/
 
       - name: Windows Artifact
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: windows-ci-build
           path: Alice_Novel/bin/Release/net7.0-windows*/**/
 
       - name: Full Artifacts
-        uses: actions/upload-artifact@v2.3.1
+        uses: actions/upload-artifact@v3
         with:
           name: full-ci-build
           path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
