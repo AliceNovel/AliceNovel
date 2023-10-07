@@ -176,6 +176,10 @@ public partial class GamePage : ContentPage
 						}
 					}
 					catch{}
+
+					// 場所指定されていない場合は背景画像を消す
+					if (match.Groups[1].Value == "")
+						image.Source = null;
 				}
 
 				// "- "から始まる"人物"を読み込み
