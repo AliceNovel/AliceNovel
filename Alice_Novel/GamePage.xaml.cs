@@ -135,16 +135,8 @@ public partial class GamePage : ContentPage
 			{
 				if (String.IsNullOrEmpty(json))
 					return new Dictionary<string, string>();
-				try
-				{
 					Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 					return dict;
-				}
-				catch (JsonException e)
-				{
-					// textbox.Text = e.Message;
-					return new Dictionary<string, string>();
-				}
 			}
 
 			// 最初の.anovファイルを読み込み
