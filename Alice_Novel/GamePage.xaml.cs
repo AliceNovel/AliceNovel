@@ -1,4 +1,6 @@
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
 
@@ -103,7 +105,7 @@ public partial class GamePage : ContentPage
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
 				PickerTitle = "Alice Novelファイル(.anproj)を選択してください。", 
 				FileTypes = anprojFileType,
-			});
+				});
 
 		if (result != null)
 		{
@@ -111,14 +113,47 @@ public partial class GamePage : ContentPage
 
 			// zip内のファイルを読み込み
 			ZipArchive zip = ZipFile.OpenRead(FilePath);
-			string first_read = "story/main.anov";// 初期値: story/main.anov(package.jsonでファイルが指定されていない時)
+
+			// zip内のpackage.jsonファイルを読み込み
+			ZipArchiveEntry entry = zip.GetEntry("package.json");
+			StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
+			string str = sr2.ReadToEnd();
+			sr2.Close();
+			var dict = JsonToDict(str);
+			string first_read = "story/main.anov";// story/main.anov <- 初期値(package.jsonで指定されていない時)
+			// json処理
+			foreach (string key in dict.Keys)
+			{
+				if (key == "game-name")
+					game_ui.Title = dict[key];
+				if (key == "first-read")
+					first_read = dict[key];
+			}
+
+			// json読み込み
+			static Dictionary<string, string> JsonToDict(string json)
+			{
+				if (String.IsNullOrEmpty(json))
+					return new Dictionary<string, string>();
+				try
+				{
+					Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+					return dict;
+				}
+				catch (JsonException e)
+				{
+					// textbox.Text = e.Message;
+					return new Dictionary<string, string>();
+				}
+			}
+
 			// 最初の.anovファイルを読み込み
-			ZipArchiveEntry entry = zip.GetEntry(first_read);
+			entry = zip.GetEntry(first_read);
 
 			sr ??= new(entry.Open(), Encoding.UTF8);
 			// ファイル読み込み処理
 			FileRead();
-			game_ui.Title = "Game Title";
+			// game_ui.Title = "Game Title";
 			textbox.Text = "";
 			talkname.Text = "";
 			button5.IsVisible = false;
@@ -170,7 +205,7 @@ public partial class GamePage : ContentPage
 			sr?.Close();
 			sr = null;
 			talkname.Text = "";
-			textbox.Text = "Alice Novelゲーム(.anov)を読み込んでください。";
+			textbox.Text = "Alice Novelゲーム(.anproj)を読み込んでください。";
 			button5.IsVisible = true;
 			button5.Text = "ロード";
 			game_ui.Title = "ゲームをプレイする!";
