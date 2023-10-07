@@ -96,6 +96,7 @@ public partial class GamePage : ContentPage
 	string FilePath;
 	StreamReader sr;
 	string sr_read;
+	ZipArchive zip;
 
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
@@ -112,7 +113,7 @@ public partial class GamePage : ContentPage
 			FilePath ??= result.FullPath.ToString();
 
 			// zip内のファイルを読み込み
-			ZipArchive zip = ZipFile.OpenRead(FilePath);
+			zip = ZipFile.OpenRead(FilePath);
 
 			// zip内のpackage.jsonファイルを読み込み
 			ZipArchiveEntry entry = zip.GetEntry("package.json");
@@ -196,6 +197,7 @@ public partial class GamePage : ContentPage
 			result = null;
 			sr?.Close();
 			sr = null;
+			zip?.Dispose();// zipファイルを閉じる
 			talkname.Text = "";
 			textbox.Text = "Alice Novelゲーム(.anproj)を読み込んでください。";
 			button5.IsVisible = true;
