@@ -1,4 +1,6 @@
+using System.Text;
 using System.Text.RegularExpressions;
+using System.IO.Compression;
 
 namespace Alice_Novel;
 
@@ -77,18 +79,18 @@ public partial class GamePage : ContentPage
 		// button4をクリックしたときの処理
 	}
 
-	// .anovファイルを規定
-	readonly FilePickerFileType anovFileType = new(
+	// .anprojファイルを規定
+	readonly FilePickerFileType anprojFileType = new(
 		new Dictionary<DevicePlatform, IEnumerable<string>>
 		{
-			{ DevicePlatform.WinUI, new[] { ".anov" } },// 拡張子
-				{ DevicePlatform.macOS, new[] { "plainText" } },// UTType
-				{ DevicePlatform.Android, new[] { "textbox/plain" } },// MIME Type
-				{ DevicePlatform.iOS, new[] { "public.plain-text" } },// UTType
-				{ DevicePlatform.Tizen, new[] { "*/*" } },
+			{ DevicePlatform.WinUI, new[] { ".anproj" } },// 拡張子
+			{ DevicePlatform.macOS, new[] { "archive", ".anproj" } },// UTType
+			{ DevicePlatform.Android, new[] { "application/x-freearc", ".anproj" } },// MIME Type
+			{ DevicePlatform.iOS, new[] { "public.archive", ".anproj" } },// UTType
+			{ DevicePlatform.Tizen, new[] { "*/*", ".anproj" } },
 		});
 
-	FileResult result;// .anovファイル選択用
+	FileResult result;// .anprojファイル選択用
 	string FilePath;
 	StreamReader sr;
 	string sr_read;
@@ -97,17 +99,23 @@ public partial class GamePage : ContentPage
 	{
 		// button5をクリックしたときの処理
 
-		// .anovファイルを読み込み(もしnullならファイル読み込みを行う)
+		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
-				PickerTitle = "Alice Novelファイル(.anov)を選択してください。", 
-				FileTypes = anovFileType,
+				PickerTitle = "Alice Novelファイル(.anproj)を選択してください。", 
+				FileTypes = anprojFileType,
 			});
 
 		if (result != null)
 		{
 			FilePath ??= result.FullPath.ToString();
 
-			sr ??= new(FilePath);
+			// zip内のファイルを読み込み
+			ZipArchive zip = ZipFile.OpenRead(FilePath);
+			string first_read = "story/main.anov";// 初期値: story/main.anov(package.jsonでファイルが指定されていない時)
+			// 最初の.anovファイルを読み込み
+			ZipArchiveEntry entry = zip.GetEntry(first_read);
+
+			sr ??= new(entry.Open(), Encoding.UTF8);
 			// ファイル読み込み処理
 			FileRead();
 			game_ui.Title = "Game Title";

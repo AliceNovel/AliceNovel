@@ -141,7 +141,7 @@
                    Padding="0,4"
                    FontSize="22"
                    InputTransparent="True"
-                   Text="Alice Novelゲーム(.anov)を読み込んでください。"/>
+                   Text="Alice Novelゲーム(.anproj)を読み込んでください。"/>
 
         </ScrollView>
 
