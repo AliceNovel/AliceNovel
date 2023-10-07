@@ -7,8 +7,8 @@
     <Grid>
         <!-- # # 縦分割 # # -->
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <!-- # # 横分割 # # -->
         <Grid.ColumnDefinitions>

@@ -7,13 +7,13 @@
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <Tab Title="Play!">
+        <Tab Title="ゲーム">
             <ShellContent
-                Title="ゲームをプレイする!"
+                Title="ゲームを遊ぶ!"
                 ContentTemplate="{DataTemplate local:GamePage}"
                 Route="GamePage" />
         </Tab>
-        <Tab Title="Setting">
+        <Tab Title="設定">
             <ShellContent
                 Title="設定"
                 ContentTemplate="{DataTemplate local:SettingPage}"
