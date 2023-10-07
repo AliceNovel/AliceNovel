@@ -135,19 +135,19 @@ public partial class GamePage : ContentPage
 			{
 				if (String.IsNullOrEmpty(json))
 					return new Dictionary<string, string>();
-					Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-					return dict;
+				Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+				return dict;
 			}
 
 			// 最初の.anovファイルを読み込み
 			entry = zip.GetEntry(first_read);
 
 			sr ??= new(entry.Open(), Encoding.UTF8);
-			// ファイル読み込み処理
-			FileRead();
 			// game_ui.Title = "Game Title";
 			textbox.Text = "";
 			talkname.Text = "";
+			// ファイル読み込み処理
+			FileRead();
 			button5.IsVisible = false;
 		}
 	}
