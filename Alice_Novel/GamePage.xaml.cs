@@ -1,6 +1,5 @@
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
 
@@ -98,6 +97,8 @@ public partial class GamePage : ContentPage
 	string sr_read;
 	ZipArchive zip;
 
+	string root_audio, root_background, root_data, root_image, root_story, first_read = "";
+
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
 		// button5をクリックしたときの処理
@@ -121,14 +122,51 @@ public partial class GamePage : ContentPage
 			string str = sr2.ReadToEnd();
 			sr2.Close();
 			var dict = JsonToDict(str);
-			string first_read = "story/main.anov";// story/main.anov <- 初期値(package.jsonで指定されていない時)
+			// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
+			root_image = "image/";
+			root_background = "image/background/";
+			root_story = "story/";
+			root_data = "data/";
+			root_audio = "audio/";
+			first_read = "main.anov";
+			// package.jsonでゲームタイトルが指定されていない時は空欄にする
+			game_ui.Title = "";
 			// json処理
 			foreach (string key in dict.Keys)
 			{
-				if (key == "game-name")
-					game_ui.Title = dict[key];
-				if (key == "first-read")
-					first_read = dict[key];
+				switch (key)
+				{
+					case "game-name":
+						game_ui.Title = dict[key];
+						break;
+
+					case "first-read":
+						first_read = dict[key];
+						break;
+
+					case "root-image":
+						root_image = dict[key];
+						break;
+
+					case "root-background":
+						root_background = dict[key];
+						break;
+
+					case "root-story":
+						root_story = dict[key];
+						break;
+
+					case "root-data":
+						root_data = dict[key];
+						break;
+
+					case "root-audio":
+						root_audio = dict[key];
+						break;
+
+					default:
+						break;
+				}
 			}
 
 			// json読み込み
@@ -141,10 +179,9 @@ public partial class GamePage : ContentPage
 			}
 
 			// 最初の.anovファイルを読み込み
-			entry = zip.GetEntry(first_read);
+			entry = zip.GetEntry(root_story + first_read);
 
 			sr ??= new(entry.Open(), Encoding.UTF8);
-			// game_ui.Title = "Game Title";
 			textbox.Text = "";
 			talkname.Text = "";
 			// ファイル読み込み処理
@@ -167,7 +204,7 @@ public partial class GamePage : ContentPage
 				{
 					try
 					{
-						using (var st = zip.GetEntry("img/pictures/" + match.Groups[1].Value + ".png").Open())
+						using (var st = zip.GetEntry(root_background + match.Groups[1].Value + ".png").Open())
 						{
 							var memoryStream = new MemoryStream();
 							st.CopyTo(memoryStream);
