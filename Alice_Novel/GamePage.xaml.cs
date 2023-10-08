@@ -100,7 +100,7 @@ public partial class GamePage : ContentPage
 	string root_image, root_background = "";// image
 	string root_audio = "";// audio
 	string root_story, first_read = "";// story
-	string root_data, root_place, root_character = "";// data
+	string root_data, root_character = "";// data
 
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
@@ -131,7 +131,6 @@ public partial class GamePage : ContentPage
 			root_story = "story/";
 			root_data = "data/";
 			root_audio = "audio/";
-			root_place = "place.json";
 			root_character = "character.json";
 			first_read = "main.anov";
 			// package.jsonでゲームタイトルが指定されていない時は空欄にする
@@ -169,10 +168,6 @@ public partial class GamePage : ContentPage
 						root_audio = dict[key];
 						break;
 
-					case "root-place":
-						root_place = dict[key];
-						break;
-
 					case "root-character":
 						root_character = dict[key];
 						break;
@@ -180,6 +175,15 @@ public partial class GamePage : ContentPage
 					default:
 						break;
 				}
+			}
+
+			// json読み込み
+			static Dictionary<string, string> JsonToDict(string json)
+			{
+				if (String.IsNullOrEmpty(json))
+					return new Dictionary<string, string>();
+				Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+				return dict;
 			}
 
 			// 最初の.anovファイルを読み込み
@@ -208,19 +212,7 @@ public partial class GamePage : ContentPage
 				{
 					try
 					{
-						string image_place = "";
-						StreamReader sr3 = new(zip.GetEntry(root_data + root_place).Open(), Encoding.UTF8);
-						string str = sr3.ReadToEnd();
-						sr3.Close();
-						var dict = JsonToDict(str);
-						// json処理
-						foreach (string key in dict.Keys)
-						{
-							if (key == match.Groups[1].Value)
-								image_place = dict[key];
-						}
-
-						using (var st = zip.GetEntry(root_background + image_place).Open())
+						using (var st = zip.GetEntry(root_background + match.Groups[1].Value).Open())
 						{
 							var memoryStream = new MemoryStream();
 							st.CopyTo(memoryStream);
@@ -273,15 +265,6 @@ public partial class GamePage : ContentPage
 			button5.Text = "ロード";
 			game_ui.Title = "ゲームをプレイする!";
 		}
-	}
-
-	// json読み込み
-	static Dictionary<string, string> JsonToDict(string json)
-	{
-		if (String.IsNullOrEmpty(json))
-			return new Dictionary<string, string>();
-		Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-		return dict;
 	}
 
 	private void Button6_Clicked(object sender, EventArgs e)
