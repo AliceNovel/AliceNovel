@@ -97,7 +97,7 @@ public partial class GamePage : ContentPage
 
 		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
-				PickerTitle = "Alice Novelファイル(.anproj)を選択してください。", 
+				PickerTitle = "Alice Novelゲームを読み込んでください。", 
 				FileTypes = anprojFileType,
 				});
 
@@ -249,7 +249,7 @@ public partial class GamePage : ContentPage
 			zip?.Dispose();// zipファイルを閉じる
 			talkname.Text = "";
 			image.Source = null;
-			textbox.Text = "Alice Novelゲーム(.anproj)を読み込んでください。";
+			textbox.Text = "Alice Novelゲームを読み込んでください。";
 			button5.IsVisible = true;
 			button5.Text = "ロード";
 			game_ui.Title = "ゲームをプレイする!";
