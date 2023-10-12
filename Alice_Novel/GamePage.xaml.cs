@@ -216,6 +216,29 @@ public partial class GamePage : ContentPage
 						image.Source = null;
 				}
 
+				// "bgm: "から始まる"音楽"を読み込み
+				match = Regex.Match(sr_read, @"bgm: (.*)");
+				if (match.Success)
+				{
+					// 指定されていない場合は音楽を止める
+					audio_bgm.Stop();
+
+					/*
+					try
+					{
+					 	using (var st = zip.GetEntry(root_audio + match.Groups[1].Value).Open())
+					 	{
+					 		var memoryStream = new MemoryStream();
+					 		st.CopyTo(memoryStream);
+					 		memoryStream.Seek(0, SeekOrigin.Begin);
+					 		audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromStream(() => memoryStream);
+							audio_bgm.Play();
+						}
+					}
+					catch{}
+					*/
+				}
+
 				// "- "から始まる"人物"を読み込み
 				match = Regex.Match(sr_read, @"- (.*)");
 				if (match.Success)
