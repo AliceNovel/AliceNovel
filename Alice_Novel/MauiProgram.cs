@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Maui;
 using CommunityToolkit.Maui.Storage;
-using CommunityToolkit.Maui.MediaElement;
 using Microsoft.Extensions.Logging;
 
 namespace Alice_Novel;
