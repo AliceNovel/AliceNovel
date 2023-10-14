@@ -223,9 +223,10 @@ public partial class GamePage : ContentPage
 					// 指定されていない場合は音楽を止める
 					audio_bgm.Stop();
 					// キャッシュ内のすべてのファイルを削除する
+					string audio_cache = FileSystem.Current.CacheDirectory;
 					try
 					{
-						DirectoryInfo di = new(FileSystem.Current.AppDataDirectory);
+						DirectoryInfo di = new(audio_cache);
 						FileInfo[] files = di.GetFiles();
 						foreach (FileInfo file in files)
 						{
@@ -237,11 +238,10 @@ public partial class GamePage : ContentPage
 					try
 					{
 						ZipArchiveEntry entry = zip.GetEntry(root_audio + match.Groups[1].Value);
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value / 同名ファイルが既存の場合は上書き保存
-						// string temp_audio = Path.Combine(FileSystem.Current.AppDataDirectory, match.Groups[1].Value);
-						string temp_audio = Path.GetFullPath(Path.Combine(FileSystem.Current.AppDataDirectory, match.Groups[1].Value));
-						if (!System.IO.Directory.Exists(FileSystem.Current.AppDataDirectory))
-							Directory.CreateDirectory(FileSystem.Current.AppDataDirectory);
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
+						if (!System.IO.Directory.Exists(audio_cache))
+							Directory.CreateDirectory(audio_cache);
 
 						entry.ExtractToFile(temp_audio, true);
 
