@@ -222,21 +222,29 @@ public partial class GamePage : ContentPage
 				{
 					// 指定されていない場合は音楽を止める
 					audio_bgm.Stop();
+					// キャッシュ内のすべてのファイルを削除する
+					DirectoryInfo di = new DirectoryInfo(FileSystem.Current.AppDataDirectory);
+					FileInfo[] files = di.GetFiles();
+					foreach (FileInfo file in files)
+					{
+						file.Delete();
+					}
 
-					/*
 					try
 					{
-					 	using (var st = zip.GetEntry(root_audio + match.Groups[1].Value).Open())
-					 	{
-					 		var memoryStream = new MemoryStream();
-					 		st.CopyTo(memoryStream);
-					 		memoryStream.Seek(0, SeekOrigin.Begin);
-					 		audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromStream(() => memoryStream);
-							audio_bgm.Play();
-						}
+						ZipArchiveEntry entry = zip.GetEntry(root_audio + match.Groups[1].Value);
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value / 同名ファイルが既存の場合は上書き保存
+						// string temp_audio = Path.Combine(FileSystem.Current.AppDataDirectory, match.Groups[1].Value);
+						string temp_audio = Path.GetFullPath(Path.Combine(FileSystem.Current.AppDataDirectory, match.Groups[1].Value));
+						if (!System.IO.Directory.Exists(FileSystem.Current.AppDataDirectory))
+							Directory.CreateDirectory(FileSystem.Current.AppDataDirectory);
+
+						entry.ExtractToFile(temp_audio, true);
+
+						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
+						audio_bgm.Play();
 					}
 					catch{}
-					*/
 				}
 
 				// "- "から始まる"人物"を読み込み
