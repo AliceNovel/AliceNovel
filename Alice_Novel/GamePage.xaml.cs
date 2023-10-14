@@ -223,12 +223,16 @@ public partial class GamePage : ContentPage
 					// 指定されていない場合は音楽を止める
 					audio_bgm.Stop();
 					// キャッシュ内のすべてのファイルを削除する
-					DirectoryInfo di = new DirectoryInfo(FileSystem.Current.AppDataDirectory);
-					FileInfo[] files = di.GetFiles();
-					foreach (FileInfo file in files)
+					try
 					{
-						file.Delete();
+						DirectoryInfo di = new(FileSystem.Current.AppDataDirectory);
+						FileInfo[] files = di.GetFiles();
+						foreach (FileInfo file in files)
+						{
+							file.Delete();
+						}
 					}
+					catch{}
 
 					try
 					{
