@@ -64,12 +64,10 @@
 							   HorizontalOptions="End"
 							   Margin="0,12,22,0">
 
-			<!-- 現時点では未実装のため非表示 -->
 			<Button x:Name="button1"
 					Clicked="Button1_Clicked"
 					Text="セーブ"
 					Margin="0,0,12,0"
-					IsVisible="false"
 					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
 			<Button x:Name="button2"
 					Clicked="Button2_Clicked"

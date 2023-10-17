@@ -41,6 +41,16 @@ public partial class GamePage : ContentPage
 	private void Button1_Clicked(object sender, EventArgs e)
 	{
 		// button1をクリックしたときの処理
+
+		// セーブ処理
+		if (zip is not null)
+		{
+			zip.CreateEntry(root_save);
+			ZipArchiveEntry ent = zip.CreateEntry(root_save + "savefile.txt");
+			using (StreamWriter sw = new(ent.Open())){
+				sw.WriteLine(read_times);
+			}
+		}
 	}
 
 	private void Button2_Clicked(object sender, EventArgs e)
@@ -89,7 +99,9 @@ public partial class GamePage : ContentPage
 	string root_image = "", root_background = "";// image
 	string root_audio = "";// audio
 	string root_story = "", first_read = "";// story
-	string root_data = "", root_character = "";// data
+	string root_data = "", root_character = "", root_save = "";// data
+
+	int read_times = 0;// 読み込み回数(セーブ用)
 
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
@@ -105,8 +117,9 @@ public partial class GamePage : ContentPage
 		{
 			FilePath ??= result.FullPath.ToString();
 
+			read_times = 0;
 			// zip内のファイルを読み込み
-			zip = ZipFile.OpenRead(FilePath);
+			zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
 
 			// zip内のpackage.jsonファイルを読み込み
 			ZipArchiveEntry entry = zip.GetEntry("package.json");
@@ -121,6 +134,7 @@ public partial class GamePage : ContentPage
 			root_data = "data/";
 			root_audio = "audio/";
 			root_character = "character.json";
+			root_save = "save/";
 			first_read = "main.anov";
 			// package.jsonでゲームタイトルが指定されていない時は空欄にする
 			game_ui.Title = "";
@@ -161,6 +175,10 @@ public partial class GamePage : ContentPage
 						root_character = dict[key];
 						break;
 
+					case "root-save":
+						root_save = dict[key];
+						break;
+
 					default:
 						break;
 				}
@@ -182,6 +200,16 @@ public partial class GamePage : ContentPage
 			textbox.Text = "";
 			talkname.Text = "";
 			// ファイル読み込み処理
+			try{
+				// セーブ読み込み
+				ZipArchiveEntry ent_saveread = zip.GetEntry(root_save + "savefile.txt");
+				StreamReader srz = new(ent_saveread.Open());
+				int read_loop = int.Parse(srz.ReadToEnd()) - 1;
+				for (int i = 1;i <= read_loop;i++)
+					FileRead();
+			}
+			catch{}
+
 			FileRead();
 			button5.IsVisible = false;
 		}
@@ -189,6 +217,7 @@ public partial class GamePage : ContentPage
 
 	void FileRead()
 	{
+		read_times++;
 		if (sr != null)
 			sr_read = sr.ReadLine();
 		if (sr_read != null)
