@@ -208,18 +208,39 @@ public partial class GamePage : ContentPage
 			talkname.Text = "";
 			button5.IsVisible = false;
 			
-			// ファイル読み込み処理
-			try{
-				// セーブ読み込み
-				ZipArchiveEntry ent_saveread = zip.GetEntry(root_save + "savefile.txt");
-				StreamReader srz = new(ent_saveread.Open());
-				int read_loop = int.Parse(srz.ReadToEnd()) - 1;
-				for (int i = 1;i <= read_loop;i++)
-					FileRead();
-			}
-			catch{}
+			// セーブ読み込み
+			ZipArchiveEntry ent_saveread = zip.GetEntry(root_save + "savefile.txt");
+			if (ent_saveread != null)
+			{
+				try
+				{
+					StreamReader srz = new(ent_saveread.Open());
+					int read_loop = int.Parse(srz.ReadToEnd());
 
-			FileRead();
+					bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+					if (answer == true)
+					{
+						// "セーブデータをロード"を選択した場合のみ、この処理を実行
+						try
+						{
+							for (int i = 1; i < read_loop; i++)
+								FileRead();
+							// 成功表示
+							await Toast.Make("ロードが成功しました。").Show();
+						}
+						catch
+						{
+							// 失敗表示
+							await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
+						}
+					}
+					srz.Dispose();
+				}
+				catch { }
+			}
+
+            // 初回ファイル読み込み処理
+            FileRead();
 		}
 	}
 
@@ -243,15 +264,15 @@ public partial class GamePage : ContentPage
 					}
 					else
 					{
-					try
-					{
-						using (var st = zip.GetEntry(root_background + match.Groups[1].Value).Open())
+						try
 						{
-							var memoryStream = new MemoryStream();
-							st.CopyTo(memoryStream);
-							memoryStream.Seek(0, SeekOrigin.Begin);
-							image.Source = ImageSource.FromStream(() => memoryStream);
-						}
+							using (var st = zip.GetEntry(root_background + match.Groups[1].Value).Open())
+							{
+								var memoryStream = new MemoryStream();
+								st.CopyTo(memoryStream);
+								memoryStream.Seek(0, SeekOrigin.Begin);
+								image.Source = ImageSource.FromStream(() => memoryStream);
+							}
 						}
 						catch { }
 					}
