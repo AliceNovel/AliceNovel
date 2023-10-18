@@ -44,11 +44,15 @@ public partial class GamePage : ContentPage
 		// button1をクリックしたときの処理
 
 		// セーブ処理
-		if (zip is not null)
+		if (zip != null)
 		{
-			zip.CreateEntry(root_save);
-			ZipArchiveEntry ent = zip.CreateEntry(root_save + "savefile.txt");
-			using (StreamWriter sw = new(ent.Open())){
+			ZipArchiveEntry ent = zip.GetEntry(root_save + "savefile.txt");
+			if (ent == null)
+			{
+				ent = zip.CreateEntry(root_save + "savefile.txt");
+			}
+			using (StreamWriter sw = new(ent.Open()))
+			{
 				sw.WriteLine(read_times);
 			}
 			// 成功表示
