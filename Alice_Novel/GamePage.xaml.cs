@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
+using CommunityToolkit.Maui.Alerts;
 
 namespace Alice_Novel;
 
@@ -38,7 +39,7 @@ public partial class GamePage : ContentPage
 		}
 	}
 
-	private void Button1_Clicked(object sender, EventArgs e)
+	private async void Button1_Clicked(object sender, EventArgs e)
 	{
 		// button1をクリックしたときの処理
 
@@ -50,6 +51,8 @@ public partial class GamePage : ContentPage
 			using (StreamWriter sw = new(ent.Open())){
 				sw.WriteLine(read_times);
 			}
+			// 成功表示
+			await Toast.Make("セーブが成功しました。").Show();
 		}
 	}
 
@@ -199,6 +202,8 @@ public partial class GamePage : ContentPage
 			sr ??= new(entry.Open(), Encoding.UTF8);
 			textbox.Text = "";
 			talkname.Text = "";
+			button5.IsVisible = false;
+			
 			// ファイル読み込み処理
 			try{
 				// セーブ読み込み
@@ -211,7 +216,6 @@ public partial class GamePage : ContentPage
 			catch{}
 
 			FileRead();
-			button5.IsVisible = false;
 		}
 	}
 
