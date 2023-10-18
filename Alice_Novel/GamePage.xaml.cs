@@ -232,6 +232,13 @@ public partial class GamePage : ContentPage
 				Match match = Regex.Match(sr_read, @"> (.*)");
 				if (match.Success)
 				{
+					// 場所指定されていない場合は背景画像を消す
+					if (match.Groups[1].Value == "")
+					{
+						image.Source = null;
+					}
+					else
+					{
 					try
 					{
 						using (var st = zip.GetEntry(root_background + match.Groups[1].Value).Open())
@@ -241,12 +248,9 @@ public partial class GamePage : ContentPage
 							memoryStream.Seek(0, SeekOrigin.Begin);
 							image.Source = ImageSource.FromStream(() => memoryStream);
 						}
+						}
+						catch { }
 					}
-					catch{}
-
-					// 場所指定されていない場合は背景画像を消す
-					if (match.Groups[1].Value == "")
-						image.Source = null;
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
