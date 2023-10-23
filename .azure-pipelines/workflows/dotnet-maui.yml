@@ -1,0 +1,48 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: windows-2022
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Install .NET sdk'
+  inputs:
+    packageType: sdk
+    version: 7.0.x
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+- task: CmdLine@2
+  displayName: 'Install Maui Workload'
+  inputs:
+    script: 'dotnet workload install maui'
+- task: DotNetCoreCLI@2
+  displayName: Restore packages
+  inputs:
+    command: 'restore'
+    feedsToUse: 'select'
+    vstsFeed: 'your-nuget-feed'
+- task: DotNetCoreCLI@2
+  displayName: Build project
+  inputs:
+    command: 'build'
+    projects: '**/PSC.Maui.Components.Doughnuts.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: Run tests
+  inputs:
+    command: 'test'
+    projects: '**/*[Te]ests/*.csproj'
+    arguments: '--configuration $(buildConfiguration) --no-build'
+- task: DotNetCoreCLI@2
+  displayName: Prepare the package
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/PSC.Maui.Components.Doughnuts.csproj'
+    versioningScheme: 'byEnvVar'
+    versionEnvVar: 'PackageVersion'
+    arguments: '-t:pack'
