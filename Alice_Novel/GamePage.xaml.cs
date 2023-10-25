@@ -119,7 +119,7 @@ public partial class GamePage : ContentPage
 
 		if (result != null)
 		{
-			FilePath ??= result.FullPath.ToString();
+			FilePath = result.FullPath.ToString();
 
 			read_times = 0;
 			// zip内のファイルを読み込み
