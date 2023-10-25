@@ -47,10 +47,7 @@ public partial class GamePage : ContentPage
 		if (zip != null)
 		{
 			ZipArchiveEntry ent = zip.GetEntry(root_save + "savefile.txt");
-			if (ent == null)
-			{
-				ent = zip.CreateEntry(root_save + "savefile.txt");
-			}
+			ent ??= zip.CreateEntry(root_save + "savefile.txt");
 			using (StreamWriter sw = new(ent.Open()))
 			{
 				sw.WriteLine(read_times);
