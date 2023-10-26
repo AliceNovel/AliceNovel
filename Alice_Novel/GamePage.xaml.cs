@@ -101,7 +101,7 @@ public partial class GamePage : ContentPage
 	ZipArchive zip;
 
 	string root_image = "", root_background = "";// image
-	string root_audio = "";// audio
+	string root_audio = "", root_movie = "";// audio
 	string root_story = "", first_read = "";// story
 	string root_data = "", root_character = "", root_save = "";// data
 
@@ -137,6 +137,7 @@ public partial class GamePage : ContentPage
 			root_story = "story/";
 			root_data = "data/";
 			root_audio = "audio/";
+			root_movie = "movie/";
 			root_character = "character.json";
 			root_save = "save/";
 			first_read = "main.anov";
@@ -173,6 +174,10 @@ public partial class GamePage : ContentPage
 
 					case "root-audio":
 						root_audio = dict[key];
+						break;
+
+					case "root-movie":
+						root_movie = dict[key];
 						break;
 
 					case "root-character":
@@ -306,6 +311,43 @@ public partial class GamePage : ContentPage
 
 						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
 						audio_bgm.Play();
+					}
+					catch{}
+				}
+
+				// "movie: "から始まる"音楽"を読み込み
+				match = Regex.Match(sr_read, @"movie: (.*)");
+				if (match.Success)
+				{
+					// 指定されていない場合は音楽を止める
+					movie.Stop();
+					movie.IsVisible = false;
+					// キャッシュ内のすべてのファイルを削除する
+					string movie_cache = FileSystem.Current.CacheDirectory;
+					try
+					{
+						DirectoryInfo di = new(movie_cache);
+						FileInfo[] files = di.GetFiles();
+						foreach (FileInfo file in files)
+						{
+							file.Delete();
+						}
+					}
+					catch{}
+
+					try
+					{
+						ZipArchiveEntry entry = zip.GetEntry(root_movie + match.Groups[1].Value);
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+						string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
+						if (!System.IO.Directory.Exists(movie_cache))
+							Directory.CreateDirectory(movie_cache);
+
+						entry.ExtractToFile(temp_movie, true);
+
+						movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
+						movie.IsVisible = true;
+						movie.Play();
 					}
 					catch{}
 				}
