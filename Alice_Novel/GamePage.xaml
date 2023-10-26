@@ -50,7 +50,16 @@
 		<!-- 動画再生領域 -->
 		<toolkit:MediaElement x:Name="movie"
 							  IsVisible="False"
-							  ShouldShowPlaybackControls="False"/>
+							  ShouldShowPlaybackControls="False"
+							  Grid.Row="0"
+							  Grid.RowSpan="2"
+							  Grid.Column="0"
+							  Grid.ColumnSpan="2"
+							  Margin="0"
+							  Aspect="AspectFit"
+							  InputTransparent="True"
+							  HorizontalOptions="Center"
+							  VerticalOptions="Center"/>
 
 		<HorizontalStackLayout x:Name="top_buttons"
 							   Grid.Row="0"
