@@ -46,8 +46,8 @@ public partial class GamePage : ContentPage
 		// セーブ処理
 		if (zip != null)
 		{
-			ZipArchiveEntry ent = zip.GetEntry(root_save + "savefile.txt");
-			ent ??= zip.CreateEntry(root_save + "savefile.txt");
+			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+			ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
 			using (StreamWriter sw = new(ent.Open()))
 			{
 				sw.WriteLine(read_times);
@@ -100,10 +100,8 @@ public partial class GamePage : ContentPage
 	string sr_read;
 	ZipArchive zip;
 
-	string root_image = "", root_background = "";// image
-	string root_audio = "", root_movie = "";// audio
-	string root_story = "", first_read = "";// story
-	string root_data = "", root_character = "", root_save = "";// data
+	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
+	Dictionary<string, string> anproj_setting = new(){};
 
 	int read_times = 0;// 読み込み回数(セーブ用)
 
@@ -130,80 +128,37 @@ public partial class GamePage : ContentPage
 			StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
 			string str = sr2.ReadToEnd();
 			sr2.Close();
-			var dict = JsonToDict(str);
-			// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
-			root_image = "image/";
-			root_background = "image/background/";
-			root_story = "story/";
-			root_data = "data/";
-			root_audio = "audio/";
-			root_movie = "movie/";
-			root_character = "character.json";
-			root_save = "save/";
-			first_read = "main.anov";
-			// package.jsonでゲームタイトルが指定されていない時は空欄にする
-			game_ui.Title = "";
-			// json処理
-			foreach (string key in dict.Keys)
+
+			// rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
+			anproj_setting = new()
 			{
-				switch (key)
-				{
-					case "game-name":
-						game_ui.Title = dict[key];
-						break;
-
-					case "first-read":
-						first_read = dict[key];
-						break;
-
-					case "root-image":
-						root_image = dict[key];
-						break;
-
-					case "root-background":
-						root_background = dict[key];
-						break;
-
-					case "root-story":
-						root_story = dict[key];
-						break;
-
-					case "root-data":
-						root_data = dict[key];
-						break;
-
-					case "root-audio":
-						root_audio = dict[key];
-						break;
-
-					case "root-movie":
-						root_movie = dict[key];
-						break;
-
-					case "root-character":
-						root_character = dict[key];
-						break;
-
-					case "root-save":
-						root_save = dict[key];
-						break;
-
-					default:
-						break;
-				}
-			}
+				{"root-image", "image/"},
+				{"root-background", "image/background/"},
+				{"root-story", "story/"},
+				{"root-data", "data/"},
+				{"root-audio", "audio/"},
+				{"root-movie", "movie/"},
+				{"root-character", "character.json"},
+				{"root-save", "save/"},
+				{"first-read", "main.anov"},
+				{"game-name", ""},
+			};
+			// json読み込み
+			anproj_setting = JsonToDict(str);
+			// タイトルの設定
+			game_ui.Title = anproj_setting["game-name"];
 
 			// json読み込み
 			static Dictionary<string, string> JsonToDict(string json)
 			{
-				if (String.IsNullOrEmpty(json))
+				if (string.IsNullOrEmpty(json))
 					return new Dictionary<string, string>();
 				Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 				return dict;
 			}
 
 			// 最初の.anovファイルを読み込み
-			entry = zip.GetEntry(root_story + first_read);
+			entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
 
 			sr ??= new(entry.Open(), Encoding.UTF8);
 			textbox.Text = "";
@@ -211,7 +166,7 @@ public partial class GamePage : ContentPage
 			button5.IsVisible = false;
 			
 			// セーブ読み込み
-			ZipArchiveEntry ent_saveread = zip.GetEntry(root_save + "savefile.txt");
+			ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 			if (ent_saveread != null)
 			{
 				try
@@ -268,7 +223,7 @@ public partial class GamePage : ContentPage
 					{
 						try
 						{
-							using (var st = zip.GetEntry(root_background + match.Groups[1].Value).Open())
+							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
 							{
 								var memoryStream = new MemoryStream();
 								st.CopyTo(memoryStream);
@@ -301,10 +256,10 @@ public partial class GamePage : ContentPage
 
 					try
 					{
-						ZipArchiveEntry entry = zip.GetEntry(root_audio + match.Groups[1].Value);
+						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
 						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
 						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
-						if (!System.IO.Directory.Exists(audio_cache))
+						if (!Directory.Exists(audio_cache))
 							Directory.CreateDirectory(audio_cache);
 
 						entry.ExtractToFile(temp_audio, true);
@@ -337,10 +292,10 @@ public partial class GamePage : ContentPage
 
 					try
 					{
-						ZipArchiveEntry entry = zip.GetEntry(root_movie + match.Groups[1].Value);
+						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value);
 						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
 						string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
-						if (!System.IO.Directory.Exists(movie_cache))
+						if (!Directory.Exists(movie_cache))
 							Directory.CreateDirectory(movie_cache);
 
 						entry.ExtractToFile(temp_movie, true);
