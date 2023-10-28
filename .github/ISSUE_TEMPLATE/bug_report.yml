@@ -1,7 +1,7 @@
 name: バグ報告 / Bug report
 description: 改善点について報告 / Create a report to help us improve
 title: "[バグ / bug]: "
-labels: ["バグ / bug"]
+labels: [バグ / bug]
 
 body:
 - type: textarea
@@ -31,8 +31,12 @@ body:
   validations:
     required: true
 
-# **スクリーンショット / Screenshots**
-# もし該当する場合は、問題の説明に役立つスクリーンショットを追加してください。 / If applicable, add screenshots to help explain your problem.
+- type: textarea
+  attributes:
+    label: スクリーンショット / Screenshots
+    description: もし該当する場合は、問題の説明に役立つスクリーンショットを追加してください。 / If applicable, add screenshots to help explain your problem.
+  validations:
+    required: false
 
 - type: textarea
   attributes:
@@ -69,7 +73,6 @@ body:
 - type: textarea
   attributes:
     label: 追加の内容 / Additional context
-    description: |
-      この問題に関するその他の情報はこちらに追加してください。 / Add any other context about the problem here.
+    description: この問題に関するその他の情報はこちらに追加してください。 / Add any other context about the problem here.
   validations:
     required: false
