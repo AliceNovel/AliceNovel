@@ -1,8 +1,7 @@
 name: 新機能の要求 / Feature request
 description: 新しいアイデアを提案 / Suggest an idea for this project
 title: ""
-labels: [強化 / enhancement]
-assignees: ""
+labels: ["強化 / enhancement"]
 
 - type: textarea
   attributes:
