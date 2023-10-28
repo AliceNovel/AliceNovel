@@ -8,7 +8,7 @@ body:
   attributes:
     label: あなたの提案する機能は何かの問題点に関連していますか? / Is your feature request related to a problem? Please describe.
     description: 何が問題点なのか明確で簡潔に記述してください。 / A clear and concise description of what the problem is.
-    value: |
+    placeholder: |
       例: [...]をしているときに私はいつもイライラしています。 / Ex. I'm always frustrated when [...]
   validations:
     required: false
