@@ -3,6 +3,7 @@ description: 改善点について報告 / Create a report to help us improve
 title: ""
 labels: ["バグ / bug"]
 
+body:
 - type: textarea
   attributes:
     label: バグについての説明 / Describe the bug

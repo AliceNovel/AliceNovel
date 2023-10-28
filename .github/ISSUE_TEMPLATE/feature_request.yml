@@ -3,6 +3,7 @@ description: 新しいアイデアを提案 / Suggest an idea for this project
 title: ""
 labels: ["強化 / enhancement"]
 
+body:
 - type: textarea
   attributes:
     label: あなたの提案する機能は何かの問題点に関連していますか? / Is your feature request related to a problem? Please describe.
