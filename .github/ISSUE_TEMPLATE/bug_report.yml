@@ -1,6 +1,6 @@
 name: バグ報告 / Bug report
 description: 改善点について報告 / Create a report to help us improve
-title: ""
+title: "[バグ / bug]: "
 labels: ["バグ / bug"]
 
 body:
@@ -14,7 +14,8 @@ body:
 - type: textarea
   attributes:
     label: 再現方法 / To Reproduce
-    description: 動作を再現するための方法 / Steps to reproduce the behavior:
+    description: |
+      動作を再現するための方法 / Steps to reproduce the behavior:
     placeholder: |
       1. "..."へ移動する / Go to "..."
       2. "..."をクリックする / Click on "...."
