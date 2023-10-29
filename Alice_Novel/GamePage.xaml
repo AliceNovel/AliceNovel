@@ -59,7 +59,8 @@
 							  Aspect="AspectFit"
 							  InputTransparent="True"
 							  HorizontalOptions="Center"
-							  VerticalOptions="Center"/>
+							  VerticalOptions="Center"
+							  MediaEnded="MovieEnded"/>
 
 		<HorizontalStackLayout x:Name="top_buttons"
 							   Grid.Row="0"
