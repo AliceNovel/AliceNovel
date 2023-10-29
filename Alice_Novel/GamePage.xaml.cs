@@ -22,21 +22,9 @@ public partial class GamePage : ContentPage
 	{
 		// 画面をクリックしたときの処理
 		if (ui_visible == true)
-		{
 			FileRead();
-		}
 		else
-		{
-			// UI再表示処理
-			talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
-			// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-			button1.IsVisible = button1_start;
-			button2.IsVisible = button2_start;
-			button3.IsVisible = button3_start;
-			button4.IsVisible = button4_start;
-			button5.IsVisible = button5_start;
-			button6.IsVisible = button6_start;
-		}
+			UI_ReDisplay();
 	}
 
 	private async void Button1_Clicked(object sender, EventArgs e)
@@ -61,6 +49,10 @@ public partial class GamePage : ContentPage
 	{
 		// button2をクリックしたときの処理
 
+		UI_Hidden();
+	}
+
+	void UI_Hidden(){
 		// 初期のボタン有効/無効状態を確認
 		button1_start = button1.IsVisible;
 		button2_start = button2.IsVisible;
@@ -71,6 +63,18 @@ public partial class GamePage : ContentPage
 		// 画像以外すべて非表示
 		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
+	}
+
+	void UI_ReDisplay(){
+		// UI再表示処理
+		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
+		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
+		button1.IsVisible = button1_start;
+		button2.IsVisible = button2_start;
+		button3.IsVisible = button3_start;
+		button4.IsVisible = button4_start;
+		button5.IsVisible = button5_start;
+		button6.IsVisible = button6_start;
 	}
 
 	private void Button3_Clicked(object sender, EventArgs e)
@@ -270,11 +274,11 @@ public partial class GamePage : ContentPage
 					catch{}
 				}
 
-				// "movie: "から始まる"音楽"を読み込み
+				// "movie: "から始まる"動画"を読み込み
 				match = Regex.Match(sr_read, @"movie: (.*)");
 				if (match.Success)
 				{
-					// 指定されていない場合は音楽を止める
+					// 指定されていない場合は動画を止める
 					movie.Stop();
 					movie.IsVisible = false;
 					// キャッシュ内のすべてのファイルを削除する
@@ -303,6 +307,11 @@ public partial class GamePage : ContentPage
 						movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
 						movie.IsVisible = true;
 						movie.Play();
+
+						// UI非表示/セリフを進められなくする
+						UI_Hidden();
+						re.IsEnabled = false;
+						// 動画のスキップボタンを実装したら便利そう
 					}
 					catch{}
 				}
@@ -345,6 +354,34 @@ public partial class GamePage : ContentPage
 			button5.Text = "ロード";
 			game_ui.Title = "ゲームをプレイする!";
 		}
+	}
+
+    private void MovieEnded(object sender, EventArgs e)
+	{
+		// 動画再生終了時の処理
+		Dispatcher.Dispatch(() =>
+		{
+			// 動画停止
+			movie.Stop();
+			movie.IsVisible = false;
+			// キャッシュ内のすべてのファイルを削除する
+			string movie_cache = FileSystem.Current.CacheDirectory;
+			try
+			{
+				DirectoryInfo di = new(movie_cache);
+				FileInfo[] files = di.GetFiles();
+				foreach (FileInfo file in files)
+				{
+					file.Delete();
+				}
+			}
+			catch{}
+
+			// UIを元に戻す
+			UI_ReDisplay();
+			re.IsEnabled = true;
+			FileRead();
+		});
 	}
 
 	private void Button6_Clicked(object sender, EventArgs e)
