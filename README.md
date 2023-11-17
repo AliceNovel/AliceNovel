@@ -11,13 +11,13 @@
 
 ### 技術
 フレームワーク
-- [MAUI] / [.NET7.0]
+- [MAUI] / [.NET8.0]
 
 プログラミング言語/デザイン
 - [C#] + [XAML]
 
 [MAUI]: https://dotnet.microsoft.com/ja-jp/apps/maui ".NET MAUI"
-[.NET7.0]: https://dotnet.microsoft.com/ja-jp/ ".NET"
+[.NET8.0]: https://dotnet.microsoft.com/ja-jp/ ".NET"
 [C#]: https://learn.microsoft.com/ja-jp/dotnet/csharp/ "C#ドキュメント"
 [xaml]: https://learn.microsoft.com/ja-jp/dotnet/maui/xaml/ ".NET MAUI XAMLドキュメント"
 
@@ -40,3 +40,6 @@
 - プラグインシステム
   - 戦闘プラグイン
 - ~~動画ファイル読み込み機能~~ (v0.9.0-rc3/v0.9.0)
+
+#### その他
+- ~~.NET7.0から.NET8.0へ移行~~ (v0.9.0)
