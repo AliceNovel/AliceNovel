@@ -1,19 +1,19 @@
 # Alice Novel
 
-## 概要
-ノベルゲーム向けのゲームエンジンです。<br />
-こちらのゲームエンジンを採用することにより、プログラムやUIの作成の必要がなくなるため、ゲームの作成が容易になります。<br />
+## Summary / 概要
+This is game engine for novel game. / ノベルゲーム向けのゲームエンジンです。<br />
+If you use this game engine, you should not make code and user interface for game. So you can make game easily. / こちらのゲームエンジンを採用することにより、プログラムやUIの作成の必要がなくなるため、ゲームの作成が容易になります。<br />
 
-### 関連URL
-- **[Alice Novel 紹介サイト](https://alicenovel.web.app "Alice Novel で世界をより楽しく")**<br />
-- [紹介サイト](https://github.com/Lemon73-Computing/Alice_Novel-Docs) (GitHubレポジトリ)
-- [サンプルゲーム](https://github.com/Lemon73-Computing/Alice_Novel-Docs) (GitHubレポジトリ)
+### URL
+- **[Alice Novel official site / 紹介サイト](https://alicenovel.web.app "Alice Novel で世界をより楽しく")**<br />
+- [official site / 紹介サイト](https://github.com/Lemon73-Computing/Alice_Novel-Docs) (GitHub repository)
+- [Sample game / サンプルゲーム](https://github.com/Lemon73-Computing/Alice_Novel-Docs) (GitHub repository)
 
-### 技術
-フレームワーク
+### Tech / 技術
+Framework / フレームワーク
 - [MAUI] / [.NET8.0]
 
-プログラミング言語/デザイン
+coding language + design lanuage / プログラミング言語+デザイン
 - [C#] + [XAML]
 
 [MAUI]: https://dotnet.microsoft.com/ja-jp/apps/maui ".NET MAUI"
