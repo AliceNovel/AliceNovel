@@ -1,1 +1,8 @@
 blank_issues_enabled: true
+contact_links:
+  - name: Docs / 資料
+    url: https://github.com/Lemon73-Computing/Alice_Novel-Docs
+    about: Issue for docs / 資料に関する意見
+  - name: Sample / サンプル
+    url: https://github.com/Lemon73-Computing/Alice_Novel-Sample
+    about: Issue for sample games / サンプルゲームに関する意見
