@@ -1,4 +1,5 @@
 # Alice Novel
+![cd/ci](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml/badge.svg)
 
 ## Summary / 概要
 This is game engine for novel game. / ノベルゲーム向けのゲームエンジンです。<br />
