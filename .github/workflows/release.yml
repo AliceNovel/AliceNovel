@@ -64,7 +64,6 @@ jobs:
           name: full-ci-build
           path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
 
-jobs:
   add-asset:
     runs-on: ubuntu-latest
     strategy:
