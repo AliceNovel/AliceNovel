@@ -1,0 +1,85 @@
+name: Add assets to release note
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build:
+    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-latest') || 'windows-latest' }}
+    strategy:
+      matrix:
+        tfm: [net8.0-android, net8.0-ios, net8.0-maccatalyst, net8.0-windows10.0.19041.0]
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install MAUI Workloads
+        run: |
+          dotnet workload install android --ignore-failed-sources
+          dotnet workload install maui --ignore-failed-sources
+
+      - name: Restore Dependencies
+        run: dotnet restore Alice_Novel/Alice_Novel.csproj
+
+      - name: Build MAUI App
+        run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false
+        # -p:PublishReadyToRun=false はWindowsの謎エラーの対策として追加。
+
+      # Upload Artifact
+      - name: Android Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-ci-build
+          path: Alice_Novel/bin/Release/net8.0-android/*Signed.a*
+
+      - name: iOS Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-ci-build
+          path: Alice_Novel/bin/Release/net8.0-ios/**/*.app/
+
+      - name: MacCatalyst Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-ci-build
+          path: Alice_Novel/bin/Release/net8.0-maccatalyst/**/*.app/
+
+      - name: Windows Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-ci-build
+          path: Alice_Novel/bin/Release/net8.0-windows*/**/
+
+      - name: Full Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: full-ci-build
+          path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
+
+jobs:
+  add-asset:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tfm: [net8.0-android, net8.0-ios, net8.0-maccatalyst, net8.0-windows10.0.19041.0]
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Add Release Assets
+        uses: actions/upload-release-asset@v2
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
+          asset_name: Artifacts-${{ matrix.tfm }}
+          asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
