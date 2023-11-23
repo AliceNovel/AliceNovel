@@ -17,10 +17,10 @@ Framework / フレームワーク
 Coding language + Design lanuage / プログラミング言語+デザイン
 - [C#] + [XAML]
 
-[MAUI]: https://dotnet.microsoft.com/ja-jp/apps/maui ".NET MAUI"
-[.NET8.0]: https://dotnet.microsoft.com/ja-jp/ ".NET"
-[C#]: https://learn.microsoft.com/ja-jp/dotnet/csharp/ "C#ドキュメント"
-[xaml]: https://learn.microsoft.com/ja-jp/dotnet/maui/xaml/ ".NET MAUI XAMLドキュメント"
+[MAUI]: https://dot.net/maui ".NET MAUI"
+[.NET8.0]: https://dot.net ".NET"
+[C#]: https://learn.microsoft.com/en-us/dotnet/csharp/ "C#ドキュメント"
+[xaml]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAMLドキュメント"
 
 ## Status / 開発進捗
 **In development** / **開発中**
