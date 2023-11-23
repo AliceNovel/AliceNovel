@@ -31,36 +31,35 @@ jobs:
 
       - name: Build MAUI App
         run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false
-        # -p:PublishReadyToRun=false はWindowsの謎エラーの対策として追加。
 
       # Upload Artifact
       - if: matrix.tfm == 'net8.0-android'
-        - name: Android Artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: android-ci-build
-            path: Alice_Novel/bin/Release/net8.0-android/*Signed.a*
+        name: Android Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: android-ci-build
+          path: Alice_Novel/bin/Release/net8.0-android/*Signed.a*
 
       - if: matrix.tfm == 'net8.0-ios'
-        - name: iOS Artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: ios-ci-build
-            path: Alice_Novel/bin/Release/net8.0-ios/**/*.app/
+        name: iOS Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ios-ci-build
+          path: Alice_Novel/bin/Release/net8.0-ios/**/*.app/
 
       - if: matrix.tfm == 'net8.0-maccatalyst'
-        - name: MacCatalyst Artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: macos-ci-build
-            path: Alice_Novel/bin/Release/net8.0-maccatalyst/**/*.app/
+        name: MacCatalyst Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: macos-ci-build
+          path: Alice_Novel/bin/Release/net8.0-maccatalyst/**/*.app/
 
       - if: matrix.tfm == 'net8.0-windows10.0.19041.0'
-        - name: Windows Artifact
-          uses: actions/upload-artifact@v3
-          with:
-            name: windows-ci-build
-            path: Alice_Novel/bin/Release/net8.0-windows*/**/
+        name: Windows Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: windows-ci-build
+          path: Alice_Novel/bin/Release/net8.0-windows*/**/
 
       - name: Full Artifacts
         uses: actions/upload-artifact@v3
@@ -68,6 +67,7 @@ jobs:
           name: full-ci-build
           path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
 
+  # Upload assets to release note
   add-asset:
     runs-on: ubuntu-latest
     strategy:
