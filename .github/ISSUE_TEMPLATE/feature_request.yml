@@ -6,30 +6,30 @@ labels: [強化 / enhancement]
 body:
 - type: textarea
   attributes:
-    label: あなたの提案する機能は何かの問題点に関連していますか? / Is your feature request related to a problem? Please describe.
-    description: 何が問題点なのか明確で簡潔に記述してください。 / A clear and concise description of what the problem is.
+    label: Is your feature request related to a problem? Please describe. / あなたの提案する機能は何かの問題点に関連していますか?
+    description: A clear and concise description of what the problem is. / 何が問題点なのか明確で簡潔に記述してください。
     placeholder: |
-      例: [...]をしているときに私はいつもイライラしています。 / Ex. I'm always frustrated when [...]
+      例: Ex. I'm always frustrated when [...] / [...]をしているときに私はいつもイライラしています。
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: あなたの望む解決策の記述 / Describe the solution you'd like
-    description: あなたが何をして欲しいか明確かつ簡潔に記述してください。 / A clear and concise description of what you want to happen.
+    label: Describe the solution you'd like / あなたの望む解決策の記述
+    description: A clear and concise description of what you want to happen. / あなたが何をして欲しいか明確かつ簡潔に記述してください。
   validations:
     required: true
 
 - type: textarea
   attributes:
-    label: 検討した代替案の記述 / Describe alternatives you've considered
-    description: あなたが検討した代替案や機能について、明確かつ簡潔に記述してください。 / A clear and concise description of any alternative solutions or features you've considered.
+    label: Describe alternatives you've considered / 検討した代替案の記述
+    description: A clear and concise description of any alternative solutions or features you've considered. / あなたが検討した代替案や機能について、明確かつ簡潔に記述してください。
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: 追加の内容 / Additional context
-    description: 機能リクエストに関するその他の内容や、スクリーンショットについてはこちらに追加してください。 / Add any other context or screenshots about the feature request here.
+    label: Additional context / 追加の内容
+    description: Add any other context or screenshots about the feature request here. / 機能リクエストに関するその他の内容や、スクリーンショットについてはこちらに追加してください。
   validations:
     required: false
