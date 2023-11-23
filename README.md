@@ -46,3 +46,4 @@ Coding language + Design lanuage / プログラミング言語+デザイン
 
 #### Others / その他
 - ~~Upgrade .net7 to 8 / .NET7.0から.NET8.0へ移行~~ (v0.9.0)
+- Localization / 国際化
