@@ -25,6 +25,7 @@
 				rx="234"
 				ry="102" />
 		</g>
+		<!-- 
 		<text
 			xml:space="preserve"
 			style="white-space:pre;display:inline;fill:#228b22"
@@ -34,6 +35,7 @@
 				y="725"
 				style="font-weight:normal;font-size:128px;font-family:'Segoe Script'">Alice Novel</tspan>
 		</text>
+		 -->
 		<g style="fill:#3cb371">
 			<rect
 				width="80"
