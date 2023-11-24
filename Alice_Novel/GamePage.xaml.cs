@@ -217,70 +217,69 @@ public partial class GamePage : ContentPage
 		{
 			while (sr_read != "" && sr_read != null)
 			{
-				if (WhileLoading == false)
+				// "> "から始まる"場所"を読み込み
+				Match match = Regex.Match(sr_read, @"> (.*)");
+				if (match.Success)
 				{
-					// "> "から始まる"場所"を読み込み
-					Match match = Regex.Match(sr_read, @"> (.*)");
-					if (match.Success)
+					// 場所指定されていない場合は背景画像を消す
+					if (match.Groups[1].Value == "")
 					{
-						// 場所指定されていない場合は背景画像を消す
-						if (match.Groups[1].Value == "")
-						{
-							image.Source = null;
-						}
-						else
-						{
-							try
-							{
-								using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
-								{
-									var memoryStream = new MemoryStream();
-									st.CopyTo(memoryStream);
-									memoryStream.Seek(0, SeekOrigin.Begin);
-									image.Source = ImageSource.FromStream(() => memoryStream);
-								}
-							}
-							catch { }
-						}
+						image.Source = null;
 					}
-
-					// "bgm: "から始まる"音楽"を読み込み
-					match = Regex.Match(sr_read, @"bgm: (.*)");
-					if (match.Success)
+					else
 					{
-						// 指定されていない場合は音楽を止める
-						audio_bgm.Stop();
-						// キャッシュ内のすべてのファイルを削除する
-						string audio_cache = FileSystem.Current.CacheDirectory;
 						try
 						{
-							DirectoryInfo di = new(audio_cache);
-							FileInfo[] files = di.GetFiles();
-							foreach (FileInfo file in files)
+							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
 							{
-								file.Delete();
+								var memoryStream = new MemoryStream();
+								st.CopyTo(memoryStream);
+								memoryStream.Seek(0, SeekOrigin.Begin);
+								image.Source = ImageSource.FromStream(() => memoryStream);
 							}
 						}
-						catch{}
-
-						try
-						{
-							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
-							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
-							string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
-							if (!Directory.Exists(audio_cache))
-								Directory.CreateDirectory(audio_cache);
-
-							entry.ExtractToFile(temp_audio, true);
-
-							audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
-							audio_bgm.Play();
-						}
-						catch{}
+						catch { }
 					}
+				}
 
-					// "movie: "から始まる"動画"を読み込み
-					match = Regex.Match(sr_read, @"movie: (.*)");
+				// "bgm: "から始まる"音楽"を読み込み
+				match = Regex.Match(sr_read, @"bgm: (.*)");
+				if (match.Success)
+				{
+					// 指定されていない場合は音楽を止める
+					audio_bgm.Stop();
+					// キャッシュ内のすべてのファイルを削除する
+					string audio_cache = FileSystem.Current.CacheDirectory;
+					try
+					{
+						DirectoryInfo di = new(audio_cache);
+						FileInfo[] files = di.GetFiles();
+						foreach (FileInfo file in files)
+						{
+							file.Delete();
+						}
+					}
+					catch{}
+
+					try
+					{
+						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
+						if (!Directory.Exists(audio_cache))
+							Directory.CreateDirectory(audio_cache);
+
+						entry.ExtractToFile(temp_audio, true);
+
+						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
+						audio_bgm.Play();
+					}
+					catch{}
+				}
+
+				// "movie: "から始まる"動画"を読み込み
+				match = Regex.Match(sr_read, @"movie: (.*)");
+				if (WhileLoading == false)
 					if (match.Success)
 					{
 						// 指定されていない場合は動画を止める
@@ -321,27 +320,27 @@ public partial class GamePage : ContentPage
 						catch{}
 					}
 
-					// "- "から始まる"人物"を読み込み
-					match = Regex.Match(sr_read, @"- (.*)");
-					if (match.Success)
-						talkname.Text = match.Groups[1].Value;
+				// "- "から始まる"人物"を読み込み
+				match = Regex.Match(sr_read, @"- (.*)");
+				if (match.Success)
+					talkname.Text = match.Groups[1].Value;
 
-					// "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
-					match = Regex.Match(sr_read, @"- (.*?)/");
-					if (match.Success)
-						talkname.Text = match.Groups[1].Value;
-						// 感情変更
+				// "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
+				match = Regex.Match(sr_read, @"- (.*?)/");
+				if (match.Success)
+					talkname.Text = match.Groups[1].Value;
+					// 感情変更
 
-					// "/ "から始まる"感情"を読み込み
-					match = Regex.Match(sr_read, @"/ (.*)");
-					//if (match.Success)
-						// 感情変更
+				// "/ "から始まる"感情"を読み込み
+				match = Regex.Match(sr_read, @"/ (.*)");
+				//if (match.Success)
+					// 感情変更
 
-					// "["と"]"で囲む"会話"を読み込み
-					match = Regex.Match(sr_read, @"\[(.*?)\]");
-					if (match.Success)
-						textbox.Text = match.Groups[1].Value;
-				}
+				// "["と"]"で囲む"会話"を読み込み
+				match = Regex.Match(sr_read, @"\[(.*?)\]");
+				if (match.Success)
+					textbox.Text = match.Groups[1].Value;
+
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
 			}
