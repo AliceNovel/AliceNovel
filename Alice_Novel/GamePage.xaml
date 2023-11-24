@@ -74,11 +74,13 @@
 			<Button x:Name="button1"
 					Clicked="Button1_Clicked"
 					Text="セーブ"
+					ToolTipProperties.Text="上書き保存します"
 					Margin="0,0,12,0"
 					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
 			<Button x:Name="button2"
 					Clicked="Button2_Clicked"
 					Text="UI非表示"
+					ToolTipProperties.Text="画面タップで再表示できます"
 					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
 
 		</HorizontalStackLayout>
@@ -113,6 +115,7 @@
 				<Button x:Name="button5"
 						Clicked="Button5_Clicked"
 						Text="ロード"
+						ToolTipProperties.Text="ゲームファイルを読み込みます"
 						Margin="0,0,0,0"
 						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
 				<!-- 規定では非表示 -->
@@ -162,7 +165,7 @@
 				   Padding="0,4"
 				   FontSize="22"
 				   InputTransparent="True"
-				   Text="Alice Novelゲームを読み込んでください。"/>
+				   Text="Alice Novelゲームを読み込んでください。" />
 
 		</ScrollView>
 
