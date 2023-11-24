@@ -103,6 +103,7 @@ public partial class GamePage : ContentPage
 	StreamReader sr;
 	string sr_read;
 	ZipArchive zip;
+	bool WhileLoading = false;
 
 	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
 	Dictionary<string, string> anproj_setting = new(){};
@@ -184,9 +185,11 @@ public partial class GamePage : ContentPage
 						// "セーブデータをロード"を選択した場合のみ、この処理を実行
 						try
 						{
+							WhileLoading = true;
 							for (int i = 1; i < read_loop; i++)
 								FileRead();
 							// 成功表示
+							WhileLoading = false;
 							await Toast.Make("ロードが成功しました。").Show();
 						}
 						catch
@@ -214,129 +217,131 @@ public partial class GamePage : ContentPage
 		{
 			while (sr_read != "" && sr_read != null)
 			{
-				// "> "から始まる"場所"を読み込み
-				Match match = Regex.Match(sr_read, @"> (.*)");
-				if (match.Success)
+				if (WhileLoading == false)
 				{
-					// 場所指定されていない場合は背景画像を消す
-					if (match.Groups[1].Value == "")
+					// "> "から始まる"場所"を読み込み
+					Match match = Regex.Match(sr_read, @"> (.*)");
+					if (match.Success)
 					{
-						image.Source = null;
+						// 場所指定されていない場合は背景画像を消す
+						if (match.Groups[1].Value == "")
+						{
+							image.Source = null;
+						}
+						else
+						{
+							try
+							{
+								using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
+								{
+									var memoryStream = new MemoryStream();
+									st.CopyTo(memoryStream);
+									memoryStream.Seek(0, SeekOrigin.Begin);
+									image.Source = ImageSource.FromStream(() => memoryStream);
+								}
+							}
+							catch { }
+						}
 					}
-					else
+
+					// "bgm: "から始まる"音楽"を読み込み
+					match = Regex.Match(sr_read, @"bgm: (.*)");
+					if (match.Success)
 					{
+						// 指定されていない場合は音楽を止める
+						audio_bgm.Stop();
+						// キャッシュ内のすべてのファイルを削除する
+						string audio_cache = FileSystem.Current.CacheDirectory;
 						try
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
+							DirectoryInfo di = new(audio_cache);
+							FileInfo[] files = di.GetFiles();
+							foreach (FileInfo file in files)
 							{
-								var memoryStream = new MemoryStream();
-								st.CopyTo(memoryStream);
-								memoryStream.Seek(0, SeekOrigin.Begin);
-								image.Source = ImageSource.FromStream(() => memoryStream);
+								file.Delete();
 							}
 						}
-						catch { }
-					}
-				}
+						catch{}
 
-				// "bgm: "から始まる"音楽"を読み込み
-				match = Regex.Match(sr_read, @"bgm: (.*)");
-				if (match.Success)
-				{
-					// 指定されていない場合は音楽を止める
-					audio_bgm.Stop();
-					// キャッシュ内のすべてのファイルを削除する
-					string audio_cache = FileSystem.Current.CacheDirectory;
-					try
-					{
-						DirectoryInfo di = new(audio_cache);
-						FileInfo[] files = di.GetFiles();
-						foreach (FileInfo file in files)
+						try
 						{
-							file.Delete();
+							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
+							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+							string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
+							if (!Directory.Exists(audio_cache))
+								Directory.CreateDirectory(audio_cache);
+
+							entry.ExtractToFile(temp_audio, true);
+
+							audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
+							audio_bgm.Play();
 						}
+						catch{}
 					}
-					catch{}
 
-					try
+					// "movie: "から始まる"動画"を読み込み
+					match = Regex.Match(sr_read, @"movie: (.*)");
+					if (match.Success)
 					{
-						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
-						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
-						if (!Directory.Exists(audio_cache))
-							Directory.CreateDirectory(audio_cache);
-
-						entry.ExtractToFile(temp_audio, true);
-
-						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
-						audio_bgm.Play();
-					}
-					catch{}
-				}
-
-				// "movie: "から始まる"動画"を読み込み
-				match = Regex.Match(sr_read, @"movie: (.*)");
-				if (match.Success)
-				{
-					// 指定されていない場合は動画を止める
-					movie.Stop();
-					movie.IsVisible = false;
-					// キャッシュ内のすべてのファイルを削除する
-					string movie_cache = FileSystem.Current.CacheDirectory;
-					try
-					{
-						DirectoryInfo di = new(movie_cache);
-						FileInfo[] files = di.GetFiles();
-						foreach (FileInfo file in files)
+						// 指定されていない場合は動画を止める
+						movie.Stop();
+						movie.IsVisible = false;
+						// キャッシュ内のすべてのファイルを削除する
+						string movie_cache = FileSystem.Current.CacheDirectory;
+						try
 						{
-							file.Delete();
+							DirectoryInfo di = new(movie_cache);
+							FileInfo[] files = di.GetFiles();
+							foreach (FileInfo file in files)
+							{
+								file.Delete();
+							}
 						}
+						catch{}
+
+						try
+						{
+							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value);
+							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
+							if (!Directory.Exists(movie_cache))
+								Directory.CreateDirectory(movie_cache);
+
+							entry.ExtractToFile(temp_movie, true);
+
+							movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
+							movie.IsVisible = true;
+							movie.Play();
+
+							// UI非表示/セリフを進められなくする
+							UI_Hidden();
+							re.IsEnabled = false;
+							// 動画のスキップボタンを実装したら便利そう
+						}
+						catch{}
 					}
-					catch{}
 
-					try
-					{
-						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value);
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
-						string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
-						if (!Directory.Exists(movie_cache))
-							Directory.CreateDirectory(movie_cache);
+					// "- "から始まる"人物"を読み込み
+					match = Regex.Match(sr_read, @"- (.*)");
+					if (match.Success)
+						talkname.Text = match.Groups[1].Value;
 
-						entry.ExtractToFile(temp_movie, true);
+					// "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
+					match = Regex.Match(sr_read, @"- (.*?)/");
+					if (match.Success)
+						talkname.Text = match.Groups[1].Value;
+						// 感情変更
 
-						movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
-						movie.IsVisible = true;
-						movie.Play();
+					// "/ "から始まる"感情"を読み込み
+					match = Regex.Match(sr_read, @"/ (.*)");
+					//if (match.Success)
+						// 感情変更
 
-						// UI非表示/セリフを進められなくする
-						UI_Hidden();
-						re.IsEnabled = false;
-						// 動画のスキップボタンを実装したら便利そう
-					}
-					catch{}
+					// "["と"]"で囲む"会話"を読み込み
+					match = Regex.Match(sr_read, @"\[(.*?)\]");
+					if (match.Success)
+						textbox.Text = match.Groups[1].Value;
 				}
-
-				// "- "から始まる"人物"を読み込み
-				match = Regex.Match(sr_read, @"- (.*)");
-				if (match.Success)
-					talkname.Text = match.Groups[1].Value;
-
-				// "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
-				match = Regex.Match(sr_read, @"- (.*?)/");
-				if (match.Success)
-					talkname.Text = match.Groups[1].Value;
-					// 感情変更
-
-				// "/ "から始まる"感情"を読み込み
-				match = Regex.Match(sr_read, @"/ (.*)");
-				//if (match.Success)
-					// 感情変更
-
-				// "["と"]"で囲む"会話"を読み込み
-				match = Regex.Match(sr_read, @"\[(.*?)\]");
-				if (match.Success)
-					textbox.Text = match.Groups[1].Value;
-
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
 			}
