@@ -1,5 +1,6 @@
 # Alice Novel
-[![cd/ci](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml/badge.svg)](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml)
+[![GitHub CI](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml/badge.svg)](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml)
+[![Azure Devops CI](https://dev.azure.com/lemon73/Alice_Novel/_apis/build/status%2FAlice_Novel?branchName=master)](https://dev.azure.com/lemon73/Alice_Novel/_build/latest?definitionId=2&branchName=master)
 
 ## Summary / 概要
 This is game engine for novel game. / ノベルゲーム向けのゲームエンジンです。<br />
