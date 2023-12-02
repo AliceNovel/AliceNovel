@@ -3,7 +3,8 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 x:Class="Alice_Novel.GamePage"
-			 x:Name="game_ui">
+			 x:Name="game_ui"
+			 Title="ゲームをプレイする!">
 
 	<Grid>
 		<!-- # # 縦分割 # # -->
