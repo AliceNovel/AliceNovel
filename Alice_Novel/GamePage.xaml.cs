@@ -106,7 +106,7 @@ public partial class GamePage : ContentPage
 	bool WhileLoading = false;
 
 	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
-	Dictionary<string, string> anproj_setting = new(){};
+	Dictionary<string, string> anproj_setting = [];
 
 	int read_times = 0;// 読み込み回数(セーブ用)
 
@@ -157,7 +157,7 @@ public partial class GamePage : ContentPage
 			static Dictionary<string, string> JsonToDict(string json)
 			{
 				if (string.IsNullOrEmpty(json))
-					return new Dictionary<string, string>();
+					return [];
 				Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
 				return dict;
 			}
@@ -203,8 +203,8 @@ public partial class GamePage : ContentPage
 				catch { }
 			}
 
-            // 初回ファイル読み込み処理
-            FileRead();
+			// 初回ファイル読み込み処理
+			FileRead();
 		}
 	}
 
@@ -360,7 +360,7 @@ public partial class GamePage : ContentPage
 		}
 	}
 
-    private void MovieEnded(object sender, EventArgs e)
+	private void MovieEnded(object sender, EventArgs e)
 	{
 		// 動画再生終了時の処理
 		Dispatcher.Dispatch(() =>
