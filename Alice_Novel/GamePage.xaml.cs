@@ -14,7 +14,9 @@ public partial class GamePage : ContentPage
 	}
 
 	// 初期状態のボタン有効/無効の確認用(nullエラー対策のために初期値はfalseに設定)
-	bool button1_start = false, button2_start = false, button3_start = false, button4_start = false, button5_start = false, button6_start = false;
+	bool Initial_button1 = false, Initial_button2 = false, Initial_button3 = false, Initial_button4 = false, Initial_button5 = false, Initial_button6 = false;
+	// 初期状態で表示されている文字
+	string Initial_textbox_text = "", Initial_button5_text = "", Initial_game_title = "";
 	// UI表示/非表示
 	bool ui_visible = true;
 
@@ -57,12 +59,12 @@ public partial class GamePage : ContentPage
 
 	void UI_Hidden(){
 		// 初期のボタン有効/無効状態を確認
-		button1_start = button1.IsVisible;
-		button2_start = button2.IsVisible;
-		button3_start = button3.IsVisible;
-		button4_start = button4.IsVisible;
-		button5_start = button5.IsVisible;
-		button6_start = button6.IsVisible;
+		Initial_button1 = button1.IsVisible;
+		Initial_button2 = button2.IsVisible;
+		Initial_button3 = button3.IsVisible;
+		Initial_button4 = button4.IsVisible;
+		Initial_button5 = button5.IsVisible;
+		Initial_button6 = button6.IsVisible;
 		// 画像以外すべて非表示
 		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
@@ -72,12 +74,12 @@ public partial class GamePage : ContentPage
 		// UI再表示処理
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-		button1.IsVisible = button1_start;
-		button2.IsVisible = button2_start;
-		button3.IsVisible = button3_start;
-		button4.IsVisible = button4_start;
-		button5.IsVisible = button5_start;
-		button6.IsVisible = button6_start;
+		button1.IsVisible = Initial_button1;
+		button2.IsVisible = Initial_button2;
+		button3.IsVisible = Initial_button3;
+		button4.IsVisible = Initial_button4;
+		button5.IsVisible = Initial_button5;
+		button6.IsVisible = Initial_button6;
 	}
 
 	private void Button3_Clicked(object sender, EventArgs e)
@@ -130,6 +132,11 @@ public partial class GamePage : ContentPage
 			read_times = 0;
 			// zip内のファイルを読み込み
 			zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
+
+			// 初期時の表示文字を保存
+			Initial_textbox_text = textbox.Text;
+			Initial_button5_text = button5.Text;
+			Initial_game_title = game_ui.Title;
 
 			// zip内のpackage.jsonファイルを読み込み
 			ZipArchiveEntry entry = zip.GetEntry("package.json");
@@ -356,10 +363,10 @@ public partial class GamePage : ContentPage
 			zip?.Dispose();// zipファイルを閉じる
 			talkname.Text = "";
 			image.Source = null;
-			textbox.Text = "Alice Novelゲームを読み込んでください。";
+			textbox.Text = Initial_textbox_text;
 			button5.IsVisible = true;
-			button5.Text = "ロード";
-			game_ui.Title = "ゲームをプレイする!";
+			button5.Text = Initial_button5_text;
+			game_ui.Title = Initial_game_title;
 		}
 	}
 
