@@ -27,10 +27,13 @@ public partial class GamePage : ContentPage
 			UI_ReDisplay();
 	}
 
-	private async void Button1_Clicked(object sender, EventArgs e)
+	private void Button1_Clicked(object sender, EventArgs e)
 	{
 		// button1をクリックしたときの処理
+		FileSave();
+	}
 
+	async void FileSave(){
 		// セーブ処理
 		if (zip != null)
 		{
