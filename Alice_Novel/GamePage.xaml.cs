@@ -233,11 +233,8 @@ public partial class GamePage : ContentPage
 				{
 					// 場所指定されていない場合は背景画像を消す
 					if (match.Groups[1].Value == "")
-					{
 						image.Source = null;
-					}
 					else
-					{
 						try
 						{
 							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
@@ -249,7 +246,6 @@ public partial class GamePage : ContentPage
 							}
 						}
 						catch { }
-					}
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
