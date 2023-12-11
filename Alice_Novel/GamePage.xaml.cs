@@ -125,97 +125,97 @@ public partial class GamePage : ContentPage
 				FileTypes = anprojFileType,
 				});
 
-		if (result != null)
+		if (result == null)
+			return;
+
+		FilePath = result.FullPath.ToString();
+
+		read_times = 0;
+		// zip内のファイルを読み込み
+		zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
+
+		// 初期時の表示文字を保存
+		Initial_textbox_text = textbox.Text;
+		Initial_button5_text = button5.Text;
+		Initial_game_title = game_ui.Title;
+
+		// zip内のpackage.jsonファイルを読み込み
+		ZipArchiveEntry entry = zip.GetEntry("package.json");
+		StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
+		string str = sr2.ReadToEnd();
+		sr2.Close();
+
+		// rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
+		anproj_setting = new()
 		{
-			FilePath = result.FullPath.ToString();
+			{"root-image", "image/"},
+			{"root-background", "image/background/"},
+			{"root-story", "story/"},
+			{"root-data", "data/"},
+			{"root-audio", "audio/"},
+			{"root-movie", "movie/"},
+			{"root-character", "character.json"},
+			{"root-save", "save/"},
+			{"first-read", "main.anov"},
+			{"game-name", ""},
+		};
+		// json読み込み
+		anproj_setting = JsonToDict(str);
+		// タイトルの設定
+		game_ui.Title = anproj_setting["game-name"];
 
-			read_times = 0;
-			// zip内のファイルを読み込み
-			zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
-
-			// 初期時の表示文字を保存
-			Initial_textbox_text = textbox.Text;
-			Initial_button5_text = button5.Text;
-			Initial_game_title = game_ui.Title;
-
-			// zip内のpackage.jsonファイルを読み込み
-			ZipArchiveEntry entry = zip.GetEntry("package.json");
-			StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
-			string str = sr2.ReadToEnd();
-			sr2.Close();
-
-			// rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
-			anproj_setting = new()
-			{
-				{"root-image", "image/"},
-				{"root-background", "image/background/"},
-				{"root-story", "story/"},
-				{"root-data", "data/"},
-				{"root-audio", "audio/"},
-				{"root-movie", "movie/"},
-				{"root-character", "character.json"},
-				{"root-save", "save/"},
-				{"first-read", "main.anov"},
-				{"game-name", ""},
-			};
-			// json読み込み
-			anproj_setting = JsonToDict(str);
-			// タイトルの設定
-			game_ui.Title = anproj_setting["game-name"];
-
-			// json読み込み
-			static Dictionary<string, string> JsonToDict(string json)
-			{
-				if (string.IsNullOrEmpty(json))
-					return [];
-				Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-				return dict;
-			}
-
-			// 最初の.anovファイルを読み込み
-			entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
-
-			sr ??= new(entry.Open(), Encoding.UTF8);
-			textbox.Text = "";
-			talkname.Text = "";
-			button5.IsVisible = false;
-			
-			// セーブ読み込み
-			ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-			if (ent_saveread != null)
-			{
-				try
-				{
-					StreamReader srz = new(ent_saveread.Open());
-					int read_loop = int.Parse(srz.ReadToEnd());
-
-					bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
-					if (answer == true)
-					{
-						// "セーブデータをロード"を選択した場合のみ、この処理を実行
-						try
-						{
-							WhileLoading = true;
-							for (int i = 1; i < read_loop; i++)
-								FileRead();
-							// 成功表示
-							WhileLoading = false;
-							await Toast.Make("ロードが成功しました。").Show();
-						}
-						catch
-						{
-							// 失敗表示
-							await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
-						}
-					}
-					srz.Dispose();
-				}
-				catch { }
-			}
-
-			// 初回ファイル読み込み処理
-			FileRead();
+		// json読み込み
+		static Dictionary<string, string> JsonToDict(string json)
+		{
+			if (string.IsNullOrEmpty(json))
+				return [];
+			Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+			return dict;
 		}
+
+		// 最初の.anovファイルを読み込み
+		entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
+
+		sr ??= new(entry.Open(), Encoding.UTF8);
+		textbox.Text = "";
+		talkname.Text = "";
+		button5.IsVisible = false;
+		
+		// セーブ読み込み
+		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+		if (ent_saveread != null)
+		{
+			try
+			{
+				StreamReader srz = new(ent_saveread.Open());
+				int read_loop = int.Parse(srz.ReadToEnd());
+
+				bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+				if (answer == true)
+				{
+					// "セーブデータをロード"を選択した場合のみ、この処理を実行
+					try
+					{
+						WhileLoading = true;
+						for (int i = 1; i < read_loop; i++)
+							FileRead();
+						// 成功表示
+						WhileLoading = false;
+						await Toast.Make("ロードが成功しました。").Show();
+					}
+					catch
+					{
+						// 失敗表示
+						await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
+					}
+				}
+				srz.Dispose();
+			}
+			catch { }
+		}
+
+		// 初回ファイル読み込み処理
+		FileRead();
 	}
 
 	void FileRead()
