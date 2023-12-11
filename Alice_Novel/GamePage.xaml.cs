@@ -341,6 +341,12 @@ public partial class GamePage : ContentPage
 					match = Regex.Match(sr_read, @"\[(.*?)\]");
 					if (match.Success)
 						textbox.Text = match.Groups[1].Value;
+
+					// "anov: "から始まる".anov構文 別ファイル"を読み込み
+					match = Regex.Match(sr_read, @"movie: (.*)");
+					// if (match.Success)
+						// .anov構文読み込み処理
+
 				}
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
