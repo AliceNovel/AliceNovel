@@ -18,11 +18,10 @@ public partial class GamePage : ContentPage
 		Initial_game_title = game_ui.Title;
 	}
 
-	// 初期状態のボタン有効/無効の確認用(nullエラー対策のために初期値はfalseに設定)
-	bool Initial_button1 = false, Initial_button2 = false, Initial_button3 = false, Initial_button4 = false, Initial_button5 = false, Initial_button6 = false;
+	// 初期状態のボタン有効/無効の確認用
+	bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
 	// 初期状態で表示されている文字
-	string Initial_textbox_text = "", Initial_button5_text = "", Initial_game_title = "";
-
+	readonly string Initial_textbox_text, Initial_button5_text, Initial_game_title;
 
 	// UI表示/非表示
 	bool ui_visible = true;
@@ -73,8 +72,8 @@ public partial class GamePage : ContentPage
 		Initial_button5 = button5.IsVisible;
 		Initial_button6 = button6.IsVisible;
 		// 画像以外すべて非表示
-		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
+		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 	}
 
 	void UI_ReDisplay(){
@@ -140,11 +139,6 @@ public partial class GamePage : ContentPage
 		read_times = 0;
 		// zip内のファイルを読み込み
 		zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
-
-		// 初期時の表示文字を保存
-		Initial_textbox_text = textbox.Text;
-		Initial_button5_text = button5.Text;
-		Initial_game_title = game_ui.Title;
 
 		// zip内のpackage.jsonファイルを読み込み
 		ZipArchiveEntry entry = zip.GetEntry("package.json");
