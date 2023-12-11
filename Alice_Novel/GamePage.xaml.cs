@@ -11,12 +11,19 @@ public partial class GamePage : ContentPage
 	public GamePage()
 	{
 		InitializeComponent();
+
+		// 初期時の表示文字を保存
+		Initial_textbox_text = textbox.Text;
+		Initial_button5_text = button5.Text;
+		Initial_game_title = game_ui.Title;
 	}
 
 	// 初期状態のボタン有効/無効の確認用(nullエラー対策のために初期値はfalseに設定)
 	bool Initial_button1 = false, Initial_button2 = false, Initial_button3 = false, Initial_button4 = false, Initial_button5 = false, Initial_button6 = false;
 	// 初期状態で表示されている文字
 	string Initial_textbox_text = "", Initial_button5_text = "", Initial_game_title = "";
+
+
 	// UI表示/非表示
 	bool ui_visible = true;
 
