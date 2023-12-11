@@ -351,6 +351,11 @@ public partial class GamePage : ContentPage
 				if (match.Success)
 					textbox.Text = match.Groups[1].Value;
 
+				// "plugin: "から始まる"プラグイン"を読み込み
+				match = Regex.Match(sr_read, @"plugin: (.*)");
+				// if (match.Success)
+					// プラグイン読み込み処理
+
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
 			}
