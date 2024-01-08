@@ -125,6 +125,10 @@ public partial class GamePage : ContentPage
 	{
 		// button5をクリックしたときの処理
 
+		// キャッシュフォルダを削除する
+		string path = FileSystem.Current.CacheDirectory;
+		Directory.Delete(path, true);
+
 		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
 				PickerTitle = "Alice Novelゲームを読み込んでください。", 
