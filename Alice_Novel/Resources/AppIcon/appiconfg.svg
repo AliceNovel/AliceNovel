@@ -1,29 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
 
-<svg
-	width="456"
-	height="456"
-	viewBox="0 0 1024 1024"
-	version="1.1"
-	xmlns="http://www.w3.org/2000/svg"
-	xmlns:svg="http://www.w3.org/2000/svg">
+<svg width="456" height="456"
+	 viewBox="0 0 1024 1024"
+	 version="1.1"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:svg="http://www.w3.org/2000/svg">
 	<g>
 		<g id="book"
 			transform="matrix(0.7,-0.2,0.14,1,80,130)"
 			style="fill:#c2ff64;fill-opacity:1">
-			<path
-				d="m 65,312.5 c -6,0 -11,5 -11,11 v 367.5 c 0,3 1,5.5 3,7.5 a 234,102.5 0 0 1 -1.5,-10 234,102.5 0 0 1 234,-102.5 234,102.5 0 0 1 232,94 234,102.5 0 0 1 232,-92 234,102.5 0 0 1 233,93 V 323.5 c 0,-6 -5,-11 -11,-11 z M 521.5,702 a 234,102.5 0 0 1 0,1 h 0 a 234,102.5 0 0 1 0,1 z" />
-			<ellipse
-				cx="286"
-				cy="311"
-				rx="234"
-				ry="102" />
-			<ellipse
-				cx="751"
-				cy="313"
-				rx="234"
-				ry="102" />
+			<path d="m 65,312.5 c -6,0 -11,5 -11,11 v 367.5 c 0,3 1,5.5 3,7.5 a 234,102.5 0 0 1 -1.5,-10 234,102.5 0 0 1 234,-102.5 234,102.5 0 0 1 232,94 234,102.5 0 0 1 232,-92 234,102.5 0 0 1 233,93 V 323.5 c 0,-6 -5,-11 -11,-11 z M 521.5,702 a 234,102.5 0 0 1 0,1 h 0 a 234,102.5 0 0 1 0,1 z" />
+			<ellipse cx="286" cy="311"
+				rx="234" ry="102" />
+			<ellipse cx="751" cy="313"
+				rx="234" ry="102" />
 		</g>
 		<!-- 
 		<text
@@ -37,45 +27,25 @@
 		</text>
 		 -->
 		<g style="fill:#3cb371">
-			<rect
-				width="80"
-				height="80"
-				x="120"
-				y="120"
+			<rect width="80" height="80"
+				x="120" y="120"
 				ry="12" />
-			<rect
-				width="60"
-				height="60"
-				x="240"
-				y="130"
+			<rect width="60" height="60"
+				x="240" y="130"
 				ry="9" />
-			<rect
-				width="40"
-				height="40"
-				x="340"
-				y="140"
+			<rect width="40" height="40"
+				x="340" y="140"
 				ry="6" />
 		</g>
-		<g
-			style="fill:#3cb371"
-			transform="matrix(-1,0,0,-1,1024,1024)">
-			<rect
-				width="80"
-				height="80"
-				x="120"
-				y="120"
+		<g style="fill:#3cb371" transform="matrix(-1,0,0,-1,1024,1024)">
+			<rect width="80" height="80"
+				x="120" y="120"
 				ry="12" />
-			<rect
-				width="60"
-				height="60"
-				x="240"
-				y="130"
+			<rect width="60" height="60"
+				x="240" y="130"
 				ry="9" />
-			<rect
-				width="40"
-				height="40"
-				x="340"
-				y="140"
+			<rect width="40" height="40"
+				x="340" y="140"
 				ry="6" />
 		</g>
 	</g>
