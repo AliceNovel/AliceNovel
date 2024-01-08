@@ -265,7 +265,8 @@ public partial class GamePage : ContentPage
 							Directory.CreateDirectory(audio_cache);
 
 						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
-						entry.ExtractToFile(temp_audio, true);
+						if (!File.Exists(temp_audio))
+							entry.ExtractToFile(temp_audio, true);
 
 						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
 						audio_bgm.Play();
@@ -291,7 +292,8 @@ public partial class GamePage : ContentPage
 								Directory.CreateDirectory(movie_cache);
 
 							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
-							entry.ExtractToFile(temp_movie, true);
+							if (!File.Exists(temp_movie))
+								entry.ExtractToFile(temp_movie, true);
 
 							movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
 							movie.IsVisible = true;
