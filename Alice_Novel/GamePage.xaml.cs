@@ -11,10 +11,18 @@ public partial class GamePage : ContentPage
 	public GamePage()
 	{
 		InitializeComponent();
+
+		// 初期時の表示文字を保存
+		Initial_textbox_text = textbox.Text;
+		Initial_button5_text = button5.Text;
+		Initial_game_title = game_ui.Title;
 	}
 
-	// 初期状態のボタン有効/無効の確認用(nullエラー対策のために初期値はfalseに設定)
-	bool button1_start = false, button2_start = false, button3_start = false, button4_start = false, button5_start = false, button6_start = false;
+	// 初期状態のボタン有効/無効の確認用
+	bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
+	// 初期状態で表示されている文字
+	readonly string Initial_textbox_text, Initial_button5_text, Initial_game_title;
+
 	// UI表示/非表示
 	bool ui_visible = true;
 
@@ -27,10 +35,13 @@ public partial class GamePage : ContentPage
 			UI_ReDisplay();
 	}
 
-	private async void Button1_Clicked(object sender, EventArgs e)
+	private void Button1_Clicked(object sender, EventArgs e)
 	{
 		// button1をクリックしたときの処理
+		FileSave();
+	}
 
+	async void FileSave(){
 		// セーブ処理
 		if (zip != null)
 		{
@@ -54,27 +65,27 @@ public partial class GamePage : ContentPage
 
 	void UI_Hidden(){
 		// 初期のボタン有効/無効状態を確認
-		button1_start = button1.IsVisible;
-		button2_start = button2.IsVisible;
-		button3_start = button3.IsVisible;
-		button4_start = button4.IsVisible;
-		button5_start = button5.IsVisible;
-		button6_start = button6.IsVisible;
+		Initial_button1 = button1.IsVisible;
+		Initial_button2 = button2.IsVisible;
+		Initial_button3 = button3.IsVisible;
+		Initial_button4 = button4.IsVisible;
+		Initial_button5 = button5.IsVisible;
+		Initial_button6 = button6.IsVisible;
 		// 画像以外すべて非表示
-		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
+		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 	}
 
 	void UI_ReDisplay(){
 		// UI再表示処理
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-		button1.IsVisible = button1_start;
-		button2.IsVisible = button2_start;
-		button3.IsVisible = button3_start;
-		button4.IsVisible = button4_start;
-		button5.IsVisible = button5_start;
-		button6.IsVisible = button6_start;
+		button1.IsVisible = Initial_button1;
+		button2.IsVisible = Initial_button2;
+		button3.IsVisible = Initial_button3;
+		button4.IsVisible = Initial_button4;
+		button5.IsVisible = Initial_button5;
+		button6.IsVisible = Initial_button6;
 	}
 
 	private void Button3_Clicked(object sender, EventArgs e)
@@ -120,92 +131,92 @@ public partial class GamePage : ContentPage
 				FileTypes = anprojFileType,
 				});
 
-		if (result != null)
+		if (result == null)
+			return;
+
+		FilePath = result.FullPath.ToString();
+
+		read_times = 0;
+		// zip内のファイルを読み込み
+		zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
+
+		// zip内のpackage.jsonファイルを読み込み
+		ZipArchiveEntry entry = zip.GetEntry("package.json");
+		StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
+		string str = sr2.ReadToEnd();
+		sr2.Close();
+
+		// rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
+		anproj_setting = new()
 		{
-			FilePath = result.FullPath.ToString();
+			{"root-image", "image/"},
+			{"root-background", "image/background/"},
+			{"root-story", "story/"},
+			{"root-data", "data/"},
+			{"root-audio", "audio/"},
+			{"root-movie", "movie/"},
+			{"root-character", "character.json"},
+			{"root-save", "save/"},
+			{"first-read", "main.anov"},
+			{"game-name", ""},
+		};
+		// json読み込み
+		anproj_setting = JsonToDict(str);
+		// タイトルの設定
+		game_ui.Title = anproj_setting["game-name"];
 
-			read_times = 0;
-			// zip内のファイルを読み込み
-			zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
-
-			// zip内のpackage.jsonファイルを読み込み
-			ZipArchiveEntry entry = zip.GetEntry("package.json");
-			StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
-			string str = sr2.ReadToEnd();
-			sr2.Close();
-
-			// rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
-			anproj_setting = new()
-			{
-				{"root-image", "image/"},
-				{"root-background", "image/background/"},
-				{"root-story", "story/"},
-				{"root-data", "data/"},
-				{"root-audio", "audio/"},
-				{"root-movie", "movie/"},
-				{"root-character", "character.json"},
-				{"root-save", "save/"},
-				{"first-read", "main.anov"},
-				{"game-name", ""},
-			};
-			// json読み込み
-			anproj_setting = JsonToDict(str);
-			// タイトルの設定
-			game_ui.Title = anproj_setting["game-name"];
-
-			// json読み込み
-			static Dictionary<string, string> JsonToDict(string json)
-			{
-				if (string.IsNullOrEmpty(json))
-					return [];
-				Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-				return dict;
-			}
-
-			// 最初の.anovファイルを読み込み
-			entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
-
-			sr ??= new(entry.Open(), Encoding.UTF8);
-			textbox.Text = "";
-			talkname.Text = "";
-			button5.IsVisible = false;
-			
-			// セーブ読み込み
-			ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-			if (ent_saveread != null)
-			{
-				try
-				{
-					StreamReader srz = new(ent_saveread.Open());
-					int read_loop = int.Parse(srz.ReadToEnd());
-
-					bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
-					if (answer == true)
-					{
-						// "セーブデータをロード"を選択した場合のみ、この処理を実行
-						try
-						{
-							WhileLoading = true;
-							for (int i = 1; i < read_loop; i++)
-								FileRead();
-							// 成功表示
-							WhileLoading = false;
-							await Toast.Make("ロードが成功しました。").Show();
-						}
-						catch
-						{
-							// 失敗表示
-							await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
-						}
-					}
-					srz.Dispose();
-				}
-				catch { }
-			}
-
-			// 初回ファイル読み込み処理
-			FileRead();
+		// json読み込み
+		static Dictionary<string, string> JsonToDict(string json)
+		{
+			if (string.IsNullOrEmpty(json))
+				return [];
+			Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
+			return dict;
 		}
+
+		// 最初の.anovファイルを読み込み
+		entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
+
+		sr ??= new(entry.Open(), Encoding.UTF8);
+		textbox.Text = "";
+		talkname.Text = "";
+		button5.IsVisible = false;
+		
+		// セーブ読み込み
+		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+		if (ent_saveread != null)
+		{
+			try
+			{
+				StreamReader srz = new(ent_saveread.Open());
+				int read_loop = int.Parse(srz.ReadToEnd());
+
+				bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+				if (answer == true)
+				{
+					// "セーブデータをロード"を選択した場合のみ、この処理を実行
+					try
+					{
+						WhileLoading = true;
+						for (int i = 1; i < read_loop; i++)
+							FileRead();
+						// 成功表示
+						WhileLoading = false;
+						await Toast.Make("ロードが成功しました。").Show();
+					}
+					catch
+					{
+						// 失敗表示
+						await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
+					}
+				}
+				srz.Dispose();
+			}
+			catch { }
+		}
+
+		// 初回ファイル読み込み処理
+		FileRead();
 	}
 
 	void FileRead()
@@ -223,11 +234,8 @@ public partial class GamePage : ContentPage
 				{
 					// 場所指定されていない場合は背景画像を消す
 					if (match.Groups[1].Value == "")
-					{
 						image.Source = null;
-					}
 					else
-					{
 						try
 						{
 							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
@@ -239,7 +247,6 @@ public partial class GamePage : ContentPage
 							}
 						}
 						catch { }
-					}
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
@@ -353,10 +360,10 @@ public partial class GamePage : ContentPage
 			zip?.Dispose();// zipファイルを閉じる
 			talkname.Text = "";
 			image.Source = null;
-			textbox.Text = "Alice Novelゲームを読み込んでください。";
+			textbox.Text = Initial_textbox_text;
 			button5.IsVisible = true;
-			button5.Text = "ロード";
-			game_ui.Title = "ゲームをプレイする!";
+			button5.Text = Initial_button5_text;
+			game_ui.Title = Initial_game_title;
 		}
 	}
 

@@ -9,7 +9,6 @@
     <TabBar>
         <Tab Title="ゲーム">
             <ShellContent
-                Title="ゲームを遊ぶ!"
                 ContentTemplate="{DataTemplate local:GamePage}"
                 Route="GamePage" />
         </Tab>
