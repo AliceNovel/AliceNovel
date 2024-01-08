@@ -45,7 +45,7 @@ Coding language + Design lanuage / プログラミング言語+デザイン
 - Plugin system / プラグインシステム
   - Plugin for battle / 戦闘プラグイン
 - ~~Read Movie files / 動画ファイル読み込み機能~~ (v0.9.0-rc3/v0.9.0-rtm)
-- Improve efficient of reading audio and movie files / 音声+動画ファイル読み込みの効率化
+- ~~Improve efficient of reading audio and movie files / 音声+動画ファイル読み込みの効率化~~ (v0.9.0-rtm)
 
 #### Others / その他
 - ~~Upgrade .net7 to 8 / .NET7.0から.NET8.0へ移行~~ (v0.9.0-rtm)
