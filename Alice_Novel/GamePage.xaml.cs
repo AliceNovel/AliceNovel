@@ -255,27 +255,16 @@ public partial class GamePage : ContentPage
 				{
 					// 指定されていない場合は音楽を止める
 					audio_bgm.Stop();
-					// キャッシュ内のすべてのファイルを削除する
-					string audio_cache = FileSystem.Current.CacheDirectory;
-					try
-					{
-						DirectoryInfo di = new(audio_cache);
-						FileInfo[] files = di.GetFiles();
-						foreach (FileInfo file in files)
-						{
-							file.Delete();
-						}
-					}
-					catch{}
 
 					try
 					{
 						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
-						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+						string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-audio"]));
 						if (!Directory.Exists(audio_cache))
 							Directory.CreateDirectory(audio_cache);
 
+						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
 						entry.ExtractToFile(temp_audio, true);
 
 						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
@@ -292,27 +281,16 @@ public partial class GamePage : ContentPage
 						// 指定されていない場合は動画を止める
 						movie.Stop();
 						movie.IsVisible = false;
-						// キャッシュ内のすべてのファイルを削除する
-						string movie_cache = FileSystem.Current.CacheDirectory;
-						try
-						{
-							DirectoryInfo di = new(movie_cache);
-							FileInfo[] files = di.GetFiles();
-							foreach (FileInfo file in files)
-							{
-								file.Delete();
-							}
-						}
-						catch{}
 
 						try
 						{
 							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value);
-							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
-							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
+							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+							string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
 							if (!Directory.Exists(movie_cache))
 								Directory.CreateDirectory(movie_cache);
 
+							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
 							entry.ExtractToFile(temp_movie, true);
 
 							movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
@@ -364,6 +342,10 @@ public partial class GamePage : ContentPage
 			button5.IsVisible = true;
 			button5.Text = Initial_button5_text;
 			game_ui.Title = Initial_game_title;
+
+			// キャッシュフォルダを削除する
+			string path = FileSystem.Current.CacheDirectory;
+			Directory.Delete(path, true);
 		}
 	}
 
@@ -375,18 +357,6 @@ public partial class GamePage : ContentPage
 			// 動画停止
 			movie.Stop();
 			movie.IsVisible = false;
-			// キャッシュ内のすべてのファイルを削除する
-			string movie_cache = FileSystem.Current.CacheDirectory;
-			try
-			{
-				DirectoryInfo di = new(movie_cache);
-				FileInfo[] files = di.GetFiles();
-				foreach (FileInfo file in files)
-				{
-					file.Delete();
-				}
-			}
-			catch{}
 
 			// UIを元に戻す
 			UI_ReDisplay();
