@@ -7,10 +7,11 @@
 This is game engine for novel game. / ノベルゲーム向けのゲームエンジンです。<br />
 If you use this game engine, you should not make code and user interface for game. So you can make game easily. / こちらのゲームエンジンを採用することにより、プログラムやUIの作成の必要がなくなるため、ゲームの作成が容易になります。<br />
 
-### URL / 関連リンク
-- **[Alice Novel official site / Alice Novel 紹介サイト](https://alicenovel.web.app "Alice Novel で世界をより楽しく")**
-- [Official site / 紹介サイト](https://github.com/Lemon73-Computing/Alice_Novel-Docs) (GitHub repository)
-- [Sample game / サンプルゲーム](https://github.com/Lemon73-Computing/Alice_Novel-Docs) (GitHub repository)
+### Alice Project Links
+- [Alice Novel Website](https://alicenovel.web.app "Alice Novel で世界をより楽しく")
+- [Alice Novel Documentation / 資料](https://alicenovel.web.app/docs)
+- [Alice Project Github](https://github.com/alicenovel/)
+- [Samples / サンプルゲーム](https://github.com/Lemon73-Computing/Alice_Novel-Docs)
 
 ### Technology / 技術
 Framework / フレームワーク
