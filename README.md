@@ -3,9 +3,8 @@
 [![GitHub CI](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml/badge.svg)](https://github.com/Lemon73-Computing/Alice_Novel/actions/workflows/dotnet-maui.yml)
 [![Azure Devops CI](https://dev.azure.com/lemon73/Alice_Novel/_apis/build/status%2FAlice_Novel?branchName=master)](https://dev.azure.com/lemon73/Alice_Novel/_build/latest?definitionId=2&branchName=master)
 
-## Summary / 概要
-This is game engine for novel game. / ノベルゲーム向けのゲームエンジンです。<br />
-If you use this game engine, you should not make code and user interface for game. So you can make game easily. / こちらのゲームエンジンを採用することにより、プログラムやUIの作成の必要がなくなるため、ゲームの作成が容易になります。<br />
+Alice Novel is a free and open source game engine for novel game. / Alice Novelはフリーでオープンなノベルゲーム向けのゲームエンジンです。<br />
+If you use it, you should not make code and user interface for your games. So you can make it easily. / こちらのゲームエンジンを採用することにより、プログラムやUIの作成の必要がなくなるため、ゲームの作成が容易になります。<br />
 
 ### Alice Project Links
 - [Alice Novel Website](https://alicenovel.web.app "Alice Novel で世界をより楽しく")
