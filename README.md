@@ -27,7 +27,7 @@ Coding language + Design lanuage / プログラミング言語+デザイン
 ## Status / 開発進捗
 **In development** / **開発中**
 
-### Loadmap / ロードマップ
+### Roadmap / ロードマップ
 > [!NOTE]
 > Please note that the timing (version) of implementation is subject to change. / 実装の時期(バージョン)は変更する可能性がありますのでご了承ください。
 
