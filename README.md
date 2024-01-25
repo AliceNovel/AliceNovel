@@ -14,10 +14,11 @@ If you use it, you should not make code and user interface for your games. So yo
 
 ### Technology / 技術
 Framework / フレームワーク
-- [MAUI] / [.NET8.0]
+- [MAUI] ([.NET8.0])
 
-Coding language + Design lanuage / プログラミング言語+デザイン
-- [C#] + [XAML]
+Languages / 言語
+- [C#]
+- [XAML]
 
 [MAUI]: https://dot.net/maui ".NET MAUI"
 [.NET8.0]: https://dot.net ".NET"
