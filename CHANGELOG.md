@@ -73,5 +73,8 @@
   - `/ `: read emotion information (preview / no function)
   - `[` and `]`: read speech information
 
-## [v0.8.0-aplha](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.8.0-alpha)
+## [v0.8.0-alpha](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.8.0-alpha)
 **Release Date**: 2023/5/3
+
+**Added**
+- Only User Interface.
