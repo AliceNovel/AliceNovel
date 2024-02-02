@@ -3,8 +3,12 @@ name: .NET MAUI Build
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'Alice_Novel/**'
   pull_request:
     branches: [ master ]
+    paths:
+      - 'Alice_Novel/**'
 
 jobs:
   build:

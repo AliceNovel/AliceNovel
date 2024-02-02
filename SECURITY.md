@@ -3,10 +3,10 @@
 ## Supported Versions / サポートバージョン
 
 | Version / バージョン | Supported / サポート |
-| -------------------- | --------------------- |
-| 0.9.0-alpha <        | :white_check_mark:    |
-| 0.8.0                | :x:                   |
-| < 0.8.0              | :x:                   |
+| ------------------- | ------------------- |
+| 0.9.0               | :white_check_mark:  |
+| 0.8.0               | :x:                 |
+| < 0.8.0             | :x:                 |
 
 ## Reporting a Vulnerability / 脆弱性の報告
 
