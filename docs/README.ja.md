@@ -25,4 +25,4 @@ Alice Novelはフリーでオープンなノベルゲーム向けのゲームエ
 [xaml]: https://learn.microsoft.com/ja-jp/dotnet/maui/xaml/ ".NET MAUI XAML ドキュメント"
 
 ## ライセンス
-[GPL v3.0](../LICENSE.txt) の下にライセンスされています。
+[GPL v3.0](./LICENSE.txt) の下にライセンスされています。

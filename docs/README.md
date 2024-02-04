@@ -28,4 +28,4 @@ Languages
 [xaml]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAML Documentation"
 
 ## License
-Licensed under the [GPL v3.0](../LICENSE.txt).
+Licensed under the [GPL v3.0](./LICENSE.txt).
