@@ -27,8 +27,5 @@ Languages
 [C#]: https://learn.microsoft.com/en-us/dotnet/csharp/ "C# Documentation"
 [xaml]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAML Documentation"
 
-## Status
-**In development**
-
 ## License
 Licensed under the [GPL v3.0](../LICENSE.txt).
