@@ -7,3 +7,7 @@
 
 > [!important]
 > You cann't use some function in VSCode debugger. ex) Alart of community tool kit
+
+---
+*Reference*
+- https://techcommunity.microsoft.com/t5/educator-developer-blog/net-maui-on-linux-with-visual-studio-code/ba-p/3982195
