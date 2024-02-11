@@ -1,6 +1,5 @@
-# Loadmap / ロードマップ
-> [!NOTE]
-> Please note that the timing (version) of implementation is subject to change. / 実装の時期(バージョン)は変更する可能性がありますのでご了承ください。
+# Alice Novel Roadmap / ロードマップ
+
 ## v0.9.0
 - ~~Read .anproj file / .anprojファイル読み込み~~ (v0.9.0-rc1)
 - ~~Read image and audio files / 画像+音声ファイル読み込み機能~~ (v0.9.0-rc1/v0.9.0-rc2)
