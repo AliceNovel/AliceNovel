@@ -17,7 +17,7 @@
 
 **Added**
 - CHANGELOG file. (#24)
-- Add Documentation for developer. (#32)
+- Documentation for developer. (#32)
 
 ## [v0.9.0-rtm](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.0-rtm)
 **Release Date**: 2024/1/8
