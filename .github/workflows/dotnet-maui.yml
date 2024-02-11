@@ -5,10 +5,12 @@ on:
     branches: [ master ]
     paths:
       - 'Alice_Novel/**'
+      - '.github/workflows/**'
   pull_request:
     branches: [ master ]
     paths:
       - 'Alice_Novel/**'
+      - '.github/workflows/**'
 
 jobs:
   build:
