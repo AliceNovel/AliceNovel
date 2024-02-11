@@ -42,34 +42,34 @@ jobs:
       # Upload Artifact
       - if: matrix.tfm == 'net8.0-android'
         name: Android Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: android-ci-build
           path: Alice_Novel/bin/Release/net8.0-android/*Signed.a*
 
       - if: matrix.tfm == 'net8.0-ios'
         name: iOS Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: ios-ci-build
           path: Alice_Novel/bin/Release/net8.0-ios/**/*.app/
 
       - if: matrix.tfm == 'net8.0-maccatalyst'
         name: MacCatalyst Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: macos-ci-build
           path: Alice_Novel/bin/Release/net8.0-maccatalyst/**/*.app/
 
       - if: matrix.tfm == 'net8.0-windows10.0.19041.0'
         name: Windows Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: windows-ci-build
           path: Alice_Novel/bin/Release/net8.0-windows*/**/
 
       - name: Full Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: full-ci-build
           path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
