@@ -4,13 +4,13 @@
 **Release Date**: TBD
 
 **Plan**
-- Add the plugin system.
+- Add the plugin system of C#. ([#16](https://github.com/Lemon73-Computing/Alice_Novel/issues/16))
 
 ## v1.0.0 GA
 **Release Date**: TBD
 
 **Plan**
-- Add the story branch function.
+- Add the story branch function. ([#6](https://github.com/Lemon73-Computing/Alice_Novel/issues/6))
 
 ## v0.9.0 GA
 **Release Date**: TBD
