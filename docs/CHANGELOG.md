@@ -16,30 +16,30 @@
 **Release Date**: TBD
 
 **Added**
-- CHANGELOG file. (#24)
-- Documentation for developer. (#32)
+- CHANGELOG file. ([#24](https://github.com/Lemon73-Computing/Alice_Novel/issues/24))
+- Documentation for developer. ([#32](https://github.com/Lemon73-Computing/Alice_Novel/issues/32))
 
 ## [v0.9.0-rtm](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.0-rtm)
 **Release Date**: 2024/1/8
 
 **Changed**
 - Upgrade of framework (.NET). Upgraded .NET7 to 8.
-- Cache effecient. (#9)
+- Cache effecient. ([#9](https://github.com/Lemon73-Computing/Alice_Novel/issues/9))
 
 **Fixed**
-- Not to do proceed until the video is finished. (#7, #11)
-- Disabled UI. (#13)
-- Play the other movie. (#22)
+- Not to do proceed until the video is finished. ([#7](https://github.com/Lemon73-Computing/Alice_Novel/issues/7))
+- Disabled UI. ([#13](https://github.com/Lemon73-Computing/Alice_Novel/issues/13))
+- Play the other movie. ([#22](https://github.com/Lemon73-Computing/Alice_Novel/issues/22))
 
 ## [v0.9.0-rc3](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.0-rc3)
 **Release Date**: 2023/10/27
 
 **Added**
 - The function to save and load of the game data.
-- The function to read and play movie files. (#4)
+- The function to read and play movie files. ([#4](https://github.com/Lemon73-Computing/Alice_Novel/issues/4))
 
 **Fixed**
-- Can't open another .anproj file. (#1)
+- Can't open another .anproj file. ([#1](https://github.com/Lemon73-Computing/Alice_Novel/issues/1))
 
 ## [v0.9.0-rc2](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.0-rc2)
 **Release Date**: 2023/10/14
