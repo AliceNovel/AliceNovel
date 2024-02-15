@@ -9,7 +9,7 @@ Alice Novelはフリーでオープンなノベルゲーム向けのゲームエ
 - [Alice Novel ウェブサイト](https://alicenovel.web.app "Alice Novel で世界をより楽しく")
 - [Alice Novel 資料](https://alicenovel.web.app/docs)
 - [Alice Project Github](https://github.com/alicenovel/)
-- [サンプルゲーム](https://github.com/Lemon73-Computing/Alice_Novel-Docs)
+- [サンプルゲーム](https://github.com/AliceNovel/Alice-Novel_Sample-Games)
 
 ### 技術
 フレームワーク
