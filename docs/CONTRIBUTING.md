@@ -1,7 +1,7 @@
 # Contribution
 Thanks for your contribution in Alice Novel!!
 
-## i18n
+### i18n
 - [日本語版](./CONTRIBUTING.ja.md)
 
 ## Technology / Language Used
