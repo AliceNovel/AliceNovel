@@ -22,20 +22,20 @@ Its licenses are GPL v3.0 and MIT.
 
 ## Directory Structure
 ```
-./Alice_Novel
-├.azure
-│Azure CI/CD
-├.github
-│GitHub Actions / Templates for GitHub Issues
-├Alice_Novel
-│Main folder
-├docs
-│Documentations
-├.gitattributes
-├.gitignore
-│Files for Git
-├Alice_Novel.sln
-│file for open in Visual Studio
-└LICENSE.txt
-  license file
+.
+├─.azure
+│  Azure CI/CD
+├─.github
+│  GitHub Actions / Templates for GitHub Issues
+├─Alice_Novel
+│  Main folder
+├─docs
+│  Documentations
+├─.gitattributes
+├─.gitignore
+│  Files for Git
+├─Alice_Novel.sln
+│  file for open in Visual Studio
+└─LICENSE.txt
+    license file
 ```
