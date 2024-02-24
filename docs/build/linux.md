@@ -50,7 +50,7 @@ More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunit
 > You cann't use some function in VSCode debugger. ex) Alart of community tool kit
 
 ## Instructions
-You can run these commands using Command Prompt, PowerShell, Git Shell, or any other terminal. These instructions will assume the use of Command Prompt.
+You can run these commands using Konsole, PowerShell, Git Shell, or any other terminal. These instructions will assume the use of Command Prompt.
 ```
 git clone https://github.com/Lemon73-Computing/Alice-Novel.git
 cd Alice_Novel/Alice_Novel
