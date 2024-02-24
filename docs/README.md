@@ -37,18 +37,12 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 - [Alice Project Github](https://github.com/alicenovel/)
 - [Samples](https://github.com/AliceNovel/Alice-Novel_Sample-Games)
 
-### Technology
-Framework
-- [MAUI] ([.NET8.0])
-
-Languages
-- [C#]
-- [XAML]
-
-[MAUI]: https://dot.net/maui ".NET MAUI"
-[.NET8.0]: https://dot.net ".NET"
-[C#]: https://learn.microsoft.com/en-us/dotnet/csharp/ "C# Documentation"
-[xaml]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAML Documentation"
+## Build documentation
+- [Technology / Language Used](./CONTRIBUTING.md#technology--language-used)
+- [Build Target](./build/target.md)
+  - [Linux](./build/linux.md)
+  - [Windows](./build/windows.md)
+  - macOS
 
 ## License
 Licensed under the [GPL v3.0](./LICENSE.txt).

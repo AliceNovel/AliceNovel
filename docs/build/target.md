@@ -1,4 +1,4 @@
-# Target OS
+# Target Operation System
 
 | TFM | Windows | MacOS | Linux |
 | --- | --- | --- | --- |
