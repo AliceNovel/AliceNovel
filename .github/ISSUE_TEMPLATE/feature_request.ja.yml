@@ -1,0 +1,35 @@
+name: 新機能の要求
+description: 新しいアイデアを提案
+title: "[強化 / enhancement]: "
+labels: [強化 / enhancement]
+
+body:
+- type: textarea
+  attributes:
+    label: あなたの提案する機能は何かの問題点に関連していますか?
+    description: 何が問題点なのか明確で簡潔に記述してください。
+    placeholder: |
+      例: [...]をしているときに私はいつもイライラしています。
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: あなたの望む解決策の記述
+    description: あなたが何をして欲しいか明確かつ簡潔に記述してください。
+  validations:
+    required: true
+
+- type: textarea
+  attributes:
+    label: 検討した代替案の記述
+    description: あなたが検討した代替案や機能について、明確かつ簡潔に記述してください。
+  validations:
+    required: false
+
+- type: textarea
+  attributes:
+    label: 追加の内容
+    description: 機能リクエストに関するその他の内容や、スクリーンショットについてはこちらに追加してください。
+  validations:
+    required: false

@@ -1,78 +1,78 @@
-name: Bug report / バグ報告
-description: Create a report to help us improve / 改善点について報告
+name: Bug report
+description: Create a report to help us improve
 title: "[バグ / bug]: "
 labels: [バグ / bug]
 
 body:
 - type: textarea
   attributes:
-    label: Describe the bug / バグについての説明
-    description: A clear and concise description of what the bug is. / バグの内容を明確かつ簡潔に記述してください。
+    label: Describe the bug
+    description: A clear and concise description of what the bug is.
   validations:
     required: true
 
 - type: textarea
   attributes:
-    label: To Reproduce / 再現方法
+    label: To Reproduce
     description: |
-      Steps to reproduce the behavior / 動作を再現するための方法:
+      Steps to reproduce the behavior
     placeholder: |
-      1. Go to "..." / "..."へ移動する
-      2. Click on "...." / "..."をクリックする
-      3. Scroll down to "...." / "..."までスクロールする
-      4. See error / エラーが発生
+      1. Go to "..."
+      2. Click on "...."
+      3. Scroll down to "...."
+      4. See error
   validations:
     required: true
 
 - type: textarea
   attributes:
-    label: Expected behavior / 期待される動作
-    description: A clear and concise description of what you expected to happen. / 期待される動作を簡潔に記述してください。
+    label: Expected behavior
+    description: A clear and concise description of what you expected to happen.
   validations:
     required: true
 
 - type: textarea
   attributes:
-    label: Screenshots / スクリーンショット
-    description: If applicable, add screenshots to help explain your problem. / もし該当する場合は、問題の説明に役立つスクリーンショットを追加してください。
+    label: Screenshots
+    description: If applicable, add screenshots to help explain your problem.
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: Desktop / デスクトップ
+    label: Desktop
     description: |
-      (please complete the following information / 以下の情報をご記入ください。):
+      (please complete the following information):
         - OS: [e.g. iOS]
-        - Browser / ブラウザ [e.g. chrome, safari]
-        - Version / バージョン [e.g. 22]
+        - Browser [e.g. chrome, safari]
+        - Version [e.g. 22]
     value: |
         - OS:
-        - Version / バージョン
+        - Version
     render: markdown
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: Smartphone / スマートフォン
+    label: Smartphone
     description: |
-      (please complete the following information / 以下の情報をご記入ください。):
-        - Device / 端末: [e.g. iPhone6]
+      (please complete the following information):
+        - Device: [e.g. iPhone6]
         - OS: [e.g. iOS8.1]
-        - Browser / ブラウザ [e.g. stock browser, safari]
-        - Version / バージョン [e.g. 22]
+        - Browser [e.g. stock browser, safari]
+        - Version [e.g. 22]
     value: |
-        - Device / 端末:
+        - Device:
         - OS:
-        - Version / バージョン
+        - Version
     render: markdown
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: Additional context / 追加の内容
-    description: Add any other context about the problem here. / この問題に関するその他の情報はこちらに追加してください。
+    label: Additional context
+    description: Add any other context about the problem here.
   validations:
     required: false

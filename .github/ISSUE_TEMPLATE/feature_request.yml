@@ -1,35 +1,35 @@
-name: Feature request / 新機能の要求
-description: Suggest an idea for this project / 新しいアイデアを提案
+name: Feature request
+description: Suggest an idea for this project
 title: "[強化 / enhancement]: "
 labels: [強化 / enhancement]
 
 body:
 - type: textarea
   attributes:
-    label: Is your feature request related to a problem? Please describe. / あなたの提案する機能は何かの問題点に関連していますか?
-    description: A clear and concise description of what the problem is. / 何が問題点なのか明確で簡潔に記述してください。
+    label: Is your feature request related to a problem? Please describe.
+    description: A clear and concise description of what the problem is.
     placeholder: |
-      例: Ex. I'm always frustrated when [...] / [...]をしているときに私はいつもイライラしています。
+      Ex. I'm always frustrated when [...]
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: Describe the solution you'd like / あなたの望む解決策の記述
-    description: A clear and concise description of what you want to happen. / あなたが何をして欲しいか明確かつ簡潔に記述してください。
+    label: Describe the solution you'd like
+    description: A clear and concise description of what you want to happen.
   validations:
     required: true
 
 - type: textarea
   attributes:
-    label: Describe alternatives you've considered / 検討した代替案の記述
-    description: A clear and concise description of any alternative solutions or features you've considered. / あなたが検討した代替案や機能について、明確かつ簡潔に記述してください。
+    label: Describe alternatives you've considered
+    description: A clear and concise description of any alternative solutions or features you've considered.
   validations:
     required: false
 
 - type: textarea
   attributes:
-    label: Additional context / 追加の内容
-    description: Add any other context or screenshots about the feature request here. / 機能リクエストに関するその他の内容や、スクリーンショットについてはこちらに追加してください。
+    label: Additional context
+    description: Add any other context or screenshots about the feature request here.
   validations:
     required: false
