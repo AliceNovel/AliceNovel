@@ -17,7 +17,7 @@ The languages used are:
 [XAML]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAML Documentation"
 
 ## Issues
-You can use either Japanese or English.
+You can use either English or Japanese.
 I prepared a template for issue, but you can use no template.
 
 ## Pull Request
