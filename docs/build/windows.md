@@ -11,7 +11,7 @@
 ## Instructions
 You can move this app to use Visual Studio 2022.
 
-## Using Visual Studio
-1. Install Visual Studio
-1. Install MAUI package in your Visual Studio
-1. Open this repository in your Visual Studio
+## Using Visual Studio 2022
+1. Install Visual Studio 2022
+1. Install MAUI package in it
+1. Open this repository in it
