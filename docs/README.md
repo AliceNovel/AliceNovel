@@ -39,6 +39,7 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 
 ## Build documentation
 - [Technology / Language Used](./CONTRIBUTING.md#technology--language-used)
+- [Directory Structure](./CONTRIBUTING.md#directory-structure)
 - [Build Target](./build/target.md)
   - [Linux](./build/linux.md)
   - [Windows](./build/windows.md)

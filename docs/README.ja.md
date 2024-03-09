@@ -36,6 +36,7 @@ Alice Novelはフリーでオープンなノベルゲーム向けのゲームエ
 
 ## 構築資料
 - [使用技術 / 言語](./CONTRIBUTING.ja.md#使用技術--言語)
+- [ディレクトリ構造](./CONTRIBUTING.ja.md#ディレクトリ構造)
 - [ビルド対象](./build/target.md)
   - [Linux](./build/linux.md)
   - [Windows](./build/windows.md)
