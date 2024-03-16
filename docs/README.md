@@ -10,6 +10,7 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 <!-- badges -->
 [![github-release-badge]][github-release]
 [![github-license-badge]][github-license]
+[![code-size-badge]](./)
 <!-- badges -->
 
 <!-- history badges -->
@@ -23,6 +24,7 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 [github-release-badge]: https://img.shields.io/github/release/Lemon73-Computing/Alice_Novel.svg?logo=github&style=flat "Latest Release"
 [github-license]: https://github.com/Lemon73-Computing/Alice_Novel/blob/master/LICENSE
 [github-license-badge]: https://img.shields.io/github/license/Lemon73-Computing/Alice_Novel.svg?style=flat "License"
+[code-size-badge]: https://img.shields.io/github/languages/code-size/Lemon73-Computing/Alice_Novel
 [azurepipelines]: https://dev.azure.com/lemon73/Alice_Novel/_build/latest?definitionId=1&branchName=master
 [azurepipelines-badge]: https://img.shields.io/azure-devops/build/lemon73/Alice_Novel/1.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines Status"
 [azurepipelines-history]: https://dev.azure.com/lemon73/Alice_Novel/_build?definitionId=1&branchName=master
