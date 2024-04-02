@@ -25,7 +25,7 @@
 		<ApplicationTitle>Alice_Novel</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>art.alice.alicenovel</ApplicationId>
+		<ApplicationId>dev.ivycafe.alicenovel</ApplicationId>
 		<ApplicationIdGuid>c7487b8b-8208-4bf1-839a-29942516ccae</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -39,7 +39,7 @@
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<Company>$(Authors)</Company>
-		<Authors>Lemon Electric Computer, $(AssemblyName) Project</Authors>
+		<Authors>Alice Project, Lemon's Resting Area, Lemon73</Authors>
 		<Copyright>GPL v3.0</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/Lemon73-Computing/Alice_Novel</RepositoryUrl>
