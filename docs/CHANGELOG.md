@@ -13,7 +13,10 @@
 - Add the story branch function. ([#6](https://github.com/Lemon73-Computing/Alice_Novel/issues/6))
 
 ## v0.9.0 GA
-**Release Date**: TBD
+**Release Date**: 2024/4/2
+
+**Changed**
+- Change fonts (Replace _Open Sans_ with _Noto Sans_). ([#35](https://github.com/Lemon73-Computing/Alice_Novel/issues/35))
 
 **Added**
 - CHANGELOG file. ([#24](https://github.com/Lemon73-Computing/Alice_Novel/issues/24))
