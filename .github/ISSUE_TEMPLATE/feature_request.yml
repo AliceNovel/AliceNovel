@@ -1,7 +1,7 @@
 name: Feature request
 description: Suggest an idea for this project
-title: "[強化 / enhancement]: "
-labels: [強化 / enhancement]
+title: "[enhancement]: "
+labels: [enhancement]
 
 body:
 - type: textarea
