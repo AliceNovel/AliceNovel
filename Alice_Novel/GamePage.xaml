@@ -18,6 +18,21 @@
 			<ColumnDefinition Width="1*"/>
 		</Grid.ColumnDefinitions>
 
+		<!-- Save Shortcut (Ctrl + S) -->
+		<Label>
+			<FlyoutBase.ContextFlyout>
+				<MenuFlyout>
+					<MenuFlyoutItem Text="Save"
+					                Clicked="Button1_Clicked">
+						<MenuFlyoutItem.KeyboardAccelerators>
+							<KeyboardAccelerator Modifiers="Ctrl"
+							                     Key="S"/>
+						</MenuFlyoutItem.KeyboardAccelerators>
+					</MenuFlyoutItem>
+				</MenuFlyout>
+			</FlyoutBase.ContextFlyout>
+		</Label>
+
 		<!-- UI再表示/"次に"用 -->
 		<Button x:Name="re"
 				Clicked="ReShow_Clicked"
