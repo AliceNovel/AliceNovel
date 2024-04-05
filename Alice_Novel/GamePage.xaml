@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+			 xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
 			 x:Class="Alice_Novel.GamePage"
 			 x:Name="game_ui"
 			 Title="ゲームをプレイする!">
@@ -92,12 +93,14 @@
 					Text="セーブ"
 					ToolTipProperties.Text="上書き保存します"
 					Margin="0,0,12,0"
-					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
+					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
+					windows:VisualElement.AccessKey="1"/>
 			<Button x:Name="button2"
 					Clicked="Button2_Clicked"
 					Text="UI非表示"
 					ToolTipProperties.Text="画面タップで再表示できます"
-					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
+					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
+					windows:VisualElement.AccessKey="2"/>
 
 		</HorizontalStackLayout>
 
@@ -117,13 +120,15 @@
 						Clicked="Button3_Clicked"
 						Text="Button3"
 						Margin="0,0,0,0"
-						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
+						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
+						windows:VisualElement.AccessKey="3"/>
 				<!-- 規定では非表示 -->
 				<Button x:Name="button4"
 						Clicked="Button4_Clicked"
 						Text="Button4"
 						Margin="12,0,0,0"
-						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
+						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
+						windows:VisualElement.AccessKey="4"/>
 			</HorizontalStackLayout>
 
 			<HorizontalStackLayout>
@@ -133,14 +138,16 @@
 						Text="ロード"
 						ToolTipProperties.Text="ゲームファイルを読み込みます"
 						Margin="0,0,0,0"
-						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
+						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
+						windows:VisualElement.AccessKey="5"/>
 				<!-- 規定では非表示 -->
 				<Button x:Name="button6"
 						Clicked="Button6_Clicked"
 						Text="Button6"
 						IsVisible="false"
 						Margin="12,0,0,0"
-						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"/>
+						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
+						windows:VisualElement.AccessKey="6"/>
 			</HorizontalStackLayout>
 
 		</VerticalStackLayout>
