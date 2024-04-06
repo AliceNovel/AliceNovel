@@ -37,7 +37,7 @@ jobs:
         run: dotnet restore Alice_Novel/Alice_Novel.csproj
 
       - name: Build MAUI App
-        run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false
+        run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false -p:WindowsPackageType=None
 
       # Upload Artifact
       - if: matrix.tfm == 'net8.0-android'
