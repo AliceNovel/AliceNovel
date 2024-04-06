@@ -12,7 +12,16 @@
 **Plan**
 - Add the story branch function. ([#6](https://github.com/Lemon73-Computing/Alice_Novel/issues/6))
 
-## v0.9.0 GA
+## [v0.9.1](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.1)
+**Release Date**: 2024/4/6
+
+**Changed**
+- CI/CD to change output file format. ([#44](https://github.com/Lemon73-Computing/Alice_Novel/issues/44))
+
+**Added**
+- Shortcut key for save and button. ([#19](https://github.com/Lemon73-Computing/Alice_Novel/issues/19))
+
+## [v0.9.0 GA](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.0)
 **Release Date**: 2024/4/2
 
 **Changed**
