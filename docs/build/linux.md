@@ -63,6 +63,12 @@ cd Alice_Novel/Alice_Novel
 dotnet watch run
 ```
 
+### Build `.apk` for Android
+```
+dotnet publish -f:net8.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
+```
+(AndroidSdk ... From Android Studio)
+
 ---
 *Reference*
 - https://techcommunity.microsoft.com/t5/educator-developer-blog/net-maui-on-linux-with-visual-studio-code/ba-p/3982195
