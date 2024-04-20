@@ -104,7 +104,7 @@ public partial class GamePage : ContentPage
 		{
 			{ DevicePlatform.WinUI, new[] { ".anproj" } },// 拡張子
 			{ DevicePlatform.macOS, new[] { "archive", ".anproj" } },// UTType
-			{ DevicePlatform.Android, new[] { "application/x-freearc", ".anproj" } },// MIME Type
+			{ DevicePlatform.Android, new[] { "application/octet-stream", ".anproj" } },// MIME Type
 			{ DevicePlatform.iOS, new[] { "public.archive", ".anproj" } },// UTType
 			{ DevicePlatform.Tizen, new[] { "*/*", ".anproj" } },
 		});
