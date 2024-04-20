@@ -51,20 +51,21 @@ More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunit
 
 ## Instructions
 You can run these commands using Konsole, PowerShell, Git Shell, or any other terminal. These instructions will assume the use of Command Prompt.
-```
-git clone https://github.com/Lemon73-Computing/Alice-Novel.git
-cd Alice_Novel/Alice_Novel
+```shell
+git clone https://github.com/AliceNovel/AliceNovel.git
+cd AliceNovel/Alice_Novel
 ```
 
 ### Running tests
-In order to run tests from command line you need `dotnet cli`, available after you install Alice Novel or after you build from source. If you installed it, run the following commands (assuming .\Alice_Novel is the root of your Atom repository): 
-```
+In order to run tests from command line you need `dotnet cli`, available after you install Alice Novel or after you build from source. If you installed it, run the following commands (assuming .\AliceNovel is the root of your AliceNovel repository): 
+```shell
 cd Alice_Novel/Alice_Novel
 dotnet watch run
 ```
 
 ### Build `.apk` for Android
-```
+```shell
+# On `Alice_Novel` directory
 dotnet publish -f:net8.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
 ```
 (AndroidSdk ... From Android Studio)
