@@ -7,40 +7,33 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
    <g>
-      <g transform="translate(50,200)">
-         <text
-            style="font-size:144px;white-space:pre;fill:#81b4fe;"
-            transform="matrix(2.2926399,0,0,2.2926399,436.3317,-337.49749)">
-            <tspan x="-186.41602" y="242.82943" style="font-family:Gabriola;">Alice</tspan></text>
+      <g transform="translate(50,200)" style="fill:#fff">
+         <text style="font-size:220px;font-family:'Noto Sans';" y="220">
+            <tspan>Alice</tspan>
+         </text>
          <rect
-            style="fill:#ffdf7e;"
             width="200"
             height="200"
             x="555.3645"
             y="-575"
             transform="rotate(45)" />
          <rect
-            style="fill:#ffdf7e;"
             width="800"
             height="20"
             x="0"
             y="250" />
       </g>
       <g transform="translate(170,550)">
-         <text
-            style="font-size:330px;font-family:Gabriola;fill:#81b4fe;"
-            x="240"
-            y="220">
-            <tspan x="240" y="220" style="fill:#81b4fe;stroke-width:2.28758">Novel</tspan></text>
+         <text style="font-size:230px;font-family:'Noto Sans';" x="200" y="220">
+            <tspan>Novel</tspan>
+         </text>
          <rect
-            style="fill:#ffdf7e;"
             width="200"
             height="200"
             x="-10"
             y="-10"
             transform="rotate(45)" />
          <rect
-            style="fill:#ffdf7e;"
             width="800"
             height="20"
             x="0"
