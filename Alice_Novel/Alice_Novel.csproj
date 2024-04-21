@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0-android</TargetFrameworks>
@@ -23,7 +23,7 @@
 		<!-- <Nullable>enable</Nullable> -->
 
 		<!-- Display name -->
-		<ApplicationTitle>Alice_Novel</ApplicationTitle>
+		<ApplicationTitle>Alice Novel</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>dev.ivycafe.alicenovel</ApplicationId>
