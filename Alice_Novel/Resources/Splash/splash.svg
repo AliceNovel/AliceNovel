@@ -6,9 +6,9 @@
    version="1.1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-  <g transform="matrix(0.85,0,0,0.85,72,72)">
-    <g transform="matrix(0.7,-0.2,0.14,1,80,130)"
-       style="fill:#f7d9e3;fill-opacity:1">
+  <g style="fill:#fff"
+     transform="matrix(0.85,0,0,0.85,72,72)">
+    <g transform="matrix(0.7,-0.2,0.14,1,80,130)">
       <path d="m 65,312.5 c -6,0 -11,5 -11,11 V 691 c 0,3 1,5.5 3,7.5 a 234,102.5 0 0 1 -1.5,-10 234,102.5 0 0 1 234,-102.5 234,102.5 0 0 1 232,94 234,102.5 0 0 1 232,-92 234,102.5 0 0 1 233,93 V 323.5 c 0,-6 -5,-11 -11,-11 z M 521.5,702 a 234,102.5 0 0 1 0,1 v 0 a 234,102.5 0 0 1 0,1 z" />
       <ellipse cx="286" cy="311"
                rx="234" ry="102" />
@@ -18,15 +18,14 @@
     <!-- 
 		<text
 			xml:space="preserve"
-			style="white-space:pre;display:inline;fill:#990B3A"
+			style="white-space:pre;display:inline"
 			transform="translate(-175,0)">
 			<tspan
-				x="350"
-				y="725"
+				x="350" y="725"
 				style="font-weight:normal;font-size:128px;font-family:'Segoe Script'">Alice Novel</tspan>
 		</text>
 		 -->
-    <g style="fill:#d42b63">
+    <g>
       <rect
          width="80" height="80"
          x="120" y="120"
@@ -40,8 +39,7 @@
          x="340" y="140"
          ry="6" />
     </g>
-    <g style="fill:#d42b63"
-       transform="rotate(180,512,512)">
+    <g transform="rotate(180,512,512)">
       <rect
          width="80" height="80"
          x="120" y="120"
