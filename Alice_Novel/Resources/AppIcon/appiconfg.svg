@@ -4,49 +4,38 @@
 	 viewBox="0 0 1024 1024"
 	 version="1.1"
 	 xmlns="http://www.w3.org/2000/svg"
-	 xmlns:svg="http://www.w3.org/2000/svg">
+	 xmlns:svg="http://www.w3.org/2000/svg"
+	 xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<linearGradient id="linearGradient2027">
+			<stop style="stop-color:#d42b8d;stop-opacity:1" offset="0" />
+			<stop style="stop-color:#d4621d;stop-opacity:1" offset="1" />
+		</linearGradient>
+		<linearGradient
+		xlink:href="#linearGradient2027"
+		id="linearGradient2029"
+		x1="0" y1="0"
+		x2="1020" y2="1020"
+		gradientUnits="userSpaceOnUse" />
+		<filter
+		style="color-interpolation-filters:sRGB"
+		id="filter5249"
+		x="-0.47615999" y="-1.9839999"
+		width="1.95232" height="4.9679999">
+			<feGaussianBlur stdDeviation="99.2" />
+		</filter>
+	</defs>
 	<g>
-		<g id="book"
-			transform="matrix(0.7,-0.2,0.14,1,80,130)"
-			style="fill:#F7D9E3;fill-opacity:1">
-			<path d="m 65,312.5 c -6,0 -11,5 -11,11 v 367.5 c 0,3 1,5.5 3,7.5 a 234,102.5 0 0 1 -1.5,-10 234,102.5 0 0 1 234,-102.5 234,102.5 0 0 1 232,94 234,102.5 0 0 1 232,-92 234,102.5 0 0 1 233,93 V 323.5 c 0,-6 -5,-11 -11,-11 z M 521.5,702 a 234,102.5 0 0 1 0,1 h 0 a 234,102.5 0 0 1 0,1 z" />
-			<ellipse cx="286" cy="311"
-				rx="234" ry="102" />
-			<ellipse cx="751" cy="313"
-				rx="234" ry="102" />
-		</g>
-		<!-- 
-		<text
-			xml:space="preserve"
-			style="white-space:pre;display:inline;fill:#990B3A"
-			transform="translate(-175,0)">
-			<tspan
-				x="350"
-				y="725"
-				style="font-weight:normal;font-size:128px;font-family:'Segoe Script'">Alice Novel</tspan>
-		</text>
-		 -->
-		<g style="fill:#D42B63">
-			<rect width="80" height="80"
-				x="120" y="120"
-				ry="12" />
-			<rect width="60" height="60"
-				x="240" y="130"
-				ry="9" />
-			<rect width="40" height="40"
-				x="340" y="140"
-				ry="6" />
-		</g>
-		<g style="fill:#D42B63" transform="matrix(-1,0,0,-1,1024,1024)">
-			<rect width="80" height="80"
-				x="120" y="120"
-				ry="12" />
-			<rect width="60" height="60"
-				x="240" y="130"
-				ry="9" />
-			<rect width="40" height="40"
-				x="340" y="140"
-				ry="6" />
-		</g>
+		<rect
+		style="fill:url(#linearGradient2029);stroke:none;stroke-width:7.55905512;fill-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+		width="1020" height="1020"
+		ry="180" />
+		<ellipse
+		style="fill:#ce003f;fill-opacity:1;stroke:none;stroke-width:5.298;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter5249)"
+		cx="510" cy="860"
+		rx="250" ry="60" />
+		<path
+		style="fill:#fff;fill-opacity:1;stroke:none;stroke-width:6.24987;stroke-miterlimit:4;stroke-dasharray:none"
+		d="M 369.56522,220 C 342.10609,220 320,242.17257 320,269.71429 V 750.28571 C 320,777.82743 342.10609,800 369.56522,800 H 650.43478 C 677.89391,800 700,777.82743 700,750.28571 V 269.71429 C 700,242.17257 677.89391,220 650.43478,220 Z m 0,13.25714 h 280.86956 c 20.07952,0 36.34782,16.31723 36.34782,36.45715 v 480.57142 c 0,20.13992 -16.2683,36.45715 -36.34782,36.45715 H 369.56522 c -20.07953,0 -36.34783,-16.31723 -36.34783,-36.45715 V 269.71429 c 0,-20.13992 16.2683,-36.45715 36.34783,-36.45715 z m 0,6.62857 c -16.53263,0 -29.73914,13.24623 -29.73914,29.82858 v 480.57142 c 0,16.58235 13.20651,29.82858 29.73914,29.82858 h 280.86956 c 16.53262,0 29.73913,-13.24623 29.73913,-29.82858 V 269.71429 c 0,-16.58235 -13.20651,-29.82858 -29.73913,-29.82858 z m 0,9.94286 h 280.86956 c 10.92649,0 19.82609,8.92637 19.82609,19.88572 v 480.57142 c 0,10.95935 -8.8996,19.88572 -19.82609,19.88572 H 369.56522 c -10.92649,0 -19.82609,-8.92637 -19.82609,-19.88572 V 269.71429 c 0,-10.95935 8.8996,-19.88572 19.82609,-19.88572 z m 0,6.62857 c -7.37958,0 -13.2174,5.85537 -13.2174,13.25715 v 480.57142 c 0,7.40178 5.83782,13.25715 13.2174,13.25715 h 280.86956 c 7.37958,0 13.21739,-5.85537 13.21739,-13.25715 V 269.71429 c 0,-7.40178 -5.83781,-13.25715 -13.21739,-13.25715 z m 0,13.25715 h 30.45228 l -30.45228,30.54386 z m 250.41728,0 h 30.45228 v 30.54386 z M 510,476.85714 A 33.043478,33.142857 0 0 1 543.04348,510 33.043478,33.142857 0 0 1 510,543.14286 33.043478,33.142857 0 0 1 476.95652,510 33.043478,33.142857 0 0 1 510,476.85714 Z m -140.43478,242.88471 30.45228,30.54386 h -30.45228 z m 280.86956,0 v 30.54386 H 619.9825 Z" />
 	</g>
 </svg>
