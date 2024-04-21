@@ -6,8 +6,8 @@
    version="1.1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-   <g>
-      <g transform="translate(50,200)" style="fill:#fff">
+   <g style="fill:#fff">
+      <g transform="translate(50,200)">
          <text style="font-size:220px;font-family:'Noto Sans';" y="220">
             <tspan>Alice</tspan>
          </text>
