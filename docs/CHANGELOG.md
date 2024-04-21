@@ -12,6 +12,12 @@
 **Plan**
 - Add the story branch function. ([#6](https://github.com/Lemon73-Computing/Alice_Novel/issues/6))
 
+## [v0.9.2](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.2)
+**Release Date**: TBD
+
+**Changed**
+- Theme colors. ([#56](https://github.com/Lemon73-Computing/Alice_Novel/issues/56))
+
 ## [v0.9.1](https://github.com/Lemon73-Computing/Alice_Novel/releases/tag/v0.9.1)
 **Release Date**: 2024/4/6
 
