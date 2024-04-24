@@ -25,10 +25,10 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 [github-license]: https://github.com/AliceNovel/AliceNovel/blob/master/LICENSE
 [github-license-badge]: https://img.shields.io/github/license/AliceNovel/AliceNovel.svg?style=flat "License"
 [code-size-badge]: https://img.shields.io/github/languages/code-size/AliceNovel/AliceNovel
-[azurepipelines]: https://dev.azure.com/lemon73/Alice_Novel/_build/latest?definitionId=1&branchName=master
-[azurepipelines-badge]: https://img.shields.io/azure-devops/build/lemon73/Alice_Novel/1.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines Status"
-[azurepipelines-history]: https://dev.azure.com/lemon73/Alice_Novel/_build?definitionId=1&branchName=master
-[azurepipelines-history-badge]: https://buildstats.info/azurepipelines/chart/lemon73/Alice_Novel/1?includeBuildsFromPullRequest=false "Azure Pipelines History"
+[azurepipelines]: https://dev.azure.com/AliceNovel/AliceNovel/_build/latest?definitionId=1&branchName=master
+[azurepipelines-badge]: https://img.shields.io/azure-devops/build/AliceNovel/AliceNovel/1.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines Status"
+[azurepipelines-history]: https://dev.azure.com/AliceNovel/AliceNovel/_build?definitionId=1&branchName=master
+[azurepipelines-history-badge]: https://buildstats.info/azurepipelines/chart/AliceNovel/AliceNovel/1?includeBuildsFromPullRequest=false "Azure Pipelines History"
 [github]: https://github.com/AliceNovel/AliceNovel/actions/workflows/dotnet-maui.yml
 [github-badge]: https://img.shields.io/github/actions/workflow/status/AliceNovel/AliceNovel/dotnet-maui.yml?label=github&logo=github&color=b845fc&logoColor=b845fc&style=flat "GitHub Actions Status"
 [github-history-badge]: https://buildstats.info/github/chart/AliceNovel/AliceNovel?includeBuildsFromPullRequest=false "GitHub Actions History"
