@@ -16,8 +16,13 @@
 **Release Date**: TBD
 
 **Changed**
-- Icon design. ([#50](https://github.com/AliceNovel/AliceNovel/issues/50))
-- Theme colors. ([#55](https://github.com/AliceNovel/AliceNovel/issues/55))
+- User interface. ([#48](https://github.com/AliceNovel/AliceNovel/issues/48))
+  - Splash screen of Android.
+  - Icon design. ([#50](https://github.com/AliceNovel/AliceNovel/issues/50))
+  - Theme colors. ([#55](https://github.com/AliceNovel/AliceNovel/issues/55))
+
+**Fixed**
+- Azure CI/CD ([#57](https://github.com/AliceNovel/AliceNovel/issues/57))
 
 ## [v0.9.1](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.1)
 **Release Date**: 2024/4/6
