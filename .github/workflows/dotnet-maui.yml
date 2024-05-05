@@ -68,14 +68,8 @@ jobs:
           name: windows-ci-build
           path: Alice_Novel/bin/Release/net8.0-windows*/**/
 
-      # if there is some artifact on full-ci-build
-      - uses: geekyeggo/delete-artifact@v5
-        with:
-          name: full-ci-build
-          failOnError: false
-
       - name: Full Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: full-ci-build
-          path: Alice_Novel/bin/Release/
+          path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
