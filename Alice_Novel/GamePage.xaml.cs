@@ -233,8 +233,19 @@ public partial class GamePage : ContentPage
 		{
 			while (sr_read != "" && sr_read != null)
 			{
+				Match match;
+
+				// "["と"]"で囲む"会話"を読み込み
+				match = Regex.Match(sr_read, @"\[(.*?)\]");
+				if (match.Success)
+				{
+					textbox.Text = match.Groups[1].Value.Trim();
+					sr_read = sr.ReadLine(); // 次の行を読み込む
+					continue; // 上から再開
+				}
+
 				// "> "から始まる"場所"を読み込み
-				Match match = Regex.Match(sr_read, @"> (.*)");
+				match = Regex.Match(sr_read, @"> (.*)");
 				if (match.Success)
 				{
 					// 場所指定されていない場合は背景画像を消す
@@ -327,11 +338,6 @@ public partial class GamePage : ContentPage
 				match = Regex.Match(sr_read, @"/ (.*)");
 				//if (match.Success)
 					// 感情変更
-
-				// "["と"]"で囲む"会話"を読み込み
-				match = Regex.Match(sr_read, @"\[(.*?)\]");
-				if (match.Success)
-					textbox.Text = match.Groups[1].Value.Trim();
 
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
