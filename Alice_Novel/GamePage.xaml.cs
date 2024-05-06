@@ -165,22 +165,28 @@ public partial class GamePage : ContentPage
 			{"first-read", "main.anov"},
 			{"game-name", ""},
 		};
-		// json読み込み
-		anproj_setting = JsonToDict(str);
-		// タイトルの設定
-		game_ui.Title = anproj_setting["game-name"];
-
-		// json読み込み
-		static Dictionary<string, string> JsonToDict(string json)
+		// json を読み込み、デフォルト設定に上書き
+		if (!string.IsNullOrEmpty(str))
+			foreach (var key in JsonSerializer.Deserialize<Dictionary<string, string>>(str))
+			{
+				if (anproj_setting.ContainsKey(key.Key))
+					anproj_setting[key.Key] = key.Value;
+			}
+		
+		// 最初の .anov ファイルを読み込み
+		if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) != null)
+			entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
+		// (v0.9.0-rc1 の互換性のため) (画像はディレクトリや設定形式が異なるので、現状は非対応)
+		else if (zip.GetEntry(anproj_setting["first-read"]) != null)
+			entry = zip.GetEntry(anproj_setting["first-read"]);
+		else
 		{
-			if (string.IsNullOrEmpty(json))
-				return [];
-			Dictionary<string, string> dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json);
-			return dict;
+			await Toast.Make("ファイルが古い形式で、対応していません。").Show();
+			return;
 		}
 
-		// 最初の.anovファイルを読み込み
-		entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
+		// タイトルの設定
+		game_ui.Title = anproj_setting["game-name"];
 
 		sr ??= new(entry.Open(), Encoding.UTF8);
 		textbox.Text = "";
