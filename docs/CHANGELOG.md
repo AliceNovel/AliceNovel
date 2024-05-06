@@ -13,16 +13,31 @@
 - Add the story branch function. ([#6](https://github.com/AliceNovel/AliceNovel/issues/6))
 
 ## [v0.9.2](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.2)
-**Release Date**: TBD
+**Release Date**: 2024/5/6
 
 **Changed**
 - User interface. ([#48](https://github.com/AliceNovel/AliceNovel/issues/48))
   - Splash screen of Android.
   - Icon design. ([#50](https://github.com/AliceNovel/AliceNovel/issues/50))
   - Theme colors. ([#55](https://github.com/AliceNovel/AliceNovel/issues/55))
+- Update dependencies. ([#51](https://github.com/AliceNovel/AliceNovel/issues/51))
+  - Nuget
+    - Microsoft.Maui.Controls
+    - Microsoft.Maui.Controls.Compatibility
+    - CommunityToolkit.Maui
+    - CommunityToolkit.Maui.MediaElement
+  - GitHub Actions
+    - actions/upload-artifacts
+- Improve regular expression ([#63](https://github.com/AliceNovel/AliceNovel/issues/63))
+
+**Added**
+- Some documentations. ([#66](https://github.com/AliceNovel/AliceNovel/issues/66))
 
 **Fixed**
-- Azure CI/CD ([#57](https://github.com/AliceNovel/AliceNovel/issues/57))
+- Azure CI/CD. ([#57](https://github.com/AliceNovel/AliceNovel/issues/57))
+- Dependabot. ([#59](https://github.com/AliceNovel/AliceNovel/issues/59))
+- [Android] Can't move file loading. ([#49](https://github.com/AliceNovel/AliceNovel/issues/49))
+- Old version file is not working. ([#62](https://github.com/AliceNovel/AliceNovel/issues/62))
 
 ## [v0.9.1](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.1)
 **Release Date**: 2024/4/6
