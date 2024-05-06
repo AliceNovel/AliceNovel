@@ -238,12 +238,12 @@ public partial class GamePage : ContentPage
 				if (match.Success)
 				{
 					// 場所指定されていない場合は背景画像を消す
-					if (match.Groups[1].Value == "")
+					if (match.Groups[1].Value.Trim() == "")
 						image.Source = null;
 					else
 						try
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value).Open())
+							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 							{
 								var memoryStream = new MemoryStream();
 								st.CopyTo(memoryStream);
@@ -263,13 +263,13 @@ public partial class GamePage : ContentPage
 
 					try
 					{
-						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value);
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value.Trim());
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
 						string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-audio"]));
 						if (!Directory.Exists(audio_cache))
 							Directory.CreateDirectory(audio_cache);
 
-						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value));
+						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value.Trim()));
 						if (!File.Exists(temp_audio))
 							entry.ExtractToFile(temp_audio, true);
 
@@ -290,13 +290,13 @@ public partial class GamePage : ContentPage
 
 						try
 						{
-							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value);
-							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value (既存の同名ファイルが存在する場合は上書き保存)
+							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
+							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
 							string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
 							if (!Directory.Exists(movie_cache))
 								Directory.CreateDirectory(movie_cache);
 
-							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value));
+							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
 							if (!File.Exists(temp_movie))
 								entry.ExtractToFile(temp_movie, true);
 
@@ -315,12 +315,12 @@ public partial class GamePage : ContentPage
 				// "- "から始まる"人物"を読み込み
 				match = Regex.Match(sr_read, @"- (.*)");
 				if (match.Success)
-					talkname.Text = match.Groups[1].Value;
+					talkname.Text = match.Groups[1].Value.Trim();
 
 				// "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
 				match = Regex.Match(sr_read, @"- (.*?)/");
 				if (match.Success)
-					talkname.Text = match.Groups[1].Value;
+					talkname.Text = match.Groups[1].Value.Trim();
 					// 感情変更
 
 				// "/ "から始まる"感情"を読み込み
@@ -331,7 +331,7 @@ public partial class GamePage : ContentPage
 				// "["と"]"で囲む"会話"を読み込み
 				match = Regex.Match(sr_read, @"\[(.*?)\]");
 				if (match.Success)
-					textbox.Text = match.Groups[1].Value;
+					textbox.Text = match.Groups[1].Value.Trim();
 
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
