@@ -22,7 +22,7 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 
 [github-release]: https://github.com/AliceNovel/AliceNovel/releases/latest
 [github-release-badge]: https://img.shields.io/github/release/AliceNovel/AliceNovel.svg?logo=github&style=flat "Latest Release"
-[github-license]: https://github.com/AliceNovel/AliceNovel/blob/master/LICENSE
+[github-license]: https://github.com/AliceNovel/AliceNovel/blob/master/LICENSE.txt
 [github-license-badge]: https://img.shields.io/github/license/AliceNovel/AliceNovel.svg?style=flat "License"
 [code-size-badge]: https://img.shields.io/github/languages/code-size/AliceNovel/AliceNovel
 [azurepipelines]: https://dev.azure.com/AliceNovel/AliceNovel/_build/latest?definitionId=1&branchName=master
