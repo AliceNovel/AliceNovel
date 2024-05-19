@@ -12,6 +12,12 @@
 **Plan**
 - Add the story branch function. ([#6](https://github.com/AliceNovel/AliceNovel/issues/6))
 
+## v0.9.3
+**Release Date**: TBD
+
+**Changed**
+- GPL v3 to MIT license. ([#70](https://github.com/AliceNovel/AliceNovel/issues/70))
+
 ## [v0.9.2](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.2)
 **Release Date**: 2024/5/6
 

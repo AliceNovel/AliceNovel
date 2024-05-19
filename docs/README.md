@@ -48,4 +48,4 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
   - macOS
 
 ## License
-Licensed under the [GPL v3.0](./LICENSE.txt).
+Licensed under the [MIT license](./LICENSE.txt).

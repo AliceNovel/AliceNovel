@@ -23,7 +23,7 @@ I prepared a template for issue, but you can use no template.
 ## Pull Request
 PR are also welcome.
 
-Its licenses are GPL v3.0 and MIT.
+Its licenses are MIT license.
 
 ## Directory Structure
 ```
