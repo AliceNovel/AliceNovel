@@ -41,7 +41,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<Company>$(Authors)</Company>
 		<Authors>Alice Project, Lemon's Resting Area, Lemon73</Authors>
-		<Copyright>GPL v3.0</Copyright>
+		<Copyright>MIT License</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AliceNovel/AliceNovel</RepositoryUrl>
 		<NeutralLanguage>ja-JP</NeutralLanguage>
