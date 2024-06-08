@@ -32,7 +32,7 @@ Alice Novelはフリーでオープンなノベルゲーム向けのゲームエ
 - [Alice Novel ウェブサイト](https://alicenovel.web.app "Alice Novel で世界をより楽しく")
 - [Alice Novel 資料](https://alicenovel.web.app/docs)
 - [Alice Project Github](https://github.com/alicenovel/)
-- [サンプルゲーム](https://github.com/AliceNovel/Alice-Novel_Sample-Games)
+- [サンプルゲーム](https://github.com/AliceNovel/SampleGames)
 
 ## 構築資料
 - [使用技術 / 言語](./CONTRIBUTING.ja.md#使用技術--言語)
@@ -43,4 +43,4 @@ Alice Novelはフリーでオープンなノベルゲーム向けのゲームエ
   - macOS
 
 ## ライセンス
-[MIT ライセンス](./LICENSE.txt) の下にライセンスされています。
+[MIT ライセンス](../LICENSE.txt) の下にライセンスされています。

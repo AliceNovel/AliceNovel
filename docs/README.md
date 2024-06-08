@@ -37,7 +37,7 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 - [Alice Novel Website](https://alicenovel.web.app "Alice Novel will make you fun!")
 - [Alice Novel Documentation](https://alicenovel.web.app/docs)
 - [Alice Project Github](https://github.com/AliceNovel)
-- [Samples](https://github.com/AliceNovel/Alice-Novel_Sample-Games)
+- [Samples](https://github.com/AliceNovel/SampleGames)
 
 ## Build documentation
 - [Technology / Language Used](./CONTRIBUTING.md#technology--language-used)
@@ -48,4 +48,4 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
   - macOS
 
 ## License
-Licensed under the [MIT license](./LICENSE.txt).
+Licensed under the [MIT license](../LICENSE.txt).
