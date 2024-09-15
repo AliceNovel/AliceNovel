@@ -4,12 +4,12 @@ on:
   push:
     branches: [ master ]
     paths:
-      - 'Alice_Novel/**'
+      - 'src/AliceNovel/**'
       - '.github/workflows/**'
   pull_request:
     branches: [ master ]
     paths:
-      - 'Alice_Novel/**'
+      - 'src/AliceNovel/**'
       - '.github/workflows/**'
 
 jobs:
@@ -34,10 +34,10 @@ jobs:
           dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore Alice_Novel/Alice_Novel.csproj
+        run: dotnet restore AliceNovel/src/AliceNovel.csproj
 
       - name: Build MAUI App
-        run: dotnet build Alice_Novel/Alice_Novel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false -p:WindowsPackageType=None
+        run: dotnet build AliceNovel/src/AliceNovel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false -p:WindowsPackageType=None
 
       # Upload Artifact
       - if: matrix.tfm == 'net8.0-android'
@@ -45,31 +45,31 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android-ci-build
-          path: Alice_Novel/bin/Release/net8.0-android/*Signed.a*
+          path: src/AliceNovel/bin/Release/net8.0-android/*Signed.a*
 
       - if: matrix.tfm == 'net8.0-ios'
         name: iOS Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ios-ci-build
-          path: Alice_Novel/bin/Release/net8.0-ios/**/*.app/
+          path: src/AliceNovel/bin/Release/net8.0-ios/**/*.app/
 
       - if: matrix.tfm == 'net8.0-maccatalyst'
         name: MacCatalyst Artifact
         uses: actions/upload-artifact@v4
         with:
           name: macos-ci-build
-          path: Alice_Novel/bin/Release/net8.0-maccatalyst/**/*.app/
+          path: src/AliceNovel/bin/Release/net8.0-maccatalyst/**/*.app/
 
       - if: matrix.tfm == 'net8.0-windows10.0.19041.0'
         name: Windows Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows-ci-build
-          path: Alice_Novel/bin/Release/net8.0-windows*/**/
+          path: src/AliceNovel/bin/Release/net8.0-windows*/**/
 
       - name: Full Artifacts
         uses: actions/upload-artifact@v3
         with:
           name: full-ci-build
-          path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
+          path: src/AliceNovel/bin/Release/${{ matrix.tfm }}*/
