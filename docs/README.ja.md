@@ -1,7 +1,7 @@
 # Alice Novel
 [![Image](image.png)](https://alicenovel.web.app)
 
-Alice Novel はフリー、オープンソースで、クロスプラットフォームのノベルゲーム開発向けのゲームエンジンです。優れたユーザーインターフェースと、簡単なスクリプトベースの処理機構の提供により、難しいプログラム言語を学習する必要がありません。ゲームは4種類のプラットフォーム: Windows, macOS, Android, iOS に対応しています。コンソール (Windows, macOS, Linux) 向けの場合は [Alice Console](https://github.com/AliceNovel/AliceConsole) を参照してください。
+**Alice Novel はフリー、オープンソースで、クロスプラットフォームのノベルゲーム開発向けのゲームエンジンです。**優れたユーザーインターフェースと、簡単なスクリプトベースの処理機構の提供により、難しいプログラム言語を学習する必要がありません。ゲームは4種類のプラットフォーム: Windows, macOS, Android, iOS に対応しています。コンソール (Windows, macOS, Linux) 向けの場合は [Alice Console](https://github.com/AliceNovel/AliceConsole) を参照してください。
 
 ### 状態
 <!-- badges -->

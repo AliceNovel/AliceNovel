@@ -1,7 +1,7 @@
 # Alice Novel
 [![Image](image.png)](https://alicenovel.web.app)
 
-Alice Novel is a free, open source and cross-platform game engine to create visual games. It provides a great user interfaces and easy script-based processing without learning difficult coding languages. Games can support four platforms: Windows, macOS, Android and iOS. If you want to create for console (Windows, macOS, Linux), you should see [Alice Console](https://github.com/AliceConsole).
+**Alice Novel is a free, open source and cross-platform game engine to create visual games.** It provides a great user interfaces and easy script-based processing without learning difficult coding languages. Games can support four platforms: Windows, macOS, Android and iOS. If you want to create for console (Windows, macOS, Linux), you should see [Alice Console](https://github.com/AliceNovel/AliceConsole).
 
 ### i18n
 - [日本語版](./README.ja.md)
