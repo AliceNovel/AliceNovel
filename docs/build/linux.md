@@ -53,13 +53,13 @@ More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunit
 You can run these commands using Konsole, PowerShell, Git Shell, or any other terminal. These instructions will assume the use of Command Prompt.
 ```shell
 git clone https://github.com/AliceNovel/AliceNovel.git
-cd AliceNovel/Alice_Novel
+cd AliceNovel/src/AliceNovel
 ```
 
 ### Running tests
-In order to run tests from command line you need `dotnet cli`, available after you install Alice Novel or after you build from source. If you installed it, run the following commands (assuming .\AliceNovel is the root of your AliceNovel repository): 
+In order to run tests from command line you need `dotnet cli`, available after you install Alice Novel or after you build from source. If you installed it, run the following commands (assuming ./AliceNovel is the root of your AliceNovel repository): 
 ```shell
-cd Alice_Novel/Alice_Novel
+cd src/AliceNovel
 dotnet watch run
 ```
 

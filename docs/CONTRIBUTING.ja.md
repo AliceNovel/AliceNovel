@@ -29,14 +29,14 @@ Typo などの小さなところの PR も歓迎しています。
 │  Azure 向けの CI/CD 用のファイルです。
 ├─.github
 │  GitHub Actions 用ファイル / GitHub Issues のテンプレートファイルです。
-├─Alice_Novel
-│  本体のディレクトリです。
+├─src/AliceNovel
+│  本体のコードが入っているディレクトリです。
 ├─docs
 │  資料が入っています。
 ├─.gitattributes
 ├─.gitignore
 │  Git 向けファイルです。
-├─Alice_Novel.sln
+├─AliceNovel.sln
 │  Visual Studio で開く際に利用します。
 └─LICENSE.txt
     ライセンス定義ファイルです。

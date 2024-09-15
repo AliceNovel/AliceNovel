@@ -32,15 +32,15 @@ Its licenses are MIT license.
 │  Azure CI/CD
 ├─.github
 │  GitHub Actions / Templates for GitHub Issues
-├─Alice_Novel
-│  Main folder
+├─src/AliceNovel
+│  Main scripts directory
 ├─docs
 │  Documentations
 ├─.gitattributes
 ├─.gitignore
-│  Files for Git
-├─Alice_Novel.sln
-│  file for open in Visual Studio
+│  Files for Git settings
+├─AliceNovel.sln
+│  Solution file for open in Visual Studio
 └─LICENSE.txt
     license file
 ```
