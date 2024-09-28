@@ -71,5 +71,5 @@ jobs:
       - name: Full Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: full-ci-build
+          name: full-ci-build-${{ matrix.tfm }}
           path: Alice_Novel/bin/Release/${{ matrix.tfm }}*/
