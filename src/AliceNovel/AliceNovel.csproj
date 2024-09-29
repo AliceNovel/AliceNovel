@@ -12,7 +12,7 @@
 		When specifying both architectures, use the plural <RuntimeIdentifiers> instead of the singular <RuntimeIdentifier>.
 		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
-		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
+		<RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
 
 		<OutputType>Exe</OutputType>
 		<WindowsPackageType>None</WindowsPackageType>
@@ -45,11 +45,6 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AliceNovel/AliceNovel</RepositoryUrl>
 		<NeutralLanguage>ja-JP</NeutralLanguage>
-	</PropertyGroup>
-
-	<!-- GitHub Actionsのビルドエラー対策として追加 -->
-	<PropertyGroup Condition="'$(TargetFramework)' == 'net8.0-maccatalyst'">
-		<RuntimeIdentifier>maccatalyst-arm64</RuntimeIdentifier>
 	</PropertyGroup>
 
 	<ItemGroup>
