@@ -1,5 +1,5 @@
 # Alice Novel
-[![Image](image.png)](https://alicenovel.web.app)
+[![Alice Novel logo](./assets/Logo1.png)](https://alicenovel.web.app)
 
 Alice Novelはフリーでオープンなノベルゲーム向けのゲームエンジンです。 こちらのゲームエンジンを採用することにより、プログラムやUIの作成の必要がなくなるため、ゲームの作成が容易になります。
 

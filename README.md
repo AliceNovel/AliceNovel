@@ -1,5 +1,5 @@
 # Alice Novel
-[![Image](image.png)](https://alicenovel.web.app)
+[![Alice Novel logo](./docs/assets/Logo1.png)](https://alicenovel.web.app)
 
 Alice Novel is a free and open source game engine for novel game. If you use it, you should not make code and user interface for your games. So you can make it easily.
 
@@ -40,11 +40,11 @@ Alice Novel is a free and open source game engine for novel game. If you use it,
 - [Samples](https://github.com/AliceNovel/SampleGames)
 
 ## Build documentation
-- [Technology / Language Used](./CONTRIBUTING.md#technology--language-used)
-- [Directory Structure](./CONTRIBUTING.md#directory-structure)
-- [Build Target](./build/target.md)
-  - [Linux](./build/linux.md)
-  - [Windows](./build/windows.md)
+- [Technology / Language Used](./docs/CONTRIBUTING.md#technology--language-used)
+- [Directory Structure](./docs/CONTRIBUTING.md#directory-structure)
+- [Build Target](./docs/build/target.md)
+  - [Linux](./docs/build/linux.md)
+  - [Windows](./docs/build/windows.md)
   - macOS
 
 ## License
