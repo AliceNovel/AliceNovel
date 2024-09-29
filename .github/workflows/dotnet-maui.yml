@@ -34,10 +34,10 @@ jobs:
           dotnet workload install maui --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore AliceNovel/src/AliceNovel.csproj
+        run: dotnet restore src/AliceNovel/AliceNovel.csproj
 
       - name: Build MAUI App
-        run: dotnet build AliceNovel/src/AliceNovel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false -p:WindowsPackageType=None
+        run: dotnet build src/AliceNovel/AliceNovel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false -p:WindowsPackageType=None
 
       # Upload Artifact
       - if: matrix.tfm == 'net8.0-android'
