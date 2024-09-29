@@ -65,7 +65,7 @@ dotnet watch run
 
 ### Build `.apk` for Android
 ```shell
-# On `Alice_Novel` directory
+# On `AliceNovel` directory
 dotnet publish -f:net8.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
 ```
 (AndroidSdk ... From Android Studio)

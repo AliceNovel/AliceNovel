@@ -1,8 +1,8 @@
 ﻿<maui:MauiWinUIApplication
-    x:Class="Alice_Novel.WinUI.App"
+    x:Class="AliceNovel.WinUI.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:maui="using:Microsoft.Maui"
-    xmlns:local="using:Alice_Novel.WinUI">
+    xmlns:local="using:AliceNovel.WinUI">
 
 </maui:MauiWinUIApplication>

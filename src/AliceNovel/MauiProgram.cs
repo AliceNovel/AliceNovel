@@ -2,7 +2,7 @@
 using CommunityToolkit.Maui.Storage;
 using Microsoft.Extensions.Logging;
 
-namespace Alice_Novel;
+namespace AliceNovel;
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()

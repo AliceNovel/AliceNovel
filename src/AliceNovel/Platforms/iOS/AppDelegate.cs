@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Alice_Novel
+namespace AliceNovel
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate

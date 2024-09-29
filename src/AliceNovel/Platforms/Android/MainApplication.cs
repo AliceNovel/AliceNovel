@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Alice_Novel
+namespace AliceNovel
 {
     [Application]
     public class MainApplication : MauiApplication

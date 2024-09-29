@@ -1,4 +1,4 @@
-﻿namespace Alice_Novel;
+﻿namespace AliceNovel;
 
 public partial class MainPage : ContentPage
 {

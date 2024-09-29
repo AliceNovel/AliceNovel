@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Alice_Novel
+namespace AliceNovel
 {
     public class Program
     {

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.IO.Compression;
 using CommunityToolkit.Maui.Alerts;
 
-namespace Alice_Novel;
+namespace AliceNovel;
 
 public partial class GamePage : ContentPage
 {

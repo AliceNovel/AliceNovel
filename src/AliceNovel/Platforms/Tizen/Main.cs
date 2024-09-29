@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace Alice_Novel
+namespace AliceNovel
 {
     internal class Program : MauiApplication
     {
