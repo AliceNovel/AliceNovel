@@ -25,19 +25,13 @@ Typo などの小さなところの PR も歓迎しています。
 ## ディレクトリ構造
 ```
 .
-├─.azure
-│  Azure 向けの CI/CD 用のファイルです。
-├─.github
-│  GitHub Actions 用ファイル / GitHub Issues のテンプレートファイルです。
-├─src/AliceNovel
-│  本体のコードが入っているディレクトリです。
-├─docs
-│  資料が入っています。
-├─.gitattributes
-├─.gitignore
-│  Git 向けファイルです。
-├─AliceNovel.sln
-│  Visual Studio で開く際に利用します。
-└─LICENSE.txt
-    ライセンス定義ファイルです。
+├─ .azure/          # Azure CI/CD
+├─ .github/         # GitHub Actions / GitHub Issues テンプレート
+├─ docs/            # 資料
+├─ src/             # ソースコード
+│   └─ AliceNovel/
+├─ .gitattributes   # Git 設定ファイル
+├─ .gitignore       # Git 設定ファイル
+├─ LICENSE.txt      # ライセンスファイル
+└─ README.md        # 最初の資料
 ```

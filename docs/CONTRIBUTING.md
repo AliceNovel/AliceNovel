@@ -28,19 +28,13 @@ Its licenses are MIT license.
 ## Directory Structure
 ```
 .
-├─.azure
-│  Azure CI/CD
-├─.github
-│  GitHub Actions / Templates for GitHub Issues
-├─src/AliceNovel
-│  Main scripts directory
-├─docs
-│  Documentations
-├─.gitattributes
-├─.gitignore
-│  Files for Git settings
-├─AliceNovel.sln
-│  Solution file for open in Visual Studio
-└─LICENSE.txt
-    license file
+├─ .azure/          # Azure CI/CD
+├─ .github/         # GitHub Actions / Templates for GitHub Issues
+├─ docs/            # Documentations
+├─ src/             # Sources
+│   └─ AliceNovel/
+├─ .gitattributes   # Git setting file
+├─ .gitignore       # Git setting file
+├─ LICENSE.txt      # License file
+└─ README.md        # First documentation
 ```
