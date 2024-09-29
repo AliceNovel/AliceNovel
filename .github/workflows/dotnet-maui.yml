@@ -69,7 +69,7 @@ jobs:
           path: src/AliceNovel/bin/Release/net8.0-windows*/**/
 
       - name: Full Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: full-ci-build
+          name: full-ci-build-${{ matrix.tfm }}
           path: src/AliceNovel/bin/Release/${{ matrix.tfm }}*/
