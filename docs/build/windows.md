@@ -19,7 +19,7 @@ You can move this app to use Visual Studio 2022.
 > [!note]
 > If there is `NETSDK1005` error, try the method below.
 > 
-> `Alice_Novel.csproj`
+> `AliceNovel.csproj`
 > ```diff xml
 > + <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
 > - <TargetFrameworks>net8.0-android</TargetFrameworks>
