@@ -43,6 +43,7 @@
 - [Technology / Language Used](./docs/CONTRIBUTING.md#technology--language-used)
 - [Directory Structure](./docs/CONTRIBUTING.md#directory-structure)
 - [Build Target](./docs/build/target.md)
+- [Development Guide](./docs/DEVELOPMENT.md)
   - [Linux](./docs/build/linux.md)
   - [Windows](./docs/build/windows.md)
   - macOS
