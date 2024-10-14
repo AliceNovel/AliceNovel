@@ -45,7 +45,7 @@
 - [Build Target](./docs/build/target.md)
 - [Development Guide](./docs/DEVELOPMENT.md)
   - [Linux](./docs/build/linux.md)
-  - [Windows](./docs/build/windows.md)
+  - Windows
   - macOS
 
 ## License
