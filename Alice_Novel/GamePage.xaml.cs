@@ -26,23 +26,33 @@ public partial class GamePage : ContentPage
 	// UI表示/非表示
 	bool ui_visible = true;
 
+	/// <summary>
+	/// 画面をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void ReShow_Clicked(object sender, EventArgs e)
 	{
-		// 画面をクリックしたときの処理
 		if (ui_visible == true)
 			FileRead();
 		else
 			UI_ReDisplay();
 	}
 
+	/// <summary>
+	/// button1 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button1_Clicked(object sender, EventArgs e)
 	{
-		// button1をクリックしたときの処理
 		FileSave();
 	}
 
+	/// <summary>
+	/// セーブ処理です。
+	/// </summary>
 	async void FileSave(){
-		// セーブ処理
 		if (zip != null)
 		{
 			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
@@ -56,13 +66,19 @@ public partial class GamePage : ContentPage
 		}
 	}
 
+	/// <summary>
+	/// button2 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button2_Clicked(object sender, EventArgs e)
 	{
-		// button2をクリックしたときの処理
-
 		UI_Hidden();
 	}
 
+	/// <summary>
+	/// 画像をフル画面で閲覧するために UI を隠します。
+	/// </summary>
 	void UI_Hidden(){
 		// 初期のボタン有効/無効状態を確認
 		Initial_button1 = button1.IsVisible;
@@ -76,8 +92,10 @@ public partial class GamePage : ContentPage
 		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 	}
 
+	/// <summary>
+	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
+	/// </summary>
 	void UI_ReDisplay(){
-		// UI再表示処理
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
 		button1.IsVisible = Initial_button1;
@@ -88,17 +106,29 @@ public partial class GamePage : ContentPage
 		button6.IsVisible = Initial_button6;
 	}
 
+	/// <summary>
+	/// button3 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button3_Clicked(object sender, EventArgs e)
 	{
-		// button3をクリックしたときの処理
+		
 	}
 
+	/// <summary>
+	/// button4 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button4_Clicked(object sender, EventArgs e)
 	{
-		// button4をクリックしたときの処理
+		
 	}
 
-	// .anprojファイルを規定
+	/// <summary>
+	/// .anproj ファイルの規定です。
+	/// </summary>
 	readonly FilePickerFileType anprojFileType = new(
 		new Dictionary<DevicePlatform, IEnumerable<string>>
 		{
@@ -121,10 +151,13 @@ public partial class GamePage : ContentPage
 
 	int read_times = 0;// 読み込み回数(セーブ用)
 
+	/// <summary>
+	/// button5 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
-		// button5をクリックしたときの処理
-
 		// キャッシュフォルダを削除する
 		string path = FileSystem.Current.CacheDirectory;
 		if (Directory.Exists(path))
@@ -232,6 +265,9 @@ public partial class GamePage : ContentPage
 		FileRead();
 	}
 
+	/// <summary>
+	/// .anproj ファイルを読み込みます。
+	/// </summary>
 	void FileRead()
 	{
 		read_times++;
@@ -376,9 +412,14 @@ public partial class GamePage : ContentPage
 		}
 	}
 
+
+	/// <summary>
+	/// 動画再生終了時の処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void MovieEnded(object sender, EventArgs e)
 	{
-		// 動画再生終了時の処理
 		Dispatcher.Dispatch(() =>
 		{
 			// 動画停止
@@ -392,9 +433,14 @@ public partial class GamePage : ContentPage
 		});
 	}
 
+	/// <summary>
+	/// button6 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button6_Clicked(object sender, EventArgs e)
 	{
-		// button6をクリックしたときの処理
+		
 	}
 
 }
