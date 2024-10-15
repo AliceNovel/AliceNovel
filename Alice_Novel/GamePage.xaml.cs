@@ -191,6 +191,8 @@ public partial class GamePage : ContentPage
 		sr ??= new(entry.Open(), Encoding.UTF8);
 		textbox.Text = "";
 		talkname.Text = "";
+		button1.IsVisible = true;
+		button2.IsVisible = true;
 		button5.IsVisible = false;
 		
 		// セーブ読み込み
@@ -361,6 +363,8 @@ public partial class GamePage : ContentPage
 			talkname.Text = "";
 			image.Source = null;
 			textbox.Text = Initial_textbox_text;
+			button1.IsVisible = false;
+			button2.IsVisible = false;
 			button5.IsVisible = true;
 			button5.Text = Initial_button5_text;
 			game_ui.Title = Initial_game_title;
