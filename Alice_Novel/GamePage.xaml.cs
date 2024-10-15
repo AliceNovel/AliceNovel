@@ -260,7 +260,10 @@ public partial class GamePage : ContentPage
 					else
 						try
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
+                            if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is null)
+                                return;
+
+                            using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 							{
 								var memoryStream = new MemoryStream();
 								st.CopyTo(memoryStream);
