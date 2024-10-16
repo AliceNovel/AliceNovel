@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
-using CommunityToolkit.Maui.Alerts;
+// using CommunityToolkit.Maui.Alerts;
 
 namespace Alice_Novel;
 
@@ -62,8 +62,8 @@ public partial class GamePage : ContentPage
 				sw.WriteLine(read_times);
 			}
 			// 成功表示
-			await Toast.Make("セーブが成功しました。").Show();
-		}
+            await DisplayAlert("セーブ", "セーブが成功しました。", "OK");
+        }
 	}
 
 	/// <summary>
@@ -214,8 +214,8 @@ public partial class GamePage : ContentPage
 			entry = zip.GetEntry(anproj_setting["first-read"]);
 		else
 		{
-			await Toast.Make("ファイルが古い形式で、対応していません。").Show();
-			return;
+            await DisplayAlert("警告", "ファイルが古い形式で、対応していません。", "OK");
+            return;
 		}
 
 		// タイトルの設定
@@ -248,13 +248,14 @@ public partial class GamePage : ContentPage
 							FileRead();
 						// 成功表示
 						WhileLoading = false;
-						await Toast.Make("ロードが成功しました。").Show();
-					}
-					catch
+                        // ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+                        // await Toast.Make("ロードが成功しました。").Show();
+                    }
+                    catch
 					{
 						// 失敗表示
-						await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
-					}
+                        await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+                    }
 				}
 				srz.Dispose();
 			}
