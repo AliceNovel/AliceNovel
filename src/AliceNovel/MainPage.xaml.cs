@@ -2,7 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
-using CommunityToolkit.Maui.Alerts;
+// using CommunityToolkit.Maui.Alerts;
 
 namespace AliceNovel;
 
@@ -26,23 +26,33 @@ public partial class MainPage : ContentPage
 	// UI表示/非表示
 	bool ui_visible = true;
 
+	/// <summary>
+	/// 画面をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void ReShow_Clicked(object sender, EventArgs e)
 	{
-		// 画面をクリックしたときの処理
 		if (ui_visible == true)
 			FileRead();
 		else
 			UI_ReDisplay();
 	}
 
+	/// <summary>
+	/// button1 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button1_Clicked(object sender, EventArgs e)
 	{
-		// button1をクリックしたときの処理
 		FileSave();
 	}
 
+	/// <summary>
+	/// セーブ処理です。
+	/// </summary>
 	async void FileSave(){
-		// セーブ処理
 		if (zip != null)
 		{
 			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
@@ -52,17 +62,23 @@ public partial class MainPage : ContentPage
 				sw.WriteLine(read_times);
 			}
 			// 成功表示
-			await Toast.Make("セーブが成功しました。").Show();
+			await DisplayAlert("セーブ", "セーブが成功しました。", "OK");
 		}
 	}
 
+	/// <summary>
+	/// button2 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button2_Clicked(object sender, EventArgs e)
 	{
-		// button2をクリックしたときの処理
-
 		UI_Hidden();
 	}
 
+	/// <summary>
+	/// 画像をフル画面で閲覧するために UI を隠します。
+	/// </summary>
 	void UI_Hidden(){
 		// 初期のボタン有効/無効状態を確認
 		Initial_button1 = button1.IsVisible;
@@ -76,8 +92,10 @@ public partial class MainPage : ContentPage
 		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
 	}
 
+	/// <summary>
+	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
+	/// </summary>
 	void UI_ReDisplay(){
-		// UI再表示処理
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
 		button1.IsVisible = Initial_button1;
@@ -88,17 +106,29 @@ public partial class MainPage : ContentPage
 		button6.IsVisible = Initial_button6;
 	}
 
+	/// <summary>
+	/// button3 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button3_Clicked(object sender, EventArgs e)
 	{
-		// button3をクリックしたときの処理
+		
 	}
 
+	/// <summary>
+	/// button4 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button4_Clicked(object sender, EventArgs e)
 	{
-		// button4をクリックしたときの処理
+		
 	}
 
-	// .anprojファイルを規定
+	/// <summary>
+	/// .anproj ファイルの規定です。
+	/// </summary>
 	readonly FilePickerFileType anprojFileType = new(
 		new Dictionary<DevicePlatform, IEnumerable<string>>
 		{
@@ -121,10 +151,13 @@ public partial class MainPage : ContentPage
 
 	int read_times = 0;// 読み込み回数(セーブ用)
 
+	/// <summary>
+	/// button5 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
-		// button5をクリックしたときの処理
-
 		// キャッシュフォルダを削除する
 		string path = FileSystem.Current.CacheDirectory;
 		if (Directory.Exists(path))
@@ -181,7 +214,7 @@ public partial class MainPage : ContentPage
 			entry = zip.GetEntry(anproj_setting["first-read"]);
 		else
 		{
-			await Toast.Make("ファイルが古い形式で、対応していません。").Show();
+			await DisplayAlert("警告", "ファイルが古い形式で、対応していません。", "OK");
 			return;
 		}
 
@@ -215,12 +248,13 @@ public partial class MainPage : ContentPage
 							FileRead();
 						// 成功表示
 						WhileLoading = false;
-						await Toast.Make("ロードが成功しました。").Show();
+						// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+						// await Toast.Make("ロードが成功しました。").Show();
 					}
 					catch
 					{
 						// 失敗表示
-						await Toast.Make("ロードが失敗したため、最初から読み込みを行います。").Show();
+						await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
 					}
 				}
 				srz.Dispose();
@@ -232,6 +266,9 @@ public partial class MainPage : ContentPage
 		FileRead();
 	}
 
+	/// <summary>
+	/// .anproj ファイルを読み込みます。
+	/// </summary>
 	void FileRead()
 	{
 		read_times++;
@@ -376,9 +413,14 @@ public partial class MainPage : ContentPage
 		}
 	}
 
+
+	/// <summary>
+	/// 動画再生終了時の処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void MovieEnded(object sender, EventArgs e)
 	{
-		// 動画再生終了時の処理
 		Dispatcher.Dispatch(() =>
 		{
 			// 動画停止
@@ -392,9 +434,14 @@ public partial class MainPage : ContentPage
 		});
 	}
 
+	/// <summary>
+	/// button6 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
 	private void Button6_Clicked(object sender, EventArgs e)
 	{
-		// button6をクリックしたときの処理
+		
 	}
 
 }
