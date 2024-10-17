@@ -24,10 +24,10 @@
 			<FlyoutBase.ContextFlyout>
 				<MenuFlyout>
 					<MenuFlyoutItem Text="Save"
-					                Clicked="Button1_Clicked">
+									Clicked="Button1_Clicked">
 						<MenuFlyoutItem.KeyboardAccelerators>
 							<KeyboardAccelerator Modifiers="Ctrl"
-							                     Key="S"/>
+												 Key="S"/>
 						</MenuFlyoutItem.KeyboardAccelerators>
 					</MenuFlyoutItem>
 				</MenuFlyout>
@@ -91,7 +91,7 @@
 			<Button x:Name="button1"
 					Clicked="Button1_Clicked"
 					Text="セーブ"
-                    IsVisible="false"
+					IsVisible="false"
 					ToolTipProperties.Text="上書き保存します"
 					Margin="0,0,12,0"
 					TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
@@ -100,7 +100,7 @@
 			<Button x:Name="button2"
 					Clicked="Button2_Clicked"
 					Text="UI非表示"
-                    IsVisible="false"
+					IsVisible="false"
 					ToolTipProperties.Text="画面タップで再表示できます"
 					TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
