@@ -9,8 +9,9 @@
     <TabBar>
         <Tab Title="ゲーム">
             <ShellContent
-                ContentTemplate="{DataTemplate local:GamePage}"
-                Route="GamePage" />
+                Title="Alice Novel"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
         </Tab>
         <Tab Title="設定">
             <ShellContent

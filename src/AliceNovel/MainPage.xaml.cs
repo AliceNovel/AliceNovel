@@ -6,9 +6,9 @@ using CommunityToolkit.Maui.Alerts;
 
 namespace AliceNovel;
 
-public partial class GamePage : ContentPage
+public partial class MainPage : ContentPage
 {
-	public GamePage()
+	public MainPage()
 	{
 		InitializeComponent();
 

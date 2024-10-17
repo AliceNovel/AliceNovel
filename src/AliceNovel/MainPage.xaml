@@ -3,7 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
-			 x:Class="AliceNovel.GamePage"
+			 x:Class="AliceNovel.MainPage"
 			 x:Name="game_ui"
 			 Title="ゲームをプレイする!">
 
