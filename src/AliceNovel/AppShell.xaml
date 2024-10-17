@@ -20,10 +20,4 @@
         </Tab>
     </TabBar>
 
-    <!-- 不要だが、一応残しておく -->
-    <ShellContent
-        Title="Alice Novel"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
 </Shell>
