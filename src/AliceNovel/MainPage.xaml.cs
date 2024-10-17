@@ -191,7 +191,9 @@ public partial class MainPage : ContentPage
 		sr ??= new(entry.Open(), Encoding.UTF8);
 		textbox.Text = "";
 		talkname.Text = "";
-		button5.IsVisible = false;
+        button1.IsVisible = true;
+        button2.IsVisible = true;
+        button5.IsVisible = false;
 		
 		// セーブ読み込み
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
@@ -260,7 +262,10 @@ public partial class MainPage : ContentPage
 					else
 						try
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
+                            if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is null)
+                                return;
+
+                            using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 							{
 								var memoryStream = new MemoryStream();
 								st.CopyTo(memoryStream);
@@ -358,7 +363,9 @@ public partial class MainPage : ContentPage
 			talkname.Text = "";
 			image.Source = null;
 			textbox.Text = Initial_textbox_text;
-			button5.IsVisible = true;
+            button1.IsVisible = false;
+            button2.IsVisible = false;
+            button5.IsVisible = true;
 			button5.Text = Initial_button5_text;
 			game_ui.Title = Initial_game_title;
 
