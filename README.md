@@ -10,14 +10,17 @@
 <!-- badges -->
 [![github-release-badge]][github-release]
 [![github-license-badge]][github-license]
-[![code-size-badge]](./)
+[![code-size-badge]]()
 <!-- badges -->
 
 <!-- history badges -->
+[![github-badge]][github]
+<!--
 | GitHub Actions  | Azure Pipelines |
 | --------------- | --------------- |
 | [![github-badge]][github] | [![azurepipelines-badge]][azurepipelines] |
 | [![github-history-badge]][github] | [![azurepipelines-history-badge]][azurepipelines-history] |
+-->
 <!-- history badges -->
 
 [github-release]: https://github.com/AliceNovel/AliceNovel/releases/latest

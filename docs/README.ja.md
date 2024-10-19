@@ -7,19 +7,24 @@
 <!-- badges -->
 [![github-release-badge]][github-release]
 [![github-license-badge]][github-license]
+[![code-size-badge]]()
 <!-- badges -->
 
 <!-- history badges -->
+[![github-badge]][github]
+<!--
 | GitHub Actions  | Azure Pipelines |
 | --------------- | --------------- |
 | [![github-badge]][github] | [![azurepipelines-badge]][azurepipelines] |
 | [![github-history-badge]][github] | [![azurepipelines-history-badge]][azurepipelines-history] |
+-->
 <!-- history badges -->
 
 [github-release]: https://github.com/AliceNovel/AliceNovel/releases/latest
 [github-release-badge]: https://img.shields.io/github/release/AliceNovel/AliceNovel.svg?logo=github&style=flat "最新リリース"
 [github-license]: https://github.com/AliceNovel/AliceNovel/blob/master/LICENSE
 [github-license-badge]: https://img.shields.io/github/license/AliceNovel/AliceNovel.svg?style=flat "ライセンス"
+[code-size-badge]: https://img.shields.io/github/languages/code-size/AliceNovel/AliceNovel
 [azurepipelines]: https://dev.azure.com/AliceNovel/AliceNovel/_build/latest?definitionId=1&branchName=master
 [azurepipelines-badge]: https://img.shields.io/azure-devops/build/AliceNovel/AliceNovel/1.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines の状態"
 [azurepipelines-history]: https://dev.azure.com/AliceNovel/AliceNovel/_build?definitionId=1&branchName=master
