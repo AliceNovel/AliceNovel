@@ -44,9 +44,9 @@
 - [Directory Structure](./docs/CONTRIBUTING.md#directory-structure)
 - [Build Target](./docs/build/target.md)
 - [Development Guide](./docs/DEVELOPMENT.md)
+  - [Windows](./docs/DEVELOPMENT.md#windows)
+  - [macOS](./docs/DEVELOPMENT.md#mac)
   - [Linux](./docs/build/linux.md)
-  - Windows
-  - macOS
 
 ## License
 Licensed under the [MIT license](../LICENSE.txt).

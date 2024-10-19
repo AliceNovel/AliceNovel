@@ -38,9 +38,10 @@
 - [使用技術 / 言語](./CONTRIBUTING.ja.md#使用技術--言語)
 - [ディレクトリ構造](./CONTRIBUTING.ja.md#ディレクトリ構造)
 - [ビルド対象](./build/target.md)
+- [開発ガイド](./DEVELOPMENT.md)
+  - [Windows](./DEVELOPMENT.md#windows)
+  - [macOS](./DEVELOPMENT.md#mac)
   - [Linux](./build/linux.md)
-  - [Windows](./build/windows.md)
-  - macOS
 
 ## ライセンス
 [MIT ライセンス](../LICENSE.txt)の下にライセンスされています。
