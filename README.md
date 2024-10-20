@@ -10,14 +10,17 @@
 <!-- badges -->
 [![github-release-badge]][github-release]
 [![github-license-badge]][github-license]
-[![code-size-badge]](./)
+[![code-size-badge]]()
 <!-- badges -->
 
 <!-- history badges -->
+[![github-badge]][github]
+<!--
 | GitHub Actions  | Azure Pipelines |
 | --------------- | --------------- |
 | [![github-badge]][github] | [![azurepipelines-badge]][azurepipelines] |
 | [![github-history-badge]][github] | [![azurepipelines-history-badge]][azurepipelines-history] |
+-->
 <!-- history badges -->
 
 [github-release]: https://github.com/AliceNovel/AliceNovel/releases/latest
@@ -44,9 +47,9 @@
 - [Directory Structure](./docs/CONTRIBUTING.md#directory-structure)
 - [Build Target](./docs/build/target.md)
 - [Development Guide](./docs/DEVELOPMENT.md)
+  - [Windows](./docs/DEVELOPMENT.md#windows)
+  - [macOS](./docs/DEVELOPMENT.md#mac)
   - [Linux](./docs/build/linux.md)
-  - Windows
-  - macOS
 
 ## License
 Licensed under the [MIT license](../LICENSE.txt).
