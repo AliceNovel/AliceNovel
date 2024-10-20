@@ -1,5 +1,5 @@
 # Alice Novel
-[![Image](image.png)](https://alicenovel.web.app)
+[![Alice Novel logo](./assets/Logo1.png)](https://alicenovel.web.app)
 
 **Alice Novel はフリー、オープンソースで、クロスプラットフォームのノベルゲーム開発向けのゲームエンジンです。**優れたユーザーインターフェースと、簡単なスクリプトベースの処理機構の提供により、難しいプログラム言語を学習する必要がありません。ゲームは4種類のプラットフォーム: Windows, macOS, Android, iOS に対応しています。コンソール (Windows, macOS, Linux) 向けの場合は [Alice Console](https://github.com/AliceNovel/AliceConsole) を参照してください。
 
@@ -7,19 +7,24 @@
 <!-- badges -->
 [![github-release-badge]][github-release]
 [![github-license-badge]][github-license]
+[![code-size-badge]]()
 <!-- badges -->
 
 <!-- history badges -->
+[![github-badge]][github]
+<!--
 | GitHub Actions  | Azure Pipelines |
 | --------------- | --------------- |
 | [![github-badge]][github] | [![azurepipelines-badge]][azurepipelines] |
 | [![github-history-badge]][github] | [![azurepipelines-history-badge]][azurepipelines-history] |
+-->
 <!-- history badges -->
 
 [github-release]: https://github.com/AliceNovel/AliceNovel/releases/latest
 [github-release-badge]: https://img.shields.io/github/release/AliceNovel/AliceNovel.svg?logo=github&style=flat "最新リリース"
 [github-license]: https://github.com/AliceNovel/AliceNovel/blob/master/LICENSE
 [github-license-badge]: https://img.shields.io/github/license/AliceNovel/AliceNovel.svg?style=flat "ライセンス"
+[code-size-badge]: https://img.shields.io/github/languages/code-size/AliceNovel/AliceNovel
 [azurepipelines]: https://dev.azure.com/AliceNovel/AliceNovel/_build/latest?definitionId=1&branchName=master
 [azurepipelines-badge]: https://img.shields.io/azure-devops/build/AliceNovel/AliceNovel/1.svg?color=98C6FF&label=azure%20pipelines&logo=azuredevops&logoColor=98C6FF&style=flat "Azure Pipelines の状態"
 [azurepipelines-history]: https://dev.azure.com/AliceNovel/AliceNovel/_build?definitionId=1&branchName=master
@@ -38,9 +43,10 @@
 - [使用技術 / 言語](./CONTRIBUTING.ja.md#使用技術--言語)
 - [ディレクトリ構造](./CONTRIBUTING.ja.md#ディレクトリ構造)
 - [ビルド対象](./build/target.md)
+- [開発ガイド](./DEVELOPMENT.md)
+  - [Windows](./DEVELOPMENT.md#windows)
+  - [macOS](./DEVELOPMENT.md#mac)
   - [Linux](./build/linux.md)
-  - [Windows](./build/windows.md)
-  - macOS
 
 ## ライセンス
 [MIT ライセンス](../LICENSE.txt)の下にライセンスされています。
