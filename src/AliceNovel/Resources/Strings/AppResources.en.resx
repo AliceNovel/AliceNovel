@@ -125,21 +125,30 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button1 (Tip)" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value>It will be overwritten and saved</value>
+    <value />
   </data>
   <data name="Button2" xml:space="preserve">
     <value>Hide UI</value>
   </data>
   <data name="Button2 (Tip)" xml:space="preserve">
-    <value>Reshow with touching the display</value>
+    <value>You can review by touching the display</value>
   </data>
-  <data name="Button5" xml:space="preserve">
-    <value>Road game file</value>
+  <data name="Button5 (Tip)" xml:space="preserve">
+    <value>Read the game file</value>
   </data>
   <data name="TextBox (Default)" xml:space="preserve">
     <value>Please read Alice Novel game (.anproj file).</value>
   </data>
   <data name="MainPage Title" xml:space="preserve">
     <value>Let's Play the Game!</value>
+  </data>
+  <data name="Button5" xml:space="preserve">
+    <value>Road</value>
+  </data>
+  <data name="Alert (Save)" xml:space="preserve">
+    <value>Successed to save the game information.</value>
+  </data>
+  <data name="Alert (Warn)" xml:space="preserve">
+    <value>Warning</value>
   </data>
 </root>

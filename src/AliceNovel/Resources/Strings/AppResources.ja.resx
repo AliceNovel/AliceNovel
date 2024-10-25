@@ -132,13 +132,22 @@
   <data name="Button2 (Tip)" xml:space="preserve">
     <value>画面タップで再表示できます</value>
   </data>
-  <data name="Button5" xml:space="preserve">
-    <value>ロード</value>
+  <data name="Button5 (Tip)" xml:space="preserve">
+    <value>ゲームファイルを読み込みます</value>
   </data>
   <data name="TextBox (Default)" xml:space="preserve">
     <value>Alice Novel ゲーム (.anproj ファイル) を読み込んでください。</value>
   </data>
   <data name="MainPage Title" xml:space="preserve">
     <value>ゲームをプレイする!</value>
+  </data>
+  <data name="Button5" xml:space="preserve">
+    <value>ロード</value>
+  </data>
+  <data name="Alert (Save)" xml:space="preserve">
+    <value>セーブが成功しました。</value>
+  </data>
+  <data name="Alert (Warn)" xml:space="preserve">
+    <value>警告</value>
   </data>
 </root>
