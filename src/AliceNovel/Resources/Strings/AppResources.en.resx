@@ -125,7 +125,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button1 (Tip)" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+    <value>It will be overwritten and saved</value>
   </data>
   <data name="Button2" xml:space="preserve">
     <value>Hide UI</value>
