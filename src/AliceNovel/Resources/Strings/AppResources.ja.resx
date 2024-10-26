@@ -123,9 +123,6 @@
   <data name="Button1" xml:space="preserve">
     <value>セーブ</value>
   </data>
-  <data name="Button1 (Tip)" xml:space="preserve">
-    <value>上書き保存します</value>
-  </data>
   <data name="Button2" xml:space="preserve">
     <value>UI 非表示</value>
   </data>
@@ -149,5 +146,8 @@
   </data>
   <data name="Alert (Warn)" xml:space="preserve">
     <value>警告</value>
+  </data>
+  <data name="Button1 (Tip" xml:space="preserve">
+    <value>上書き保存します</value>
   </data>
 </root>

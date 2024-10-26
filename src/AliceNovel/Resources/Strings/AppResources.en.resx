@@ -123,10 +123,6 @@
   <data name="Button1" xml:space="preserve">
     <value>Save</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button1 (Tip)" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
   <data name="Button2" xml:space="preserve">
     <value>Hide UI</value>
   </data>
@@ -150,5 +146,8 @@
   </data>
   <data name="Alert (Warn)" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="Button1 (Tip" xml:space="preserve">
+    <value>Overwrite Save</value>
   </data>
 </root>

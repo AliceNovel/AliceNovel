@@ -123,9 +123,6 @@
   <data name="Button1" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="Button1 (Tip)" xml:space="preserve">
-    <value>Save with onwrite</value>
-  </data>
   <data name="Button2" xml:space="preserve">
     <value>Hide UI</value>
   </data>
@@ -149,5 +146,8 @@
   </data>
   <data name="Alert (Warn)" xml:space="preserve">
     <value>Warning</value>
+  </data>
+  <data name="Button1 (Tip)" xml:space="preserve">
+    <value>Overwrite Save</value>
   </data>
 </root>
