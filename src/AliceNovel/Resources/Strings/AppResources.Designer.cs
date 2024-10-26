@@ -61,6 +61,24 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Successed to save the game information. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Save_ {
+            get {
+                return ResourceManager.GetString("Alert (Save)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Warning に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Warn_ {
+            get {
+                return ResourceManager.GetString("Alert (Warn)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Alice Novel に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Application_Name {
@@ -79,7 +97,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Save with onwrite に類似しているローカライズされた文字列を検索します。
+        ///   Overwrite Save に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Button1__Tip_ {
             get {
@@ -106,11 +124,20 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Road game file に類似しているローカライズされた文字列を検索します。
+        ///   Load に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Button5 {
             get {
                 return ResourceManager.GetString("Button5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Read game file に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Button5__Tip_ {
+            get {
+                return ResourceManager.GetString("Button5 (Tip)", resourceCulture);
             }
         }
         
@@ -120,6 +147,33 @@ namespace AliceNovel.Resources.Strings {
         internal static string MainPage_Title {
             get {
                 return ResourceManager.GetString("MainPage Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string SettingsPage_Title {
+            get {
+                return ResourceManager.GetString("SettingsPage Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Game に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Tab1 {
+            get {
+                return ResourceManager.GetString("Tab1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Tab2 {
+            get {
+                return ResourceManager.GetString("Tab2", resourceCulture);
             }
         }
         

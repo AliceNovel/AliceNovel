@@ -165,7 +165,7 @@ public partial class MainPage : ContentPage
 
 		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
-				PickerTitle = "Alice Novelゲームを読み込んでください。", 
+				PickerTitle = AppResources.TextBox__Default_,
 				FileTypes = anprojFileType,
 				});
 

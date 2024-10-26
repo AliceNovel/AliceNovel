@@ -147,7 +147,16 @@
   <data name="Alert (Warn)" xml:space="preserve">
     <value>警告</value>
   </data>
-  <data name="Button1 (Tip" xml:space="preserve">
+  <data name="Button1 (Tip)" xml:space="preserve">
     <value>上書き保存します</value>
+  </data>
+  <data name="Tab1" xml:space="preserve">
+    <value>ゲーム</value>
+  </data>
+  <data name="Tab2" xml:space="preserve">
+    <value>設定</value>
+  </data>
+  <data name="SettingsPage Title" xml:space="preserve">
+    <value>設定</value>
   </data>
 </root>
