@@ -13,8 +13,8 @@ public partial class MainPage : ContentPage
 	{
 		InitializeComponent();
 
-		// 初期時の表示文字を保存
-		Initial_textbox_text = textbox.Text;
+        // 初期時の表示文字を保存
+        Initial_textbox_text = textbox.Text;
 		Initial_button5_text = button5.Text;
 		Initial_game_title = game_ui.Title;
 	}
@@ -63,7 +63,7 @@ public partial class MainPage : ContentPage
 				sw.WriteLine(read_times);
 			}
 			// 成功表示
-			await DisplayAlert("セーブ", "セーブが成功しました。", "OK");
+			await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
 		}
 	}
 
@@ -212,7 +212,7 @@ public partial class MainPage : ContentPage
 			entry = zip.GetEntry(anproj_setting["first-read"]);
 		else
 		{
-			await DisplayAlert("警告", "ファイルが古い形式で、対応していません。", "OK");
+			await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
 			return;
 		}
 
@@ -235,7 +235,7 @@ public partial class MainPage : ContentPage
 				StreamReader srz = new(ent_saveread.Open());
 				int read_loop = int.Parse(srz.ReadToEnd());
 
-				bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+				bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
 				if (answer == true)
 				{
 					// "セーブデータをロード"を選択した場合のみ、この処理を実行
@@ -252,7 +252,7 @@ public partial class MainPage : ContentPage
 					catch
 					{
 						// 失敗表示
-						await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+						await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
 					}
 				}
 				srz.Dispose();

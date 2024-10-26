@@ -61,20 +61,92 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Confirm に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Confirm_ {
+            get {
+                return ResourceManager.GetString("Alert (Confirm)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Save data found. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Load1_ {
+            get {
+                return ResourceManager.GetString("Alert (Load1)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Do you want to load the save data? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Load2_ {
+            get {
+                return ResourceManager.GetString("Alert (Load2)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Load に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Load3_ {
+            get {
+                return ResourceManager.GetString("Alert (Load3)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   From the begining に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Load4_ {
+            get {
+                return ResourceManager.GetString("Alert (Load4)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Load failed, load from the beginning. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Load5_ {
+            get {
+                return ResourceManager.GetString("Alert (Load5)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Save に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Save1_ {
+            get {
+                return ResourceManager.GetString("Alert (Save1)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Successed to save the game information. に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Alert__Save_ {
+        internal static string Alert__Save2_ {
             get {
-                return ResourceManager.GetString("Alert (Save)", resourceCulture);
+                return ResourceManager.GetString("Alert (Save2)", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Warning に類似しているローカライズされた文字列を検索します。
         /// </summary>
-        internal static string Alert__Warn_ {
+        internal static string Alert__Warn1_ {
             get {
-                return ResourceManager.GetString("Alert (Warn)", resourceCulture);
+                return ResourceManager.GetString("Alert (Warn1)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The file is old type, and this is out of support. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Warn2_ {
+            get {
+                return ResourceManager.GetString("Alert (Warn2)", resourceCulture);
             }
         }
         
