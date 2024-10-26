@@ -140,7 +140,6 @@ public partial class MainPage : ContentPage
 		});
 
 	FileResult result;// .anprojファイル選択用
-	string FilePath;
 	StreamReader sr;
 	string sr_read;
 	ZipArchive zip;
@@ -172,11 +171,9 @@ public partial class MainPage : ContentPage
 		if (result == null)
 			return;
 
-		FilePath = result.FullPath.ToString();
-
 		read_times = 0;
 		// zip内のファイルを読み込み
-		zip = ZipFile.Open(FilePath, ZipArchiveMode.Update);
+		zip = ZipFile.Open(result.FullPath.ToString(), ZipArchiveMode.Update);
 
 		// zip内のpackage.jsonファイルを読み込み
 		ZipArchiveEntry entry = zip.GetEntry("package.json");
