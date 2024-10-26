@@ -17,8 +17,8 @@
         <Tab Title="{x:Static strings:AppResources.Tab2}">
             <ShellContent
                 Title="{x:Static strings:AppResources.SettingsPage_Title}"
-                ContentTemplate="{DataTemplate local:SettingPage}"
-                Route="SettingPage" />
+                ContentTemplate="{DataTemplate local:SettingsPage}"
+                Route="SettingsPage" />
         </Tab>
     </TabBar>
 
