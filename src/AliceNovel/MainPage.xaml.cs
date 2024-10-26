@@ -293,12 +293,8 @@ public partial class MainPage : ContentPage
 					// 場所指定されていない場合は背景画像を消す
 					if (match.Groups[1].Value.Trim() == "")
 						image.Source = null;
-					else
-						try
+					else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
 						{
-							if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is null)
-								return;
-
 							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 							{
 								var memoryStream = new MemoryStream();
@@ -307,7 +303,6 @@ public partial class MainPage : ContentPage
 								image.Source = ImageSource.FromStream(() => memoryStream);
 							}
 						}
-						catch { }
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
@@ -409,7 +404,6 @@ public partial class MainPage : ContentPage
 				Directory.Delete(path, true);
 		}
 	}
-
 
 	/// <summary>
 	/// 動画再生終了時の処理です。
