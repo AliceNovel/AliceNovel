@@ -44,7 +44,7 @@
 		<Copyright>MIT License</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AliceNovel/AliceNovel</RepositoryUrl>
-    <NeutralLanguage>ja-JP</NeutralLanguage>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
 
