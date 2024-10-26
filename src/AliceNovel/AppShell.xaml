@@ -16,8 +16,8 @@
         <Tab Title="設定">
             <ShellContent
                 Title="設定"
-                ContentTemplate="{DataTemplate local:SettingPage}"
-                Route="SettingPage" />
+                ContentTemplate="{DataTemplate local:SettingsPage}"
+                Route="SettingsPage" />
         </Tab>
     </TabBar>
 
