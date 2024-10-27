@@ -40,11 +40,50 @@ public partial class MainPage : ContentPage
 	}
 
 	/// <summary>
-	/// button1 をクリックしたときの処理です。
+	/// Hide Interface
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	private void Button1_Clicked(object sender, EventArgs e)
+    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    {
+		if (ui_visible == true)
+		{
+			toolbarItem1.Text = "Show Interfaces";
+            UI_Hidden();
+        }
+        else
+		{
+            toolbarItem1.Text = "Hide Interfaces";
+            UI_ReDisplay();
+        }
+    }
+
+	/// <summary>
+	/// Save the Game
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+    private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+    {
+		FileSave();
+    }
+
+	/// <summary>
+	/// Exit the Game
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+    private void ToolbarItem_Clicked_3(object sender, EventArgs e)
+    {
+		// 実装予定
+    }
+
+    /// <summary>
+    /// button1 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button1_Clicked(object sender, EventArgs e)
 	{
 		FileSave();
 	}
@@ -143,7 +182,7 @@ public partial class MainPage : ContentPage
 	StreamReader sr;
 	string sr_read;
 	ZipArchive zip;
-	bool WhileLoading = false;
+    bool WhileLoading = false;
 
 	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
 	Dictionary<string, string> anproj_setting = [];

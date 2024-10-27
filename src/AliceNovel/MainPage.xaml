@@ -7,7 +7,20 @@
 			 x:Name="game_ui"
 			 Title="ゲームをプレイする!">
 
-	<Grid>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary"
+                     x:Name="toolbarItem1"
+                     Text="Hide Interfaces"
+                     Clicked="ToolbarItem_Clicked_1" />
+        <ToolbarItem Order="Secondary"
+                     Text="Save"
+                     Clicked="ToolbarItem_Clicked_2" />
+        <ToolbarItem Order="Secondary"
+                     Text="Exit the Game"
+                     Clicked="ToolbarItem_Clicked_3" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
 		<!-- # # 縦分割 # # -->
 		<Grid.RowDefinitions>
 			<RowDefinition Height="6*"/>
@@ -34,7 +47,7 @@
 			</FlyoutBase.ContextFlyout>
 		</Label>
 
-		<!-- UI再表示/"次に"用 -->
+        <!-- UI再表示/"次に"用 -->
 		<Button x:Name="re"
 				Clicked="ReShow_Clicked"
 				Grid.Row="0"
