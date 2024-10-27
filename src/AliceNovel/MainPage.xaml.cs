@@ -40,11 +40,21 @@ public partial class MainPage : ContentPage
 	}
 
 	/// <summary>
-	/// button1 をクリックしたときの処理です。
+	/// The function when droped .anproj file into this app.
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	private void Button1_Clicked(object sender, EventArgs e)
+    async private void DropGestureRecognizer_Drop(object sender, DropEventArgs e)
+    {
+        textbox.Text = await e.Data.GetTextAsync();
+    }
+
+    /// <summary>
+    /// button1 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button1_Clicked(object sender, EventArgs e)
 	{
 		FileSave();
 	}
@@ -143,7 +153,8 @@ public partial class MainPage : ContentPage
 	StreamReader sr;
 	string sr_read;
 	ZipArchive zip;
-	bool WhileLoading = false;
+
+    bool WhileLoading = false;
 
 	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
 	Dictionary<string, string> anproj_setting = [];

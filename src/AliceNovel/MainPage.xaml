@@ -35,16 +35,20 @@
 		</Label>
 
 		<!-- UI再表示/"次に"用 -->
-		<Button x:Name="re"
+        <Button x:Name="re"
 				Clicked="ReShow_Clicked"
 				Grid.Row="0"
 				Grid.RowSpan="2"
 				Grid.Column="0"
 				Grid.ColumnSpan="2"
 				BackgroundColor="Transparent"
-				BorderColor="Transparent"/>
+				BorderColor="Transparent">
+            <Button.GestureRecognizers>
+                <DropGestureRecognizer Drop="DropGestureRecognizer_Drop"/>
+            </Button.GestureRecognizers>
+        </Button>
 
-		<!-- # # メインUI # # -->
+        <!-- # # メインUI # # -->
 		<!-- 画像表示領域(Source=""で指定) -->
 		<Image x:Name="image"
 			   Grid.Row="0"
