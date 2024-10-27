@@ -141,10 +141,10 @@
   <data name="Button5" xml:space="preserve">
     <value>ロード</value>
   </data>
-  <data name="Alert (Save)" xml:space="preserve">
+  <data name="Alert (Save2)" xml:space="preserve">
     <value>セーブが成功しました。</value>
   </data>
-  <data name="Alert (Warn)" xml:space="preserve">
+  <data name="Alert (Warn1)" xml:space="preserve">
     <value>警告</value>
   </data>
   <data name="Button1 (Tip)" xml:space="preserve">
@@ -158,5 +158,29 @@
   </data>
   <data name="SettingsPage Title" xml:space="preserve">
     <value>設定</value>
+  </data>
+  <data name="Alert (Save1)" xml:space="preserve">
+    <value>セーブが成功しました。</value>
+  </data>
+  <data name="Alert (Confirm)" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Alert (Warn2)" xml:space="preserve">
+    <value>ファイルが古い形式で、対応していません。</value>
+  </data>
+  <data name="Alert (Load1)" xml:space="preserve">
+    <value>セーブデータが見つかりました。</value>
+  </data>
+  <data name="Alert (Load2)" xml:space="preserve">
+    <value>セーブデータをロードしますか?</value>
+  </data>
+  <data name="Alert (Load3)" xml:space="preserve">
+    <value>ロードする</value>
+  </data>
+  <data name="Alert (Load4)" xml:space="preserve">
+    <value>はじめから</value>
+  </data>
+  <data name="Alert (Load5)" xml:space="preserve">
+    <value>ロードが失敗したため、最初から読み込みを行います。</value>
   </data>
 </root>
