@@ -20,7 +20,7 @@
                      Clicked="ToolbarItem_Clicked_3" />
     </ContentPage.ToolbarItems>
 
-    <Grid>
+	<Grid>
 		<!-- # # 縦分割 # # -->
 		<Grid.RowDefinitions>
 			<RowDefinition Height="6*"/>
@@ -47,7 +47,7 @@
 			</FlyoutBase.ContextFlyout>
 		</Label>
 
-        <!-- UI再表示/"次に"用 -->
+		<!-- UI再表示/"次に"用 -->
 		<Button x:Name="re"
 				Clicked="ReShow_Clicked"
 				Grid.Row="0"
