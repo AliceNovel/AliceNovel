@@ -40,13 +40,55 @@ public partial class MainPage : ContentPage
 	}
 
 	/// <summary>
-	/// button1 をクリックしたときの処理です。
+	/// Hide Interface
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-	private void Button1_Clicked(object sender, EventArgs e)
-	{
+    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    {
+		if (ui_visible == true)
+		{
+			toolbarItem1.Text = "Show Interfaces";
+            UI_Hidden();
+        }
+        else
+		{
+            toolbarItem1.Text = "Hide Interfaces";
+            UI_ReDisplay();
+        }
+    }
+
+	/// <summary>
+	/// Save the Game
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+    private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+    {
 		FileSave();
+    }
+
+	/// <summary>
+	/// Exit the Game
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+    async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
+		if (answer == true)
+			FileSave();
+        ExitGame();
+    }
+
+    /// <summary>
+    /// button1 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button1_Clicked(object sender, EventArgs e)
+	{
+		
 	}
 
 	/// <summary>
@@ -73,7 +115,7 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	private void Button2_Clicked(object sender, EventArgs e)
 	{
-		UI_Hidden();
+		
 	}
 
 	/// <summary>
@@ -221,9 +263,10 @@ public partial class MainPage : ContentPage
 		sr ??= new(entry.Open(), Encoding.UTF8);
 		textbox.Text = "";
 		talkname.Text = "";
-		button1.IsVisible = true;
-		button2.IsVisible = true;
 		button5.IsVisible = false;
+		toolbarItem1.IsEnabled = true;
+		toolbarItem2.IsEnabled = true;
+		toolbarItem3.IsEnabled = true;
 		
 		// セーブ読み込み
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
@@ -384,26 +427,39 @@ public partial class MainPage : ContentPage
 			}
 		}
 		else
-		{
-			result = null;
-			sr?.Close();
-			sr = null;
-			zip?.Dispose();// zipファイルを閉じる
-			talkname.Text = "";
-			image.Source = null;
-			textbox.Text = Initial_textbox_text;
-			button1.IsVisible = false;
-			button2.IsVisible = false;
-			button5.IsVisible = true;
-			button5.Text = Initial_button5_text;
-			game_ui.Title = Initial_game_title;
-
-			// キャッシュフォルダを削除する
-			string path = FileSystem.Current.CacheDirectory;
-			if (Directory.Exists(path))
-				Directory.Delete(path, true);
-		}
+			ExitGame();
 	}
+
+	/// <summary>
+	/// ゲーム終了時の処理
+	/// </summary>
+	private void ExitGame()
+	{
+        // 動画停止処理
+        movie.Stop();
+        movie.IsVisible = false;
+        UI_ReDisplay();
+        re.IsEnabled = true;
+
+        result = null;
+        sr?.Close();
+        sr = null;
+        zip?.Dispose();// zipファイルを閉じる
+        talkname.Text = "";
+        image.Source = null;
+        textbox.Text = Initial_textbox_text;
+        button5.IsVisible = true;
+        button5.Text = Initial_button5_text;
+        game_ui.Title = Initial_game_title;
+        toolbarItem1.IsEnabled = false;
+        toolbarItem2.IsEnabled = false;
+        toolbarItem3.IsEnabled = false;
+
+        // キャッシュフォルダを削除する
+        string path = FileSystem.Current.CacheDirectory;
+        if (Directory.Exists(path))
+            Directory.Delete(path, true);
+    }
 
 	/// <summary>
 	/// 動画再生終了時の処理です。
