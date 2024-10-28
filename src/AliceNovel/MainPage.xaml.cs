@@ -435,6 +435,12 @@ public partial class MainPage : ContentPage
 	/// </summary>
 	private void ExitGame()
 	{
+        // 動画停止処理
+        movie.Stop();
+        movie.IsVisible = false;
+        UI_ReDisplay();
+        re.IsEnabled = true;
+
         result = null;
         sr?.Close();
         sr = null;
