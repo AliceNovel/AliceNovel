@@ -48,12 +48,12 @@ public partial class MainPage : ContentPage
     {
 		if (ui_visible == true)
 		{
-			toolbarItem1.Text = "Show Interfaces";
+			toolbarItem1.Text = "UI 再表示";
             UI_Hidden();
         }
         else
 		{
-            toolbarItem1.Text = "Hide Interfaces";
+            toolbarItem1.Text = "UI 非表示";
             UI_ReDisplay();
         }
     }
