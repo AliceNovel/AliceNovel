@@ -100,7 +100,7 @@ public partial class MainPage : ContentPage
 			}
 
 			// ローカル保存
-			string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, anproj_setting["game-name"]);
+			string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
 			// (保存先のディレクトリ作成)
 			if (!Directory.Exists(localSaveDirectory))
 				Directory.CreateDirectory(localSaveDirectory);
@@ -298,7 +298,7 @@ public partial class MainPage : ContentPage
 		{
 			try
 			{
-				string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, anproj_setting["game-name"], "savefile.txt"));
+				string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
 				LoadSaveOrNot(localSaveData);
 			}
 			catch { }
