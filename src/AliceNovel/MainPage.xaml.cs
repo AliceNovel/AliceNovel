@@ -44,43 +44,43 @@ public partial class MainPage : ContentPage
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
-    {
+	private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+	{
 		if (ui_visible == true)
-            UI_Hidden();
-        else
-            UI_ReDisplay();
-    }
+			UI_Hidden();
+		else
+			UI_ReDisplay();
+	}
 
 	/// <summary>
 	/// Save the Game
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-    private void ToolbarItem_Clicked_2(object sender, EventArgs e)
-    {
+	private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+	{
 		FileSave();
-    }
+	}
 
 	/// <summary>
 	/// Exit the Game
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-    async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
-    {
-        bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
+	async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
+	{
+		bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
 		if (answer == true)
 			FileSave();
-        ExitGame();
-    }
+		ExitGame();
+	}
 
-    /// <summary>
-    /// button1 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button1_Clicked(object sender, EventArgs e)
+	/// <summary>
+	/// button1 をクリックしたときの処理です。
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	private void Button1_Clicked(object sender, EventArgs e)
 	{
 		
 	}
@@ -91,12 +91,25 @@ public partial class MainPage : ContentPage
 	async void FileSave(){
 		if (zip != null)
 		{
+			// .anproj 内保存
 			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 			ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
 			using (StreamWriter sw = new(ent.Open()))
 			{
 				sw.WriteLine(read_times);
 			}
+
+			// ローカル保存
+			string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
+			// (保存先のディレクトリ作成)
+			if (!Directory.Exists(localSaveDirectory))
+				Directory.CreateDirectory(localSaveDirectory);
+			string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
+			using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+			{
+				saveStream.WriteLine(read_times);
+			}
+
 			// 成功表示
 			await DisplayAlert("セーブ", "セーブが成功しました。", "OK");
 		}
@@ -116,10 +129,10 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために UI を隠します。
 	/// </summary>
 	void UI_Hidden(){
-        toolbarItem1.Text = "UI 再表示";
+		toolbarItem1.Text = "UI 再表示";
 
-        // 初期のボタン有効/無効状態を確認
-        Initial_button1 = button1.IsVisible;
+		// 初期のボタン有効/無効状態を確認
+		Initial_button1 = button1.IsVisible;
 		Initial_button2 = button2.IsVisible;
 		Initial_button3 = button3.IsVisible;
 		Initial_button4 = button4.IsVisible;
@@ -134,8 +147,8 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
 	/// </summary>
 	void UI_ReDisplay(){
-        toolbarItem1.Text = "UI 非表示";
-        
+		toolbarItem1.Text = "UI 非表示";
+		
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
 		button1.IsVisible = Initial_button1;
@@ -265,39 +278,55 @@ public partial class MainPage : ContentPage
 		toolbarItem1.IsEnabled = true;
 		toolbarItem2.IsEnabled = true;
 		toolbarItem3.IsEnabled = true;
-		
+
 		// セーブ読み込み
+		// 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
+		// .anproj 内のデータから読み込み
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 		if (ent_saveread != null)
 		{
 			try
 			{
 				StreamReader srz = new(ent_saveread.Open());
-				int read_loop = int.Parse(srz.ReadToEnd());
-
-				bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
-				if (answer == true)
-				{
-					// "セーブデータをロード"を選択した場合のみ、この処理を実行
-					try
-					{
-						WhileLoading = true;
-						for (int i = 1; i < read_loop; i++)
-							FileRead();
-						// 成功表示
-						WhileLoading = false;
-						// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-						// await Toast.Make("ロードが成功しました。").Show();
-					}
-					catch
-					{
-						// 失敗表示
-						await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
-					}
-				}
+				LoadSaveOrNot(srz.ReadToEnd());
 				srz.Dispose();
 			}
 			catch { }
+		}
+		// ローカルデータから読み込み
+		else
+		{
+			try
+			{
+				string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+				LoadSaveOrNot(localSaveData);
+			}
+			catch { }
+		}
+
+		async void LoadSaveOrNot(string saveData)
+		{
+			int read_loop = int.Parse(saveData);
+			bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+			if (answer == true)
+			{
+				// "セーブデータをロード"を選択した場合のみ、この処理を実行
+				try
+				{
+					WhileLoading = true;
+					for (int i = 1; i < read_loop; i++)
+						FileRead();
+					// 成功表示
+					WhileLoading = false;
+					// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+					// await Toast.Make("ロードが成功しました。").Show();
+				}
+				catch
+				{
+					// 失敗表示
+					await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+				}
+			}
 		}
 
 		// 初回ファイル読み込み処理
@@ -433,31 +462,31 @@ public partial class MainPage : ContentPage
 	/// </summary>
 	private void ExitGame()
 	{
-        // 動画停止処理
-        movie.Stop();
-        movie.IsVisible = false;
-        UI_ReDisplay();
-        re.IsEnabled = true;
+		// 動画停止処理
+		movie.Stop();
+		movie.IsVisible = false;
+		UI_ReDisplay();
+		re.IsEnabled = true;
 
-        result = null;
-        sr?.Close();
-        sr = null;
-        zip?.Dispose();// zipファイルを閉じる
-        talkname.Text = "";
-        image.Source = null;
-        textbox.Text = Initial_textbox_text;
-        button5.IsVisible = true;
-        button5.Text = Initial_button5_text;
-        game_ui.Title = Initial_game_title;
-        toolbarItem1.IsEnabled = false;
-        toolbarItem2.IsEnabled = false;
-        toolbarItem3.IsEnabled = false;
+		result = null;
+		sr?.Close();
+		sr = null;
+		zip?.Dispose();// zipファイルを閉じる
+		talkname.Text = "";
+		image.Source = null;
+		textbox.Text = Initial_textbox_text;
+		button5.IsVisible = true;
+		button5.Text = Initial_button5_text;
+		game_ui.Title = Initial_game_title;
+		toolbarItem1.IsEnabled = false;
+		toolbarItem2.IsEnabled = false;
+		toolbarItem3.IsEnabled = false;
 
-        // キャッシュフォルダを削除する
-        string path = FileSystem.Current.CacheDirectory;
-        if (Directory.Exists(path))
-            Directory.Delete(path, true);
-    }
+		// キャッシュフォルダを削除する
+		string path = FileSystem.Current.CacheDirectory;
+		if (Directory.Exists(path))
+			Directory.Delete(path, true);
+	}
 
 	/// <summary>
 	/// 動画再生終了時の処理です。
