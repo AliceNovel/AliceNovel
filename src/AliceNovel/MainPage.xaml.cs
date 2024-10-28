@@ -91,12 +91,25 @@ public partial class MainPage : ContentPage
 	async void FileSave(){
 		if (zip != null)
 		{
+			// .anproj 内保存
 			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 			ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
 			using (StreamWriter sw = new(ent.Open()))
 			{
 				sw.WriteLine(read_times);
 			}
+
+            // ローカル保存
+            string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, anproj_setting["game-name"]);
+			// (保存先のディレクトリ作成)
+			if (!Directory.Exists(localSaveDirectory))
+				Directory.CreateDirectory(localSaveDirectory);
+            string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
+            using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+			{
+				saveStream.WriteLine(read_times);
+			}
+
 			// 成功表示
 			await DisplayAlert("セーブ", "セーブが成功しました。", "OK");
 		}
@@ -265,43 +278,60 @@ public partial class MainPage : ContentPage
 		toolbarItem1.IsEnabled = true;
 		toolbarItem2.IsEnabled = true;
 		toolbarItem3.IsEnabled = true;
-		
-		// セーブ読み込み
-		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-		if (ent_saveread != null)
+
+        // セーブ読み込み
+        // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
+
+        // .anproj 内のデータから読み込み
+        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+        if (ent_saveread != null)
+        {
+            try
+            {
+                StreamReader srz = new(ent_saveread.Open());
+				LoadSaveOrNot(srz.ReadToEnd());
+                srz.Dispose();
+            }
+            catch { }
+        }
+		// ローカルデータから読み込み
+		else
 		{
-			try
-			{
-				StreamReader srz = new(ent_saveread.Open());
-				int read_loop = int.Parse(srz.ReadToEnd());
+            try
+            {
+                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, anproj_setting["game-name"], "savefile.txt"));
+                LoadSaveOrNot(localSaveData);
+            }
+            catch { }
+        }
 
-				bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
-				if (answer == true)
-				{
-					// "セーブデータをロード"を選択した場合のみ、この処理を実行
-					try
-					{
-						WhileLoading = true;
-						for (int i = 1; i < read_loop; i++)
-							FileRead();
-						// 成功表示
-						WhileLoading = false;
-						// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-						// await Toast.Make("ロードが成功しました。").Show();
-					}
-					catch
-					{
-						// 失敗表示
-						await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
-					}
-				}
-				srz.Dispose();
-			}
-			catch { }
-		}
+        async void LoadSaveOrNot(string saveData)
+        {
+			int read_loop = int.Parse(saveData);
+            bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+            if (answer == true)
+            {
+                // "セーブデータをロード"を選択した場合のみ、この処理を実行
+                try
+                {
+                    WhileLoading = true;
+                    for (int i = 1; i < read_loop; i++)
+                        FileRead();
+                    // 成功表示
+                    WhileLoading = false;
+                    // ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+                    // await Toast.Make("ロードが成功しました。").Show();
+                }
+                catch
+                {
+                    // 失敗表示
+                    await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+                }
+            }
+        }
 
-		// 初回ファイル読み込み処理
-		FileRead();
+        // 初回ファイル読み込み処理
+        FileRead();
 	}
 
 	/// <summary>
