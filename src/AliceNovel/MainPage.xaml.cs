@@ -73,9 +73,12 @@ public partial class MainPage : ContentPage
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
-    private void ToolbarItem_Clicked_3(object sender, EventArgs e)
+    async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
     {
-		// 実装予定
+        bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
+		if (answer == true)
+			FileSave();
+        ExitGame();
     }
 
     /// <summary>
@@ -334,15 +337,15 @@ public partial class MainPage : ContentPage
 					if (match.Groups[1].Value.Trim() == "")
 						image.Source = null;
 					else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
+					{
+						using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
-							{
-								var memoryStream = new MemoryStream();
-								st.CopyTo(memoryStream);
-								memoryStream.Seek(0, SeekOrigin.Begin);
-								image.Source = ImageSource.FromStream(() => memoryStream);
-							}
+							var memoryStream = new MemoryStream();
+							st.CopyTo(memoryStream);
+							memoryStream.Seek(0, SeekOrigin.Begin);
+							image.Source = ImageSource.FromStream(() => memoryStream);
 						}
+					}
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
@@ -412,39 +415,45 @@ public partial class MainPage : ContentPage
 				match = Regex.Match(sr_read, @"- (.*?)/");
 				if (match.Success)
 					talkname.Text = match.Groups[1].Value.Trim();
-					// 感情変更
+				// 感情変更
 
 				// "/ "から始まる"感情"を読み込み
 				match = Regex.Match(sr_read, @"/ (.*)");
 				//if (match.Success)
-					// 感情変更
+				// 感情変更
 
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
 			}
 		}
 		else
-		{
-			result = null;
-			sr?.Close();
-			sr = null;
-			zip?.Dispose();// zipファイルを閉じる
-			talkname.Text = "";
-			image.Source = null;
-			textbox.Text = Initial_textbox_text;
-			button5.IsVisible = true;
-			button5.Text = Initial_button5_text;
-			game_ui.Title = Initial_game_title;
-			toolbarItem1.IsEnabled = false;
-			toolbarItem2.IsEnabled = false;
-			toolbarItem3.IsEnabled = false;
-
-            // キャッシュフォルダを削除する
-            string path = FileSystem.Current.CacheDirectory;
-			if (Directory.Exists(path))
-				Directory.Delete(path, true);
-		}
+			ExitGame();
 	}
+
+	/// <summary>
+	/// ゲーム終了時の処理
+	/// </summary>
+	private void ExitGame()
+	{
+        result = null;
+        sr?.Close();
+        sr = null;
+        zip?.Dispose();// zipファイルを閉じる
+        talkname.Text = "";
+        image.Source = null;
+        textbox.Text = Initial_textbox_text;
+        button5.IsVisible = true;
+        button5.Text = Initial_button5_text;
+        game_ui.Title = Initial_game_title;
+        toolbarItem1.IsEnabled = false;
+        toolbarItem2.IsEnabled = false;
+        toolbarItem3.IsEnabled = false;
+
+        // キャッシュフォルダを削除する
+        string path = FileSystem.Current.CacheDirectory;
+        if (Directory.Exists(path))
+            Directory.Delete(path, true);
+    }
 
 	/// <summary>
 	/// 動画再生終了時の処理です。
@@ -453,18 +462,18 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	private void MovieEnded(object sender, EventArgs e)
 	{
-		Dispatcher.Dispatch(() =>
-		{
-			// 動画停止
-			movie.Stop();
-			movie.IsVisible = false;
+        Dispatcher.Dispatch(() =>
+        {
+            // 動画停止
+            movie.Stop();
+            movie.IsVisible = false;
 
-			// UIを元に戻す
-			UI_ReDisplay();
-			re.IsEnabled = true;
-			FileRead();
-		});
-	}
+            // UIを元に戻す
+            UI_ReDisplay();
+            re.IsEnabled = true;
+            FileRead();
+        });
+    }
 
 	/// <summary>
 	/// button6 をクリックしたときの処理です。
