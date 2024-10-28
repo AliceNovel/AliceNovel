@@ -144,7 +144,7 @@
 						Clicked="Button3_Clicked"
 						Text="Button3"
 						Margin="0,0,0,0"
-                        IsVisible="false"
+						IsVisible="false"
 						TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
 						windows:VisualElement.AccessKey="3"/>
@@ -153,7 +153,7 @@
 						Clicked="Button4_Clicked"
 						Text="Button4"
 						Margin="12,0,0,0"
-                        IsVisible="false"
+						IsVisible="false"
 						TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
 						windows:VisualElement.AccessKey="4"/>

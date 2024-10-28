@@ -185,7 +185,7 @@ public partial class MainPage : ContentPage
 	StreamReader sr;
 	string sr_read;
 	ZipArchive zip;
-    bool WhileLoading = false;
+	bool WhileLoading = false;
 
 	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
 	Dictionary<string, string> anproj_setting = [];
@@ -266,7 +266,7 @@ public partial class MainPage : ContentPage
 		button5.IsVisible = false;
 		toolbarItem1.IsEnabled = true;
 		toolbarItem2.IsEnabled = true;
-        toolbarItem3.IsEnabled = true;
+		toolbarItem3.IsEnabled = true;
 		
 		// セーブ読み込み
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
@@ -337,15 +337,15 @@ public partial class MainPage : ContentPage
 					if (match.Groups[1].Value.Trim() == "")
 						image.Source = null;
 					else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
-					{
-						using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 						{
-							var memoryStream = new MemoryStream();
-							st.CopyTo(memoryStream);
-							memoryStream.Seek(0, SeekOrigin.Begin);
-							image.Source = ImageSource.FromStream(() => memoryStream);
+							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
+							{
+								var memoryStream = new MemoryStream();
+								st.CopyTo(memoryStream);
+								memoryStream.Seek(0, SeekOrigin.Begin);
+								image.Source = ImageSource.FromStream(() => memoryStream);
+							}
 						}
-					}
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
@@ -415,12 +415,12 @@ public partial class MainPage : ContentPage
 				match = Regex.Match(sr_read, @"- (.*?)/");
 				if (match.Success)
 					talkname.Text = match.Groups[1].Value.Trim();
-				// 感情変更
+					// 感情変更
 
 				// "/ "から始まる"感情"を読み込み
 				match = Regex.Match(sr_read, @"/ (.*)");
 				//if (match.Success)
-				// 感情変更
+					// 感情変更
 
 				// 次の行を読み込む
 				sr_read = sr.ReadLine();
@@ -468,18 +468,18 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	private void MovieEnded(object sender, EventArgs e)
 	{
-        Dispatcher.Dispatch(() =>
-        {
-            // 動画停止
-            movie.Stop();
-            movie.IsVisible = false;
+		Dispatcher.Dispatch(() =>
+		{
+			// 動画停止
+			movie.Stop();
+			movie.IsVisible = false;
 
-            // UIを元に戻す
-            UI_ReDisplay();
-            re.IsEnabled = true;
-            FileRead();
-        });
-    }
+			// UIを元に戻す
+			UI_ReDisplay();
+			re.IsEnabled = true;
+			FileRead();
+		});
+	}
 
 	/// <summary>
 	/// button6 をクリックしたときの処理です。
