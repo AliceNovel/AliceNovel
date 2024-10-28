@@ -47,15 +47,9 @@ public partial class MainPage : ContentPage
     private void ToolbarItem_Clicked_1(object sender, EventArgs e)
     {
 		if (ui_visible == true)
-		{
-			toolbarItem1.Text = "UI 再表示";
             UI_Hidden();
-        }
         else
-		{
-            toolbarItem1.Text = "UI 非表示";
             UI_ReDisplay();
-        }
     }
 
 	/// <summary>
@@ -122,8 +116,10 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために UI を隠します。
 	/// </summary>
 	void UI_Hidden(){
-		// 初期のボタン有効/無効状態を確認
-		Initial_button1 = button1.IsVisible;
+        toolbarItem1.Text = "UI 再表示";
+
+        // 初期のボタン有効/無効状態を確認
+        Initial_button1 = button1.IsVisible;
 		Initial_button2 = button2.IsVisible;
 		Initial_button3 = button3.IsVisible;
 		Initial_button4 = button4.IsVisible;
@@ -138,6 +134,8 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
 	/// </summary>
 	void UI_ReDisplay(){
+        toolbarItem1.Text = "UI 非表示";
+        
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
 		button1.IsVisible = Initial_button1;
