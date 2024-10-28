@@ -85,7 +85,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void Button1_Clicked(object sender, EventArgs e)
 	{
-		FileSave();
+		
 	}
 
 	/// <summary>
@@ -112,7 +112,7 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	private void Button2_Clicked(object sender, EventArgs e)
 	{
-		UI_Hidden();
+		
 	}
 
 	/// <summary>
@@ -260,9 +260,10 @@ public partial class MainPage : ContentPage
 		sr ??= new(entry.Open(), Encoding.UTF8);
 		textbox.Text = "";
 		talkname.Text = "";
-		button1.IsVisible = true;
-		button2.IsVisible = true;
 		button5.IsVisible = false;
+		toolbarItem1.IsEnabled = true;
+		toolbarItem2.IsEnabled = true;
+        toolbarItem3.IsEnabled = true;
 		
 		// セーブ読み込み
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
@@ -431,14 +432,15 @@ public partial class MainPage : ContentPage
 			talkname.Text = "";
 			image.Source = null;
 			textbox.Text = Initial_textbox_text;
-			button1.IsVisible = false;
-			button2.IsVisible = false;
 			button5.IsVisible = true;
 			button5.Text = Initial_button5_text;
 			game_ui.Title = Initial_game_title;
+			toolbarItem1.IsEnabled = false;
+			toolbarItem2.IsEnabled = false;
+			toolbarItem3.IsEnabled = false;
 
-			// キャッシュフォルダを削除する
-			string path = FileSystem.Current.CacheDirectory;
+            // キャッシュフォルダを削除する
+            string path = FileSystem.Current.CacheDirectory;
 			if (Directory.Exists(path))
 				Directory.Delete(path, true);
 		}

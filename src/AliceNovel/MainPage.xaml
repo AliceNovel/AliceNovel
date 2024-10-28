@@ -10,13 +10,21 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary"
                      x:Name="toolbarItem1"
-                     Text="Hide Interfaces"
+                     Text="UI 非表示"
+                     ToolTipProperties.Text="画面タップで再表示できます"
+                     IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_1" />
         <ToolbarItem Order="Secondary"
-                     Text="Save"
+                     x:Name="toolbarItem2"
+                     Text="セーブ"
+                     ToolTipProperties.Text="上書き保存します"
+                     IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_2" />
         <ToolbarItem Order="Secondary"
-                     Text="Exit the Game"
+                     x:Name="toolbarItem3"
+                     Text="ゲームを終了"
+                     ToolTipProperties.Text="現在開いているゲームを閉じます"
+                     IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_3" />
     </ContentPage.ToolbarItems>
 
@@ -101,20 +109,20 @@
 							   HorizontalOptions="End"
 							   Margin="0,12,22,0">
 
-			<Button x:Name="button1"
+            <!-- 規定では非表示 -->
+            <Button x:Name="button1"
 					Clicked="Button1_Clicked"
-					Text="セーブ"
+					Text="Button1"
 					IsVisible="false"
-					ToolTipProperties.Text="上書き保存します"
 					Margin="0,0,12,0"
 					TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
 					windows:VisualElement.AccessKey="1"/>
-			<Button x:Name="button2"
+            <!-- 規定では非表示 -->
+            <Button x:Name="button2"
 					Clicked="Button2_Clicked"
-					Text="UI非表示"
+					Text="Button2"
 					IsVisible="false"
-					ToolTipProperties.Text="画面タップで再表示できます"
 					TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 					BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
 					windows:VisualElement.AccessKey="2"/>
@@ -130,13 +138,13 @@
 							 VerticalOptions="End"
 							 HorizontalOptions="End">
 
-			<HorizontalStackLayout Margin="0,0,0,6"
-								   IsVisible="false">
+			<HorizontalStackLayout Margin="0,0,0,6">
 				<!-- 規定では非表示 -->
 				<Button x:Name="button3"
 						Clicked="Button3_Clicked"
 						Text="Button3"
 						Margin="0,0,0,0"
+                        IsVisible="false"
 						TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
 						windows:VisualElement.AccessKey="3"/>
@@ -145,6 +153,7 @@
 						Clicked="Button4_Clicked"
 						Text="Button4"
 						Margin="12,0,0,0"
+                        IsVisible="false"
 						TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
 						windows:VisualElement.AccessKey="4"/>
