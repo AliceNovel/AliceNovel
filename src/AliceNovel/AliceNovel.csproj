@@ -44,11 +44,11 @@
 		<Copyright>MIT License</Copyright>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AliceNovel/AliceNovel</RepositoryUrl>
-    <NeutralLanguage>en-US</NeutralLanguage>
-    <DefaultLanguage>en</DefaultLanguage>
+		<NeutralLanguage>en-US</NeutralLanguage>
+		<DefaultLanguage>en</DefaultLanguage>
 	</PropertyGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#00FFFFFF" />
 
@@ -82,21 +82,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\Strings\AppResources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>AppResources.resx</DependentUpon>
-	  </Compile>
+		<Compile Update="Resources\Strings\AppResources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>AppResources.resx</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Update="Resources\Strings\AppResources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
+		<EmbeddedResource Update="Resources\Strings\AppResources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
 	</ItemGroup>
 
-  <ItemGroup>
+	<ItemGroup>
 		<MauiXaml Update="SettingsPage.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
