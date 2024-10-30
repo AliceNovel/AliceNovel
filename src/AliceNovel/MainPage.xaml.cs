@@ -504,6 +504,9 @@ public partial class MainPage : ContentPage
 			movie.Stop();
 			movie.IsVisible = false;
 
+			// 手動メモリ解放
+			GC.Collect();
+
 			// UIを元に戻す
 			UI_ReDisplay();
 			re.IsEnabled = true;
