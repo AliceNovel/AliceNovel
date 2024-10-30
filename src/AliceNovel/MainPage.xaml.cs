@@ -311,29 +311,29 @@ public partial class MainPage : ContentPage
 		{
 			int read_loop = int.Parse(saveData);
 			bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
-			if (answer == true)
-			{
-				// "セーブデータをロード"を選択した場合のみ、この処理を実行
-				try
-				{
-					WhileLoading = true;
-					for (int i = 1; i < read_loop; i++)
-						FileRead();
-					// 成功表示
-					WhileLoading = false;
-					// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-					// await Toast.Make("ロードが成功しました。").Show();
-				}
-				catch
-				{
-					// 失敗表示
-					await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
-				}
-			}
-		}
+			if (answer != true)
+				return;
 
-		// 初回ファイル読み込み処理
-		FileRead();
+            WhileLoading = true;
+            // "セーブデータをロード"を選択した場合のみ、この処理を実行
+            try
+            {
+				for (int i = 1; i < read_loop; i++)
+					FileRead();
+				// 成功表示
+				// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+				// await Toast.Make("ロードが成功しました。").Show();
+			}
+			catch
+			{
+				// 失敗表示
+				await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+			}
+			WhileLoading = false;
+        }
+
+        // 初回ファイル読み込み処理
+        FileRead();
 	}
 
 	/// <summary>
