@@ -285,20 +285,23 @@ public partial class MainPage : ContentPage
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 		if (ent_saveread != null)
 		{
+			StreamReader srz = null;
 			try
 			{
-				StreamReader srz = new(ent_saveread.Open());
+				srz = new(ent_saveread.Open());
 				LoadSaveOrNot(srz.ReadToEnd());
-				srz.Dispose();
 			}
-			catch { }
+			finally
+			{
+				srz?.Dispose();
+			}
 		}
 		// ローカルデータから読み込み
 		else
 		{
+			string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
 			try
 			{
-				string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
 				LoadSaveOrNot(localSaveData);
 			}
 			catch { }
@@ -308,25 +311,25 @@ public partial class MainPage : ContentPage
 		{
 			int read_loop = int.Parse(saveData);
 			bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
-			if (answer == true)
+			if (answer != true)
+				return;
+
+			WhileLoading = true;
+			// "セーブデータをロード"を選択した場合のみ、この処理を実行
+			try
 			{
-				// "セーブデータをロード"を選択した場合のみ、この処理を実行
-				try
-				{
-					WhileLoading = true;
-					for (int i = 1; i < read_loop; i++)
-						FileRead();
-					// 成功表示
-					WhileLoading = false;
-					// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-					// await Toast.Make("ロードが成功しました。").Show();
-				}
-				catch
-				{
-					// 失敗表示
-					await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
-				}
+				for (int i = 1; i < read_loop; i++)
+					FileRead();
+				// 成功表示
+				// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+				// await Toast.Make("ロードが成功しました。").Show();
 			}
+			catch
+			{
+				// 失敗表示
+				await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+			}
+			WhileLoading = false;
 		}
 
 		// 初回ファイル読み込み処理
@@ -364,15 +367,15 @@ public partial class MainPage : ContentPage
 					if (match.Groups[1].Value.Trim() == "")
 						image.Source = null;
 					else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
+					{
+						using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
-							{
-								var memoryStream = new MemoryStream();
-								st.CopyTo(memoryStream);
-								memoryStream.Seek(0, SeekOrigin.Begin);
-								image.Source = ImageSource.FromStream(() => memoryStream);
-							}
+							var memoryStream = new MemoryStream();
+							st.CopyTo(memoryStream);
+							memoryStream.Seek(0, SeekOrigin.Begin);
+							image.Source = ImageSource.FromStream(() => memoryStream);
 						}
+					}
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
@@ -402,36 +405,35 @@ public partial class MainPage : ContentPage
 
 				// "movie: "から始まる"動画"を読み込み
 				match = Regex.Match(sr_read, @"movie: (.*)");
-				if (WhileLoading == false)
-					if (match.Success)
+				if (WhileLoading == false && match.Success)
+				{
+					// 指定されていない場合は動画を止める
+					movie.Stop();
+					movie.IsVisible = false;
+
+					try
 					{
-						// 指定されていない場合は動画を止める
-						movie.Stop();
-						movie.IsVisible = false;
+						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
+						string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
+						if (!Directory.Exists(movie_cache))
+							Directory.CreateDirectory(movie_cache);
 
-						try
-						{
-							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
-							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
-							string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
-							if (!Directory.Exists(movie_cache))
-								Directory.CreateDirectory(movie_cache);
+						string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
+						if (!File.Exists(temp_movie))
+							entry.ExtractToFile(temp_movie, true);
 
-							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
-							if (!File.Exists(temp_movie))
-								entry.ExtractToFile(temp_movie, true);
+						movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
+						movie.IsVisible = true;
+						movie.Play();
 
-							movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
-							movie.IsVisible = true;
-							movie.Play();
-
-							// UI非表示/セリフを進められなくする
-							UI_Hidden();
-							re.IsEnabled = false;
-							// 動画のスキップボタンを実装したら便利そう
-						}
-						catch{}
+						// UI非表示/セリフを進められなくする
+						UI_Hidden();
+						re.IsEnabled = false;
+						// 動画のスキップボタンを実装したら便利そう
 					}
+					catch{}
+				}
 
 				// "- "から始まる"人物"を読み込み
 				match = Regex.Match(sr_read, @"- (.*)");
@@ -500,6 +502,9 @@ public partial class MainPage : ContentPage
 			// 動画停止
 			movie.Stop();
 			movie.IsVisible = false;
+
+			// 手動メモリ解放
+			GC.Collect();
 
 			// UIを元に戻す
 			UI_ReDisplay();
