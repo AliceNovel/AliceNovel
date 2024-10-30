@@ -285,20 +285,23 @@ public partial class MainPage : ContentPage
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 		if (ent_saveread != null)
 		{
-			try
-			{
-				StreamReader srz = new(ent_saveread.Open());
-				LoadSaveOrNot(srz.ReadToEnd());
-				srz.Dispose();
+			StreamReader srz = null;
+            try
+            {
+                srz = new(ent_saveread.Open());
+                LoadSaveOrNot(srz.ReadToEnd());
 			}
-			catch { }
-		}
+			finally
+			{
+                srz?.Dispose();
+            }
+        }
 		// ローカルデータから読み込み
 		else
 		{
-			try
-			{
-				string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+            string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+            try
+            {
 				LoadSaveOrNot(localSaveData);
 			}
 			catch { }
