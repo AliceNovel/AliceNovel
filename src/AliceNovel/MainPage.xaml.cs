@@ -299,10 +299,10 @@ public partial class MainPage : ContentPage
 		// ローカルデータから読み込み
 		else
 		{
-			string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
 			try
 			{
-				LoadSaveOrNot(localSaveData);
+                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+                LoadSaveOrNot(localSaveData);
 			}
 			catch { }
 		}
