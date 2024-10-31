@@ -160,7 +160,7 @@
     <value>設定</value>
   </data>
   <data name="Alert (Save1)" xml:space="preserve">
-    <value>セーブが成功しました。</value>
+    <value>セーブ</value>
   </data>
   <data name="Alert (Confirm)" xml:space="preserve">
     <value>OK</value>
@@ -182,5 +182,26 @@
   </data>
   <data name="Alert (Load5)" xml:space="preserve">
     <value>ロードが失敗したため、最初から読み込みを行います。</value>
+  </data>
+  <data name="ToolbarItem1 (Reshow)" xml:space="preserve">
+    <value>UI 再表示</value>
+  </data>
+  <data name="ToolbarItem3 (Exit)" xml:space="preserve">
+    <value>終了</value>
+  </data>
+  <data name="ToolbarItem3 (Save or not)" xml:space="preserve">
+    <value>変更を保存しますか?</value>
+  </data>
+  <data name="ToolbarItem3 (Save and Exit)" xml:space="preserve">
+    <value>保存して終了</value>
+  </data>
+  <data name="ToolbarItem3 (only Exit)" xml:space="preserve">
+    <value>保存せずに終了</value>
+  </data>
+  <data name="ToolbarItem3" xml:space="preserve">
+    <value>ゲームを終了</value>
+  </data>
+  <data name="ToolbarItem3 (TIp)" xml:space="preserve">
+    <value>現在開いているゲームを閉じます</value>
   </data>
 </root>

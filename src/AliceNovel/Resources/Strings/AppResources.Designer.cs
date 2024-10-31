@@ -257,5 +257,68 @@ namespace AliceNovel.Resources.Strings {
                 return ResourceManager.GetString("TextBox (Default)", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Reshow に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem1__Reshow_ {
+            get {
+                return ResourceManager.GetString("ToolbarItem1 (Reshow)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Exit the Game に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem3 {
+            get {
+                return ResourceManager.GetString("ToolbarItem3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Exit に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem3__Exit_ {
+            get {
+                return ResourceManager.GetString("ToolbarItem3 (Exit)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   No save and Exit に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem3__only_Exit_ {
+            get {
+                return ResourceManager.GetString("ToolbarItem3 (only Exit)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Save and Exit に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem3__Save_and_Exit_ {
+            get {
+                return ResourceManager.GetString("ToolbarItem3 (Save and Exit)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Do you save the game? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem3__Save_or_not_ {
+            get {
+                return ResourceManager.GetString("ToolbarItem3 (Save or not)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Close currently game に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ToolbarItem3__Tip_ {
+            get {
+                return ResourceManager.GetString("ToolbarItem3 (Tip)", resourceCulture);
+            }
+        }
     }
 }

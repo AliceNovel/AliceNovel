@@ -23,8 +23,8 @@
                      Clicked="ToolbarItem_Clicked_2" />
         <ToolbarItem Order="Secondary"
                      x:Name="toolbarItem3"
-                     Text="ゲームを終了"
-                     ToolTipProperties.Text="現在開いているゲームを閉じます"
+                     Text="{x:Static strings:AppResources.ToolbarItem3}"
+                     ToolTipProperties.Text="{x:Static strings:AppResources.ToolbarItem3__Tip_}"
                      IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_3" />
     </ContentPage.ToolbarItems>

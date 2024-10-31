@@ -63,7 +63,7 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
 	{
-		bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
+		bool answer = await DisplayAlert(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
 		if (answer == true)
 			FileSave();
 		ExitGame();
@@ -123,7 +123,7 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために UI を隠します。
 	/// </summary>
 	void UI_Hidden(){
-		toolbarItem1.Text = "UI 再表示";
+		toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
 
 		// 初期のボタン有効/無効状態を確認
 		Initial_button1 = button1.IsVisible;
@@ -141,7 +141,7 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
 	/// </summary>
 	void UI_ReDisplay(){
-		toolbarItem1.Text = "UI 非表示";
+		toolbarItem1.Text = AppResources.Button2;
 		
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)

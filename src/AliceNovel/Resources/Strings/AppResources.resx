@@ -186,4 +186,25 @@
     <value>Load failed, load from the beginning.</value>
     <comment>Load failed message</comment>
   </data>
+  <data name="ToolbarItem1 (Reshow)" xml:space="preserve">
+    <value>Reshow</value>
+  </data>
+  <data name="ToolbarItem3 (Exit)" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="ToolbarItem3 (Save or not)" xml:space="preserve">
+    <value>Do you save the game?</value>
+  </data>
+  <data name="ToolbarItem3 (Save and Exit)" xml:space="preserve">
+    <value>Save and Exit</value>
+  </data>
+  <data name="ToolbarItem3 (only Exit)" xml:space="preserve">
+    <value>No save and Exit</value>
+  </data>
+  <data name="ToolbarItem3" xml:space="preserve">
+    <value>Exit the Game</value>
+  </data>
+  <data name="ToolbarItem3 (Tip)" xml:space="preserve">
+    <value>Close currently game</value>
+  </data>
 </root>
