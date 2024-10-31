@@ -34,13 +34,49 @@ public partial class MainPage : ContentPage
 	}
 
 	/// <summary>
+	/// Hide Interface
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+	{
+		if (ui_visible == true)
+			UI_Hidden();
+		else
+			UI_ReDisplay();
+	}
+
+	/// <summary>
+	/// Save the Game
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+	{
+		FileSave();
+	}
+
+	/// <summary>
+	/// Exit the Game
+	/// </summary>
+	/// <param name="sender"></param>
+	/// <param name="e"></param>
+	async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
+	{
+		bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
+		if (answer == true)
+			FileSave();
+		ExitGame();
+	}
+
+	/// <summary>
 	/// button1 をクリックしたときの処理です。
 	/// </summary>
 	/// <param name="sender"></param>
 	/// <param name="e"></param>
 	private void Button1_Clicked(object sender, EventArgs e)
 	{
-		FileSave();
+		
 	}
 
 	/// <summary>
@@ -49,12 +85,25 @@ public partial class MainPage : ContentPage
 	async void FileSave(){
 		if (zip != null)
 		{
+			// .anproj 内保存
 			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 			ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
 			using (StreamWriter sw = new(ent.Open()))
 			{
 				sw.WriteLine(read_times);
 			}
+
+			// ローカル保存
+			string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
+			// (保存先のディレクトリ作成)
+			if (!Directory.Exists(localSaveDirectory))
+				Directory.CreateDirectory(localSaveDirectory);
+			string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
+			using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+			{
+				saveStream.WriteLine(read_times);
+			}
+
 			// 成功表示
 			await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
 		}
@@ -67,13 +116,15 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	private void Button2_Clicked(object sender, EventArgs e)
 	{
-		UI_Hidden();
+		
 	}
 
 	/// <summary>
 	/// 画像をフル画面で閲覧するために UI を隠します。
 	/// </summary>
 	void UI_Hidden(){
+		toolbarItem1.Text = "UI 再表示";
+
 		// 初期のボタン有効/無効状態を確認
 		Initial_button1 = button1.IsVisible;
 		Initial_button2 = button2.IsVisible;
@@ -90,6 +141,8 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
 	/// </summary>
 	void UI_ReDisplay(){
+		toolbarItem1.Text = "UI 非表示";
+		
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
 		button1.IsVisible = Initial_button1;
@@ -215,42 +268,62 @@ public partial class MainPage : ContentPage
 		sr ??= new(entry.Open(), Encoding.UTF8);
 		textbox.Text = "";
 		talkname.Text = "";
-		button1.IsVisible = true;
-		button2.IsVisible = true;
 		button5.IsVisible = false;
-		
+		toolbarItem1.IsEnabled = true;
+		toolbarItem2.IsEnabled = true;
+		toolbarItem3.IsEnabled = true;
+
 		// セーブ読み込み
+		// 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
+		// .anproj 内のデータから読み込み
 		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
 		if (ent_saveread != null)
 		{
+			StreamReader srz = null;
 			try
 			{
-				StreamReader srz = new(ent_saveread.Open());
-				int read_loop = int.Parse(srz.ReadToEnd());
-
-				bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
-				if (answer == true)
-				{
-					// "セーブデータをロード"を選択した場合のみ、この処理を実行
-					try
-					{
-						WhileLoading = true;
-						for (int i = 1; i < read_loop; i++)
-							FileRead();
-						// 成功表示
-						WhileLoading = false;
-						// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-						// await Toast.Make("ロードが成功しました。").Show();
-					}
-					catch
-					{
-						// 失敗表示
-						await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
-					}
-				}
-				srz.Dispose();
+				srz = new(ent_saveread.Open());
+				LoadSaveOrNot(srz.ReadToEnd());
+			}
+			finally
+			{
+				srz?.Dispose();
+			}
+		}
+		// ローカルデータから読み込み
+		else
+		{
+			try
+			{
+                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+                LoadSaveOrNot(localSaveData);
 			}
 			catch { }
+		}
+
+		async void LoadSaveOrNot(string saveData)
+		{
+			int read_loop = int.Parse(saveData);
+			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load5_);
+			if (answer != true)
+				return;
+
+			WhileLoading = true;
+			// "セーブデータをロード"を選択した場合のみ、この処理を実行
+			try
+			{
+				for (int i = 1; i < read_loop; i++)
+					FileRead();
+				// 成功表示
+				// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+				// await Toast.Make("ロードが成功しました。").Show();
+			}
+			catch
+			{
+				// 失敗表示
+				await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+			}
+			WhileLoading = false;
 		}
 
 		// 初回ファイル読み込み処理
@@ -288,15 +361,15 @@ public partial class MainPage : ContentPage
 					if (match.Groups[1].Value.Trim() == "")
 						image.Source = null;
 					else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
+					{
+						using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
 						{
-							using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
-							{
-								var memoryStream = new MemoryStream();
-								st.CopyTo(memoryStream);
-								memoryStream.Seek(0, SeekOrigin.Begin);
-								image.Source = ImageSource.FromStream(() => memoryStream);
-							}
+							var memoryStream = new MemoryStream();
+							st.CopyTo(memoryStream);
+							memoryStream.Seek(0, SeekOrigin.Begin);
+							image.Source = ImageSource.FromStream(() => memoryStream);
 						}
+					}
 				}
 
 				// "bgm: "から始まる"音楽"を読み込み
@@ -326,36 +399,35 @@ public partial class MainPage : ContentPage
 
 				// "movie: "から始まる"動画"を読み込み
 				match = Regex.Match(sr_read, @"movie: (.*)");
-				if (WhileLoading == false)
-					if (match.Success)
+				if (WhileLoading == false && match.Success)
+				{
+					// 指定されていない場合は動画を止める
+					movie.Stop();
+					movie.IsVisible = false;
+
+					try
 					{
-						// 指定されていない場合は動画を止める
-						movie.Stop();
-						movie.IsVisible = false;
+						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
+						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
+						string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
+						if (!Directory.Exists(movie_cache))
+							Directory.CreateDirectory(movie_cache);
 
-						try
-						{
-							ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
-							// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
-							string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
-							if (!Directory.Exists(movie_cache))
-								Directory.CreateDirectory(movie_cache);
+						string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
+						if (!File.Exists(temp_movie))
+							entry.ExtractToFile(temp_movie, true);
 
-							string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
-							if (!File.Exists(temp_movie))
-								entry.ExtractToFile(temp_movie, true);
+						movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
+						movie.IsVisible = true;
+						movie.Play();
 
-							movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
-							movie.IsVisible = true;
-							movie.Play();
-
-							// UI非表示/セリフを進められなくする
-							UI_Hidden();
-							re.IsEnabled = false;
-							// 動画のスキップボタンを実装したら便利そう
-						}
-						catch{}
+						// UI非表示/セリフを進められなくする
+						UI_Hidden();
+						re.IsEnabled = false;
+						// 動画のスキップボタンを実装したら便利そう
 					}
+					catch{}
+				}
 
 				// "- "から始まる"人物"を読み込み
 				match = Regex.Match(sr_read, @"- (.*)");
@@ -378,25 +450,38 @@ public partial class MainPage : ContentPage
 			}
 		}
 		else
-		{
-			result = null;
-			sr?.Close();
-			sr = null;
-			zip?.Dispose();// zipファイルを閉じる
-			talkname.Text = "";
-			image.Source = null;
-			textbox.Text = AppResources.TextBox__Default_;
-			button1.IsVisible = false;
-			button2.IsVisible = false;
-			button5.IsVisible = true;
-			button5.Text = AppResources.Button5;
-			game_ui.Title = AppResources.MainPage_Title;
+			ExitGame();
+	}
 
-			// キャッシュフォルダを削除する
-			string path = FileSystem.Current.CacheDirectory;
-			if (Directory.Exists(path))
-				Directory.Delete(path, true);
-		}
+	/// <summary>
+	/// ゲーム終了時の処理
+	/// </summary>
+	private void ExitGame()
+	{
+		// 動画停止処理
+		movie.Stop();
+		movie.IsVisible = false;
+		UI_ReDisplay();
+		re.IsEnabled = true;
+
+		result = null;
+		sr?.Close();
+		sr = null;
+		zip?.Dispose();// zipファイルを閉じる
+		talkname.Text = "";
+		image.Source = null;
+		textbox.Text = AppResources.TextBox__Default_;
+		button5.IsVisible = true;
+		button5.Text = AppResources.Button5;
+		game_ui.Title = AppResources.MainPage_Title;
+		toolbarItem1.IsEnabled = false;
+		toolbarItem2.IsEnabled = false;
+		toolbarItem3.IsEnabled = false;
+
+		// キャッシュフォルダを削除する
+		string path = FileSystem.Current.CacheDirectory;
+		if (Directory.Exists(path))
+			Directory.Delete(path, true);
 	}
 
 	/// <summary>
@@ -411,6 +496,9 @@ public partial class MainPage : ContentPage
 			// 動画停止
 			movie.Stop();
 			movie.IsVisible = false;
+
+			// 手動メモリ解放
+			GC.Collect();
 
 			// UIを元に戻す
 			UI_ReDisplay();
