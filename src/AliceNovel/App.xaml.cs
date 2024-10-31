@@ -7,6 +7,13 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+
+            // Set Application Theme (from Local Data)
+            string UserAppTheme = Preferences.Default.Get("AppTheme", "Default");
+            if (UserAppTheme == "Light")
+                Application.Current.UserAppTheme = AppTheme.Light;
+            else if (UserAppTheme == "Dark")
+                Application.Current.UserAppTheme = AppTheme.Dark;
         }
 
         protected override Window CreateWindow(IActivationState activationState) {
