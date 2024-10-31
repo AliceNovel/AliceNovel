@@ -207,4 +207,13 @@
   <data name="ToolbarItem3 (Tip)" xml:space="preserve">
     <value>Close currently game</value>
   </data>
+  <data name="ColorTheme (Description)" xml:space="preserve">
+    <value>The color theme of application</value>
+  </data>
+  <data name="ColorTheme (Light)" xml:space="preserve">
+    <value>Light-mode</value>
+  </data>
+  <data name="ColorTheme (Dark)" xml:space="preserve">
+    <value>Dark-mode</value>
+  </data>
 </root>

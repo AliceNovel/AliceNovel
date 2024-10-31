@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:strings="clr-namespace:AliceNovel.Resources.Strings"
              x:Class="AliceNovel.SettingsPage">
 
     <ScrollView Margin="18,12,18,12">
         <StackLayout Padding="18,8">
-            <Label Text="アプリケーションのカラーテーマ" />
+            <Label Text="{x:Static strings:AppResources.ColorTheme__Description_}" />
             <RadioButton x:Name="switchThemeToLight"
-                         Content="ライトモード"
+                         Content="{x:Static strings:AppResources.ColorTheme__Light_}"
                          GroupName="switchTheme"
                          CheckedChanged="SwitchTheme" />
             <RadioButton x:Name="switchThemeToDark"
-                         Content="ダークモード"
+                         Content="{x:Static strings:AppResources.ColorTheme__Dark_}"
                          GroupName="switchTheme"
                          CheckedChanged="SwitchTheme" />
         </StackLayout>

@@ -214,6 +214,33 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Dark-mode に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorTheme__Dark_ {
+            get {
+                return ResourceManager.GetString("ColorTheme (Dark)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   The color theme of application に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorTheme__Description_ {
+            get {
+                return ResourceManager.GetString("ColorTheme (Description)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Light-mode に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ColorTheme__Light_ {
+            get {
+                return ResourceManager.GetString("ColorTheme (Light)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Let&apos;s Play the Game! に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string MainPage_Title {

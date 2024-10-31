@@ -201,7 +201,16 @@
   <data name="ToolbarItem3" xml:space="preserve">
     <value>ゲームを終了</value>
   </data>
-  <data name="ToolbarItem3 (TIp)" xml:space="preserve">
+  <data name="ToolbarItem3 (Tip)" xml:space="preserve">
     <value>現在開いているゲームを閉じます</value>
+  </data>
+  <data name="ColorTheme (Description)" xml:space="preserve">
+    <value>アプリケーションのカラーテーマ</value>
+  </data>
+  <data name="ColorTheme (Light)" xml:space="preserve">
+    <value>ライトモード</value>
+  </data>
+  <data name="ColorTheme (Dark)" xml:space="preserve">
+    <value>ダークモード</value>
   </data>
 </root>
