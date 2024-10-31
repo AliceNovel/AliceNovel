@@ -3,4 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AliceNovel.SettingsPage">
 
+    <ScrollView Margin="18,12,18,12">
+        <StackLayout Padding="18,8">
+            <Label Text="アプリケーションのカラーテーマ" />
+            <RadioButton x:Name="switchThemeToLight"
+                         Content="ライトモード"
+                         GroupName="switchTheme"
+                         CheckedChanged="SwitchTheme" />
+            <RadioButton x:Name="switchThemeToDark"
+                         Content="ダークモード"
+                         GroupName="switchTheme"
+                         CheckedChanged="SwitchTheme" />
+        </StackLayout>
+    </ScrollView>
+
 </ContentPage>
