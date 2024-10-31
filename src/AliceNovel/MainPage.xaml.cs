@@ -12,17 +12,10 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-
-        // 初期時の表示文字を保存
-        Initial_textbox_text = textbox.Text;
-		Initial_button5_text = button5.Text;
-		Initial_game_title = game_ui.Title;
 	}
 
 	// 初期状態のボタン有効/無効の確認用
 	bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
-	// 初期状態で表示されている文字
-	readonly string Initial_textbox_text, Initial_button5_text, Initial_game_title;
 
 	// UI表示/非表示
 	bool ui_visible = true;
@@ -392,12 +385,12 @@ public partial class MainPage : ContentPage
 			zip?.Dispose();// zipファイルを閉じる
 			talkname.Text = "";
 			image.Source = null;
-			textbox.Text = Initial_textbox_text;
+			textbox.Text = AppResources.TextBox__Default_;
 			button1.IsVisible = false;
 			button2.IsVisible = false;
 			button5.IsVisible = true;
-			button5.Text = Initial_button5_text;
-			game_ui.Title = Initial_game_title;
+			button5.Text = AppResources.Button5;
+			game_ui.Title = AppResources.MainPage_Title;
 
 			// キャッシュフォルダを削除する
 			string path = FileSystem.Current.CacheDirectory;
