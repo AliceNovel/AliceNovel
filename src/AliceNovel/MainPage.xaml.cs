@@ -304,7 +304,7 @@ public partial class MainPage : ContentPage
 		async void LoadSaveOrNot(string saveData)
 		{
 			int read_loop = int.Parse(saveData);
-			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load5_);
+			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
 			if (answer != true)
 				return;
 
