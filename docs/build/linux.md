@@ -25,13 +25,13 @@ More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunit
     ```bash
     dotnet workload install maui-android
     ```
-1. Install OpenJDK 11
+1. Install OpenJDK 17
     ```bash
     ubuntu_release=`lsb_release -rs`
 
     sudo apt-get install apt-transport-https
     sudo apt-get update
-    sudo apt-get install msopenjdk-11
+    sudo apt-get install msopenjdk-17
     ```
 1. Install Android Studio
 1. Install Visual Studio Code
