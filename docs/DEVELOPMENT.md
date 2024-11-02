@@ -15,6 +15,10 @@ This page contains steps to build and run the Alice Novel repository from source
 > [!note]
 > If there is `NETSDK1005` error, try the method below.
 > 
+> ```shell
+> dotnet restore src/AliceNovel.sln
+> ```
+> <!--
 > `AliceNovel.csproj`
 > ```diff xml
 > + <TargetFrameworks>net8.0-windows10.0.19041.0</TargetFrameworks>
@@ -22,6 +26,7 @@ This page contains steps to build and run the Alice Novel repository from source
 > - <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 > - <TargetFrameworks Condition="!$([MSBuild]::IsOSPlatform('linux'))">$(TargetFrameworks);net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
 > ```
+> -->
 
 ### Mac
 
