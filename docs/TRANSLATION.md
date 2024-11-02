@@ -17,6 +17,8 @@ This page contains steps to translate this app.
 (`**`: language-code or culture-code)
 1. Add language-code or culture-code for every Platform
 
+(You can find a list of culture codes [here](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/a9eac961-e77d-41a6-90a5-ce1a8b0cdb9c).)
+
 `AliceNovel/Platforms/iOS/Info.plist` and `AliceNovel/Platforms/MacCatalyst/Info.plist`
 ```diff xml
 <!-- Example -->
