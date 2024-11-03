@@ -1,3 +1,4 @@
+using AliceNovel.Resources.Strings;
 using System.Globalization;
 
 namespace AliceNovel;
@@ -9,10 +10,7 @@ public partial class SettingsPage : ContentPage
 		InitializeComponent();
 
         // Check Default AppLanguage
-        if (CultureInfo.CurrentUICulture.ToString() == "ja-JP")
-            languageSetting_jaJP.IsChecked = true;
-        else
-            languageSetting_enUS.IsChecked = true;
+        CheckAppLanguage();
 
         // Check Default AppTheme
         if (Application.Current.RequestedTheme == AppTheme.Light)
@@ -21,7 +19,7 @@ public partial class SettingsPage : ContentPage
             switchThemeToDark.IsChecked = true;
     }
 
-    private void SwitchLanguage(object sender, CheckedChangedEventArgs e)
+    private async void SwitchLanguage(object sender, CheckedChangedEventArgs e)
     {
         if (!e.Value)
             return;
@@ -34,6 +32,16 @@ public partial class SettingsPage : ContentPage
         else if (selectedRadioButton == languageSetting_jaJP)
             selectedLanguage = "ja-JP";
 
+        if (CultureInfo.CurrentUICulture.ToString() == selectedLanguage)
+            return;
+
+        bool answer = await DisplayAlert(AppResources.Alert__Confirm_, AppResources.Alert__RebootDescriptions_, AppResources.Alert__Reboot_, AppResources.Alert__Canncel_);
+        if (answer != true)
+        {
+            CheckAppLanguage();
+            return;
+        }
+
         CultureInfo culture = new(selectedLanguage, false);
         Thread.CurrentThread.CurrentCulture = culture;
         Thread.CurrentThread.CurrentUICulture = culture;
@@ -42,19 +50,22 @@ public partial class SettingsPage : ContentPage
 
         //// Save the state in local
         Preferences.Default.Set("AppLanguage", selectedLanguage);
-    }
 
-    /// <summary>
-    /// Restart the app
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void LanguageSetting_Reboot(object sender, EventArgs e)
-    {
         (Application.Current as App).MainPage.Dispatcher.Dispatch(() =>
         {
             (Application.Current as App).MainPage = new AppShell();
         });
+    }
+
+    /// <summary>
+    /// Set default Language for the Application
+    /// </summary>
+    void CheckAppLanguage()
+    {
+        if (CultureInfo.CurrentUICulture.ToString() == "ja-JP")
+            languageSetting_jaJP.IsChecked = true;
+        else
+            languageSetting_enUS.IsChecked = true;
     }
 
     private void SwitchTheme(object sender, CheckedChangedEventArgs e)

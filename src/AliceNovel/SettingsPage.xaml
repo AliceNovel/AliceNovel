@@ -7,7 +7,7 @@
     <ScrollView Margin="18,12,18,12">
         <StackLayout Padding="18,8">
             <!-- Language -->
-            <Label Text="Language Setting (Necessaly Reboot)" />
+            <Label Text="{x:Static strings:AppResources.LanguageSetting}" />
             <RadioButton x:Name="languageSetting_enUS"
                          Content="English (en-US)"
                          GroupName="languageSetting"
@@ -16,8 +16,6 @@
                          Content="日本語 (ja-JP)"
                          GroupName="languageSetting"
                          CheckedChanged="SwitchLanguage" />
-            <Button Text="Reboot (Apply)"
-                    Clicked="LanguageSetting_Reboot"/>
 
             <!-- Theme Color -->
             <Label Text="{x:Static strings:AppResources.ColorTheme__Description_}" />

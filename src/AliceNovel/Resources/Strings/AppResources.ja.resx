@@ -213,4 +213,17 @@
   <data name="ColorTheme (Dark)" xml:space="preserve">
     <value>ダークモード</value>
   </data>
+  <data name="Alert (RebootDescriptions)" xml:space="preserve">
+    <value>アプリケーションを再起動しますか?
+(ゲームが動いている場合はリセットされるため、先にセーブをしてください)</value>
+  </data>
+  <data name="Alert (Reboot)" xml:space="preserve">
+    <value>再起動</value>
+  </data>
+  <data name="Alert (Canncel)" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>言語設定 (再起動が必要)</value>
+  </data>
 </root>

@@ -61,6 +61,15 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Cancel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Canncel_ {
+            get {
+                return ResourceManager.GetString("Alert (Canncel)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Confirm に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Alert__Confirm_ {
@@ -111,6 +120,25 @@ namespace AliceNovel.Resources.Strings {
         internal static string Alert__Load5_ {
             get {
                 return ResourceManager.GetString("Alert (Load5)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Reboot に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Reboot_ {
+            get {
+                return ResourceManager.GetString("Alert (Reboot)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Do you want to reboot the application?
+        ///(If the game runs, you have to save it before reboot.) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__RebootDescriptions_ {
+            get {
+                return ResourceManager.GetString("Alert (RebootDescriptions)", resourceCulture);
             }
         }
         
@@ -237,6 +265,15 @@ namespace AliceNovel.Resources.Strings {
         internal static string ColorTheme__Light_ {
             get {
                 return ResourceManager.GetString("ColorTheme (Light)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Language Setting (Necessary to Reboot) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string LanguageSetting {
+            get {
+                return ResourceManager.GetString("LanguageSetting", resourceCulture);
             }
         }
         

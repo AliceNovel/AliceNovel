@@ -216,4 +216,17 @@
   <data name="ColorTheme (Dark)" xml:space="preserve">
     <value>Dark-mode</value>
   </data>
+  <data name="Alert (RebootDescriptions)" xml:space="preserve">
+    <value>Do you want to reboot the application?
+(If the game runs, you have to save it before reboot.)</value>
+  </data>
+  <data name="Alert (Reboot)" xml:space="preserve">
+    <value>Reboot</value>
+  </data>
+  <data name="Alert (Canncel)" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="LanguageSetting" xml:space="preserve">
+    <value>Language Setting (Necessary to Reboot)</value>
+  </data>
 </root>
