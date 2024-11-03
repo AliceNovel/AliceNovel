@@ -4,18 +4,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:AliceNovel"
+    xmlns:strings="clr-namespace:AliceNovel.Resources.Strings"
     Shell.FlyoutBehavior="Disabled">
 
     <TabBar>
-        <Tab Title="ゲーム">
+        <Tab Title="{x:Static strings:AppResources.Tab1}">
             <ShellContent
-                Title="Alice Novel"
+                Title="{x:Static strings:AppResources.MainPage_Title}"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
         </Tab>
-        <Tab Title="設定">
+        <Tab Title="{x:Static strings:AppResources.Tab2}">
             <ShellContent
-                Title="設定"
+                Title="{x:Static strings:AppResources.SettingsPage_Title}"
                 ContentTemplate="{DataTemplate local:SettingsPage}"
                 Route="SettingsPage" />
         </Tab>

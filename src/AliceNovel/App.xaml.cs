@@ -6,14 +6,19 @@
         {
             InitializeComponent();
 
+            // Set Application language (from Local Data)
+            string userAppLanguage = Preferences.Default.Get("AppLanguage", "Default");
+            if (userAppLanguage != "Default")
+                System.Globalization.CultureInfo.CurrentUICulture = new(userAppLanguage);
+
             MainPage = new AppShell();
 
             // Set Application Theme (from Local Data)
-            string UserAppTheme = Preferences.Default.Get("AppTheme", "Default");
-            if (UserAppTheme == "Light")
-                Application.Current.UserAppTheme = AppTheme.Light;
-            else if (UserAppTheme == "Dark")
-                Application.Current.UserAppTheme = AppTheme.Dark;
+            string userAppTheme = Preferences.Default.Get("AppTheme", "Default");
+            if (userAppTheme == "Light")
+                Current.UserAppTheme = AppTheme.Light;
+            else if (userAppTheme == "Dark")
+                Current.UserAppTheme = AppTheme.Dark;
         }
 
         protected override Window CreateWindow(IActivationState activationState) {

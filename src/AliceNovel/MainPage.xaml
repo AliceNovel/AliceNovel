@@ -3,27 +3,28 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
 			 xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:strings="clr-namespace:AliceNovel.Resources.Strings"
 			 x:Class="AliceNovel.MainPage"
 			 x:Name="game_ui"
-			 Title="ゲームをプレイする!">
+			 Title="{x:Static strings:AppResources.MainPage_Title}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Order="Secondary"
                      x:Name="toolbarItem1"
-                     Text="UI 非表示"
-                     ToolTipProperties.Text="画面タップで再表示できます"
+                     Text="{x:Static strings:AppResources.Button2}"
+                     ToolTipProperties.Text="{x:Static strings:AppResources.Button2__Tip_}"
                      IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_1" />
         <ToolbarItem Order="Secondary"
                      x:Name="toolbarItem2"
-                     Text="セーブ"
-                     ToolTipProperties.Text="上書き保存します"
+                     Text="{x:Static strings:AppResources.Button1}"
+                     ToolTipProperties.Text="{x:Static strings:AppResources.Button1__Tip_}"
                      IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_2" />
         <ToolbarItem Order="Secondary"
                      x:Name="toolbarItem3"
-                     Text="ゲームを終了"
-                     ToolTipProperties.Text="現在開いているゲームを閉じます"
+                     Text="{x:Static strings:AppResources.ToolbarItem3}"
+                     ToolTipProperties.Text="{x:Static strings:AppResources.ToolbarItem3__Tip_}"
                      IsEnabled="False"
                      Clicked="ToolbarItem_Clicked_3" />
     </ContentPage.ToolbarItems>
@@ -163,8 +164,8 @@
 				<!-- 規定では(ファイルのロード後は)非表示 -->
 				<Button x:Name="button5"
 						Clicked="Button5_Clicked"
-						Text="ロード"
-						ToolTipProperties.Text="ゲームファイルを読み込みます"
+						Text="{x:Static strings:AppResources.Button5}"
+						ToolTipProperties.Text="{x:Static strings:AppResources.Button5__Tip_}"
 						Margin="0,0,0,0"
 						TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
 						BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
@@ -218,7 +219,7 @@
 				   Padding="0,4"
 				   FontSize="22"
 				   InputTransparent="True"
-				   Text="Alice Novelゲームを読み込んでください。" />
+				   Text="{x:Static strings:AppResources.TextBox__Default_}" />
 
 		</ScrollView>
 

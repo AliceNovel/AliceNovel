@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
+using AliceNovel.Resources.Strings;
 // using CommunityToolkit.Maui.Alerts;
 
 namespace AliceNovel;
@@ -11,17 +12,10 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-
-		// 初期時の表示文字を保存
-		Initial_textbox_text = textbox.Text;
-		Initial_button5_text = button5.Text;
-		Initial_game_title = game_ui.Title;
 	}
 
 	// 初期状態のボタン有効/無効の確認用
 	bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
-	// 初期状態で表示されている文字
-	readonly string Initial_textbox_text, Initial_button5_text, Initial_game_title;
 
 	// UI表示/非表示
 	bool ui_visible = true;
@@ -69,7 +63,7 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
 	{
-		bool answer = await DisplayAlert("終了", "変更を保存しますか?", "保存して終了", "保存せずに終了");
+		bool answer = await DisplayAlert(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
 		if (answer == true)
 			FileSave();
 		ExitGame();
@@ -111,7 +105,7 @@ public partial class MainPage : ContentPage
 			}
 
 			// 成功表示
-			await DisplayAlert("セーブ", "セーブが成功しました。", "OK");
+			await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
 		}
 	}
 
@@ -129,7 +123,7 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために UI を隠します。
 	/// </summary>
 	void UI_Hidden(){
-		toolbarItem1.Text = "UI 再表示";
+		toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
 
 		// 初期のボタン有効/無効状態を確認
 		Initial_button1 = button1.IsVisible;
@@ -147,7 +141,7 @@ public partial class MainPage : ContentPage
 	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
 	/// </summary>
 	void UI_ReDisplay(){
-		toolbarItem1.Text = "UI 非表示";
+		toolbarItem1.Text = AppResources.Button2;
 		
 		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
 		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
@@ -217,7 +211,7 @@ public partial class MainPage : ContentPage
 
 		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
-				PickerTitle = "Alice Novelゲームを読み込んでください。", 
+				PickerTitle = AppResources.TextBox__Default_,
 				FileTypes = anprojFileType,
 				});
 
@@ -264,7 +258,7 @@ public partial class MainPage : ContentPage
 			entry = zip.GetEntry(anproj_setting["first-read"]);
 		else
 		{
-			await DisplayAlert("警告", "ファイルが古い形式で、対応していません。", "OK");
+			await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
 			return;
 		}
 
@@ -310,7 +304,7 @@ public partial class MainPage : ContentPage
 		async void LoadSaveOrNot(string saveData)
 		{
 			int read_loop = int.Parse(saveData);
-			bool answer = await DisplayAlert("セーブデータが見つかりました。", "セーブデータをロードしますか?", "ロードする", "はじめから");
+			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
 			if (answer != true)
 				return;
 
@@ -327,7 +321,7 @@ public partial class MainPage : ContentPage
 			catch
 			{
 				// 失敗表示
-				await DisplayAlert("警告", "ロードが失敗したため、最初から読み込みを行います。", "OK");
+				await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
 			}
 			WhileLoading = false;
 		}
@@ -476,10 +470,10 @@ public partial class MainPage : ContentPage
 		zip?.Dispose();// zipファイルを閉じる
 		talkname.Text = "";
 		image.Source = null;
-		textbox.Text = Initial_textbox_text;
+		textbox.Text = AppResources.TextBox__Default_;
 		button5.IsVisible = true;
-		button5.Text = Initial_button5_text;
-		game_ui.Title = Initial_game_title;
+		button5.Text = AppResources.Button5;
+		game_ui.Title = AppResources.MainPage_Title;
 		toolbarItem1.IsEnabled = false;
 		toolbarItem2.IsEnabled = false;
 		toolbarItem3.IsEnabled = false;
