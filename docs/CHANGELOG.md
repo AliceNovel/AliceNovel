@@ -6,24 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## v1.1.0 GA (Unreleased)
+
 **Release Date**: TBD
 
 **Plan**
 - Add the plugin system of C#. ([#16](https://github.com/AliceNovel/AliceNovel/issues/16))
 
 ## v1.0.0 GA (Unreleased)
+
 **Release Date**: TBD
 
 **Plan**
 - Add the story branch function. ([#6](https://github.com/AliceNovel/AliceNovel/issues/6))
 
-## [Next](https://github.com/AliceNovel/AliceNovel/compare/v0.9.3...HEAD) (Unreleased)
+## [Next] (Unreleased)
 
 **Release Date**: TBD
 
-## [v0.9.3](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.3)
-**Release Date**: 2024/11/3
+## [v0.9.3]
 
+**Release Date**: 2024/11/3
 
 **Changed**
 - License of this app from GPL v3 to MIT license. ([#70](https://github.com/AliceNovel/AliceNovel/issues/70))
@@ -51,7 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - \[Windows\] Error when saving the game data. ([#47](https://github.com/AliceNovel/AliceNovel/issues/47))
   - \[Android\] Loading the save data is not working. ([#61](https://github.com/AliceNovel/AliceNovel/issues/61))
 
-## [v0.9.2](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.2)
+## [v0.9.2]
+
 **Release Date**: 2024/5/6
 
 **Changed**
@@ -78,7 +81,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - \[Android\] Can't move file loading. ([#49](https://github.com/AliceNovel/AliceNovel/issues/49))
 - Old version file is not working. ([#62](https://github.com/AliceNovel/AliceNovel/issues/62))
 
-## [v0.9.1](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.1)
+## [v0.9.1]
+
 **Release Date**: 2024/4/6
 
 **Changed**
@@ -87,7 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Added**
 - Shortcut key for save and button. ([#19](https://github.com/AliceNovel/AliceNovel/issues/19))
 
-## [v0.9.0 GA](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0)
+## [v0.9.0 GA]
+
 **Release Date**: 2024/4/2
 
 **Changed**
@@ -101,7 +106,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Fixed**
 - Main color theme for Android. ([#38](https://github.com/AliceNovel/AliceNovel/issues/38))
 
-## [v0.9.0-rtm](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rtm)
+## [v0.9.0-rtm]
+
 **Release Date**: 2024/1/8
 
 **Changed**
@@ -113,7 +119,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Disabled UI. ([#13](https://github.com/AliceNovel/AliceNovel/issues/13))
 - Play the other movie. ([#22](https://github.com/AliceNovel/AliceNovel/issues/22))
 
-## [v0.9.0-rc3](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rc3)
+## [v0.9.0-rc3]
+
 **Release Date**: 2023/10/27
 
 **Added**
@@ -123,13 +130,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Fixed**
 - Can't open another .anproj file. ([#1](https://github.com/AliceNovel/AliceNovel/issues/1))
 
-## [v0.9.0-rc2](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rc2)
+## [v0.9.0-rc2]
+
 **Release Date**: 2023/10/14
 
 **Added**
 - The function to read and play sound files.
 
-## [v0.9.0-rc1](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rc1)
+## [v0.9.0-rc1]
+
 **Release Date**: 2023/10/8
 
 **Added**
@@ -139,13 +148,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Removed**
 - The function to read `.anov` file.
 
-## [v0.9.0-beta](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-beta)
+## [v0.9.0-beta]
+
 **Release Date**: 2023/9/3
 
 **Changed**
 - When reading `.anov` file, previously per line. But this version support reading multi lines.
 
-## [v0.9.0-alpha](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-alpha)
+## [v0.9.0-alpha]
+
 **Release Date**: 2023/8/25
 
 **Added**
@@ -156,8 +167,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `/ `: read emotion information (preview / no function)
   - `[` and `]`: read speech information
 
-## [v0.8.0-alpha](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.8.0-alpha)
+## [v0.8.0-alpha]
+
 **Release Date**: 2023/5/3
 
 **Added**
 - Only User Interface.
+
+<!-- Links -->
+[Next]: https://github.com/AliceNovel/AliceNovel/compare/v0.9.3...HEAD
+[v0.9.3]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.3
+[v0.9.2]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.2
+[v0.9.1]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.1
+[v0.9.0 GA]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0
+[v0.9.0-rtm]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rtm
+[v0.9.0-rc3]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rc3
+[v0.9.0-rc2]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rc2
+[v0.9.0-rc1]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-rc1
+[v0.9.0-beta]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-beta
+[v0.9.0-alpha]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.0-alpha
+[v0.8.0-alpha]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.8.0-alpha
