@@ -42,17 +42,17 @@ public partial class SettingsPage : ContentPage
             return;
         }
 
-        CultureInfo culture = new(selectedLanguage, false);
-        Thread.CurrentThread.CurrentCulture = culture;
-        Thread.CurrentThread.CurrentUICulture = culture;
-        CultureInfo.DefaultThreadCurrentCulture = culture;
-        CultureInfo.DefaultThreadCurrentUICulture = culture;
-
-        //// Save the state in local
+        // Save the state in local
         Preferences.Default.Set("AppLanguage", selectedLanguage);
 
         (Application.Current as App).MainPage.Dispatcher.Dispatch(() =>
         {
+            CultureInfo culture = new(selectedLanguage, false);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
             (Application.Current as App).MainPage = new AppShell();
         });
     }

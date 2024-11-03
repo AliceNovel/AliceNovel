@@ -6,8 +6,10 @@
         {
             InitializeComponent();
 
-            // For debug of multi-languages support
-            // System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+            // Set Application language (from Local Data)
+            string UserAppLanguage = Preferences.Default.Get("AppLanguage", "Default");
+            if (UserAppLanguage != "Default")
+                System.Globalization.CultureInfo.CurrentUICulture = new(UserAppLanguage);
 
             MainPage = new AppShell();
 
