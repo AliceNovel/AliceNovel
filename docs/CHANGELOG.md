@@ -1,22 +1,55 @@
 # Changelog of Alice Novel
 
-## v1.1.0 GA
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## v1.1.0 GA (Unreleased)
 **Release Date**: TBD
 
 **Plan**
 - Add the plugin system of C#. ([#16](https://github.com/AliceNovel/AliceNovel/issues/16))
 
-## v1.0.0 GA
+## v1.0.0 GA (Unreleased)
 **Release Date**: TBD
 
 **Plan**
 - Add the story branch function. ([#6](https://github.com/AliceNovel/AliceNovel/issues/6))
 
-## v0.9.3
+## [Next](https://github.com/AliceNovel/AliceNovel/compare/v0.9.3...HEAD) (Unreleased)
+
 **Release Date**: TBD
 
+## [v0.9.3](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.3)
+**Release Date**: 2024/11/3
+
+
 **Changed**
-- GPL v3 to MIT license. ([#70](https://github.com/AliceNovel/AliceNovel/issues/70))
+- License of this app from GPL v3 to MIT license. ([#70](https://github.com/AliceNovel/AliceNovel/issues/70))
+- Disable the buttons for save and hide UI until read `.anproj` file on default. ([#69](https://github.com/AliceNovel/AliceNovel/issues/69))
+- Bump dependencies. ([#85](https://github.com/AliceNovel/AliceNovel/issues/85), [#87](https://github.com/AliceNovel/AliceNovel/issues/87))
+  - Microsoft.Maui.Controls from 8.0.21 to 8.0.92
+  - Microsoft.Maui.Controls.Compatibility from 8.0.21 to 8.0.92
+  - CommunityToolkit.Maui from 9.0.0 to 9.1.0
+  - CommunityToolkit.Maui.MediaElement from 3.1.1 to 4.1.2
+  - Microsoft.Extensions.Logging.Debug from 8.0.0 to 8.0.1
+- Directory structures. ([#76](https://github.com/AliceNovel/AliceNovel/issues/76))
+- Refactor codes. ([#89](https://github.com/AliceNovel/AliceNovel/issues/89))
+- Improve performance of memory processing. ([#94](https://github.com/AliceNovel/AliceNovel/issues/94))
+
+**Added**
+- New development guide. ([#83](https://github.com/AliceNovel/AliceNovel/issues/83))
+- Azure Devops CI/CD to build for Android. ([#75](https://github.com/AliceNovel/AliceNovel/issues/75))
+- New button to exit the currently game. ([#68](https://github.com/AliceNovel/AliceNovel/issues/68))
+- Settings
+  - Application Theme. ([#12](https://github.com/AliceNovel/AliceNovel/issues/12))
+  - User Language. ([#10](https://github.com/AliceNovel/AliceNovel/issues/10))
+
+**Fixed**
+- Save function ([#67](https://github.com/AliceNovel/AliceNovel/issues/67))
+  - \[Windows\] Error when saving the game data. ([#47](https://github.com/AliceNovel/AliceNovel/issues/47))
+  - \[Android\] Loading the save data is not working. ([#61](https://github.com/AliceNovel/AliceNovel/issues/61))
 
 ## [v0.9.2](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.2)
 **Release Date**: 2024/5/6
@@ -27,13 +60,13 @@
   - Icon design. ([#50](https://github.com/AliceNovel/AliceNovel/issues/50))
   - Theme colors. ([#55](https://github.com/AliceNovel/AliceNovel/issues/55))
 - Update dependencies. ([#51](https://github.com/AliceNovel/AliceNovel/issues/51))
-  - Nuget
+  - Nuget packages
     - Microsoft.Maui.Controls
     - Microsoft.Maui.Controls.Compatibility
-    - CommunityToolkit.Maui
-    - CommunityToolkit.Maui.MediaElement
+    - CommunityToolkit.Maui from 7.0.1 to 9.0.0
+    - CommunityToolkit.Maui.MediaElement from 3.0.1 to 3.1.1
   - GitHub Actions
-    - actions/upload-artifacts
+    - actions/upload-artifacts from v3 to v4
 - Improve regular expression ([#63](https://github.com/AliceNovel/AliceNovel/issues/63))
 
 **Added**
@@ -41,8 +74,8 @@
 
 **Fixed**
 - Azure CI/CD. ([#57](https://github.com/AliceNovel/AliceNovel/issues/57))
-- Dependabot. ([#59](https://github.com/AliceNovel/AliceNovel/issues/59))
-- [Android] Can't move file loading. ([#49](https://github.com/AliceNovel/AliceNovel/issues/49))
+- ~~Dependabot. ([#59](https://github.com/AliceNovel/AliceNovel/issues/59))~~
+- \[Android\] Can't move file loading. ([#49](https://github.com/AliceNovel/AliceNovel/issues/49))
 - Old version file is not working. ([#62](https://github.com/AliceNovel/AliceNovel/issues/62))
 
 ## [v0.9.1](https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.1)
