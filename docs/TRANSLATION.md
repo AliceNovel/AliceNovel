@@ -8,6 +8,9 @@ This page contains steps to translate this app.
 
 #### Translate existing languages
 
+- English (en-US) - Default
+- 日本語 (ja-JP)
+
 1. Open `AliceNovel/Resources/Strings/AppResources.resx`
 1. You can translate the app!
 
@@ -28,9 +31,9 @@ This page contains steps to translate this app.
     <string>es</string>
     <string>fr</string>
     <string>ja</string>
-+   <string>pt</string> <!-- Brazil -->
+    <string>pt</string> <!-- Brazil -->
     <string>pt-PT</string> <!-- Portugal -->
-+   <string>ru</string>
+    <string>ru</string>
     <string>zh-Hans</string>
     <string>zh-Hant</string>
 </array>
@@ -47,12 +50,57 @@ This page contains steps to translate this app.
     <Resource Language="es-ES"/>
     <Resource Language="fr-FR"/>
     <Resource Language="ja-JP"/>
-+   <Resource Language="pt-BR"/>
+    <Resource Language="pt-BR"/>
     <Resource Language="pt-PT"/>
-+   <Resource Language="ru-RU"/>
+    <Resource Language="ru-RU"/>
     <Resource Language="zh-CN"/>
     <Resource Language="zh-TW"/>
 </Resources>
 ```
 
 (Android has no settings for translation)
+
+3. Add culture-code into sources.
+
+`AliceNovel/SettingsPage.xaml`
+```diff xml
+    <!-- Language -->
+    <Label Text="{x:Static strings:AppResources.LanguageSetting}" />
+    <RadioButton x:Name="languageSetting_enUS"
+                 Content="English (en-US)"
+                 GroupName="languageSetting"
+                 CheckedChanged="SwitchLanguage" />
+    <RadioButton x:Name="languageSetting_jaJP"
+                 Content="日本語 (ja-JP)"
+                 GroupName="languageSetting"
+                 CheckedChanged="SwitchLanguage" />
++   <RadioButton x:Name="languageSetting_deDE"
++                Content="Deutsch (de-DE)"
++                GroupName="languageSetting"
++                CheckedChanged="SwitchLanguage" />
+```
+
+`AliceNovel/SettingsPage.xaml.cs`
+```diff cs
+    var selectedRadioButton = (RadioButton)sender;
+    string selectedLanguage = "en-US";
+
+    if (selectedRadioButton == languageSetting_enUS)
+        selectedLanguage = "en-US";
+    else if (selectedRadioButton == languageSetting_jaJP)
+        selectedLanguage = "ja-JP";
++   else if (selectedRadioButton == languageSetting_deDE)
++       selectedLanguage = "de-DE";
+
+...
+
+    void CheckAppLanguage()
+    {
+        if (CultureInfo.CurrentUICulture.ToString() == "ja-JP")
+            languageSetting_jaJP.IsChecked = true;
++       else if (CultureInfo.CurrentUICulture.ToString() == "de-DE")
++           languageSetting_deDE.IsChecked = true;
+        else
+            languageSetting_enUS.IsChecked = true;
+    }
+```
