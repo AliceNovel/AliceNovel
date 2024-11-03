@@ -6,6 +6,9 @@
         {
             InitializeComponent();
 
+            // For debug of multi-languages support
+            // System.Globalization.CultureInfo.CurrentUICulture = new System.Globalization.CultureInfo("en-US");
+
             MainPage = new AppShell();
 
             // Set Application Theme (from Local Data)
