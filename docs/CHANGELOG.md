@@ -30,12 +30,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 **Changed**
 - License of this app from GPL v3 to MIT license. ([#70](https://github.com/AliceNovel/AliceNovel/issues/70))
 - Disable the buttons for save and hide UI until read `.anproj` file on default. ([#69](https://github.com/AliceNovel/AliceNovel/issues/69))
-- Bump dependencies. ([#85](https://github.com/AliceNovel/AliceNovel/issues/85), [#87](https://github.com/AliceNovel/AliceNovel/issues/87))
+- Bump dependencies. ([#73](https://github.com/AliceNovel/AliceNovel/issues/73), [#74](https://github.com/AliceNovel/AliceNovel/issues/74), [#78](https://github.com/AliceNovel/AliceNovel/issues/78), [#85](https://github.com/AliceNovel/AliceNovel/issues/85), [#87](https://github.com/AliceNovel/AliceNovel/issues/87))
   - Microsoft.Maui.Controls from 8.0.21 to 8.0.92
   - Microsoft.Maui.Controls.Compatibility from 8.0.21 to 8.0.92
   - CommunityToolkit.Maui from 9.0.0 to 9.1.0
   - CommunityToolkit.Maui.MediaElement from 3.1.1 to 4.1.2
   - Microsoft.Extensions.Logging.Debug from 8.0.0 to 8.0.1
+- Bump GitHub Actions package. ([#46](https://github.com/AliceNovel/AliceNovel/issues/46))
+  - actions/upload-artifact from v3 to v4
 - Directory structures. ([#76](https://github.com/AliceNovel/AliceNovel/issues/76))
 - Refactor codes. ([#89](https://github.com/AliceNovel/AliceNovel/issues/89))
 - Improve performance of memory processing. ([#94](https://github.com/AliceNovel/AliceNovel/issues/94))
