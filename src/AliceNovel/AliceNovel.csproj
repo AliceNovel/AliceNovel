@@ -15,7 +15,6 @@
 		<RuntimeIdentifiers Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers>
 
 		<OutputType>Exe</OutputType>
-		<WindowsPackageType>None</WindowsPackageType>
 		<RootNamespace>AliceNovel</RootNamespace>
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
@@ -26,14 +25,17 @@
 		<ApplicationTitle>Alice Novel</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>dev.ivycafe.alicenovel</ApplicationId>
-		<ApplicationIdGuid>c7487b8b-8208-4bf1-839a-29942516ccae</ApplicationIdGuid>
+		<ApplicationId>net.lemonium.alicenovel</ApplicationId>
+		<!-- <ApplicationIdGuid>c7487b8b-8208-4bf1-839a-29942516ccae</ApplicationIdGuid> -->
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>0.9.4</ApplicationDisplayVersion>
 		<ApplicationVersion>1</ApplicationVersion>
 
-		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
+		<!-- To develop, package, and publish an app to the Microsoft Store, see: https://aka.ms/MauiTemplateUnpackaged -->
+		<WindowsPackageType>None</WindowsPackageType>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">15.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
