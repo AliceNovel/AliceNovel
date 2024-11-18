@@ -18,7 +18,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-latest') || 'windows-latest' }}
+    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-13') || 'windows-latest' }}
     strategy:
       matrix:
         tfm: [net9.0-android, net9.0-ios, net9.0-maccatalyst, net9.0-windows10.0.19041.0]
@@ -31,12 +31,6 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
-
-      - if: matrix.tfm == 'net9.0-maccatalyst'
-        name: Install Xcode 16
-        run: |
-          brew install --cask xcode
-          sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
 
       - name: Install MAUI Workloads
         run: |
