@@ -33,8 +33,10 @@ jobs:
           dotnet-version: 9.0.x
 
       - if: matrix.tfm == 'net9.0-maccatalyst'
-        name: Select Xcode version
-        run: sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
+        name: Install Xcode 16
+        run: |
+          brew install --cask xcode
+          sudo xcode-select -s /Applications/Xcode_16.0.app/Contents/Developer
 
       - name: Install MAUI Workloads
         run: |
