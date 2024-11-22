@@ -11,4 +11,4 @@
 
 ## 脆弱性の報告
 
-**セキュリティー脆弱性は公開されている GitHub issues を通して報告しないでください。**その代わりとして、Fediverse 経由で [@lemon73@misskey.io](https://misskey.io/@lemon73) にその内容を報告してください。
+**セキュリティー脆弱性は公開されている GitHub issues を通して報告しないでください。**その代わりに、[GitHub セキュリティーフォーム](https://github.com/alicenovel/alicenovel/security/advisories/new)にてその内容を報告してください。
