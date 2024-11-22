@@ -45,7 +45,7 @@ public partial class SettingsPage : ContentPage
         // Save the state in local
         Preferences.Default.Set("AppLanguage", selectedLanguage);
 
-        (Application.Current as App).MainPage.Dispatcher.Dispatch(() =>
+        Application.Current.Windows[0].Page.Dispatcher.Dispatch(() =>
         {
             CultureInfo culture = new(selectedLanguage, false);
             Thread.CurrentThread.CurrentCulture = culture;
@@ -53,7 +53,7 @@ public partial class SettingsPage : ContentPage
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-            (Application.Current as App).MainPage = new AppShell();
+            Application.Current.Windows[0].Page = new AppShell();
         });
     }
 
