@@ -50,6 +50,7 @@
   - [Windows](./docs/DEVELOPMENT.md#windows)
   - [macOS](./docs/DEVELOPMENT.md#mac)
   - [Linux](./docs/build/linux.md)
+- [Translation Guide](./docs/TRANSLATION.md)
 
 ## License
 Licensed under the [MIT license](../LICENSE.txt).

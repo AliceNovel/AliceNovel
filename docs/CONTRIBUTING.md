@@ -8,13 +8,13 @@ Thanks for your contribution in Alice Novel!!
 This application has been created using [.NET MAUI].
 
 The languages used are: 
-- [C#] ([.NET 8])
+- [C#] ([.NET 9])
 - [XAML]
 
 [.NET MAUI]: https://dot.net/maui ".NET MAUI"
-[C#]: https://learn.microsoft.com/en-us/dotnet/csharp/ "C# Documentation"
-[.NET 8]: https://dot.net ".NET"
-[XAML]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAML Documentation"
+[C#]: https://learn.microsoft.com/dotnet/csharp/ "C# Documentation"
+[.NET 9]: https://dot.net ".NET"
+[XAML]: https://learn.microsoft.com/dotnet/maui/xaml/ ".NET MAUI XAML Documentation"
 
 ## Issues
 You can use either English or Japanese.

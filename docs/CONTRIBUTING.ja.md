@@ -5,13 +5,13 @@ Alice Novel の貢献に感謝します!!
 このアプリケーションは [.NET MAUI] をベースとして作成しています。
 
 使用する言語は以下の通りです。
-- [C#] ([.NET 8])
+- [C#] ([.NET 9])
 - [XAML]
 
 [.NET MAUI]: https://dot.net/maui ".NET MAUI"
-[C#]: https://learn.microsoft.com/en-us/dotnet/csharp/ "C# 資料"
-[.NET 8]: https://dot.net ".NET"
-[XAML]: https://learn.microsoft.com/en-us/dotnet/maui/xaml/ ".NET MAUI XAML 資料"
+[C#]: https://learn.microsoft.com/dotnet/csharp/ "C# 資料"
+[.NET 9]: https://dot.net ".NET"
+[XAML]: https://learn.microsoft.com/dotnet/maui/xaml/ ".NET MAUI XAML 資料"
 
 ## Issues
 日本語を利用しても、英語を利用しても構いません。
