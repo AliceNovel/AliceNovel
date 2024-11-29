@@ -287,6 +287,15 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Restore default settings (Necessary to Reboot) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Settings__Restore_ {
+            get {
+                return ResourceManager.GetString("Settings (Restore)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Settings に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string SettingsPage_Title {

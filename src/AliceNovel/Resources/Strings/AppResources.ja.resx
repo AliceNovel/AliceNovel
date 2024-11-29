@@ -226,4 +226,7 @@
   <data name="LanguageSetting" xml:space="preserve">
     <value>言語設定 (再起動が必要)</value>
   </data>
+  <data name="Settings (Restore)" xml:space="preserve">
+    <value>デフォルトの設定に戻す (再起動が必要)</value>
+  </data>
 </root>
