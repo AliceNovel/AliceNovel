@@ -210,7 +210,7 @@ public partial class MainPage : ContentPage
                 FileTypes = anprojFileType,
                 });
 
-        if (result == null)
+        if (result is null)
             return;
 
         FirstFileReader(result.FullPath.ToString());
@@ -260,10 +260,10 @@ public partial class MainPage : ContentPage
             }
 
         // 最初の .anov ファイルを読み込み
-        if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) != null)
+        if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) is not null)
             entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
         // (v0.9.0-rc1 の互換性のため) (画像はディレクトリや設定形式が異なるので、現状は非対応)
-        else if (zip.GetEntry(anproj_setting["first-read"]) != null)
+        else if (zip.GetEntry(anproj_setting["first-read"]) is not null)
             entry = zip.GetEntry(anproj_setting["first-read"]);
         else
         {
@@ -286,7 +286,7 @@ public partial class MainPage : ContentPage
         // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
         // .anproj 内のデータから読み込み
         ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-        if (ent_saveread != null)
+        if (ent_saveread is not null)
         {
             StreamReader srz = null;
             try
@@ -345,11 +345,11 @@ public partial class MainPage : ContentPage
     void FileRead()
     {
         read_times++;
-        if (sr != null)
+        if (sr is not null)
             sr_read = sr.ReadLine();
-        if (sr_read != null)
+        if (sr_read is not null)
         {
-            while (sr_read != "" && sr_read != null)
+            while (sr_read != "" && sr_read is not null)
             {
                 Match match;
 
