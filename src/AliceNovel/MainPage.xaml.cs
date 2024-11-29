@@ -204,11 +204,6 @@ public partial class MainPage : ContentPage
 	/// <param name="e"></param>
 	private async void Button5_Clicked(object sender, EventArgs e)
 	{
-		// キャッシュフォルダを削除する
-		string path = FileSystem.Current.CacheDirectory;
-		if (Directory.Exists(path))
-			Directory.Delete(path, true);
-
 		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
 		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
 				PickerTitle = AppResources.TextBox__Default_,
@@ -227,6 +222,11 @@ public partial class MainPage : ContentPage
 	/// <param name="targetFilePath">.anproj ファイルのパス</param>
 	async void FirstFileReader(string targetFilePath)
 	{
+        // キャッシュフォルダを削除する
+        string path = FileSystem.Current.CacheDirectory;
+        if (Directory.Exists(path))
+            Directory.Delete(path, true);
+
         read_times = 0;
         // zip内のファイルを読み込み
         zip = ZipFile.Open(targetFilePath, ZipArchiveMode.Update);
