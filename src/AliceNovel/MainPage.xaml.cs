@@ -3,7 +3,6 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.IO.Compression;
 using AliceNovel.Resources.Strings;
-// using CommunityToolkit.Maui.Alerts;
 
 namespace AliceNovel;
 
@@ -323,9 +322,6 @@ public partial class MainPage : ContentPage
             {
                 for (int i = 1; i < read_loop; i++)
                     FileRead();
-                // 成功表示
-                // ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-                // await Toast.Make("ロードが成功しました。").Show();
             }
             catch
             {
