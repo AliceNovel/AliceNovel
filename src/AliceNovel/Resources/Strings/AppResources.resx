@@ -229,4 +229,7 @@
   <data name="LanguageSetting" xml:space="preserve">
     <value>Language Setting (Necessary to Reboot)</value>
   </data>
+  <data name="Settings (Restore)" xml:space="preserve">
+    <value>Restore default settings (Necessary to Reboot)</value>
+  </data>
 </root>
