@@ -64,7 +64,11 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 BackgroundColor="Transparent"
-                BorderColor="Transparent"/>
+                BorderColor="Transparent">
+            <Button.GestureRecognizers>
+                <DropGestureRecognizer Drop="OnDrop"/>
+            </Button.GestureRecognizers>
+        </Button>
 
         <!-- # # メインUI # # -->
         <!-- 画像表示領域(Source=""で指定) -->

@@ -232,4 +232,10 @@
   <data name="Settings (Restore)" xml:space="preserve">
     <value>Restore default settings (Necessary to Reboot)</value>
   </data>
+  <data name="Alert (Confirmation)" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="Alert (FileDrop)" xml:space="preserve">
+    <value>Do you want to open the game at the following path?</value>
+  </data>
 </root>
