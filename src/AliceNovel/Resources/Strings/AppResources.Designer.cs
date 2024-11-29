@@ -79,6 +79,24 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Confirmation に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Confirmation_ {
+            get {
+                return ResourceManager.GetString("Alert (Confirmation)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Do you want to open the game at the following path? に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__FileDrop_ {
+            get {
+                return ResourceManager.GetString("Alert (FileDrop)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Save data found. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Alert__Load1_ {

@@ -81,11 +81,9 @@ public partial class MainPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    #if WINDOWS || IOS || MACCATALYST
+    #pragma warning disable IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
     async private void OnDrop(object sender, DropEventArgs e)
-    #else
-    private void OnDrop(object sender, DropEventArgs e)
-    #endif
+    #pragma warning restore IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
     {
         var filePaths = new List<string>();
 
@@ -136,8 +134,13 @@ public partial class MainPage : ContentPage
         string filePath = filePaths.FirstOrDefault();
 
         // Process the dropped file
+        // [Want to] Activate current Window
+        // Check whether open the .anproj file or not
+        bool answer = await DisplayAlert(AppResources.Alert__Confirmation_, AppResources.Alert__FileDrop_ + "<"+ filePath + ">", AppResources.Alert__Confirm_, AppResources.Alert__Canncel_);
+        if (answer != true)
+            return;
 
-        textbox.Text = filePath;
+        FirstFileReader(filePath);
     }
 
     /// <summary>
