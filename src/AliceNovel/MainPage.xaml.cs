@@ -83,30 +83,30 @@ public partial class MainPage : ContentPage
 	/// セーブ処理です。
 	/// </summary>
 	async void FileSave(){
-		if (zip != null)
+		if (zip is null)
+			return;
+
+		// .anproj 内保存
+		ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+		ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
+		using (StreamWriter sw = new(ent.Open()))
 		{
-			// .anproj 内保存
-			ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-			ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
-			using (StreamWriter sw = new(ent.Open()))
-			{
-				sw.WriteLine(read_times);
-			}
-
-			// ローカル保存
-			string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
-			// (保存先のディレクトリ作成)
-			if (!Directory.Exists(localSaveDirectory))
-				Directory.CreateDirectory(localSaveDirectory);
-			string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
-			using (StreamWriter saveStream = new(File.Create(localSaveFile)))
-			{
-				saveStream.WriteLine(read_times);
-			}
-
-			// 成功表示
-			await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
+			sw.WriteLine(read_times);
 		}
+
+		// ローカル保存
+		string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
+		// (保存先のディレクトリ作成)
+		if (!Directory.Exists(localSaveDirectory))
+			Directory.CreateDirectory(localSaveDirectory);
+		string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
+		using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+		{
+			saveStream.WriteLine(read_times);
+		}
+
+		// 成功表示
+		await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
 	}
 
 	/// <summary>
