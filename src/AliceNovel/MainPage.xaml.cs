@@ -306,38 +306,38 @@ public partial class MainPage : ContentPage
             {
                 string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
                 LoadSaveOrNot(localSaveData);
-            }
-            catch { }
-        }
+			}
+			catch { }
+		}
 
-        async void LoadSaveOrNot(string saveData)
-        {
-            int read_loop = int.Parse(saveData);
-            bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
-            if (answer != true)
-                return;
+		async void LoadSaveOrNot(string saveData)
+		{
+			int read_loop = int.Parse(saveData);
+			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
+			if (answer != true)
+				return;
 
-            WhileLoading = true;
-            // "セーブデータをロード"を選択した場合のみ、この処理を実行
-            try
-            {
-                for (int i = 1; i < read_loop; i++)
-                    FileRead();
-                // 成功表示
-                // ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-                // await Toast.Make("ロードが成功しました。").Show();
-            }
-            catch
-            {
-                // 失敗表示
-                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
-            }
-            WhileLoading = false;
-        }
+			WhileLoading = true;
+			// "セーブデータをロード"を選択した場合のみ、この処理を実行
+			try
+			{
+				for (int i = 1; i < read_loop; i++)
+					FileRead();
+				// 成功表示
+				// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+				// await Toast.Make("ロードが成功しました。").Show();
+			}
+			catch
+			{
+				// 失敗表示
+				await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+			}
+			WhileLoading = false;
+		}
 
-        // 初回ファイル読み込み処理
-        FileRead();
-    }
+		// 初回ファイル読み込み処理
+		FileRead();
+	}
 
 	/// <summary>
 	/// .anproj ファイルを読み込みます。
