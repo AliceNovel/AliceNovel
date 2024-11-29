@@ -81,7 +81,7 @@ public partial class MainPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    #pragma warning disable IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
+    #pragma warning disable IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する (この警告が表示されるのは、多分 Visual Studio のバグ)
     async private void OnDrop(object sender, DropEventArgs e)
     #pragma warning restore IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
     {
