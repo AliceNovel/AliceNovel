@@ -218,117 +218,126 @@ public partial class MainPage : ContentPage
 		if (result == null)
 			return;
 
-		read_times = 0;
-		// zip内のファイルを読み込み
-		zip = ZipFile.Open(result.FullPath.ToString(), ZipArchiveMode.Update);
+		FirstFileReader(result.FullPath.ToString());
+    }
 
-		// zip内のpackage.jsonファイルを読み込み
-		ZipArchiveEntry entry = zip.GetEntry("package.json");
-		StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
-		string str = sr2.ReadToEnd();
-		sr2.Close();
+	/// <summary>
+	/// .anproj ファイルの初回読み込みの処理を行います。
+	/// </summary>
+	/// <param name="targetFilePath">.anproj ファイルのパス</param>
+	async void FirstFileReader(string targetFilePath)
+	{
+        read_times = 0;
+        // zip内のファイルを読み込み
+        zip = ZipFile.Open(targetFilePath, ZipArchiveMode.Update);
 
-		// rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
-		anproj_setting = new()
-		{
-			{"root-image", "image/"},
-			{"root-background", "image/background/"},
-			{"root-story", "story/"},
-			{"root-data", "data/"},
-			{"root-audio", "audio/"},
-			{"root-movie", "movie/"},
-			{"root-character", "character.json"},
-			{"root-save", "save/"},
-			{"first-read", "main.anov"},
-			{"game-name", ""},
-		};
-		// json を読み込み、デフォルト設定に上書き
-		if (!string.IsNullOrEmpty(str))
-			foreach (var key in JsonSerializer.Deserialize<Dictionary<string, string>>(str))
-			{
-				if (anproj_setting.ContainsKey(key.Key))
-					anproj_setting[key.Key] = key.Value;
-			}
-		
-		// 最初の .anov ファイルを読み込み
-		if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) != null)
-			entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
-		// (v0.9.0-rc1 の互換性のため) (画像はディレクトリや設定形式が異なるので、現状は非対応)
-		else if (zip.GetEntry(anproj_setting["first-read"]) != null)
-			entry = zip.GetEntry(anproj_setting["first-read"]);
-		else
-		{
-			await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
-			return;
-		}
+        // zip内のpackage.jsonファイルを読み込み
+        ZipArchiveEntry entry = zip.GetEntry("package.json");
+        StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
+        string str = sr2.ReadToEnd();
+        sr2.Close();
 
-		// タイトルの設定
-		game_ui.Title = anproj_setting["game-name"];
+        // rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
+        anproj_setting = new()
+        {
+            {"root-image", "image/"},
+            {"root-background", "image/background/"},
+            {"root-story", "story/"},
+            {"root-data", "data/"},
+            {"root-audio", "audio/"},
+            {"root-movie", "movie/"},
+            {"root-character", "character.json"},
+            {"root-save", "save/"},
+            {"first-read", "main.anov"},
+            {"game-name", ""},
+        };
+        // json を読み込み、デフォルト設定に上書き
+        if (!string.IsNullOrEmpty(str))
+            foreach (var key in JsonSerializer.Deserialize<Dictionary<string, string>>(str))
+            {
+                if (anproj_setting.ContainsKey(key.Key))
+                    anproj_setting[key.Key] = key.Value;
+            }
 
-		sr ??= new(entry.Open(), Encoding.UTF8);
-		textbox.Text = "";
-		talkname.Text = "";
-		button5.IsVisible = false;
-		toolbarItem1.IsEnabled = true;
-		toolbarItem2.IsEnabled = true;
-		toolbarItem3.IsEnabled = true;
+        // 最初の .anov ファイルを読み込み
+        if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) != null)
+            entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
+        // (v0.9.0-rc1 の互換性のため) (画像はディレクトリや設定形式が異なるので、現状は非対応)
+        else if (zip.GetEntry(anproj_setting["first-read"]) != null)
+            entry = zip.GetEntry(anproj_setting["first-read"]);
+        else
+        {
+            await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
+            return;
+        }
 
-		// セーブ読み込み
-		// 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
-		// .anproj 内のデータから読み込み
-		ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-		if (ent_saveread != null)
-		{
-			StreamReader srz = null;
-			try
-			{
-				srz = new(ent_saveread.Open());
-				LoadSaveOrNot(srz.ReadToEnd());
-			}
-			finally
-			{
-				srz?.Dispose();
-			}
-		}
-		// ローカルデータから読み込み
-		else
-		{
-			try
-			{
+        // タイトルの設定
+        game_ui.Title = anproj_setting["game-name"];
+
+        sr ??= new(entry.Open(), Encoding.UTF8);
+        textbox.Text = "";
+        talkname.Text = "";
+        button5.IsVisible = false;
+        toolbarItem1.IsEnabled = true;
+        toolbarItem2.IsEnabled = true;
+        toolbarItem3.IsEnabled = true;
+
+        // セーブ読み込み
+        // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
+        // .anproj 内のデータから読み込み
+        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+        if (ent_saveread != null)
+        {
+            StreamReader srz = null;
+            try
+            {
+                srz = new(ent_saveread.Open());
+                LoadSaveOrNot(srz.ReadToEnd());
+            }
+            finally
+            {
+                srz?.Dispose();
+            }
+        }
+        // ローカルデータから読み込み
+        else
+        {
+            try
+            {
                 string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
                 LoadSaveOrNot(localSaveData);
-			}
-			catch { }
-		}
+            }
+            catch { }
+        }
 
-		async void LoadSaveOrNot(string saveData)
-		{
-			int read_loop = int.Parse(saveData);
-			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
-			if (answer != true)
-				return;
+        async void LoadSaveOrNot(string saveData)
+        {
+            int read_loop = int.Parse(saveData);
+            bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
+            if (answer != true)
+                return;
 
-			WhileLoading = true;
-			// "セーブデータをロード"を選択した場合のみ、この処理を実行
-			try
-			{
-				for (int i = 1; i < read_loop; i++)
-					FileRead();
-				// 成功表示
-				// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-				// await Toast.Make("ロードが成功しました。").Show();
-			}
-			catch
-			{
-				// 失敗表示
-				await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
-			}
-			WhileLoading = false;
-		}
+            WhileLoading = true;
+            // "セーブデータをロード"を選択した場合のみ、この処理を実行
+            try
+            {
+                for (int i = 1; i < read_loop; i++)
+                    FileRead();
+                // 成功表示
+                // ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+                // await Toast.Make("ロードが成功しました。").Show();
+            }
+            catch
+            {
+                // 失敗表示
+                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+            }
+            WhileLoading = false;
+        }
 
-		// 初回ファイル読み込み処理
-		FileRead();
-	}
+        // 初回ファイル読み込み処理
+        FileRead();
+    }
 
 	/// <summary>
 	/// .anproj ファイルを読み込みます。
