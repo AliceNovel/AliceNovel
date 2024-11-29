@@ -5,9 +5,9 @@ namespace AliceNovel;
 
 public partial class SettingsPage : ContentPage
 {
-	public SettingsPage()
-	{
-		InitializeComponent();
+    public SettingsPage()
+    {
+        InitializeComponent();
 
         // Check Default AppLanguage
         CheckAppLanguage();
@@ -82,5 +82,32 @@ public partial class SettingsPage : ContentPage
             // Save the state in local
             Preferences.Default.Set("AppTheme", "Dark");
         }
+    }
+
+    async private void RestoreDefaultSettings(object sender, EventArgs e)
+    {
+        // Check whether reboot for executing this process or not
+        bool answer = await DisplayAlert(AppResources.Alert__Confirm_, AppResources.Alert__RebootDescriptions_, AppResources.Alert__Reboot_, AppResources.Alert__Canncel_);
+        if (answer != true)
+            return;
+
+        Application.Current.Windows[0].Page.Dispatcher.Dispatch(() =>
+        {
+            // Remove preferences data
+            Preferences.Default.Clear();
+
+            // Reset theme color
+            Application.Current.UserAppTheme = AppTheme.Unspecified;
+
+            // Reset app language
+            CultureInfo culture = new(CultureInfo.InstalledUICulture.ToString(), false);
+            Thread.CurrentThread.CurrentCulture = culture;
+            Thread.CurrentThread.CurrentUICulture = culture;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
+
+            // Restart this app
+            Application.Current.Windows[0].Page = new AppShell();
+        });
     }
 }
