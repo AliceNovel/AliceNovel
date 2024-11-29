@@ -5,9 +5,9 @@ namespace AliceNovel;
 
 public partial class SettingsPage : ContentPage
 {
-	public SettingsPage()
-	{
-		InitializeComponent();
+    public SettingsPage()
+    {
+        InitializeComponent();
 
         // Check Default AppLanguage
         CheckAppLanguage();

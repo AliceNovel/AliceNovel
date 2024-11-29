@@ -9,219 +9,219 @@ namespace AliceNovel;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
-	{
-		InitializeComponent();
-	}
-
-	// 初期状態のボタン有効/無効の確認用
-	bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
-
-	// UI表示/非表示
-	bool ui_visible = true;
-
-	/// <summary>
-	/// 画面をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void ReShow_Clicked(object sender, EventArgs e)
-	{
-		if (ui_visible == true)
-			FileRead();
-		else
-			UI_ReDisplay();
-	}
-
-	/// <summary>
-	/// Hide Interface
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void ToolbarItem_Clicked_1(object sender, EventArgs e)
-	{
-		if (ui_visible == true)
-			UI_Hidden();
-		else
-			UI_ReDisplay();
-	}
-
-	/// <summary>
-	/// Save the Game
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void ToolbarItem_Clicked_2(object sender, EventArgs e)
-	{
-		FileSave();
-	}
-
-	/// <summary>
-	/// Exit the Game
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
-	{
-		bool answer = await DisplayAlert(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
-		if (answer == true)
-			FileSave();
-		ExitGame();
-	}
-
-	/// <summary>
-	/// button1 をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void Button1_Clicked(object sender, EventArgs e)
-	{
-		
-	}
-
-	/// <summary>
-	/// セーブ処理です。
-	/// </summary>
-	async void FileSave(){
-		if (zip is null)
-			return;
-
-		// .anproj 内保存
-		ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-		ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
-		using (StreamWriter sw = new(ent.Open()))
-		{
-			sw.WriteLine(read_times);
-		}
-
-		// ローカル保存
-		string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
-		// (保存先のディレクトリ作成)
-		if (!Directory.Exists(localSaveDirectory))
-			Directory.CreateDirectory(localSaveDirectory);
-		string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
-		using (StreamWriter saveStream = new(File.Create(localSaveFile)))
-		{
-			saveStream.WriteLine(read_times);
-		}
-
-		// 成功表示
-		await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
-	}
-
-	/// <summary>
-	/// button2 をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void Button2_Clicked(object sender, EventArgs e)
-	{
-		
-	}
-
-	/// <summary>
-	/// 画像をフル画面で閲覧するために UI を隠します。
-	/// </summary>
-	void UI_Hidden(){
-		toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
-
-		// 初期のボタン有効/無効状態を確認
-		Initial_button1 = button1.IsVisible;
-		Initial_button2 = button2.IsVisible;
-		Initial_button3 = button3.IsVisible;
-		Initial_button4 = button4.IsVisible;
-		Initial_button5 = button5.IsVisible;
-		Initial_button6 = button6.IsVisible;
-		// 画像以外すべて非表示
-		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
-		button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
-	}
-
-	/// <summary>
-	/// 画像をフル画面で閲覧するために非表示した UI を再表示します。
-	/// </summary>
-	void UI_ReDisplay(){
-		toolbarItem1.Text = AppResources.Button2;
-		
-		talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
-		// 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-		button1.IsVisible = Initial_button1;
-		button2.IsVisible = Initial_button2;
-		button3.IsVisible = Initial_button3;
-		button4.IsVisible = Initial_button4;
-		button5.IsVisible = Initial_button5;
-		button6.IsVisible = Initial_button6;
-	}
-
-	/// <summary>
-	/// button3 をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void Button3_Clicked(object sender, EventArgs e)
-	{
-		
-	}
-
-	/// <summary>
-	/// button4 をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void Button4_Clicked(object sender, EventArgs e)
-	{
-		
-	}
-
-	/// <summary>
-	/// .anproj ファイルの規定です。
-	/// </summary>
-	readonly FilePickerFileType anprojFileType = new(
-		new Dictionary<DevicePlatform, IEnumerable<string>>
-		{
-			{ DevicePlatform.WinUI, new[] { ".anproj" } },// 拡張子
-			{ DevicePlatform.macOS, new[] { "archive", ".anproj" } },// UTType
-			{ DevicePlatform.Android, new[] { "application/octet-stream", ".anproj" } },// MIME Type
-			{ DevicePlatform.iOS, new[] { "public.archive", ".anproj" } },// UTType
-			{ DevicePlatform.Tizen, new[] { "*/*", ".anproj" } },
-		});
-
-	FileResult result;// .anprojファイル選択用
-	StreamReader sr;
-	string sr_read;
-	ZipArchive zip;
-	bool WhileLoading = false;
-
-	// rootの初期値(package.jsonで指定されていない時に使用する値)を設定
-	Dictionary<string, string> anproj_setting = [];
-
-	int read_times = 0;// 読み込み回数(セーブ用)
-
-	/// <summary>
-	/// button5 をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private async void Button5_Clicked(object sender, EventArgs e)
-	{
-		// .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
-		result ??= await FilePicker.Default.PickAsync(new PickOptions { 
-				PickerTitle = AppResources.TextBox__Default_,
-				FileTypes = anprojFileType,
-				});
-
-		if (result == null)
-			return;
-
-		FirstFileReader(result.FullPath.ToString());
+    public MainPage()
+    {
+        InitializeComponent();
     }
 
-	/// <summary>
-	/// .anproj ファイルの初回読み込みの処理を行います。
-	/// </summary>
-	/// <param name="targetFilePath">.anproj ファイルのパス</param>
-	async void FirstFileReader(string targetFilePath)
-	{
+    // 初期状態のボタン有効/無効の確認用
+    bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
+
+    // UI表示/非表示
+    bool ui_visible = true;
+
+    /// <summary>
+    /// 画面をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ReShow_Clicked(object sender, EventArgs e)
+    {
+        if (ui_visible == true)
+            FileRead();
+        else
+            UI_ReDisplay();
+    }
+
+    /// <summary>
+    /// Hide Interface
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ToolbarItem_Clicked_1(object sender, EventArgs e)
+    {
+        if (ui_visible == true)
+            UI_Hidden();
+        else
+            UI_ReDisplay();
+    }
+
+    /// <summary>
+    /// Save the Game
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void ToolbarItem_Clicked_2(object sender, EventArgs e)
+    {
+        FileSave();
+    }
+
+    /// <summary>
+    /// Exit the Game
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
+    {
+        bool answer = await DisplayAlert(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
+        if (answer == true)
+            FileSave();
+        ExitGame();
+    }
+
+    /// <summary>
+    /// button1 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button1_Clicked(object sender, EventArgs e)
+    {
+        
+    }
+
+    /// <summary>
+    /// セーブ処理です。
+    /// </summary>
+    async void FileSave(){
+        if (zip is null)
+            return;
+
+        // .anproj 内保存
+        ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+        ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
+        using (StreamWriter sw = new(ent.Open()))
+        {
+            sw.WriteLine(read_times);
+        }
+
+        // ローカル保存
+        string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
+        // (保存先のディレクトリ作成)
+        if (!Directory.Exists(localSaveDirectory))
+            Directory.CreateDirectory(localSaveDirectory);
+        string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
+        using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+        {
+            saveStream.WriteLine(read_times);
+        }
+
+        // 成功表示
+        await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
+    }
+
+    /// <summary>
+    /// button2 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button2_Clicked(object sender, EventArgs e)
+    {
+        
+    }
+
+    /// <summary>
+    /// 画像をフル画面で閲覧するために UI を隠します。
+    /// </summary>
+    void UI_Hidden(){
+        toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
+
+        // 初期のボタン有効/無効状態を確認
+        Initial_button1 = button1.IsVisible;
+        Initial_button2 = button2.IsVisible;
+        Initial_button3 = button3.IsVisible;
+        Initial_button4 = button4.IsVisible;
+        Initial_button5 = button5.IsVisible;
+        Initial_button6 = button6.IsVisible;
+        // 画像以外すべて非表示
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
+        button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
+    }
+
+    /// <summary>
+    /// 画像をフル画面で閲覧するために非表示した UI を再表示します。
+    /// </summary>
+    void UI_ReDisplay(){
+        toolbarItem1.Text = AppResources.Button2;
+        
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
+        // 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
+        button1.IsVisible = Initial_button1;
+        button2.IsVisible = Initial_button2;
+        button3.IsVisible = Initial_button3;
+        button4.IsVisible = Initial_button4;
+        button5.IsVisible = Initial_button5;
+        button6.IsVisible = Initial_button6;
+    }
+
+    /// <summary>
+    /// button3 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button3_Clicked(object sender, EventArgs e)
+    {
+        
+    }
+
+    /// <summary>
+    /// button4 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button4_Clicked(object sender, EventArgs e)
+    {
+        
+    }
+
+    /// <summary>
+    /// .anproj ファイルの規定です。
+    /// </summary>
+    readonly FilePickerFileType anprojFileType = new(
+        new Dictionary<DevicePlatform, IEnumerable<string>>
+        {
+            { DevicePlatform.WinUI, new[] { ".anproj" } },// 拡張子
+            { DevicePlatform.macOS, new[] { "archive", ".anproj" } },// UTType
+            { DevicePlatform.Android, new[] { "application/octet-stream", ".anproj" } },// MIME Type
+            { DevicePlatform.iOS, new[] { "public.archive", ".anproj" } },// UTType
+            { DevicePlatform.Tizen, new[] { "*/*", ".anproj" } },
+        });
+
+    FileResult result;// .anprojファイル選択用
+    StreamReader sr;
+    string sr_read;
+    ZipArchive zip;
+    bool WhileLoading = false;
+
+    // rootの初期値(package.jsonで指定されていない時に使用する値)を設定
+    Dictionary<string, string> anproj_setting = [];
+
+    int read_times = 0;// 読み込み回数(セーブ用)
+
+    /// <summary>
+    /// button5 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private async void Button5_Clicked(object sender, EventArgs e)
+    {
+        // .anprojファイルを読み込み(もしnullならファイル読み込みを行う)
+        result ??= await FilePicker.Default.PickAsync(new PickOptions { 
+                PickerTitle = AppResources.TextBox__Default_,
+                FileTypes = anprojFileType,
+                });
+
+        if (result == null)
+            return;
+
+        FirstFileReader(result.FullPath.ToString());
+    }
+
+    /// <summary>
+    /// .anproj ファイルの初回読み込みの処理を行います。
+    /// </summary>
+    /// <param name="targetFilePath">.anproj ファイルのパス</param>
+    async void FirstFileReader(string targetFilePath)
+    {
         // キャッシュフォルダを削除する
         string path = FileSystem.Current.CacheDirectory;
         if (Directory.Exists(path))
@@ -306,224 +306,224 @@ public partial class MainPage : ContentPage
             {
                 string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
                 LoadSaveOrNot(localSaveData);
-			}
-			catch { }
-		}
+            }
+            catch { }
+        }
 
-		async void LoadSaveOrNot(string saveData)
-		{
-			int read_loop = int.Parse(saveData);
-			bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
-			if (answer != true)
-				return;
+        async void LoadSaveOrNot(string saveData)
+        {
+            int read_loop = int.Parse(saveData);
+            bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
+            if (answer != true)
+                return;
 
-			WhileLoading = true;
-			// "セーブデータをロード"を選択した場合のみ、この処理を実行
-			try
-			{
-				for (int i = 1; i < read_loop; i++)
-					FileRead();
-				// 成功表示
-				// ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
-				// await Toast.Make("ロードが成功しました。").Show();
-			}
-			catch
-			{
-				// 失敗表示
-				await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
-			}
-			WhileLoading = false;
-		}
+            WhileLoading = true;
+            // "セーブデータをロード"を選択した場合のみ、この処理を実行
+            try
+            {
+                for (int i = 1; i < read_loop; i++)
+                    FileRead();
+                // 成功表示
+                // ここは DisplayAlert ではなく CommunityToolkit.Maui.Alerts の Toast がいいが、現状 Windows (.exe) 上でエラーになる
+                // await Toast.Make("ロードが成功しました。").Show();
+            }
+            catch
+            {
+                // 失敗表示
+                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+            }
+            WhileLoading = false;
+        }
 
-		// 初回ファイル読み込み処理
-		FileRead();
-	}
+        // 初回ファイル読み込み処理
+        FileRead();
+    }
 
-	/// <summary>
-	/// .anproj ファイルを読み込みます。
-	/// </summary>
-	void FileRead()
-	{
-		read_times++;
-		if (sr != null)
-			sr_read = sr.ReadLine();
-		if (sr_read != null)
-		{
-			while (sr_read != "" && sr_read != null)
-			{
-				Match match;
+    /// <summary>
+    /// .anproj ファイルを読み込みます。
+    /// </summary>
+    void FileRead()
+    {
+        read_times++;
+        if (sr != null)
+            sr_read = sr.ReadLine();
+        if (sr_read != null)
+        {
+            while (sr_read != "" && sr_read != null)
+            {
+                Match match;
 
-				// "["と"]"で囲む"会話"を読み込み
-				match = Regex.Match(sr_read, @"\[(.*?)\]");
-				if (match.Success)
-				{
-					textbox.Text = match.Groups[1].Value.Trim();
-					sr_read = sr.ReadLine(); // 次の行を読み込む
-					continue; // 上から再開
-				}
+                // "["と"]"で囲む"会話"を読み込み
+                match = Regex.Match(sr_read, @"\[(.*?)\]");
+                if (match.Success)
+                {
+                    textbox.Text = match.Groups[1].Value.Trim();
+                    sr_read = sr.ReadLine(); // 次の行を読み込む
+                    continue; // 上から再開
+                }
 
-				// "> "から始まる"場所"を読み込み
-				match = Regex.Match(sr_read, @"> (.*)");
-				if (match.Success)
-				{
-					// 場所指定されていない場合は背景画像を消す
-					if (match.Groups[1].Value.Trim() == "")
-						image.Source = null;
-					else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
-					{
-						using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
-						{
-							var memoryStream = new MemoryStream();
-							st.CopyTo(memoryStream);
-							memoryStream.Seek(0, SeekOrigin.Begin);
-							image.Source = ImageSource.FromStream(() => memoryStream);
-						}
-					}
-				}
+                // "> "から始まる"場所"を読み込み
+                match = Regex.Match(sr_read, @"> (.*)");
+                if (match.Success)
+                {
+                    // 場所指定されていない場合は背景画像を消す
+                    if (match.Groups[1].Value.Trim() == "")
+                        image.Source = null;
+                    else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
+                    {
+                        using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
+                        {
+                            var memoryStream = new MemoryStream();
+                            st.CopyTo(memoryStream);
+                            memoryStream.Seek(0, SeekOrigin.Begin);
+                            image.Source = ImageSource.FromStream(() => memoryStream);
+                        }
+                    }
+                }
 
-				// "bgm: "から始まる"音楽"を読み込み
-				match = Regex.Match(sr_read, @"bgm: (.*)");
-				if (match.Success)
-				{
-					// 指定されていない場合は音楽を止める
-					audio_bgm.Stop();
+                // "bgm: "から始まる"音楽"を読み込み
+                match = Regex.Match(sr_read, @"bgm: (.*)");
+                if (match.Success)
+                {
+                    // 指定されていない場合は音楽を止める
+                    audio_bgm.Stop();
 
-					try
-					{
-						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value.Trim());
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
-						string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-audio"]));
-						if (!Directory.Exists(audio_cache))
-							Directory.CreateDirectory(audio_cache);
+                    try
+                    {
+                        ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value.Trim());
+                        // ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
+                        string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-audio"]));
+                        if (!Directory.Exists(audio_cache))
+                            Directory.CreateDirectory(audio_cache);
 
-						string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value.Trim()));
-						if (!File.Exists(temp_audio))
-							entry.ExtractToFile(temp_audio, true);
+                        string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, match.Groups[1].Value.Trim()));
+                        if (!File.Exists(temp_audio))
+                            entry.ExtractToFile(temp_audio, true);
 
-						audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
-						audio_bgm.Play();
-					}
-					catch{}
-				}
+                        audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
+                        audio_bgm.Play();
+                    }
+                    catch{}
+                }
 
-				// "movie: "から始まる"動画"を読み込み
-				match = Regex.Match(sr_read, @"movie: (.*)");
-				if (WhileLoading == false && match.Success)
-				{
-					// 指定されていない場合は動画を止める
-					movie.Stop();
-					movie.IsVisible = false;
+                // "movie: "から始まる"動画"を読み込み
+                match = Regex.Match(sr_read, @"movie: (.*)");
+                if (WhileLoading == false && match.Success)
+                {
+                    // 指定されていない場合は動画を止める
+                    movie.Stop();
+                    movie.IsVisible = false;
 
-					try
-					{
-						ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
-						// ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
-						string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
-						if (!Directory.Exists(movie_cache))
-							Directory.CreateDirectory(movie_cache);
+                    try
+                    {
+                        ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
+                        // ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
+                        string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
+                        if (!Directory.Exists(movie_cache))
+                            Directory.CreateDirectory(movie_cache);
 
-						string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
-						if (!File.Exists(temp_movie))
-							entry.ExtractToFile(temp_movie, true);
+                        string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, match.Groups[1].Value.Trim()));
+                        if (!File.Exists(temp_movie))
+                            entry.ExtractToFile(temp_movie, true);
 
-						movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
-						movie.IsVisible = true;
-						movie.Play();
+                        movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
+                        movie.IsVisible = true;
+                        movie.Play();
 
-						// UI非表示/セリフを進められなくする
-						UI_Hidden();
-						re.IsEnabled = false;
-						// 動画のスキップボタンを実装したら便利そう
-					}
-					catch{}
-				}
+                        // UI非表示/セリフを進められなくする
+                        UI_Hidden();
+                        re.IsEnabled = false;
+                        // 動画のスキップボタンを実装したら便利そう
+                    }
+                    catch{}
+                }
 
-				// "- "から始まる"人物"を読み込み
-				match = Regex.Match(sr_read, @"- (.*)");
-				if (match.Success)
-					talkname.Text = match.Groups[1].Value.Trim();
+                // "- "から始まる"人物"を読み込み
+                match = Regex.Match(sr_read, @"- (.*)");
+                if (match.Success)
+                    talkname.Text = match.Groups[1].Value.Trim();
 
-				// "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
-				match = Regex.Match(sr_read, @"- (.*?)/");
-				if (match.Success)
-					talkname.Text = match.Groups[1].Value.Trim();
-					// 感情変更
+                // "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
+                match = Regex.Match(sr_read, @"- (.*?)/");
+                if (match.Success)
+                    talkname.Text = match.Groups[1].Value.Trim();
+                    // 感情変更
 
-				// "/ "から始まる"感情"を読み込み
-				match = Regex.Match(sr_read, @"/ (.*)");
-				//if (match.Success)
-					// 感情変更
+                // "/ "から始まる"感情"を読み込み
+                match = Regex.Match(sr_read, @"/ (.*)");
+                //if (match.Success)
+                    // 感情変更
 
-				// 次の行を読み込む
-				sr_read = sr.ReadLine();
-			}
-		}
-		else
-			ExitGame();
-	}
+                // 次の行を読み込む
+                sr_read = sr.ReadLine();
+            }
+        }
+        else
+            ExitGame();
+    }
 
-	/// <summary>
-	/// ゲーム終了時の処理
-	/// </summary>
-	private void ExitGame()
-	{
-		// 動画停止処理
-		movie.Stop();
-		movie.IsVisible = false;
-		UI_ReDisplay();
-		re.IsEnabled = true;
+    /// <summary>
+    /// ゲーム終了時の処理
+    /// </summary>
+    private void ExitGame()
+    {
+        // 動画停止処理
+        movie.Stop();
+        movie.IsVisible = false;
+        UI_ReDisplay();
+        re.IsEnabled = true;
 
-		result = null;
-		sr?.Close();
-		sr = null;
-		zip?.Dispose();// zipファイルを閉じる
-		talkname.Text = "";
-		image.Source = null;
-		textbox.Text = AppResources.TextBox__Default_;
-		button5.IsVisible = true;
-		button5.Text = AppResources.Button5;
-		game_ui.Title = AppResources.MainPage_Title;
-		toolbarItem1.IsEnabled = false;
-		toolbarItem2.IsEnabled = false;
-		toolbarItem3.IsEnabled = false;
+        result = null;
+        sr?.Close();
+        sr = null;
+        zip?.Dispose();// zipファイルを閉じる
+        talkname.Text = "";
+        image.Source = null;
+        textbox.Text = AppResources.TextBox__Default_;
+        button5.IsVisible = true;
+        button5.Text = AppResources.Button5;
+        game_ui.Title = AppResources.MainPage_Title;
+        toolbarItem1.IsEnabled = false;
+        toolbarItem2.IsEnabled = false;
+        toolbarItem3.IsEnabled = false;
 
-		// キャッシュフォルダを削除する
-		string path = FileSystem.Current.CacheDirectory;
-		if (Directory.Exists(path))
-			Directory.Delete(path, true);
-	}
+        // キャッシュフォルダを削除する
+        string path = FileSystem.Current.CacheDirectory;
+        if (Directory.Exists(path))
+            Directory.Delete(path, true);
+    }
 
-	/// <summary>
-	/// 動画再生終了時の処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void MovieEnded(object sender, EventArgs e)
-	{
-		Dispatcher.Dispatch(() =>
-		{
-			// 動画停止
-			movie.Stop();
-			movie.IsVisible = false;
+    /// <summary>
+    /// 動画再生終了時の処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void MovieEnded(object sender, EventArgs e)
+    {
+        Dispatcher.Dispatch(() =>
+        {
+            // 動画停止
+            movie.Stop();
+            movie.IsVisible = false;
 
-			// 手動メモリ解放
-			GC.Collect();
+            // 手動メモリ解放
+            GC.Collect();
 
-			// UIを元に戻す
-			UI_ReDisplay();
-			re.IsEnabled = true;
-			FileRead();
-		});
-	}
+            // UIを元に戻す
+            UI_ReDisplay();
+            re.IsEnabled = true;
+            FileRead();
+        });
+    }
 
-	/// <summary>
-	/// button6 をクリックしたときの処理です。
-	/// </summary>
-	/// <param name="sender"></param>
-	/// <param name="e"></param>
-	private void Button6_Clicked(object sender, EventArgs e)
-	{
-		
-	}
+    /// <summary>
+    /// button6 をクリックしたときの処理です。
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private void Button6_Clicked(object sender, EventArgs e)
+    {
+        
+    }
 
 }
