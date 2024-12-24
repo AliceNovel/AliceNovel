@@ -1,0 +1,16 @@
+changelog:
+  categories:
+    - title: New Features 🎉
+      labels:
+        - "enhancement"
+    - title: Bug Fix 🦋
+      labels:
+        - "bug"
+    - title: Dependencies 🤖
+      labels:
+        - "dependencies"
+      authors:
+        - dependabot
+    - title: Others 🛠
+      labels:
+        - "*"
