@@ -170,7 +170,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Successed to save the game information. に類似しているローカライズされた文字列を検索します。
+        ///   Saved successfully. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Alert__Save2_ {
             get {
@@ -188,7 +188,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   The file is old type, and this is out of support. に類似しているローカライズされた文字列を検索します。
+        ///   The file format is old type, and this is out of support. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Alert__Warn2_ {
             get {
@@ -215,7 +215,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Overwrite Save に類似しているローカライズされた文字列を検索します。
+        ///   Overwrite save に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Button1__Tip_ {
             get {
@@ -233,7 +233,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Reshow with touching the display に類似しているローカライズされた文字列を検索します。
+        ///   Tap the screen to redisplay it に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Button2__Tip_ {
             get {
@@ -251,7 +251,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Read game file に類似しているローカライズされた文字列を検索します。
+        ///   Load game file に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Button5__Tip_ {
             get {
@@ -305,7 +305,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Restore default settings (Necessary to Reboot) に類似しているローカライズされた文字列を検索します。
+        ///   Restore default settings (Rebooting is required) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Settings__Restore_ {
             get {
@@ -341,7 +341,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Please read Alice Novel game (.anproj file). に類似しているローカライズされた文字列を検索します。
+        ///   Please load the Alice Novel game (.anproj file). に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string TextBox__Default_ {
             get {
@@ -350,7 +350,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Reshow に類似しているローカライズされた文字列を検索します。
+        ///   Redisplay UI に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ToolbarItem1__Reshow_ {
             get {
@@ -377,7 +377,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   No save and Exit に類似しているローカライズされた文字列を検索します。
+        ///   Exit without saving に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ToolbarItem3__only_Exit_ {
             get {
@@ -395,7 +395,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Do you save the game? に類似しているローカライズされた文字列を検索します。
+        ///   Do you want to save the changes? に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ToolbarItem3__Save_or_not_ {
             get {
@@ -404,7 +404,7 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
-        ///   Close currently game に類似しているローカライズされた文字列を検索します。
+        ///   The currently opened game will disappear に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string ToolbarItem3__Tip_ {
             get {
