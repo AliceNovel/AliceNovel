@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
 using System.IO.Compression;
@@ -169,12 +170,17 @@ public partial class MainPage : ContentPage
             return;
 
         // 保存するデータ
-        Dictionary<string, string> saveValues = new(){
-            { "GameTitle", anproj_setting["game-name"] },
-            { "CurrentLines", read_times.ToString() },
-            { "LastUpdated", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK") }, // Format: ISO8601
-            { "GameEngine", AppInfo.Current.Name },
-            { "EngineVersion", AppInfo.Current.VersionString },
+        List<SaveDataInfo.SaveDataLists> saveDataLists = [];
+        saveDataLists.Add(new SaveDataInfo.SaveDataLists {
+            CurrentLines = read_times,
+            LastUpdated = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK"), // Format: ISO8601
+        });
+        SaveDataInfo saveValues = new()
+        {
+            GameTitle = anproj_setting["game-name"],
+            GameEngine = AppInfo.Current.Name,
+            EngineVersion = AppInfo.Current.VersionString,
+            SaveLists = saveDataLists,
         };
 
         string writerInfo = JsonSerializer.Serialize(saveValues, jsonOptions);
@@ -408,11 +414,11 @@ public partial class MainPage : ContentPage
             if (String.IsNullOrEmpty(saveData))
                 return;
 
-            int? read_loop;
+            int read_loop;
             try
             {
-                Dictionary<string, string> loadData = JsonSerializer.Deserialize<Dictionary<string, string>>(saveData, jsonOptions);
-                read_loop = int.Parse(loadData["CurrentLines"]);
+                SaveDataInfo loadData = JsonSerializer.Deserialize<SaveDataInfo>(saveData, jsonOptions);
+                read_loop = loadData.SaveLists.FirstOrDefault().CurrentLines;
             }
             catch
             {
@@ -628,6 +634,30 @@ public partial class MainPage : ContentPage
     private void Button6_Clicked(object sender, EventArgs e)
     {
         
+    }
+
+    public class SaveDataInfo
+    {
+        [JsonPropertyName("GameTitle")]
+        public string GameTitle { get; set; }
+
+        [JsonPropertyName("GameEngine")]
+        public string GameEngine { get; set; }
+
+        [JsonPropertyName("EngineVersion")]
+        public string EngineVersion { get; set; }
+
+        [JsonPropertyName("SaveLists")]
+        public IList<SaveDataLists> SaveLists { get; set; }
+
+        public class SaveDataLists
+        {
+            [JsonPropertyName("CurrentLines")]
+            public int CurrentLines { get; set; }
+
+            [JsonPropertyName("LastUpdated")] // Format: ISO8601
+            public string LastUpdated { get; set; }
+        }
     }
 
 }
