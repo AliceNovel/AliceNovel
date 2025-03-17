@@ -1,6 +1,8 @@
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using System.Text.Unicode;
 using System.IO.Compression;
 using AliceNovel.Resources.Strings;
 #if WINDOWS
@@ -153,6 +155,12 @@ public partial class MainPage : ContentPage
         
     }
 
+    readonly JsonSerializerOptions jsonOptions = new()
+    {
+        Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+        WriteIndented = true,
+    };
+
     /// <summary>
     /// セーブ処理です。
     /// </summary>
@@ -160,12 +168,23 @@ public partial class MainPage : ContentPage
         if (zip is null)
             return;
 
+        // 保存するデータ
+        Dictionary<string, string> saveValues = new(){
+            { "GameTitle", anproj_setting["game-name"] },
+            { "CurrentLines", read_times.ToString() },
+            { "LastUpdated", DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK") }, // Format: ISO8601
+            { "GameEngine", AppInfo.Current.Name },
+            { "EngineVersion", AppInfo.Current.VersionString },
+        };
+
+        string writerInfo = JsonSerializer.Serialize(saveValues, jsonOptions);
+
         // .anproj 内保存
-        ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-        ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
+        ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.json");
+        ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.json");
         using (StreamWriter sw = new(ent.Open()))
         {
-            sw.WriteLine(read_times);
+            sw.WriteLine(writerInfo);
         }
 
         // ローカル保存
@@ -173,10 +192,10 @@ public partial class MainPage : ContentPage
         // (保存先のディレクトリ作成)
         if (!Directory.Exists(localSaveDirectory))
             Directory.CreateDirectory(localSaveDirectory);
-        string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
-        using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+        string localSaveFile = Path.Combine(localSaveDirectory, "savefile.json");
+        using (StreamWriter sw = new(File.Create(localSaveFile)))
         {
-            saveStream.WriteLine(read_times);
+            sw.WriteLine(writerInfo);
         }
 
         // 成功表示
@@ -359,7 +378,7 @@ public partial class MainPage : ContentPage
         // セーブ読み込み
         // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
         // .anproj 内のデータから読み込み
-        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.json");
         if (ent_saveread is not null)
         {
             StreamReader srz = null;
@@ -378,7 +397,7 @@ public partial class MainPage : ContentPage
         {
             try
             {
-                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.json"));
                 LoadSaveOrNot(localSaveData);
             }
             catch { }
@@ -386,7 +405,21 @@ public partial class MainPage : ContentPage
 
         async void LoadSaveOrNot(string saveData)
         {
-            int read_loop = int.Parse(saveData);
+            if (String.IsNullOrEmpty(saveData))
+                return;
+
+            int? read_loop;
+            try
+            {
+                Dictionary<string, string> loadData = JsonSerializer.Deserialize<Dictionary<string, string>>(saveData, jsonOptions);
+                read_loop = int.Parse(loadData["CurrentLines"]);
+            }
+            catch
+            {
+                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+                return;
+            }
+
             bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
             if (answer != true)
                 return;
