@@ -1,6 +1,9 @@
 using System.Text;
+using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
+using System.Text.Unicode;
 using System.IO.Compression;
 using AliceNovel.Resources.Strings;
 #if WINDOWS
@@ -153,6 +156,12 @@ public partial class MainPage : ContentPage
         
     }
 
+    readonly JsonSerializerOptions jsonOptions = new()
+    {
+        Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+        WriteIndented = true,
+    };
+
     /// <summary>
     /// セーブ処理です。
     /// </summary>
@@ -160,12 +169,28 @@ public partial class MainPage : ContentPage
         if (zip is null)
             return;
 
+        // 保存するデータ
+        List<SaveDataInfo.SaveDataLists> saveDataLists = [];
+        saveDataLists.Add(new SaveDataInfo.SaveDataLists {
+            CurrentLines = read_times,
+            LastUpdated = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK"), // Format: ISO8601
+        });
+        SaveDataInfo saveValues = new()
+        {
+            GameTitle = anproj_setting["game-name"],
+            GameEngine = AppInfo.Current.Name,
+            EngineVersion = AppInfo.Current.VersionString,
+            SaveLists = saveDataLists,
+        };
+
+        string writerInfo = JsonSerializer.Serialize(saveValues, jsonOptions);
+
         // .anproj 内保存
-        ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
-        ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.txt");
+        ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.json");
+        ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.json");
         using (StreamWriter sw = new(ent.Open()))
         {
-            sw.WriteLine(read_times);
+            sw.WriteLine(writerInfo);
         }
 
         // ローカル保存
@@ -173,10 +198,10 @@ public partial class MainPage : ContentPage
         // (保存先のディレクトリ作成)
         if (!Directory.Exists(localSaveDirectory))
             Directory.CreateDirectory(localSaveDirectory);
-        string localSaveFile = Path.Combine(localSaveDirectory, "savefile.txt");
-        using (StreamWriter saveStream = new(File.Create(localSaveFile)))
+        string localSaveFile = Path.Combine(localSaveDirectory, "savefile.json");
+        using (StreamWriter sw = new(File.Create(localSaveFile)))
         {
-            saveStream.WriteLine(read_times);
+            sw.WriteLine(writerInfo);
         }
 
         // 成功表示
@@ -359,7 +384,7 @@ public partial class MainPage : ContentPage
         // セーブ読み込み
         // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
         // .anproj 内のデータから読み込み
-        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.txt");
+        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.json");
         if (ent_saveread is not null)
         {
             StreamReader srz = null;
@@ -378,7 +403,7 @@ public partial class MainPage : ContentPage
         {
             try
             {
-                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.txt"));
+                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.json"));
                 LoadSaveOrNot(localSaveData);
             }
             catch { }
@@ -386,7 +411,21 @@ public partial class MainPage : ContentPage
 
         async void LoadSaveOrNot(string saveData)
         {
-            int read_loop = int.Parse(saveData);
+            if (String.IsNullOrEmpty(saveData))
+                return;
+
+            int read_loop;
+            try
+            {
+                SaveDataInfo loadData = JsonSerializer.Deserialize<SaveDataInfo>(saveData, jsonOptions);
+                read_loop = loadData.SaveLists.FirstOrDefault().CurrentLines;
+            }
+            catch
+            {
+                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+                return;
+            }
+
             bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
             if (answer != true)
                 return;
@@ -595,6 +634,30 @@ public partial class MainPage : ContentPage
     private void Button6_Clicked(object sender, EventArgs e)
     {
         
+    }
+
+    public class SaveDataInfo
+    {
+        [JsonPropertyName("GameTitle")]
+        public string GameTitle { get; set; }
+
+        [JsonPropertyName("GameEngine")]
+        public string GameEngine { get; set; }
+
+        [JsonPropertyName("EngineVersion")]
+        public string EngineVersion { get; set; }
+
+        [JsonPropertyName("SaveLists")]
+        public IList<SaveDataLists> SaveLists { get; set; }
+
+        public class SaveDataLists
+        {
+            [JsonPropertyName("CurrentLines")]
+            public int CurrentLines { get; set; }
+
+            [JsonPropertyName("LastUpdated")] // Format: ISO8601
+            public string LastUpdated { get; set; }
+        }
     }
 
 }
