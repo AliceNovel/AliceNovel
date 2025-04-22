@@ -1,4 +1,4 @@
-.2name: .NET MAUI Build
+name: .NET MAUI Build
 
 on:
   push:
