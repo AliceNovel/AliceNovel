@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void ReShow_Clicked(object sender, EventArgs e)
     {
-        if (currentUIVisible == true)
+        if (currentUIVisible)
             FileRead();
         else
             UI_ReDisplay();
@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void ToolbarItem_Clicked_1(object sender, EventArgs e)
     {
-        if (currentUIVisible == true)
+        if (currentUIVisible)
             UI_Hidden();
         else
             UI_ReDisplay();
@@ -74,7 +74,7 @@ public partial class MainPage : ContentPage
     async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
     {
         bool answer = await DisplayAlert(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
-        if (answer == true)
+        if (answer)
             FileSave();
         ExitGame();
     }
