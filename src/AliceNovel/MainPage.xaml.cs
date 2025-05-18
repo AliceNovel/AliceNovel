@@ -25,10 +25,10 @@ public partial class MainPage : ContentPage
     }
 
     // 初期状態のボタン有効/無効の確認用
-    bool Initial_button1, Initial_button2, Initial_button3, Initial_button4, Initial_button5, Initial_button6;
+    private bool[] initialButtonsState = new bool[6];
 
     // UI表示/非表示
-    bool ui_visible = true;
+    bool currentUIVisible = true;
 
     /// <summary>
     /// 画面をクリックしたときの処理です。
@@ -37,7 +37,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void ReShow_Clicked(object sender, EventArgs e)
     {
-        if (ui_visible == true)
+        if (currentUIVisible == true)
             FileRead();
         else
             UI_ReDisplay();
@@ -50,7 +50,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void ToolbarItem_Clicked_1(object sender, EventArgs e)
     {
-        if (ui_visible == true)
+        if (currentUIVisible == true)
             UI_Hidden();
         else
             UI_ReDisplay();
@@ -225,14 +225,14 @@ public partial class MainPage : ContentPage
         toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
 
         // 初期のボタン有効/無効状態を確認
-        Initial_button1 = button1.IsVisible;
-        Initial_button2 = button2.IsVisible;
-        Initial_button3 = button3.IsVisible;
-        Initial_button4 = button4.IsVisible;
-        Initial_button5 = button5.IsVisible;
-        Initial_button6 = button6.IsVisible;
+        initialButtonsState[0] = button1.IsVisible;
+        initialButtonsState[1] = button2.IsVisible;
+        initialButtonsState[2] = button3.IsVisible;
+        initialButtonsState[3] = button4.IsVisible;
+        initialButtonsState[4] = button5.IsVisible;
+        initialButtonsState[5] = button6.IsVisible;
         // 画像以外すべて非表示
-        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = false;
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = false;
         button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
     }
 
@@ -242,14 +242,14 @@ public partial class MainPage : ContentPage
     void UI_ReDisplay(){
         toolbarItem1.Text = AppResources.Button2;
         
-        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = ui_visible = true;
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = true;
         // 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-        button1.IsVisible = Initial_button1;
-        button2.IsVisible = Initial_button2;
-        button3.IsVisible = Initial_button3;
-        button4.IsVisible = Initial_button4;
-        button5.IsVisible = Initial_button5;
-        button6.IsVisible = Initial_button6;
+        button1.IsVisible = initialButtonsState[0];
+        button2.IsVisible = initialButtonsState[1];
+        button3.IsVisible = initialButtonsState[2];
+        button4.IsVisible = initialButtonsState[3];
+        button5.IsVisible = initialButtonsState[4];
+        button6.IsVisible = initialButtonsState[5];
     }
 
     /// <summary>
@@ -521,7 +521,7 @@ public partial class MainPage : ContentPage
 
             // "movie: "から始まる"動画"を読み込み
             match = Regex.Match(sr_read, @"movie: (.*)");
-            if (WhileLoading == false && match.Success)
+            if (!WhileLoading && match.Success)
             {
                 // 指定されていない場合は動画を止める
                 movie.Stop();
