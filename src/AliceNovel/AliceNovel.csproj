@@ -45,7 +45,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/AliceNovel/AliceNovel</RepositoryUrl>
 		<NeutralLanguage>en-US</NeutralLanguage>
-		<DefaultLanguage>en</DefaultLanguage>
+		<DefaultLanguage>en-us</DefaultLanguage>
 	</PropertyGroup>
 
 	<ItemGroup>
