@@ -1,11 +1,13 @@
+using AliceNovel.Resources.Strings;
+using Microsoft.Maui.Controls.StyleSheets;
+using System.Collections.Generic;
+using System.IO.Compression;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
-using System.IO.Compression;
-using AliceNovel.Resources.Strings;
 #if WINDOWS
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
@@ -347,6 +349,7 @@ public partial class MainPage : ContentPage
             {"root-movie", "movie/"},
             {"root-character", "character.json"},
             {"root-save", "save/"},
+            {"style", "style.css"},
             {"first-read", "main.anov"},
             {"game-name", ""},
         };
@@ -380,6 +383,22 @@ public partial class MainPage : ContentPage
         toolbarItem1.IsEnabled = true;
         toolbarItem2.IsEnabled = true;
         toolbarItem3.IsEnabled = true;
+
+        // CSS の読み込み
+        ZipArchiveEntry cssZip = zip.GetEntry(anproj_setting["style"]);
+        if (cssZip is not null)
+        {
+            StreamReader r = null;
+            try
+            {
+                r = new(cssZip.Open());
+                Resources.Add(StyleSheet.FromReader(r));
+            }
+            finally
+            {
+                r?.Dispose();
+            }
+        }
 
         // セーブ読み込み
         // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
@@ -582,6 +601,8 @@ public partial class MainPage : ContentPage
         movie.IsVisible = false;
         UI_ReDisplay();
         re.IsEnabled = true;
+
+        // [ToDo] CSS 削除
 
         result = null;
         sr?.Close();
