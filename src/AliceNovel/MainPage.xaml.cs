@@ -100,8 +100,31 @@ public partial class MainPage : ContentPage
                 {
                     if (item is StorageFile file)
                         filePaths.Add(item.Path);
-                }
+    }
+
+    private string cssContent = string.Empty;
+
+    private void LoadCssFile()
+    {
+        if (zip == null || string.IsNullOrEmpty(anproj_setting["css"]))
+            return;
+
+        try
+        {
+            var cssEntry = zip.GetEntry(anproj_setting["css"]);
+            if (cssEntry != null)
+            {
+                using var reader = new StreamReader(cssEntry.Open());
+                cssContent = reader.ReadToEnd();
+                // TODO: Apply the cssContent as needed in the app
             }
+        }
+        catch
+        {
+            // Handle exceptions if needed
+        }
+    }
+}
         }
         #elif IOS || MACCATALYST
         var session = e.PlatformArgs?.DropSession;
@@ -349,14 +372,19 @@ public partial class MainPage : ContentPage
             {"root-save", "save/"},
             {"first-read", "main.anov"},
             {"game-name", ""},
+            {"css", "style.css"},
         };
         // json を読み込み、デフォルト設定に上書き
         if (!string.IsNullOrEmpty(str))
-            foreach (var key in JsonSerializer.Deserialize<Dictionary<string, string>>(str))
+        {
+            var jsonDict = JsonSerializer.Deserialize<Dictionary<string, string>>(str);
+            foreach (var key in jsonDict)
             {
                 if (anproj_setting.ContainsKey(key.Key))
                     anproj_setting[key.Key] = key.Value;
             }
+        }
+        LoadCssFile();
 
         // 最初の .anov ファイルを読み込み
         if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) is not null)
