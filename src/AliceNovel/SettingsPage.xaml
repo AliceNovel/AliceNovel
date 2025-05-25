@@ -27,6 +27,10 @@
                          Content="{x:Static strings:AppResources.ColorTheme__Dark_}"
                          GroupName="switchTheme"
                          CheckedChanged="SwitchTheme" />
+            
+            <!-- Restore Default Settings -->
+            <Button Text="{x:Static strings:AppResources.Settings__Restore_}"
+                    Clicked="RestoreDefaultSettings" />
         </StackLayout>
     </ScrollView>
 
