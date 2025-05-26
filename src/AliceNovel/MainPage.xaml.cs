@@ -1,6 +1,5 @@
 using AliceNovel.Resources.Strings;
 using Microsoft.Maui.Controls.StyleSheets;
-using System.Collections.Generic;
 using System.IO.Compression;
 using System.Text;
 using System.Text.Encodings.Web;
@@ -8,7 +7,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
-using System.Globalization;
 
 #if WINDOWS
 using Windows.ApplicationModel.DataTransfer;
