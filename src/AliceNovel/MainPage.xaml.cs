@@ -8,6 +8,8 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
+using System.Globalization;
+
 #if WINDOWS
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
@@ -292,6 +294,7 @@ public partial class MainPage : ContentPage
     string sr_read;
     ZipArchive zip;
     bool WhileLoading = false;
+    bool readCss = false;
 
     // rootの初期値(package.jsonで指定されていない時に使用する値)を設定
     Dictionary<string, string> anproj_setting = [];
@@ -393,6 +396,7 @@ public partial class MainPage : ContentPage
             {
                 r = new(cssZip.Open());
                 Resources.Add(StyleSheet.FromReader(r));
+                readCss = true;
             }
             finally
             {
@@ -602,7 +606,14 @@ public partial class MainPage : ContentPage
         UI_ReDisplay();
         re.IsEnabled = true;
 
-        // [ToDo] CSS 削除
+        // CSS のリセットのための再起動
+        if (readCss)
+        {
+            Application.Current.Windows[0].Page.Dispatcher.Dispatch(() =>
+            {
+                Application.Current.Windows[0].Page = new AppShell();
+            });
+        }
 
         result = null;
         sr?.Close();
