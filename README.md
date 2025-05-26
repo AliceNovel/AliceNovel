@@ -36,6 +36,10 @@
 [github-badge]: https://img.shields.io/github/actions/workflow/status/AliceNovel/AliceNovel/dotnet-maui.yml?label=github&logo=github&color=b845fc&logoColor=b845fc&style=flat "GitHub Actions Status"
 [github-history-badge]: https://buildstats.info/github/chart/AliceNovel/AliceNovel?includeBuildsFromPullRequest=false "GitHub Actions History"
 
+<a href="https://apps.microsoft.com/detail/9mvs80m1ps8v?referrer=appbadge&mode=direct">
+	<img src="https://get.microsoft.com/images/en-us%20light.svg" width="200"/>
+</a>
+
 ### Alice Project Links
 - [Alice Novel Website](https://alicenovel.web.app "Alice Novel will make you fun!")
 - [Alice Novel Documentation](https://alicenovel.web.app/en/docs)
