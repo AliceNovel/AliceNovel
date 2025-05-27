@@ -38,7 +38,7 @@
 
 ### Alice Project Links
 - [Alice Novel Website](https://alicenovel.web.app "Alice Novel will make you fun!")
-- [Alice Novel Documentation](https://alicenovel.web.app/docs)
+- [Alice Novel Documentation](https://alicenovel.web.app/en/docs)
 - [Alice Project Github](https://github.com/AliceNovel)
 - [Samples](https://github.com/AliceNovel/SampleGames)
 

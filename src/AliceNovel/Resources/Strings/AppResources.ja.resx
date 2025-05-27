@@ -226,4 +226,13 @@
   <data name="LanguageSetting" xml:space="preserve">
     <value>言語設定 (再起動が必要)</value>
   </data>
+  <data name="Settings (Restore)" xml:space="preserve">
+    <value>デフォルトの設定に戻す (再起動が必要)</value>
+  </data>
+  <data name="Alert (Confirmation)" xml:space="preserve">
+    <value>確認</value>
+  </data>
+  <data name="Alert (FileDrop)" xml:space="preserve">
+    <value>以下のゲームを開きますか?</value>
+  </data>
 </root>

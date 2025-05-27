@@ -1,15 +1,17 @@
 # Linux
 
 ## Requirements
+
 - Git Bash
-- .NET 8.0 or later (.NET CLI)
+- .NET 9.0 or later (.NET CLI)
 - Editor: 
   - [Visual Studio Code](https://code.visualstudio.com) (Recommend)
   - (Other Editor)
 
 ## Editor setting - VSCode
+
 More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunity.microsoft.com/t5/educator-developer-blog/net-maui-on-linux-with-visual-studio-code/ba-p/3982195) (Microsoft official documentation for .NET MAUI)
-1. Install .NET 8 on Linux
+1. Install .NET 9 on Linux
     ```bash
     # Debian
     wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -17,9 +19,9 @@ More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunit
     rm packages-microsoft-prod.deb
 
     sudo apt-get update && \
-      sudo apt-get install -y dotnet-sdk-8.0
+      sudo apt-get install -y dotnet-sdk-9.0
     sudo apt-get update && \
-      sudo apt-get install -y aspnetcore-runtime-8.0
+      sudo apt-get install -y aspnetcore-runtime-9.0
     ```
 1. Install .NET MAUI Android workload
     ```bash
@@ -47,9 +49,10 @@ More details : [.NET MAUI on Linux with Visual Studio Code](https://techcommunit
 1. Edit and build the app
 
 > [!important]
-> You cann't use some function in VSCode debugger. ex) Alart of community tool kit
+> ~~You cann't use some function in VSCode debugger. ex) Alart of community tool kit~~
 
 ## Instructions
+
 You can run these commands using Konsole, PowerShell, Git Shell, or any other terminal. These instructions will assume the use of Command Prompt.
 ```shell
 git clone https://github.com/AliceNovel/AliceNovel.git
@@ -57,6 +60,7 @@ cd AliceNovel/src/AliceNovel
 ```
 
 ### Running tests
+
 In order to run tests from command line you need `dotnet cli`, available after you install Alice Novel or after you build from source. If you installed it, run the following commands (assuming ./AliceNovel is the root of your AliceNovel repository): 
 ```shell
 cd src/AliceNovel
@@ -64,9 +68,10 @@ dotnet watch run
 ```
 
 ### Build `.apk` for Android
+
 ```shell
 # On `AliceNovel` directory
-dotnet publish -f:net8.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
+dotnet publish -f:net9.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
 ```
 (AndroidSdk ... From Android Studio)
 

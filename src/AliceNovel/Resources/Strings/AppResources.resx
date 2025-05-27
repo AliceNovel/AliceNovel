@@ -127,13 +127,13 @@
     <value>Hide UI</value>
   </data>
   <data name="Button2 (Tip)" xml:space="preserve">
-    <value>Reshow with touching the display</value>
+    <value>Tap the screen to redisplay it</value>
   </data>
   <data name="Button5 (Tip)" xml:space="preserve">
-    <value>Read game file</value>
+    <value>Load game file</value>
   </data>
   <data name="TextBox (Default)" xml:space="preserve">
-    <value>Please read Alice Novel game (.anproj file).</value>
+    <value>Please load the Alice Novel game (.anproj file).</value>
   </data>
   <data name="MainPage Title" xml:space="preserve">
     <value>Let's Play the Game!</value>
@@ -142,14 +142,14 @@
     <value>Load</value>
   </data>
   <data name="Alert (Save2)" xml:space="preserve">
-    <value>Successed to save the game information.</value>
+    <value>Saved successfully.</value>
     <comment>Successed Message</comment>
   </data>
   <data name="Alert (Warn1)" xml:space="preserve">
     <value>Warning</value>
   </data>
   <data name="Button1 (Tip)" xml:space="preserve">
-    <value>Overwrite Save</value>
+    <value>Overwrite save</value>
   </data>
   <data name="Tab1" xml:space="preserve">
     <value>Game</value>
@@ -167,7 +167,7 @@
     <value>Confirm</value>
   </data>
   <data name="Alert (Warn2)" xml:space="preserve">
-    <value>The file is old type, and this is out of support.</value>
+    <value>The file format is old type, and this is out of support.</value>
     <comment>Old type file and is no longer support</comment>
   </data>
   <data name="Alert (Load1)" xml:space="preserve">
@@ -187,25 +187,25 @@
     <comment>Load failed message</comment>
   </data>
   <data name="ToolbarItem1 (Reshow)" xml:space="preserve">
-    <value>Reshow</value>
+    <value>Redisplay UI</value>
   </data>
   <data name="ToolbarItem3 (Exit)" xml:space="preserve">
     <value>Exit</value>
   </data>
   <data name="ToolbarItem3 (Save or not)" xml:space="preserve">
-    <value>Do you save the game?</value>
+    <value>Do you want to save the changes?</value>
   </data>
   <data name="ToolbarItem3 (Save and Exit)" xml:space="preserve">
     <value>Save and Exit</value>
   </data>
   <data name="ToolbarItem3 (only Exit)" xml:space="preserve">
-    <value>No save and Exit</value>
+    <value>Exit without saving</value>
   </data>
   <data name="ToolbarItem3" xml:space="preserve">
     <value>Exit the Game</value>
   </data>
   <data name="ToolbarItem3 (Tip)" xml:space="preserve">
-    <value>Close currently game</value>
+    <value>The currently opened game will disappear</value>
   </data>
   <data name="ColorTheme (Description)" xml:space="preserve">
     <value>The color theme of application</value>
@@ -228,5 +228,14 @@
   </data>
   <data name="LanguageSetting" xml:space="preserve">
     <value>Language Setting (Necessary to Reboot)</value>
+  </data>
+  <data name="Settings (Restore)" xml:space="preserve">
+    <value>Restore default settings (Rebooting is required)</value>
+  </data>
+  <data name="Alert (Confirmation)" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
+  <data name="Alert (FileDrop)" xml:space="preserve">
+    <value>Do you want to open the game at the following path?</value>
   </data>
 </root>

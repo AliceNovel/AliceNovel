@@ -11,4 +11,4 @@
 
 ## Reporting a Vulnerability
 
-**Please do not report security vulnerabilities through public GitHub issues.** Instead, please report them to the misskey account of Lemon73 at [@lemon73@misskey.io](https://misskey.io/@lemon73) via Fediverse.
+**Please do not report security vulnerabilities through public GitHub issues.** Instead, please report them to [the GitHub security form](https://github.com/alicenovel/alicenovel/security/advisories/new).
