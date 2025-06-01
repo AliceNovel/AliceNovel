@@ -502,7 +502,10 @@ public partial class MainPage : ContentPage
             {
                 // 場所指定されていない場合は背景画像を消す
                 if (match.Groups[1].Value.Trim() == "")
+                {
                     image.Source = null;
+                    bgImage.Source = null;
+                }
                 else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
                 {
                     using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
@@ -511,6 +514,14 @@ public partial class MainPage : ContentPage
                         st.CopyTo(memoryStream);
                         memoryStream.Seek(0, SeekOrigin.Begin);
                         image.Source = ImageSource.FromStream(() => memoryStream);
+                    }
+
+                    using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
+                    {
+                        var memoryStream = new MemoryStream();
+                        st.CopyTo(memoryStream);
+                        memoryStream.Seek(0, SeekOrigin.Begin);
+                        bgImage.Source = ImageSource.FromStream(() => memoryStream);
                     }
                 }
             }
@@ -619,6 +630,7 @@ public partial class MainPage : ContentPage
         zip?.Dispose();// zipファイルを閉じる
         talkname.Text = "";
         image.Source = null;
+        bgImage.Source = null;
         textbox.Text = AppResources.TextBox__Default_;
         button5.IsVisible = true;
         button5.Text = AppResources.Button5;
