@@ -79,7 +79,7 @@
                Grid.ColumnSpan="2"
                Margin="0"
                Aspect="AspectFill"
-               Opacity="0.2"
+               Opacity="0.4"
                InputTransparent="True"
                HorizontalOptions="Center"
                VerticalOptions="Center"/>
@@ -208,7 +208,7 @@
                     InputTransparent="True">
 
             <Border StrokeThickness="0"
-                    StrokeShape="RoundRectangle 0,36,0,0"
+                    StrokeShape="RoundRectangle 0,32,0,0"
                     Grid.Row="0"
                     Grid.RowSpan="1"
                     Grid.Column="0"
@@ -220,7 +220,7 @@
                     BackgroundColor="{AppThemeBinding Light=#D0FFFFFF, Dark=#AA000000}">
 
                 <Label x:Name="talkname"
-                       FontSize="18" />
+                       FontSize="22" />
 
             </Border>
             
