@@ -195,17 +195,22 @@
                     VerticalOptions="End"
                     InputTransparent="True">
             
-            <Label x:Name="talkname"
+            <Border StrokeThickness="0"
+                    StrokeShape="RoundRectangle 0,36,0,0"
                    Grid.Row="0"
                    Grid.RowSpan="1"
                    Grid.Column="0"
                    Grid.ColumnSpan="1"
                    Margin="0,12,12,0"
                    Padding="28,10,10,10"
-                   FontSize="16"
                    VerticalOptions="End"
                    InputTransparent="True"
-                   BackgroundColor="{AppThemeBinding Light=#D0FFFFFF, Dark=#AA000000}"/>
+                    BackgroundColor="{AppThemeBinding Light=#D0FFFFFF, Dark=#AA000000}">
+
+                <Label x:Name="talkname"
+                       FontSize="18" />
+
+            </Border>
             
         </ScrollView>
         
