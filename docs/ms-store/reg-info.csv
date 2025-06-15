@@ -1,56 +1,35 @@
 ﻿Field,ID,Type (種類),default,en,ja,ja-jp,en-us
 Description,2,テキスト,,Alice Novel provides your Novel Game life. You can enjoy playing Anov-Sytax-type Novel Game.,Alice Novel は、独自の構文である Anov 構文を利用したゲームを起動することができるランチャーです。Alice System を統合したこのシステムを利用することで、軽量で高速なゲーム体験ができます。,Alice Novel は、独自の構文である Anov 構文を利用したゲームを起動することができるランチャーです。Alice System を統合したこのシステムを利用することで、軽量で高速なゲーム体験ができます。,Alice Novel provides your Novel Game life. You can enjoy playing Anov-Sytax-type Novel Game.
-ReleaseNotes,3,テキスト,,"Change: License by @Lemon73-Computing in #72
-Update: dependencies by @Lemon73-Computing in #73
-chore (dependencies): maui version by @Lemon73-Computing in #74
-chore (ci/cd): recreate the android ci/cd on azure devops by @Lemon73-Computing in #77
-build (deps): bump packages by @Lemon73-Computing in #78
-chore (ci/cd): bump actions/upload-artifact from v3 to v4 by @Lemon73-Computing in #46
-docs(development): create new development guide by @Lemon73-Computing in #83
-chore: hide the save button and the button for hide ui on default by @Lemon73-Computing in #84
-build(deps): bump dependencies by @Lemon73-Computing in #85
-fix: fixed toast error on windows by @Lemon73-Computing in #86
-build(deps): bump Microsoft.Extensions.Logging.Debug from 8.0.0 to 8.0.1 by @Lemon73-Computing in #87
-chore: move directories and files and update documentations about it by @Lemon73-Computing in #76
-refactor: main functions by @Lemon73-Computing in #89
-feat(exit game): add exit game function and the toolbar for it by @Lemon73-Computing in #91
-feat(local save): support local save by @Lemon73-Computing in #92
-perf: optimisation of memory processing by @Lemon73-Computing in #95
-feat(app theme): add button to switch app theme by @Lemon73-Computing in #96
-loc(en): add english support by @Lemon73-Computing in #88","## v0.9.3
+ReleaseNotes,3,テキスト,,"v0.9.4
 
-- 英語サポートの追加
-- バグフィックス
-- テーマカラーを変更できる設定の追加
-- ゲーム終了ボタンの追加
-- 最適化
+- Support for file loading by drag and drop
+- Update save function
+- Added Restore default settings button
+- Update base from .NET 8 to .NET 9
+- Support for loading CSS from package.json
+- Improved design by displaying images faintly in the background","v0.9.4
 
-など","## v0.9.3
+- ドラッグ・ドロップでのファイル読み込みの対応
+- セーブ機能の更新
+- 設定をリセットボタンを追加
+- ベースを .NET 8 から .NET 9 に更新
+- package.json からの CSS の読み込みに対応
+- 画像を背景に薄く表示するようにし、デザインの向上
+","v0.9.4
 
-- 英語サポートの追加
-- バグフィックス
-- テーマカラーを変更できる設定の追加
-- ゲーム終了ボタンの追加
-- 最適化
+- ドラッグ・ドロップでのファイル読み込みの対応
+- セーブ機能の更新
+- 設定をリセットボタンを追加
+- ベースを .NET 8 から .NET 9 に更新
+- package.json からの CSS の読み込みに対応
+- 画像を背景に薄く表示するようにし、デザインの向上","v0.9.4
 
-など","Change: License by @Lemon73-Computing in #72
-Update: dependencies by @Lemon73-Computing in #73
-chore (dependencies): maui version by @Lemon73-Computing in #74
-chore (ci/cd): recreate the android ci/cd on azure devops by @Lemon73-Computing in #77
-build (deps): bump packages by @Lemon73-Computing in #78
-chore (ci/cd): bump actions/upload-artifact from v3 to v4 by @Lemon73-Computing in #46
-docs(development): create new development guide by @Lemon73-Computing in #83
-chore: hide the save button and the button for hide ui on default by @Lemon73-Computing in #84
-build(deps): bump dependencies by @Lemon73-Computing in #85
-fix: fixed toast error on windows by @Lemon73-Computing in #86
-build(deps): bump Microsoft.Extensions.Logging.Debug from 8.0.0 to 8.0.1 by @Lemon73-Computing in #87
-chore: move directories and files and update documentations about it by @Lemon73-Computing in #76
-refactor: main functions by @Lemon73-Computing in #89
-feat(exit game): add exit game function and the toolbar for it by @Lemon73-Computing in #91
-feat(local save): support local save by @Lemon73-Computing in #92
-perf: optimisation of memory processing by @Lemon73-Computing in #95
-feat(app theme): add button to switch app theme by @Lemon73-Computing in #96
-loc(en): add english support by @Lemon73-Computing in #88"
+- Support for file loading by drag and drop
+- Update save function
+- Added Restore default settings button
+- Update base from .NET 8 to .NET 9
+- Support for loading CSS from package.json
+- Improved design by displaying images faintly in the background"
 Title,4,テキスト,,Alice Novel,Alice Novel,Alice Novel,Alice Novel
 ShortTitle,5,テキスト,,,,,
 SortTitle,6,テキスト,,,,,
@@ -396,8 +375,8 @@ RecommendedHardwareReq9,858,テキスト,,,,,
 RecommendedHardwareReq10,859,テキスト,,,,,
 RecommendedHardwareReq11,860,テキスト,,,,,
 SearchTerm1,900,テキスト,,Novel,Novel,Novel,Novel
-SearchTerm2,901,テキスト,," Game"," Game"," Game"," Game"
-SearchTerm3,902,テキスト,," Launcher"," Launcher"," Launcher"," Launcher"
+SearchTerm2,901,テキスト,,Game,Game,Game,Game
+SearchTerm3,902,テキスト,,Launcher,Launcher,Launcher,Launcher
 SearchTerm4,903,テキスト,,launcher,launcher,launcher,launcher
 SearchTerm5,904,テキスト,,novel,novel,novel,novel
 SearchTerm6,905,テキスト,,story,story,story,story
