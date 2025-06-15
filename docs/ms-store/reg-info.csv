@@ -1,5 +1,9 @@
 ﻿Field,ID,Type (種類),default,en,ja,ja-jp,en-us
-Description,2,テキスト,,Alice Novel provides your Novel Game life. You can enjoy playing Anov-Sytax-type Novel Game.,Alice Novel は、独自の構文である Anov 構文を利用したゲームを起動することができるランチャーです。Alice System を統合したこのシステムを利用することで、軽量で高速なゲーム体験ができます。,Alice Novel は、独自の構文である Anov 構文を利用したゲームを起動することができるランチャーです。Alice System を統合したこのシステムを利用することで、軽量で高速なゲーム体験ができます。,Alice Novel provides your Novel Game life. You can enjoy playing Anov-Sytax-type Novel Game.
+Description,2,テキスト,,"Alice Novel provides your Novel Game life. You can enjoy playing Anov-Sytax-type Novel Game.
+The app depends on .NET Desktop Runtime.","Alice Novel は、独自の構文である Anov 構文を利用したゲームを起動することができるランチャーです。Alice System を統合したこのシステムを利用することで、軽量で高速なゲーム体験ができます。
+このアプリケーションは .NET Desktop Runtime に依存しています。","Alice Novel は、独自の構文である Anov 構文を利用したゲームを起動することができるランチャーです。Alice System を統合したこのシステムを利用することで、軽量で高速なゲーム体験ができます。
+このアプリケーションは .NET Desktop Runtime に依存しています。","Alice Novel provides your Novel Game life. You can enjoy playing Anov-Sytax-type Novel Game.
+The app depends on .NET Desktop Runtime."
 ReleaseNotes,3,テキスト,,"v0.9.4
 
 - Support for file loading by drag and drop
@@ -38,7 +42,7 @@ ShortDescription,8,テキスト,,,,,
 DevStudio,9,テキスト,,Alice Project,Alice Project,Alice Project,Alice Project
 CopyrightTrademarkInformation,12,テキスト,,Copyright (c) 2023-2025 Alice Project,Copyright (c) 2023-2025 Alice Project,Copyright (c) 2023-2025 Alice Project,Copyright (c) 2023-2025 Alice Project
 AdditionalLicenseTerms,13,テキスト,,MIT License,MIT License,MIT License,MIT License
-DesktopScreenshot1,100,相対パス (またはパートナー センターにあるファイルへの URL),,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478646/listingassets/3018785694571636646,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478648/listingassets/3018785694571636646,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478700/listingassets/3018785694571636646,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020654266/listingassets/3018785694571636646
+DesktopScreenshot1,100,相対パス (またはパートナー センターにあるファイルへの URL),,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478646/listingassets/3042001360210900455,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478648/listingassets/3026718884533021915,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478700/listingassets/3008710622469642939,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020654266/listingassets/3042659919175786804
 DesktopScreenshot2,101,相対パス (またはパートナー センターにあるファイルへの URL),,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478646/listingassets/3068064901942465426,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478648/listingassets/3068064901942465426,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020478700/listingassets/3068064901942465426,https://developer.microsoft.com/en-us/dashboard/apps/9MVS80M1PS8V/submissions/1152921505699327855/listings/1152922700020654266/listingassets/3068064901942465426
 DesktopScreenshot3,102,相対パス (またはパートナー センターにあるファイルへの URL),,,,,
 DesktopScreenshot4,103,相対パス (またはパートナー センターにあるファイルへの URL),,,,,
