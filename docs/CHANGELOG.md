@@ -31,6 +31,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Save File Format from text to Json ([#93](https://github.com/AliceNovel/AliceNovel/issues/93))
 - Upgrade version from .NET 8 to .NET 9 ([#104](https://github.com/AliceNovel/AliceNovel/issues/104))
 - Imploved Main Design ([#155](https://github.com/AliceNovel/AliceNovel/issues/155))
+- Refactored ([#113](https://github.com/AliceNovel/AliceNovel/pull/113), [#143](https://github.com/AliceNovel/AliceNovel/pull/143))
+- Bump dependencies ([#98](https://github.com/AliceNovel/AliceNovel/pull/98), [#99](https://github.com/AliceNovel/AliceNovel/pull/99), [#100](https://github.com/AliceNovel/AliceNovel/pull/100), [#101](https://github.com/AliceNovel/AliceNovel/pull/101), [#102](https://github.com/AliceNovel/AliceNovel/pull/102), [#103](https://github.com/AliceNovel/AliceNovel/pull/103), [#107](https://github.com/AliceNovel/AliceNovel/pull/107), [#108](https://github.com/AliceNovel/AliceNovel/pull/108), [#109](https://github.com/AliceNovel/AliceNovel/pull/109), [#110](https://github.com/AliceNovel/AliceNovel/pull/110), [#115](https://github.com/AliceNovel/AliceNovel/pull/115), [#116](https://github.com/AliceNovel/AliceNovel/pull/116), [#117](https://github.com/AliceNovel/AliceNovel/pull/117), [#118](https://github.com/AliceNovel/AliceNovel/pull/118), [#119](https://github.com/AliceNovel/AliceNovel/pull/119), [#120](https://github.com/AliceNovel/AliceNovel/pull/120), [#122](https://github.com/AliceNovel/AliceNovel/pull/122), [#123](https://github.com/AliceNovel/AliceNovel/pull/123), [#128](https://github.com/AliceNovel/AliceNovel/pull/128), [#129](https://github.com/AliceNovel/AliceNovel/pull/129), [#130](https://github.com/AliceNovel/AliceNovel/pull/130), [#131](https://github.com/AliceNovel/AliceNovel/pull/131), [#132](https://github.com/AliceNovel/AliceNovel/pull/132), [#133](https://github.com/AliceNovel/AliceNovel/pull/133), [#134](https://github.com/AliceNovel/AliceNovel/pull/134), [#135](https://github.com/AliceNovel/AliceNovel/pull/135), [#136](https://github.com/AliceNovel/AliceNovel/pull/136), [#138](https://github.com/AliceNovel/AliceNovel/pull/138), [#139](https://github.com/AliceNovel/AliceNovel/pull/139), [#140](https://github.com/AliceNovel/AliceNovel/pull/140), [#156](https://github.com/AliceNovel/AliceNovel/pull/156), [#157](https://github.com/AliceNovel/AliceNovel/pull/157))
+  - Microsoft.Maui.Controls from 8.0.92 to 9.0.80
+  - Microsoft.Maui.Controls.Compatibility from from 8.0.92 to 9.0.80
+  - CommunityToolkit.Maui from 9.1.0 to 9.1.1
+  - CommunityToolkit.Maui.MediaElement from 4.1.2 to 5.0.0
+  - Microsoft.Extensions>Logging.Debug from 8.0.1 to 9.0.2
 
 **Added**
 - Enable to Read from Draged and Droped file ([#31](https://github.com/AliceNovel/AliceNovel/issues/31))
@@ -38,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Restore Defauat Settings Button to Settings Page ([#97](https://github.com/AliceNovel/AliceNovel/issues/97))
 - Prepare for Releasing at Microsoft Store ([#141](https://github.com/AliceNovel/AliceNovel/issues/141))
 - \[Feat\] Support CSS File from package.json ([#148](https://github.com/AliceNovel/AliceNovel/issues/148))
+- Microsoft Budge to Readme.md ([#152](https://github.com/AliceNovel/AliceNovel/pull/152))
 
 **Fixed**
 - Dependabot is not working ([#59](https://github.com/AliceNovel/AliceNovel/issues/59))
