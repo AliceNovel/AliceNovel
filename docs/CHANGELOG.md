@@ -23,6 +23,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 **Release Date**: TBD
 
+## [v0.9.4]
+
+**Release Date**: 2025/6/16
+
+**Changed**
+- Save File Format from text to Json ([#93](https://github.com/AliceNovel/AliceNovel/issues/93))
+- Upgrade version from .NET 8 to .NET 9 ([#104](https://github.com/AliceNovel/AliceNovel/issues/104))
+- Imploved Main Design ([#155](https://github.com/AliceNovel/AliceNovel/issues/155))
+
+**Added**
+- Enable to Read from Draged and Droped file ([#31](https://github.com/AliceNovel/AliceNovel/issues/31))
+- \[Docs\] Target Platforms Documentation ([#79](https://github.com/AliceNovel/AliceNovel/issues/79))
+- Restore Defauat Settings Button to Settings Page ([#97](https://github.com/AliceNovel/AliceNovel/issues/97))
+- Prepare for Releasing at Microsoft Store ([#141](https://github.com/AliceNovel/AliceNovel/issues/141))
+- \[Feat\] Support CSS File from package.json ([#148](https://github.com/AliceNovel/AliceNovel/issues/148))
+
+**Fixed**
+- Dependabot is not working ([#59](https://github.com/AliceNovel/AliceNovel/issues/59))
+- \[CI\] CI/CI for macOS ([#126](https://github.com/AliceNovel/AliceNovel/issues/126))
+
 ## [v0.9.3]
 
 **Release Date**: 2024/11/3
@@ -177,7 +197,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Only User Interface.
 
 <!-- Links -->
-[Next]: https://github.com/AliceNovel/AliceNovel/compare/v0.9.3...HEAD
+[Next]: https://github.com/AliceNovel/AliceNovel/compare/v0.9.4...HEAD
+[v0.9.4]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.4
 [v0.9.3]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.3
 [v0.9.2]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.2
 [v0.9.1]: https://github.com/AliceNovel/AliceNovel/releases/tag/v0.9.1
