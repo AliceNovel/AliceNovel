@@ -24,6 +24,9 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+
+        if (DeviceInfo.Platform == DevicePlatform.Android)
+            re.GestureRecognizers.Clear();
     }
 
     // 初期状態のボタン有効/無効の確認用
