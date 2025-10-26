@@ -39,7 +39,7 @@ jobs:
         name: Setup Xcode latest
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '16.4' # including beta version
+          xcode-version: '26.0' # including beta version
 
       - name: Install MAUI Workloads
         run: |
