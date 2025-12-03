@@ -3,7 +3,7 @@
 ## Requirements
 
 - Git
-- .NET CLI (.NET 9 or later)
+- .NET CLI (.NET 10 or later)
 - Editor: 
   - [VSCode](https://code.visualstudio.com) (Recommend)
   - (Other Editor)
@@ -12,7 +12,7 @@
 
 See also: [.NET MAUI on Linux with VSCode](https://techcommunity.microsoft.com/t5/educator-developer-blog/net-maui-on-linux-with-visual-studio-code/ba-p/3982195) (Microsoft official documentation for .NET MAUI)
 
-1. Install .NET 9 on Linux
+1. Install .NET 10 on Linux
     ```sh
     # Debian
     wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
@@ -20,9 +20,9 @@ See also: [.NET MAUI on Linux with VSCode](https://techcommunity.microsoft.com/t
     rm packages-microsoft-prod.deb
 
     sudo apt-get update && \
-      sudo apt-get install -y dotnet-sdk-9.0
+      sudo apt-get install -y dotnet-sdk-10.0
     # sudo apt-get update && \
-    #   sudo apt-get install -y aspnetcore-runtime-9.0
+    #   sudo apt-get install -y aspnetcore-runtime-10.0
     ```
 1. Install .NET MAUI workloads
     ```sh
@@ -55,11 +55,11 @@ See also: [.NET MAUI on Linux with VSCode](https://techcommunity.microsoft.com/t
         ```
     - Android SDK not found
 1. Connect your physical Android device or your emulator device
-    - [Setup physical Android device for debug](https://learn.microsoft.com/dotnet/maui/android/device/setup?view=net-maui-9.0#connecting-over-wifi)
+    - [Setup physical Android device for debug](https://learn.microsoft.com/dotnet/maui/android/device/setup?view=net-maui-10.0#connecting-over-wifi)
 1. Edit and build the app
     ```sh
     # e.g.
-    dotnet build -t:Run -f:net9.0-android -c:Debug \
+    dotnet build -t:Run -f:net10.0-android -c:Debug \
       -p:AndroidSdkDirectory="/home/lemon73/Android/Sdk" \
       -p:JavaSdkDirectory="/usr/lib/jvm/msopenjdk-17-amd64" \
       /home/lemon73/Repo/AliceNovel/src/AliceNovel/AliceNovel.csproj
@@ -97,7 +97,7 @@ In order to run tests from command line you need `dotnet cli`, available after y
 cd src/AliceNovel
 # dotnet watch run
 # e.g.
-dotnet build -t:Run -f:net9.0-android -c:Debug \
+dotnet build -t:Run -f:net10.0-android -c:Debug \
   -p:AndroidSdkDirectory="/home/lemon73/Android/Sdk" \
   -p:JavaSdkDirectory="/usr/lib/jvm/msopenjdk-17-amd64" \
   /home/lemon73/Repo/AliceNovel/src/AliceNovel/AliceNovel.csproj
@@ -107,6 +107,6 @@ dotnet build -t:Run -f:net9.0-android -c:Debug \
 
 ```sh
 # On `AliceNovel` directory
-dotnet publish -f:net9.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
+dotnet publish -f:net10.0-android -c:Release -p:AndroidSdkDirectory=~/Android/Sdk
 # (AndroidSdk ... From Android Studio)
 ```

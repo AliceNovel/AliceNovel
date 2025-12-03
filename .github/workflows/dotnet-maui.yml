@@ -19,27 +19,27 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-15') || 'windows-latest' }}
+    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-latest') || 'windows-latest' }}
     strategy:
       matrix:
-        tfm: [net9.0-android, net9.0-ios, net9.0-maccatalyst, net9.0-windows10.0.19041.0]
+        tfm: [net10.0-android, net10.0-ios, net10.0-maccatalyst, net10.0-windows10.0.19041.0]
       fail-fast: false
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 9.0.x
+          dotnet-version: 10.0.x
 
-      # currently, macos-latest (macos-15) is not include xcode 16.3. Please show below link.
-      # https://github.com/actions/runner-images/blob/2c013247b1be5aaefb18a96fb0aed6e8d8fca8a2/images/macos/macos-15-Readme.md#xcode
-      - if: matrix.tfm == 'net9.0-maccatalyst'
+      # currently, macos-latest (macos-26) is not include xcode 26.1. Please show below link.
+      # https://github.com/actions/runner-images/blob/74a06c36b6baa8acb1072fb933f4776b4898164d/images/macos/macos-26-arm64-Readme.md#xcode
+      - if: matrix.tfm == 'net10.0-maccatalyst'
         name: Setup Xcode latest
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: '26.0' # including beta version
+          xcode-version: '26.1.1' # including beta version
 
       - name: Install MAUI Workloads
         run: |
@@ -53,36 +53,36 @@ jobs:
         run: dotnet build src/AliceNovel/AliceNovel.csproj -c Release -f ${{ matrix.tfm }} --no-restore -p:PublishReadyToRun=false
 
       # Upload Artifact
-      - if: matrix.tfm == 'net9.0-android'
+      - if: matrix.tfm == 'net10.0-android'
         name: Android Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: android-ci-build
-          path: src/AliceNovel/bin/Release/net9.0-android/*Signed.a*
+          path: src/AliceNovel/bin/Release/net10.0-android/*Signed.a*
 
-      - if: matrix.tfm == 'net9.0-ios'
+      - if: matrix.tfm == 'net10.0-ios'
         name: iOS Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ios-ci-build
-          path: src/AliceNovel/bin/Release/net9.0-ios/**/*.app/
+          path: src/AliceNovel/bin/Release/net10.0-ios/**/*.app/
 
-      - if: matrix.tfm == 'net9.0-maccatalyst'
+      - if: matrix.tfm == 'net10.0-maccatalyst'
         name: MacCatalyst Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: macos-ci-build
-          path: src/AliceNovel/bin/Release/net9.0-maccatalyst/**/*.app/
+          path: src/AliceNovel/bin/Release/net10.0-maccatalyst/**/*.app/
 
-      - if: matrix.tfm == 'net9.0-windows10.0.19041.0'
+      - if: matrix.tfm == 'net10.0-windows10.0.19041.0'
         name: Windows Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: windows-ci-build
-          path: src/AliceNovel/bin/Release/net9.0-windows*/**/
+          path: src/AliceNovel/bin/Release/net10.0-windows*/**/
 
       - name: Full Artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: full-ci-build-${{ matrix.tfm }}
           path: src/AliceNovel/bin/Release/${{ matrix.tfm }}*/
