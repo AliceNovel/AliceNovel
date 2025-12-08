@@ -35,7 +35,7 @@ public partial class SettingsPage : ContentPage
         if (CultureInfo.CurrentUICulture.ToString() == selectedLanguage)
             return;
 
-        bool answer = await DisplayAlert(AppResources.Alert__Confirmation_, AppResources.Alert__RebootDescriptions_, AppResources.Alert__Reboot_, AppResources.Alert__Canncel_);
+        bool answer = await DisplayAlertAsync(AppResources.Alert__Confirmation_, AppResources.Alert__RebootDescriptions_, AppResources.Alert__Reboot_, AppResources.Alert__Canncel_);
         if (answer != true)
         {
             CheckAppLanguage();
@@ -87,7 +87,7 @@ public partial class SettingsPage : ContentPage
     async private void RestoreDefaultSettings(object sender, EventArgs e)
     {
         // Check whether reboot for executing this process or not
-        bool answer = await DisplayAlert(AppResources.Alert__Confirmation_, AppResources.Alert__RebootDescriptions_, AppResources.Alert__Reboot_, AppResources.Alert__Canncel_);
+        bool answer = await DisplayAlertAsync(AppResources.Alert__Confirmation_, AppResources.Alert__RebootDescriptions_, AppResources.Alert__Reboot_, AppResources.Alert__Canncel_);
         if (answer != true)
             return;
 

@@ -78,7 +78,7 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     async private void ToolbarItem_Clicked_3(object sender, EventArgs e)
     {
-        bool answer = await DisplayAlert(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
+        bool answer = await DisplayAlertAsync(AppResources.ToolbarItem3__Exit_, AppResources.ToolbarItem3__Save_or_not_, AppResources.ToolbarItem3__Save_and_Exit_, AppResources.ToolbarItem3__only_Exit_);
         if (answer)
             FileSave();
         ExitGame();
@@ -144,7 +144,7 @@ public partial class MainPage : ContentPage
         // Process the dropped file
         // [Want to] Activate current Window
         // Check whether open the .anproj file or not
-        bool answer = await DisplayAlert(AppResources.Alert__Confirmation_, AppResources.Alert__FileDrop_ + "<"+ filePath + ">", AppResources.Alert__Confirm_, AppResources.Alert__Canncel_);
+        bool answer = await DisplayAlertAsync(AppResources.Alert__Confirmation_, AppResources.Alert__FileDrop_ + "<"+ filePath + ">", AppResources.Alert__Confirm_, AppResources.Alert__Canncel_);
         if (answer != true)
             return;
 
@@ -210,7 +210,7 @@ public partial class MainPage : ContentPage
         }
 
         // 成功表示
-        await DisplayAlert(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
+        await DisplayAlertAsync(AppResources.Alert__Save1_, AppResources.Alert__Save2_, AppResources.Alert__Confirm_);
     }
 
     /// <summary>
@@ -373,7 +373,7 @@ public partial class MainPage : ContentPage
             entry = zip.GetEntry(anproj_setting["first-read"]);
         else
         {
-            await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
+            await DisplayAlertAsync(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
             return;
         }
 
@@ -446,11 +446,11 @@ public partial class MainPage : ContentPage
             }
             catch
             {
-                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+                await DisplayAlertAsync(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
                 return;
             }
 
-            bool answer = await DisplayAlert(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
+            bool answer = await DisplayAlertAsync(AppResources.Alert__Load1_, AppResources.Alert__Load2_, AppResources.Alert__Load3_, AppResources.Alert__Load4_);
             if (answer != true)
                 return;
 
@@ -464,7 +464,7 @@ public partial class MainPage : ContentPage
             catch
             {
                 // 失敗表示
-                await DisplayAlert(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
+                await DisplayAlertAsync(AppResources.Alert__Warn1_, AppResources.Alert__Load5_, AppResources.Alert__Confirm_);
             }
             WhileLoading = false;
         }
