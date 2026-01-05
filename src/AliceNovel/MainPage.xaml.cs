@@ -460,16 +460,9 @@ public partial class MainPage : ContentPage
                     {
                         var memoryStream = new MemoryStream();
                         st.CopyTo(memoryStream);
-                        memoryStream.Seek(0, SeekOrigin.Begin);
-                        image.Source = ImageSource.FromStream(() => memoryStream);
-                    }
-
-                    using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
-                    {
-                        var memoryStream = new MemoryStream();
-                        st.CopyTo(memoryStream);
-                        memoryStream.Seek(0, SeekOrigin.Begin);
-                        bgImage.Source = ImageSource.FromStream(() => memoryStream);
+                        byte[] bytes = memoryStream.ToArray();
+                        image.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+                        bgImage.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
                     }
                 }
             }
