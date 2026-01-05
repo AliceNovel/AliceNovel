@@ -98,16 +98,6 @@ public partial class MainPage : ContentPage
         FirstFileReader(filePath);
     }
 
-    /// <summary>
-    /// button1 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button1_Clicked(object sender, EventArgs e)
-    {
-        
-    }
-
     readonly JsonSerializerOptions jsonOptions = new()
     {
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
@@ -161,31 +151,17 @@ public partial class MainPage : ContentPage
     }
 
     /// <summary>
-    /// button2 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button2_Clicked(object sender, EventArgs e)
-    {
-        
-    }
-
-    /// <summary>
     /// 画像をフル画面で閲覧するために UI を隠します。
     /// </summary>
     void UI_Hidden(){
         toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
 
         // 初期のボタン有効/無効状態を確認
-        initialButtonsState[0] = button1.IsVisible;
-        initialButtonsState[1] = button2.IsVisible;
-        initialButtonsState[2] = button3.IsVisible;
-        initialButtonsState[3] = button4.IsVisible;
         initialButtonsState[4] = button5.IsVisible;
         initialButtonsState[5] = button6.IsVisible;
         // 画像以外すべて非表示
         talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = false;
-        button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
+        button5.IsVisible = button6.IsVisible = false;
     }
 
     /// <summary>
@@ -196,32 +172,8 @@ public partial class MainPage : ContentPage
         
         talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = true;
         // 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-        button1.IsVisible = initialButtonsState[0];
-        button2.IsVisible = initialButtonsState[1];
-        button3.IsVisible = initialButtonsState[2];
-        button4.IsVisible = initialButtonsState[3];
         button5.IsVisible = initialButtonsState[4];
         button6.IsVisible = initialButtonsState[5];
-    }
-
-    /// <summary>
-    /// button3 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button3_Clicked(object sender, EventArgs e)
-    {
-        
-    }
-
-    /// <summary>
-    /// button4 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button4_Clicked(object sender, EventArgs e)
-    {
-        
     }
 
     /// <summary>
