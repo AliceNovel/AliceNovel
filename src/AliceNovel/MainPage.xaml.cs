@@ -433,7 +433,7 @@ public partial class MainPage : ContentPage
 
         async void LoadSaveOrNot(string saveData)
         {
-            if (String.IsNullOrEmpty(saveData))
+            if (string.IsNullOrEmpty(saveData))
                 return;
 
             int read_loop;
@@ -617,13 +617,7 @@ public partial class MainPage : ContentPage
         re.IsEnabled = true;
 
         // CSS のリセットのための再起動
-        if (readCss)
-        {
-            Application.Current.Windows[0].Page.Dispatcher.Dispatch(() =>
-            {
-                Application.Current.Windows[0].Page = new AppShell();
-            });
-        }
+        FileLoader.CssReset(readCss);
 
         result = null;
         sr?.Close();
@@ -641,9 +635,7 @@ public partial class MainPage : ContentPage
         toolbarItem3.IsEnabled = false;
 
         // キャッシュフォルダを削除する
-        string path = FileSystem.Current.CacheDirectory;
-        if (Directory.Exists(path))
-            Directory.Delete(path, true);
+        FileLoader.ClearCache();
     }
 
     /// <summary>
