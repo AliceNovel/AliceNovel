@@ -1,21 +1,12 @@
+using AliceNovel.Controls;
 using AliceNovel.Resources.Strings;
 using Microsoft.Maui.Controls.StyleSheets;
 using System.IO.Compression;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
-
-#if WINDOWS
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage;
-#elif IOS || MACCATALYST
-using UIKit;
-using Foundation;
-using System.Diagnostics;
-#endif
 
 namespace AliceNovel;
 
@@ -93,53 +84,9 @@ public partial class MainPage : ContentPage
     async private void OnDrop(object sender, DropEventArgs e)
     #pragma warning restore IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
     {
-        var filePaths = new List<string>();
-
-        #if WINDOWS
-        if (e.PlatformArgs is not null && e.PlatformArgs.DragEventArgs.DataView.Contains(StandardDataFormats.StorageItems))
-        {
-            var items = await e.PlatformArgs.DragEventArgs.DataView.GetStorageItemsAsync();
-            if (items.Any())
-            {
-                foreach (var item in items)
-                {
-                    if (item is StorageFile file)
-                        filePaths.Add(item.Path);
-                }
-            }
-        }
-        #elif IOS || MACCATALYST
-        var session = e.PlatformArgs?.DropSession;
-        if (session == null)
+        string filePath = await FileDroper.DropAsync(e);
+        if (string.IsNullOrEmpty(filePath))
             return;
-
-        foreach (UIDragItem item in session.Items)
-        {
-            var result = await LoadItemAsync(item.ItemProvider, item.ItemProvider.RegisteredTypeIdentifiers.ToList());
-            if (result is not null)
-                filePaths.Add(result.FileUrl?.Path!);
-        }
-        foreach (var item in filePaths)
-        {
-            Debug.WriteLine($"Path: {item}");
-        }
-
-        static async Task<LoadInPlaceResult> LoadItemAsync(NSItemProvider itemProvider, List<string> typeIdentifiers)
-        {
-            if (typeIdentifiers is null || typeIdentifiers.Count == 0)
-                return null;
-
-            var typeIdent = typeIdentifiers.First();
-
-            if (itemProvider.HasItemConformingTo(typeIdent))
-                return await itemProvider.LoadInPlaceFileRepresentationAsync(typeIdent);
-
-            typeIdentifiers.Remove(typeIdent);
-            return await LoadItemAsync(itemProvider, typeIdentifiers);
-        }
-        #endif
-
-        string filePath = filePaths.FirstOrDefault();
 
         // Process the dropped file
         // [Want to] Activate current Window
@@ -149,16 +96,6 @@ public partial class MainPage : ContentPage
             return;
 
         FirstFileReader(filePath);
-    }
-
-    /// <summary>
-    /// button1 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button1_Clicked(object sender, EventArgs e)
-    {
-        
     }
 
     readonly JsonSerializerOptions jsonOptions = new()
@@ -178,7 +115,7 @@ public partial class MainPage : ContentPage
         List<SaveDataInfo.SaveDataLists> saveDataLists = [];
         saveDataLists.Add(new SaveDataInfo.SaveDataLists {
             CurrentLines = read_times,
-            LastUpdated = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK"), // Format: ISO8601
+            LastUpdated = DateTimeOffset.Now,
         });
         SaveDataInfo saveValues = new()
         {
@@ -214,31 +151,17 @@ public partial class MainPage : ContentPage
     }
 
     /// <summary>
-    /// button2 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button2_Clicked(object sender, EventArgs e)
-    {
-        
-    }
-
-    /// <summary>
     /// 画像をフル画面で閲覧するために UI を隠します。
     /// </summary>
     void UI_Hidden(){
         toolbarItem1.Text = AppResources.ToolbarItem1__Reshow_;
 
         // 初期のボタン有効/無効状態を確認
-        initialButtonsState[0] = button1.IsVisible;
-        initialButtonsState[1] = button2.IsVisible;
-        initialButtonsState[2] = button3.IsVisible;
-        initialButtonsState[3] = button4.IsVisible;
         initialButtonsState[4] = button5.IsVisible;
         initialButtonsState[5] = button6.IsVisible;
         // 画像以外すべて非表示
-        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = false;
-        button1.IsVisible = button2.IsVisible = button3.IsVisible = button4.IsVisible = button5.IsVisible = button6.IsVisible = false;
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = textboxRoundBorder.IsVisible = currentUIVisible = false;
+        button5.IsVisible = button6.IsVisible = false;
     }
 
     /// <summary>
@@ -246,35 +169,11 @@ public partial class MainPage : ContentPage
     /// </summary>
     void UI_ReDisplay(){
         toolbarItem1.Text = AppResources.Button2;
-        
-        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = true;
+
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = textboxRoundBorder.IsVisible = currentUIVisible = true;
         // 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
-        button1.IsVisible = initialButtonsState[0];
-        button2.IsVisible = initialButtonsState[1];
-        button3.IsVisible = initialButtonsState[2];
-        button4.IsVisible = initialButtonsState[3];
         button5.IsVisible = initialButtonsState[4];
         button6.IsVisible = initialButtonsState[5];
-    }
-
-    /// <summary>
-    /// button3 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button3_Clicked(object sender, EventArgs e)
-    {
-        
-    }
-
-    /// <summary>
-    /// button4 をクリックしたときの処理です。
-    /// </summary>
-    /// <param name="sender"></param>
-    /// <param name="e"></param>
-    private void Button4_Clicked(object sender, EventArgs e)
-    {
-        
     }
 
     /// <summary>
@@ -327,10 +226,8 @@ public partial class MainPage : ContentPage
     /// <param name="targetFilePath">.anproj ファイルのパス</param>
     async void FirstFileReader(string targetFilePath)
     {
-        // キャッシュフォルダを削除する
-        string path = FileSystem.Current.CacheDirectory;
-        if (Directory.Exists(path))
-            Directory.Delete(path, true);
+        // キャッシュファイルを削除する
+        FileLoader.ClearCache();
 
         read_times = 0;
         // zip内のファイルを読み込み
@@ -435,7 +332,7 @@ public partial class MainPage : ContentPage
 
         async void LoadSaveOrNot(string saveData)
         {
-            if (String.IsNullOrEmpty(saveData))
+            if (string.IsNullOrEmpty(saveData))
                 return;
 
             int read_loop;
@@ -515,16 +412,9 @@ public partial class MainPage : ContentPage
                     {
                         var memoryStream = new MemoryStream();
                         st.CopyTo(memoryStream);
-                        memoryStream.Seek(0, SeekOrigin.Begin);
-                        image.Source = ImageSource.FromStream(() => memoryStream);
-                    }
-
-                    using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
-                    {
-                        var memoryStream = new MemoryStream();
-                        st.CopyTo(memoryStream);
-                        memoryStream.Seek(0, SeekOrigin.Begin);
-                        bgImage.Source = ImageSource.FromStream(() => memoryStream);
+                        byte[] bytes = memoryStream.ToArray();
+                        image.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+                        bgImage.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
                     }
                 }
             }
@@ -586,21 +476,25 @@ public partial class MainPage : ContentPage
                 catch{}
             }
 
-            // "- "から始まる"人物"を読み込み
-            match = Regex.Match(sr_read, @"- (.*)");
-            if (match.Success)
-                talkname.Text = match.Groups[1].Value.Trim();
+            // Captures the people name and its emotion
+            // "- example" → people: "example", emotion: null
+            // "- example / happy" → people: "example", emotion: "happy"
+            // "/ happy" → people: null, emotion: "happy"
+            string pattern = @"^(?:-\s*(?<people>[^/]+))?(?:\s*/\s*(?<emotion>.+))?$";
+            match = Regex.Match(sr_read, pattern);
+            if (match.Groups["people"].Success)
+            {
+                string people = match.Groups["people"].Value.Trim();
 
-            // "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
-            match = Regex.Match(sr_read, @"- (.*?)/");
-            if (match.Success)
-                talkname.Text = match.Groups[1].Value.Trim();
-                // 感情変更
-
-            // "/ "から始まる"感情"を読み込み
-            match = Regex.Match(sr_read, @"/ (.*)");
-            //if (match.Success)
-                // 感情変更
+                if (!string.IsNullOrWhiteSpace(people))
+                    talkname.Text = people;
+            }
+            if (match.Groups["emotion"].Success)
+            {
+                string emotion = match.Groups["emotion"].Value.Trim();
+                // if (!string.IsNullOrWhiteSpace(emotion))
+                // [ToDo] Change emotion
+            }
 
             // 次の行を読み込む
             sr_read = sr.ReadLine();
@@ -619,13 +513,7 @@ public partial class MainPage : ContentPage
         re.IsEnabled = true;
 
         // CSS のリセットのための再起動
-        if (readCss)
-        {
-            Application.Current.Windows[0].Page.Dispatcher.Dispatch(() =>
-            {
-                Application.Current.Windows[0].Page = new AppShell();
-            });
-        }
+        FileLoader.CssReset(readCss);
 
         result = null;
         sr?.Close();
@@ -643,9 +531,7 @@ public partial class MainPage : ContentPage
         toolbarItem3.IsEnabled = false;
 
         // キャッシュフォルダを削除する
-        string path = FileSystem.Current.CacheDirectory;
-        if (Directory.Exists(path))
-            Directory.Delete(path, true);
+        FileLoader.ClearCache();
     }
 
     /// <summary>
@@ -680,29 +566,4 @@ public partial class MainPage : ContentPage
     {
         
     }
-
-    public class SaveDataInfo
-    {
-        [JsonPropertyName("GameTitle")]
-        public string GameTitle { get; set; }
-
-        [JsonPropertyName("GameEngine")]
-        public string GameEngine { get; set; }
-
-        [JsonPropertyName("EngineVersion")]
-        public string EngineVersion { get; set; }
-
-        [JsonPropertyName("SaveLists")]
-        public IList<SaveDataLists> SaveLists { get; set; }
-
-        public class SaveDataLists
-        {
-            [JsonPropertyName("CurrentLines")]
-            public int CurrentLines { get; set; }
-
-            [JsonPropertyName("LastUpdated")] // Format: ISO8601
-            public string LastUpdated { get; set; }
-        }
-    }
-
 }
