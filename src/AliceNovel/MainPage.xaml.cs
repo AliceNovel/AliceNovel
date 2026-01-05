@@ -8,15 +8,6 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
 
-#if WINDOWS
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage;
-#elif IOS || MACCATALYST
-using UIKit;
-using Foundation;
-using System.Diagnostics;
-#endif
-
 namespace AliceNovel;
 
 public partial class MainPage : ContentPage

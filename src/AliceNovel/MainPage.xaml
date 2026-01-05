@@ -132,16 +132,12 @@
                     Text="Button1"
                     IsVisible="false"
                     Margin="0,0,12,0"
-                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
                     windows:VisualElement.AccessKey="1"/>
             <!-- 規定では非表示 -->
             <Button x:Name="button2"
                     Clicked="Button2_Clicked"
                     Text="Button2"
                     IsVisible="false"
-                    TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                    BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
                     windows:VisualElement.AccessKey="2"/>
 
         </HorizontalStackLayout>
@@ -162,8 +158,6 @@
                         Text="Button3"
                         Margin="0,0,0,0"
                         IsVisible="false"
-                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
                         windows:VisualElement.AccessKey="3"/>
                 <!-- 規定では非表示 -->
                 <Button x:Name="button4"
@@ -171,8 +165,6 @@
                         Text="Button4"
                         Margin="12,0,0,0"
                         IsVisible="false"
-                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
                         windows:VisualElement.AccessKey="4"/>
             </HorizontalStackLayout>
 
@@ -183,8 +175,6 @@
                         Text="{x:Static strings:AppResources.Button5}"
                         ToolTipProperties.Text="{x:Static strings:AppResources.Button5__Tip_}"
                         Margin="0,0,0,0"
-                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
                         windows:VisualElement.AccessKey="5"/>
                 <!-- 規定では非表示 -->
                 <Button x:Name="button6"
@@ -192,8 +182,6 @@
                         Text="Button6"
                         IsVisible="false"
                         Margin="12,0,0,0"
-                        TextColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}"
-                        BackgroundColor="{AppThemeBinding Light=#AA000000, Dark=#D0FFFFFF}"
                         windows:VisualElement.AccessKey="6"/>
             </HorizontalStackLayout>
 
