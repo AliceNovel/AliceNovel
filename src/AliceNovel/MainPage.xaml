@@ -150,7 +150,8 @@
                     VerticalOptions="End"
                     InputTransparent="True">
 
-            <Border StrokeThickness="0"
+            <Border x:Name="textboxRoundBorder"
+                    StrokeThickness="0"
                     StrokeShape="RoundRectangle 0,32,0,0"
                     Grid.Row="0"
                     Grid.RowSpan="1"

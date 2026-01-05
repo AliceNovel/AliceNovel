@@ -160,7 +160,7 @@ public partial class MainPage : ContentPage
         initialButtonsState[4] = button5.IsVisible;
         initialButtonsState[5] = button6.IsVisible;
         // 画像以外すべて非表示
-        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = false;
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = textboxRoundBorder.IsVisible = currentUIVisible = false;
         button5.IsVisible = button6.IsVisible = false;
     }
 
@@ -169,8 +169,8 @@ public partial class MainPage : ContentPage
     /// </summary>
     void UI_ReDisplay(){
         toolbarItem1.Text = AppResources.Button2;
-        
-        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = currentUIVisible = true;
+
+        talkname.IsVisible = textbox.IsVisible = textbox_out.IsVisible = textboxRoundBorder.IsVisible = currentUIVisible = true;
         // 初期値に設定(初期で表示されていたら表示、そうでなかったら非表示)
         button5.IsVisible = initialButtonsState[4];
         button6.IsVisible = initialButtonsState[5];
