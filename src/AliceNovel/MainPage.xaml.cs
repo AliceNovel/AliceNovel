@@ -1,5 +1,5 @@
-using AliceNovel.Resources.Strings;
 using AliceNovel.Controls;
+using AliceNovel.Resources.Strings;
 using Microsoft.Maui.Controls.StyleSheets;
 using System.IO.Compression;
 using System.Text;
@@ -531,21 +531,25 @@ public partial class MainPage : ContentPage
                 catch{}
             }
 
-            // "- "から始まる"人物"を読み込み
-            match = Regex.Match(sr_read, @"- (.*)");
-            if (match.Success)
-                talkname.Text = match.Groups[1].Value.Trim();
+            // Captures the people name and its emotion
+            // "- example" → people: "example", emotion: null
+            // "- example / happy" → people: "example", emotion: "happy"
+            // "/ happy" → people: null, emotion: "happy"
+            string pattern = @"^(?:-\s*(?<people>[^/]+))?(?:\s*/\s*(?<emotion>.+))?$";
+            match = Regex.Match(sr_read, pattern);
+            if (match.Groups["people"].Success)
+            {
+                string people = match.Groups["people"].Value.Trim();
 
-            // "- "から始まって"/ "が続く場合の"人物"と"感情"を読み込み
-            match = Regex.Match(sr_read, @"- (.*?)/");
-            if (match.Success)
-                talkname.Text = match.Groups[1].Value.Trim();
-                // 感情変更
-
-            // "/ "から始まる"感情"を読み込み
-            match = Regex.Match(sr_read, @"/ (.*)");
-            //if (match.Success)
-                // 感情変更
+                if (!string.IsNullOrWhiteSpace(people))
+                    talkname.Text = people;
+            }
+            if (match.Groups["emotion"].Success)
+            {
+                string emotion = match.Groups["emotion"].Value.Trim();
+                // if (!string.IsNullOrWhiteSpace(emotion))
+                // [ToDo] Change emotion
+            }
 
             // 次の行を読み込む
             sr_read = sr.ReadLine();
