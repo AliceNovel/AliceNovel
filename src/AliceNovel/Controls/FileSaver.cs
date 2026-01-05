@@ -27,6 +27,6 @@ internal class SaveDataInfo
         public int CurrentLines { get; set; }
 
         [JsonPropertyName("LastUpdated")] // Format: ISO8601
-        public string LastUpdated { get; set; }
+        public DateTimeOffset LastUpdated { get; set; }
     }
 }

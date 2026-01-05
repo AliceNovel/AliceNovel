@@ -84,7 +84,9 @@ public partial class MainPage : ContentPage
     async private void OnDrop(object sender, DropEventArgs e)
     #pragma warning restore IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
     {
-        string filePath = await FileDroper.DropAsync(e); // null check??
+        string filePath = await FileDroper.DropAsync(e);
+        if (string.IsNullOrEmpty(filePath))
+            return;
 
         // Process the dropped file
         // [Want to] Activate current Window
@@ -123,7 +125,7 @@ public partial class MainPage : ContentPage
         List<SaveDataInfo.SaveDataLists> saveDataLists = [];
         saveDataLists.Add(new SaveDataInfo.SaveDataLists {
             CurrentLines = read_times,
-            LastUpdated = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssK"), // Format: ISO8601
+            LastUpdated = DateTimeOffset.Now,
         });
         SaveDataInfo saveValues = new()
         {

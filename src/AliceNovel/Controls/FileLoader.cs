@@ -21,7 +21,7 @@ internal class FileLoader
     /// <param name="useCss">A boolean value indicating whether CSS is changed. If <see langword="false"/>, the method performs no action.</param>
     public static void CssReset(bool useCss)
     {
-        if (!useCss)
+        if (!useCss || Application.Current.Windows.Count <= 0)
             return;
 
         Application.Current.Windows[0].Page.Dispatcher.Dispatch(() =>
