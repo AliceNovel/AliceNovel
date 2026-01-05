@@ -1,10 +1,10 @@
 using AliceNovel.Resources.Strings;
+using AliceNovel.Controls;
 using Microsoft.Maui.Controls.StyleSheets;
 using System.IO.Compression;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
 
@@ -327,10 +327,8 @@ public partial class MainPage : ContentPage
     /// <param name="targetFilePath">.anproj ファイルのパス</param>
     async void FirstFileReader(string targetFilePath)
     {
-        // キャッシュフォルダを削除する
-        string path = FileSystem.Current.CacheDirectory;
-        if (Directory.Exists(path))
-            Directory.Delete(path, true);
+        // キャッシュファイルを削除する
+        FileLoader.ClearCache();
 
         read_times = 0;
         // zip内のファイルを読み込み
@@ -680,29 +678,4 @@ public partial class MainPage : ContentPage
     {
         
     }
-
-    public class SaveDataInfo
-    {
-        [JsonPropertyName("GameTitle")]
-        public string GameTitle { get; set; }
-
-        [JsonPropertyName("GameEngine")]
-        public string GameEngine { get; set; }
-
-        [JsonPropertyName("EngineVersion")]
-        public string EngineVersion { get; set; }
-
-        [JsonPropertyName("SaveLists")]
-        public IList<SaveDataLists> SaveLists { get; set; }
-
-        public class SaveDataLists
-        {
-            [JsonPropertyName("CurrentLines")]
-            public int CurrentLines { get; set; }
-
-            [JsonPropertyName("LastUpdated")] // Format: ISO8601
-            public string LastUpdated { get; set; }
-        }
-    }
-
 }
