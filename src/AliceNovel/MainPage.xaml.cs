@@ -93,53 +93,7 @@ public partial class MainPage : ContentPage
     async private void OnDrop(object sender, DropEventArgs e)
     #pragma warning restore IDE0051 // 警告を非表示: 使用されていないプライベート メンバーを削除する
     {
-        var filePaths = new List<string>();
-
-        #if WINDOWS
-        if (e.PlatformArgs is not null && e.PlatformArgs.DragEventArgs.DataView.Contains(StandardDataFormats.StorageItems))
-        {
-            var items = await e.PlatformArgs.DragEventArgs.DataView.GetStorageItemsAsync();
-            if (items.Any())
-            {
-                foreach (var item in items)
-                {
-                    if (item is StorageFile file)
-                        filePaths.Add(item.Path);
-                }
-            }
-        }
-        #elif IOS || MACCATALYST
-        var session = e.PlatformArgs?.DropSession;
-        if (session == null)
-            return;
-
-        foreach (UIDragItem item in session.Items)
-        {
-            var result = await LoadItemAsync(item.ItemProvider, item.ItemProvider.RegisteredTypeIdentifiers.ToList());
-            if (result is not null)
-                filePaths.Add(result.FileUrl?.Path!);
-        }
-        foreach (var item in filePaths)
-        {
-            Debug.WriteLine($"Path: {item}");
-        }
-
-        static async Task<LoadInPlaceResult> LoadItemAsync(NSItemProvider itemProvider, List<string> typeIdentifiers)
-        {
-            if (typeIdentifiers is null || typeIdentifiers.Count == 0)
-                return null;
-
-            var typeIdent = typeIdentifiers.First();
-
-            if (itemProvider.HasItemConformingTo(typeIdent))
-                return await itemProvider.LoadInPlaceFileRepresentationAsync(typeIdent);
-
-            typeIdentifiers.Remove(typeIdent);
-            return await LoadItemAsync(itemProvider, typeIdentifiers);
-        }
-        #endif
-
-        string filePath = filePaths.FirstOrDefault();
+        string filePath = await FileDroper.DropAsync(e); // null check??
 
         // Process the dropped file
         // [Want to] Activate current Window
