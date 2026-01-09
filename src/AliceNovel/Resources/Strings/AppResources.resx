@@ -238,4 +238,10 @@
   <data name="Alert (FileDrop)" xml:space="preserve">
     <value>Do you want to open the game at the following path?</value>
   </data>
+  <data name="Settings (Clear Caches)" xml:space="preserve">
+    <value>Clear Caches</value>
+  </data>
+  <data name="Alert (Clear Caches)" xml:space="preserve">
+    <value>Sucsessed to clear chashes.</value>
+  </data>
 </root>

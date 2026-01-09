@@ -235,4 +235,10 @@
   <data name="Alert (FileDrop)" xml:space="preserve">
     <value>以下のゲームを開きますか?</value>
   </data>
+  <data name="Settings (Clear Caches)" xml:space="preserve">
+    <value>キャッシュを削除</value>
+  </data>
+  <data name="Alert (Clear Caches)" xml:space="preserve">
+    <value>キャッシュクリアが成功しました。</value>
+  </data>
 </root>

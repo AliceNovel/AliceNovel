@@ -27,7 +27,11 @@
                          Content="{x:Static strings:AppResources.ColorTheme__Dark_}"
                          GroupName="switchTheme"
                          CheckedChanged="SwitchTheme" />
-            
+
+            <!-- Clear Cache directories and files -->
+            <Button Text="{x:Static strings:AppResources.Settings__Clear_Caches_}"
+                    Clicked="CacheClear" />
+
             <!-- Restore Default Settings -->
             <Button Text="{x:Static strings:AppResources.Settings__Restore_}"
                     Clicked="RestoreDefaultSettings" />
