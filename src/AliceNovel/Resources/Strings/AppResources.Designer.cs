@@ -70,6 +70,15 @@ namespace AliceNovel.Resources.Strings {
         }
         
         /// <summary>
+        ///   Sucsessed to clear chashes. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Alert__Clear_Caches_ {
+            get {
+                return ResourceManager.GetString("Alert (Clear Caches)", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Confirm に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string Alert__Confirm_ {
@@ -301,6 +310,15 @@ namespace AliceNovel.Resources.Strings {
         internal static string MainPage_Title {
             get {
                 return ResourceManager.GetString("MainPage Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Clear Caches に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string Settings__Clear_Caches_ {
+            get {
+                return ResourceManager.GetString("Settings (Clear Caches)", resourceCulture);
             }
         }
         

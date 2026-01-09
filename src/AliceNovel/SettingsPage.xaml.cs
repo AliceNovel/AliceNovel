@@ -1,3 +1,4 @@
+using AliceNovel.Controls;
 using AliceNovel.Resources.Strings;
 using System.Globalization;
 
@@ -82,6 +83,12 @@ public partial class SettingsPage : ContentPage
             // Save the state in local
             Preferences.Default.Set("AppTheme", "Dark");
         }
+    }
+
+    async private void CacheClear(object sender, EventArgs e)
+    {
+        FileLoader.ClearCache();
+        await DisplayAlertAsync(AppResources.Settings__Clear_Caches_, AppResources.Alert__Clear_Caches_, AppResources.Alert__Confirm_);
     }
 
     async private void RestoreDefaultSettings(object sender, EventArgs e)
