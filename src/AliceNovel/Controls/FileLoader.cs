@@ -56,36 +56,36 @@ internal class AnprojFormat
     public string GameName { get; set; } = "";
 }
 
-[Obsolete("Future idea")]
-internal class AnprojFormatFuture
-{
-    public string GameTitle { get; set; } = "";
+//[Obsolete("Future idea")]
+//internal class AnprojFormatFuture
+//{
+//    public string GameTitle { get; set; } = "";
 
-    public RootData Roots { get; set; } = new();
+//    public RootData Roots { get; set; } = new();
 
-    internal class RootData
-    {
-        public string InitFile { get; set; } = "main.anov";
+//    internal class RootData
+//    {
+//        public string InitFile { get; set; } = "main.anov";
 
-        public string Style { get; set; } = "style.css";
+//        public string Style { get; set; } = "style.css";
 
-        //public string Character { get; set; } = "character.json";
+//        //public string Character { get; set; } = "character.json";
 
-        public string RootImage { get; set; } = "images/";
+//        public string RootImage { get; set; } = "images/";
 
-        public string Background { get; set; } = "images/background/";
+//        public string Background { get; set; } = "images/background/";
 
-        //public string Story { get; set; } = "stories/";
+//        //public string Story { get; set; } = "stories/";
 
-        //public string Data { get; set; } = "data/";
+//        //public string Data { get; set; } = "data/";
 
-        public string Audio { get; set; } = "sounds/";
+//        public string Audio { get; set; } = "sounds/";
 
-        public string Movie { get; set; } = "movies/";
+//        public string Movie { get; set; } = "movies/";
 
-        public string Save { get; set; } = "saves/";
-    }
-}
+//        public string Save { get; set; } = "saves/";
+//    }
+//}
 
 [Obsolete("""
 Processing related to zip archives is scheduled for discontinuation.
