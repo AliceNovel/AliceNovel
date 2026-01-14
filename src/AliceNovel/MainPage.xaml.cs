@@ -98,8 +98,9 @@ public partial class MainPage : ContentPage
         FirstFileReader(filePath);
     }
 
-    readonly JsonSerializerOptions jsonOptions = new()
+    readonly JsonSerializerOptions jsonOptions = new(JsonSerializerDefaults.Web)
     {
+        PropertyNamingPolicy = JsonNamingPolicy.KebabCaseLower,
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
         WriteIndented = true,
     };
@@ -119,7 +120,7 @@ public partial class MainPage : ContentPage
         });
         SaveDataInfo saveValues = new()
         {
-            GameTitle = anproj_setting["game-name"],
+            GameTitle = anprojSettings.GameName,
             GameEngine = AppInfo.Current.Name,
             EngineVersion = AppInfo.Current.VersionString,
             SaveLists = saveDataLists,
@@ -128,19 +129,19 @@ public partial class MainPage : ContentPage
         string writerInfo = JsonSerializer.Serialize(saveValues, jsonOptions);
 
         // .anproj 内保存
-        ZipArchiveEntry ent = zip.GetEntry(anproj_setting["root-save"] + "savefile.json");
-        ent ??= zip.CreateEntry(anproj_setting["root-save"] + "savefile.json");
+        ZipArchiveEntry ent = zip.GetEntry(anprojSettings.RootSave + SAVE_JSON_NAME);
+        ent ??= zip.CreateEntry(anprojSettings.RootSave + SAVE_JSON_NAME);
         using (StreamWriter sw = new(ent.Open()))
         {
             sw.WriteLine(writerInfo);
         }
 
         // ローカル保存
-        string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"]);
+        string localSaveDirectory = Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anprojSettings.GameName);
         // (保存先のディレクトリ作成)
         if (!Directory.Exists(localSaveDirectory))
             Directory.CreateDirectory(localSaveDirectory);
-        string localSaveFile = Path.Combine(localSaveDirectory, "savefile.json");
+        string localSaveFile = Path.Combine(localSaveDirectory, SAVE_JSON_NAME);
         using (StreamWriter sw = new(File.Create(localSaveFile)))
         {
             sw.WriteLine(writerInfo);
@@ -196,8 +197,9 @@ public partial class MainPage : ContentPage
     bool WhileLoading = false;
     bool readCss = false;
 
-    // rootの初期値(package.jsonで指定されていない時に使用する値)を設定
-    Dictionary<string, string> anproj_setting = [];
+    // ゲームの設定を保持する変数
+    AnprojFormat anprojSettings = new();
+    readonly string SAVE_JSON_NAME = "savefile.json";
 
     int read_times = 0;// 読み込み回数(セーブ用)
 
@@ -239,43 +241,26 @@ public partial class MainPage : ContentPage
         string str = sr2.ReadToEnd();
         sr2.Close();
 
-        // rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
-        anproj_setting = new()
-        {
-            {"root-image", "image/"},
-            {"root-background", "image/background/"},
-            {"root-story", "story/"},
-            {"root-data", "data/"},
-            {"root-audio", "audio/"},
-            {"root-movie", "movie/"},
-            {"root-character", "character.json"},
-            {"root-save", "save/"},
-            {"style", "style.css"},
-            {"first-read", "main.anov"},
-            {"game-name", ""},
-        };
-        // json を読み込み、デフォルト設定に上書き
         if (!string.IsNullOrEmpty(str))
-            foreach (var key in JsonSerializer.Deserialize<Dictionary<string, string>>(str))
-            {
-                if (anproj_setting.ContainsKey(key.Key))
-                    anproj_setting[key.Key] = key.Value;
-            }
+            // json を読み込み、デフォルト設定に上書き
+            anprojSettings = JsonSerializer.Deserialize<AnprojFormat>(str, jsonOptions);
+        else
+            // rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
+            anprojSettings = new();
 
         // 最初の .anov ファイルを読み込み
-        if (zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]) is not null)
-            entry = zip.GetEntry(anproj_setting["root-story"] + anproj_setting["first-read"]);
-        // (v0.9.0-rc1 の互換性のため) (画像はディレクトリや設定形式が異なるので、現状は非対応)
-        else if (zip.GetEntry(anproj_setting["first-read"]) is not null)
-            entry = zip.GetEntry(anproj_setting["first-read"]);
-        else
+        try
+        {
+            entry = zip.GetEntry(anprojSettings.RootStory + anprojSettings.FirstRead);
+        }
+        catch
         {
             await DisplayAlertAsync(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
             return;
         }
 
         // タイトルの設定
-        game_ui.Title = anproj_setting["game-name"];
+        game_ui.Title = anprojSettings.GameName;
 
         sr ??= new(entry.Open(), Encoding.UTF8);
         textbox.Text = "";
@@ -286,7 +271,7 @@ public partial class MainPage : ContentPage
         toolbarItem3.IsEnabled = true;
 
         // CSS の読み込み
-        ZipArchiveEntry cssZip = zip.GetEntry(anproj_setting["style"]);
+        ZipArchiveEntry cssZip = zip.GetEntry(anprojSettings.Style);
         if (cssZip is not null)
         {
             StreamReader r = null;
@@ -305,7 +290,7 @@ public partial class MainPage : ContentPage
         // セーブ読み込み
         // 現状は .anproj 内のセーブデータを優先、なければローカルデータを参照する
         // .anproj 内のデータから読み込み
-        ZipArchiveEntry ent_saveread = zip.GetEntry(anproj_setting["root-save"] + "savefile.json");
+        ZipArchiveEntry ent_saveread = zip.GetEntry(anprojSettings.RootSave + SAVE_JSON_NAME);
         if (ent_saveread is not null)
         {
             StreamReader srz = null;
@@ -324,7 +309,7 @@ public partial class MainPage : ContentPage
         {
             try
             {
-                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anproj_setting["game-name"], "savefile.json"));
+                string localSaveData = File.ReadAllText(Path.Combine(FileSystem.Current.AppDataDirectory, "SaveData", anprojSettings.GameName, SAVE_JSON_NAME));
                 LoadSaveOrNot(localSaveData);
             }
             catch { }
@@ -406,9 +391,9 @@ public partial class MainPage : ContentPage
                     image.Source = null;
                     bgImage.Source = null;
                 }
-                else if (zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()) is not null)
+                else if (zip.GetEntry(anprojSettings.RootBackground + match.Groups[1].Value.Trim()) is not null)
                 {
-                    using (var st = zip.GetEntry(anproj_setting["root-background"] + match.Groups[1].Value.Trim()).Open())
+                    using (var st = zip.GetEntry(anprojSettings.RootBackground + match.Groups[1].Value.Trim()).Open())
                     {
                         var memoryStream = new MemoryStream();
                         st.CopyTo(memoryStream);
@@ -428,9 +413,9 @@ public partial class MainPage : ContentPage
 
                 try
                 {
-                    ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-audio"] + match.Groups[1].Value.Trim());
+                    ZipArchiveEntry entry = zip.GetEntry(anprojSettings.RootAudio + match.Groups[1].Value.Trim());
                     // ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
-                    string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-audio"]));
+                    string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anprojSettings.RootAudio));
                     if (!Directory.Exists(audio_cache))
                         Directory.CreateDirectory(audio_cache);
 
@@ -454,9 +439,9 @@ public partial class MainPage : ContentPage
 
                 try
                 {
-                    ZipArchiveEntry entry = zip.GetEntry(anproj_setting["root-movie"] + match.Groups[1].Value.Trim());
+                    ZipArchiveEntry entry = zip.GetEntry(anprojSettings.RootMovie + match.Groups[1].Value.Trim());
                     // ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/match.Groups[1].Value.Trim() (既存の同名ファイルが存在する場合は上書き保存)
-                    string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anproj_setting["root-movie"]));
+                    string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anprojSettings.RootMovie));
                     if (!Directory.Exists(movie_cache))
                         Directory.CreateDirectory(movie_cache);
 
