@@ -249,11 +249,8 @@ public partial class MainPage : ContentPage
             anprojSettings = new();
 
         // 最初の .anov ファイルを読み込み
-        try
-        {
-            entry = zip.GetEntry(anprojSettings.RootStory + anprojSettings.FirstRead);
-        }
-        catch
+        entry = zip.GetEntry(anprojSettings.RootStory + anprojSettings.FirstRead);
+        if (entry is null)
         {
             await DisplayAlertAsync(AppResources.Alert__Warn1_, AppResources.Alert__Warn2_, AppResources.Alert__Confirm_);
             return;
