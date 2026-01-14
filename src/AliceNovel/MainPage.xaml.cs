@@ -98,10 +98,10 @@ public partial class MainPage : ContentPage
         FirstFileReader(filePath);
     }
 
-    readonly JsonSerializerOptions jsonOptions = new(JsonSerializerDefaults.Web)
+    readonly JsonSerializerOptions jsonOptions = new()
     {
-        PropertyNamingPolicy = JsonNamingPolicy.KebabCaseLower,
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+        PropertyNameCaseInsensitive = true,
         WriteIndented = true,
     };
 
@@ -243,7 +243,14 @@ public partial class MainPage : ContentPage
 
         if (!string.IsNullOrEmpty(str))
             // json を読み込み、デフォルト設定に上書き
-            anprojSettings = JsonSerializer.Deserialize<AnprojFormat>(str, jsonOptions);
+            anprojSettings = JsonSerializer.Deserialize<AnprojFormat>(str, options: new()
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.KebabCaseLower,
+                Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                PropertyNameCaseInsensitive = true,
+                WriteIndented = true,
+            });
+
         else
             // rootの位置初期値/初期化(package.jsonで指定されていない時に使用する値)を設定
             anprojSettings = new();
