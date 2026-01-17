@@ -388,13 +388,13 @@ public partial class MainPage : ContentPage
             else if (trimmedLine.StartsWith("bgm: "))
             {
                 string bgmPath = trimmedLine[5..].Trim();
-                AnovReader.ReadAudio(bgmPath, anprojSettings, zip, audio_bgm);
+                AnovReader.ReadMedia(bgmPath, anprojSettings, zip, audio_bgm, false);
             }
             // "movie: "から始まる"動画"を読み込み
             else if (trimmedLine.StartsWith("movie: ") && !WhileLoading)
             {
                 string moviePath = trimmedLine[7..].Trim();
-                if (AnovReader.ReadMovie(moviePath, anprojSettings, zip, movie))
+                if (AnovReader.ReadMedia(moviePath, anprojSettings, zip, movie, true))
                 {
                     // 読み込みが成功した場合、UI非表示/セリフを進められなくする
                     UI_Hidden();
