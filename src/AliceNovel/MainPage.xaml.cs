@@ -192,7 +192,6 @@ public partial class MainPage : ContentPage
 
     FileResult result;// .anprojファイル選択用
     StreamReader sr;
-    string sr_read;
     ZipArchive zip;
     bool WhileLoading = false;
     bool readCss = false;
@@ -365,7 +364,7 @@ public partial class MainPage : ContentPage
     void FileRead()
     {
         read_times++;
-        sr_read = sr.ReadLine(); // 1行読み込み
+        string sr_read = sr.ReadLine(); // 1行読み込み
         if (sr_read is null)
         {
             ExitGame();
