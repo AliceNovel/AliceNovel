@@ -394,13 +394,12 @@ public partial class MainPage : ContentPage
             else if (trimmedLine.StartsWith("movie: ") && !WhileLoading)
             {
                 string moviePath = trimmedLine[7..].Trim();
-                AnovReader.ReadMovie(moviePath, anprojSettings, zip, movie);
-
-                // ↓本来はAnovReader.ReadMovie()内のtry{}内で処理すべきだが、
-                // ↓UI_Hidden()の呼び出しがこちらからしかできないので、妥協。
-                // UI非表示/セリフを進められなくする
-                UI_Hidden();
-                re.IsEnabled = false;
+                if (AnovReader.ReadMovie(moviePath, anprojSettings, zip, movie))
+                {
+                    // 読み込みが成功した場合、UI非表示/セリフを進められなくする
+                    UI_Hidden();
+                    re.IsEnabled = false;
+                }
             }
             else
             {
@@ -426,7 +425,6 @@ public partial class MainPage : ContentPage
             }
 
             sr_read = sr.ReadLine(); // 1行読み込み
-            continue;
         }
     }
 
