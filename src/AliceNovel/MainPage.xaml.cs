@@ -377,122 +377,52 @@ public partial class MainPage : ContentPage
 
             // "["と"]"で囲む"会話"を読み込み
             if (trimmedLine.StartsWith('[') && trimmedLine.EndsWith(']'))
-            {
                 textbox.Text = trimmedLine[1..^1];
-
-                sr_read = sr.ReadLine(); // 1行読み込み
-                continue;
-            }
-
             // "> "から始まる"場所"を読み込み
-            if (trimmedLine.StartsWith("> "))
+            else if (trimmedLine.StartsWith("> "))
             {
                 string imagePath = trimmedLine[2..].Trim();
-                // 場所指定されていない場合は背景画像を消す
-                if (string.IsNullOrWhiteSpace(imagePath))
-                {
-                    image.Source = null;
-                    bgImage.Source = null;
-                }
-                else if (zip.GetEntry(anprojSettings.RootBackground + imagePath) is not null)
-                {
-                    using (var st = zip.GetEntry(anprojSettings.RootBackground + imagePath).Open())
-                    {
-                        var memoryStream = new MemoryStream();
-                        st.CopyTo(memoryStream);
-                        byte[] bytes = memoryStream.ToArray();
-                        image.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
-                        bgImage.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
-                    }
-                }
-
-                sr_read = sr.ReadLine(); // 1行読み込み
-                continue;
+                AnovReader.ReadPlace(imagePath, anprojSettings, zip, image, bgImage);
             }
-
             // "bgm: "から始まる"音楽"を読み込み
-            if (trimmedLine.StartsWith("bgm: "))
+            else if (trimmedLine.StartsWith("bgm: "))
             {
                 string bgmPath = trimmedLine[5..].Trim();
-
-                // 指定されていない場合は音楽を止める
-                audio_bgm.Stop();
-
-                try
-                {
-                    ZipArchiveEntry entry = zip.GetEntry(anprojSettings.RootAudio + bgmPath);
-                    // ファイル保存場所: アプリケーション専用キャッシュフォルダー/音声フォルダ/bgmPath (既存の同名ファイルが存在する場合は上書き保存)
-                    string audio_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anprojSettings.RootAudio));
-                    if (!Directory.Exists(audio_cache))
-                        Directory.CreateDirectory(audio_cache);
-
-                    string temp_audio = Path.GetFullPath(Path.Combine(audio_cache, bgmPath));
-                    if (!File.Exists(temp_audio))
-                        entry.ExtractToFile(temp_audio, true);
-
-                    audio_bgm.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_audio);
-                    audio_bgm.Play();
-                }
-                catch{}
-
-                sr_read = sr.ReadLine(); // 1行読み込み
-                continue;
+                AnovReader.ReadAudio(bgmPath, anprojSettings, zip, audio_bgm);
             }
-
             // "movie: "から始まる"動画"を読み込み
-            if (trimmedLine.StartsWith("movie: ") && !WhileLoading)
+            else if (trimmedLine.StartsWith("movie: ") && !WhileLoading)
             {
                 string moviePath = trimmedLine[7..].Trim();
+                AnovReader.ReadMovie(moviePath, anprojSettings, zip, movie);
 
-                // 指定されていない場合は動画を止める
-                movie.Stop();
-                movie.IsVisible = false;
-
-                try
+                // ↓本来はAnovReader.ReadMovie()内のtry{}内で処理すべきだが、
+                // ↓UI_Hidden()の呼び出しがこちらからしかできないので、妥協。
+                // UI非表示/セリフを進められなくする
+                UI_Hidden();
+                re.IsEnabled = false;
+            }
+            else
+            {
+                // Captures the people name and its emotion
+                // "- example" → people: "example", emotion: null
+                // "- example / happy" → people: "example", emotion: "happy"
+                // "/ happy" → people: null, emotion: "happy"
+                string pattern = @"^(?:-\s*(?<people>[^/]+))?(?:\s*/\s*(?<emotion>.+))?$";
+                Match match = Regex.Match(trimmedLine, pattern);
+                if (match.Groups["people"].Success)
                 {
-                    ZipArchiveEntry entry = zip.GetEntry(anprojSettings.RootMovie + moviePath);
-                    // ファイル保存場所: アプリケーション専用キャッシュフォルダー/動画フォルダ/moviePath (既存の同名ファイルが存在する場合は上書き保存)
-                    string movie_cache = Path.GetFullPath(Path.Combine(FileSystem.Current.CacheDirectory, anprojSettings.RootMovie));
-                    if (!Directory.Exists(movie_cache))
-                        Directory.CreateDirectory(movie_cache);
+                    string people = match.Groups["people"].Value.Trim();
 
-                    string temp_movie = Path.GetFullPath(Path.Combine(movie_cache, moviePath));
-                    if (!File.Exists(temp_movie))
-                        entry.ExtractToFile(temp_movie, true);
-
-                    movie.Source = CommunityToolkit.Maui.Views.MediaSource.FromUri(temp_movie);
-                    movie.IsVisible = true;
-                    movie.Play();
-
-                    // UI非表示/セリフを進められなくする
-                    UI_Hidden();
-                    re.IsEnabled = false;
-                    // 動画のスキップボタンを実装したら便利そう
+                    if (!string.IsNullOrWhiteSpace(people))
+                        talkname.Text = people;
                 }
-                catch{}
-
-                sr_read = sr.ReadLine(); // 1行読み込み
-                continue;
-            }
-
-            // Captures the people name and its emotion
-            // "- example" → people: "example", emotion: null
-            // "- example / happy" → people: "example", emotion: "happy"
-            // "/ happy" → people: null, emotion: "happy"
-            string pattern = @"^(?:-\s*(?<people>[^/]+))?(?:\s*/\s*(?<emotion>.+))?$";
-            Match match = Regex.Match(sr_read, pattern);
-            if (match.Groups["people"].Success)
-            {
-                string people = match.Groups["people"].Value.Trim();
-
-                if (!string.IsNullOrWhiteSpace(people))
-                    talkname.Text = people;
-            }
-            if (match.Groups["emotion"].Success)
-            {
-                string emotion = match.Groups["emotion"].Value.Trim();
-                // if (!string.IsNullOrWhiteSpace(emotion))
-                // [ToDo] Change emotion
+                if (match.Groups["emotion"].Success)
+                {
+                    string emotion = match.Groups["emotion"].Value.Trim();
+                    // if (!string.IsNullOrWhiteSpace(emotion))
+                    // [ToDo] Change emotion
+                }
             }
 
             sr_read = sr.ReadLine(); // 1行読み込み
@@ -561,8 +491,5 @@ public partial class MainPage : ContentPage
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private void Button6_Clicked(object sender, EventArgs e)
-    {
-        
-    }
+    private void Button6_Clicked(object sender, EventArgs e) { }
 }
