@@ -9,3 +9,15 @@ updates:
     directory: "/src/" # Location of package manifests
     schedule:
       interval: "daily"
+    groups:
+      microsoft-maui:
+        patterns:
+          - "Microsoft.Maui*"
+      community-maui:
+        patterns:
+          - "CommunityToolkit.Maui*"
+
+  - package-ecosystem: "github-actions" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
