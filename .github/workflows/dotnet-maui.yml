@@ -56,34 +56,34 @@ jobs:
       # Upload Artifact
       - if: matrix.tfm == 'net10.0-android'
         name: Android Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: android-ci-build
           path: src/AliceNovel/bin/Release/net10.0-android/*Signed.a*
 
       - if: matrix.tfm == 'net10.0-ios'
         name: iOS Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: ios-ci-build
           path: src/AliceNovel/bin/Release/net10.0-ios/**/*.app/
 
       - if: matrix.tfm == 'net10.0-maccatalyst'
         name: MacCatalyst Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: macos-ci-build
           path: src/AliceNovel/bin/Release/net10.0-maccatalyst/**/*.app/
 
       - if: matrix.tfm == 'net10.0-windows10.0.19041.0'
         name: Windows Artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: windows-ci-build
           path: src/AliceNovel/bin/Release/net10.0-windows*/**/
 
       - name: Full Artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
           name: full-ci-build-${{ matrix.tfm }}
           path: src/AliceNovel/bin/Release/${{ matrix.tfm }}*/
