@@ -19,7 +19,7 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'macos-26') || 'windows-latest' }}
+    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'xcode-27') || 'windows-latest' }}
     strategy:
       matrix:
         tfm: [net10.0-android, net10.0-ios, net10.0-maccatalyst, net10.0-windows10.0.19041.0]
