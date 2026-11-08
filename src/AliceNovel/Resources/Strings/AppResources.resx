@@ -244,4 +244,10 @@
   <data name="Alert (Clear Caches)" xml:space="preserve">
     <value>Sucsessed to clear chashes.</value>
   </data>
+  <data name="Error (Error)" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error (File Type)" xml:space="preserve">
+    <value>File format is not correct.</value>
+  </data>
 </root>

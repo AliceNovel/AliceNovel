@@ -33,9 +33,9 @@ public partial class MainPage : ContentPage
     /// <param name="e"></param>
     private void ReShow_Clicked(object sender, EventArgs e)
     {
-        if (currentUIVisible)
+        if (currentUIVisible && read_times != 0)
             FileRead();
-        else
+        else if (!currentUIVisible)
             UI_ReDisplay();
     }
 
@@ -231,14 +231,35 @@ public partial class MainPage : ContentPage
         FileLoader.ClearCache();
 
         read_times = 0;
-        // zip内のファイルを読み込み
-        zip = ZipFile.Open(targetFilePath, ZipArchiveMode.Update);
 
-        // zip内のpackage.jsonファイルを読み込み
-        ZipArchiveEntry entry = zip.GetEntry("package.json");
-        StreamReader sr2 = new(entry.Open(), Encoding.UTF8);
-        string str = sr2.ReadToEnd();
-        sr2.Close();
+        ZipArchiveEntry entry;
+        string str;
+
+        // ZIP でない、または ZIP 内に package.json が含まれない場合に、anproj 形式に適していないとして、エラーと終了
+        try
+        {
+            // zip内のファイルを読み込み
+            zip = ZipFile.Open(targetFilePath, ZipArchiveMode.Update);
+
+            // zip内のpackage.jsonファイルを読み込み
+            entry = zip.GetEntry("package.json");
+
+            if (entry is null)
+            {
+                await DisplayAlertAsync(AppResources.Error__Error_, AppResources.Error__File_Type_, AppResources.Alert__Confirm_);
+                return;
+            }
+
+            using (StreamReader sr2 = new(entry.Open(), Encoding.UTF8))
+            {
+                str = sr2.ReadToEnd();
+            }
+        }
+        catch (Exception e)
+        {
+            await DisplayAlertAsync(AppResources.Error__Error_, e.Message, AppResources.Alert__Confirm_);
+            return;
+        }
 
         if (!string.IsNullOrWhiteSpace(str))
             // json を読み込み、デフォルト設定に上書き
