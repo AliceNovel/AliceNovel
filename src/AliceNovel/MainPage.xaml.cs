@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Text.Unicode;
 
@@ -103,6 +104,11 @@ public partial class MainPage : ContentPage
         Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
         PropertyNameCaseInsensitive = true,
         WriteIndented = true,
+        ReadCommentHandling = JsonCommentHandling.Skip,
+        AllowTrailingCommas = true,
+        NumberHandling =
+            JsonNumberHandling.AllowReadingFromString |
+            JsonNumberHandling.WriteAsString,
     };
 
     /// <summary>
@@ -269,6 +275,11 @@ public partial class MainPage : ContentPage
                 Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                 PropertyNameCaseInsensitive = true,
                 WriteIndented = true,
+                ReadCommentHandling = JsonCommentHandling.Skip,
+                AllowTrailingCommas = true,
+                NumberHandling =
+                    JsonNumberHandling.AllowReadingFromString |
+                    JsonNumberHandling.WriteAsString,
             });
 
         else
