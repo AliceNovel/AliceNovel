@@ -241,4 +241,10 @@
   <data name="Alert (Clear Caches)" xml:space="preserve">
     <value>キャッシュクリアが成功しました。</value>
   </data>
+  <data name="Error (Error)" xml:space="preserve">
+    <value>エラー</value>
+  </data>
+  <data name="Error (File Type)" xml:space="preserve">
+    <value>ファイルの形式が異なります</value>
+  </data>
 </root>
