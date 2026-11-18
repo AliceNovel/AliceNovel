@@ -17,12 +17,24 @@ on:
       - '.github/workflows/**'
   workflow_dispatch:
 
+env:
+  PROJECT_PATH: src/AliceNovel/AliceNovel.csproj
+
 jobs:
   build:
-    runs-on: ${{ (contains(matrix.tfm, 'maccatalyst') && 'xcode-27') || 'windows-latest' }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        tfm: [net10.0-android, net10.0-ios, net10.0-maccatalyst, net10.0-windows10.0.19041.0]
+        include:
+          - tfm: net10.0-android
+            os: ubuntu-26.04
+          - tfm: net10.0-ios
+            os: xcode-27
+            options: -r ios-arm64 -p:EnableCodeSigning=false
+          - tfm: net10.0-maccatalyst
+            os: xcode-27
+          - tfm: net10.0-windows10.0.19041.0
+            os: windows-2025
       fail-fast: false
     steps:
       - name: Checkout
@@ -33,27 +45,26 @@ jobs:
         with:
           dotnet-version: 10.0.x
 
-      # currently, the macos-latest (macos-26) ~~does not~~ contains the xcode 26.5 as default. See also:
-      # https://github.com/actions/runner-images/blob/macos-26/20260630.0313/images/macos/macos-26-Readme.md#xcode
-      # - if: matrix.tfm == 'net10.0-maccatalyst'
-      #   name: Setup Xcode latest
-      #   uses: maxim-lobanov/setup-xcode@v1
-      #   with:
-      #     xcode-version: '26.4' # including beta version
+      # currently, the xcode-27 **does not** contains the xcode 27.2 (latest) as default. See also:
+      # https://github.com/actions/runner-images/blob/xcode-27-arm64/20261104.0337/images/macos/xcode-27-arm64-Readme.md#xcode
+      - if: matrix.os == 'xcode-27'
+        name: Setup Xcode latest
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 'latest' # including beta version
 
       - name: Install MAUI Workloads
         run: |
-          dotnet workload install android --ignore-failed-sources
-          dotnet workload install maui --ignore-failed-sources
+          dotnet workload restore ${{ env.PROJECT_PATH }} --ignore-failed-sources
 
       - name: Restore Dependencies
-        run: dotnet restore src/AliceNovel/AliceNovel.csproj
+        run: dotnet restore ${{ env.PROJECT_PATH }} ${{ matrix.options }}
 
-      - name: Build MAUI App
+      - name: Publish MAUI App
         run: >
-          dotnet build src/AliceNovel/AliceNovel.csproj
-            -c Release -f ${{ matrix.tfm }} --no-restore
-            ${{ matrix.tfm == 'net10.0-ios' && '-r ios-arm64' || '' }}
+          dotnet publish ${{ env.PROJECT_PATH }}
+          -c Release -f ${{ matrix.tfm }} --no-restore
+          -p:PublishReadyToRun=false ${{ matrix.options }}
 
       # Upload Artifact
       - if: matrix.tfm == 'net10.0-android'
